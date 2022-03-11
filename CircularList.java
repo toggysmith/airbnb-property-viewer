@@ -3,10 +3,10 @@ import javafx.scene.layout.Pane;
 import java.util.List;
 
 /**
- * Write a description of class CircularList here.
+ * A circular list that has no end and no beginning, only the current position.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray K21003575
+ * @version 11/03/2022
  */
 public class CircularList
 {
@@ -18,25 +18,43 @@ public class CircularList
      */
     public CircularList()
     {
+        list = new ArrayList<>();
         currentItem = 0;
     }
     
+    /**
+     * Gets the next pane from the list.
+     * @return The next pane in the list.
+     */
     public Pane getNext()
     {
-        currentItem = (currentItem + 1) % list.size() - 1;
+        if (list.size() == 0)
+        {
+            return null;
+        }
+        currentItem = (currentItem + 1) % list.size();
         return list.get(currentItem);
     }
     
+    /**
+     * Gets the previous pane from the list.
+     * @return The previous pane in the list.
+     */
     public Pane getPrev()
     {
-        currentItem = (currentItem - 1);
-        if (currentItem < 0)
+        if (list.size() == 0)
         {
-            currentItem = list.size() - 1;
+            return null;
         }
+        currentItem = list.size() - ((list.size() - currentItem) % list.size()) - 1;
         return list.get(currentItem);
     }
     
+    /**
+     * Adds a pane to the list.
+     * The pane is added so that it will appear after the previously added pane.
+     * @param pane The pane to be added.
+     */
     public void add(Pane pane)
     {
         list.add(pane);
