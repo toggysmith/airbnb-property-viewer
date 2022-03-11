@@ -3,6 +3,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
+import java.util.ArrayList;
+
 /**
  * Create the initial window.
  * 
@@ -14,6 +16,16 @@ import javafx.fxml.FXMLLoader;
  */
 public class MainController extends Application
 {
+    ArrayList<AirbnbListing> airbnbListings;
+    
+    /**
+     * Initialise instance variables.
+     */
+    public MainController()
+    {
+        airbnbListings = new AirbnbDataLoader().load();
+    }
+    
     /**
      * Create the initial window by loading the FXML file.
      * 
@@ -27,5 +39,31 @@ public class MainController extends Application
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Airbnb Property Viewer");
         stage.show();
+    }
+    
+    /**
+     * Get the minimum property price.
+     * 
+     * @return The minimum property price.
+     */
+    public int getMinPropertyPrice()
+    {
+        return airbnbListings.stream()
+                             .map(listing -> listing.getPrice())
+                             .min(Integer::compare)
+                             .get();
+    }
+    
+    /**
+     * Get the maximum property price.
+     * 
+     * @return The maximum property price.
+     */
+    public int getMaxPropertyPrice()
+    {
+        return airbnbListings.stream()
+                             .map(listing -> listing.getPrice())
+                             .max(Integer::compare)
+                             .get();
     }
 }
