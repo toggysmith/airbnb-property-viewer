@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainController">
    <top>
-      <BorderPane BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <right>
-            <HBox prefHeight="200.0" prefWidth="205.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="34.0" prefWidth="211.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="From:">
+                  <Label prefHeight="22.0" prefWidth="33.0" text="From:">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
