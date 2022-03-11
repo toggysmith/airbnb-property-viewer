@@ -22,8 +22,8 @@ public class MainView extends Stage
         
         MainController mainController = loader.getController();
         
-        mainController.fromRangeBox.setItems(getRangeBoxOptions("No min"));
-        mainController.toRangeBox.setItems(getRangeBoxOptions("No max"));
+        mainController.fromRangeBox.getItems().addAll(getRangeBoxOptions("No min"));
+        mainController.toRangeBox.getItems().addAll(getRangeBoxOptions("No max"));
         
         setScene(scene);
         setTitle("Airbnb Property Viewer");
@@ -36,7 +36,7 @@ public class MainView extends Stage
      * @param noOptionString The string to show to select no option, e.g. "No min".
      * @return The list of possible price options for the range boxes.
      */
-    public ObservableList<String> getRangeBoxOptions(String noOptionString)
+    public ArrayList<String> getRangeBoxOptions(String noOptionString)
     {
         ArrayList<String> options = new ArrayList<>();
         
@@ -52,7 +52,7 @@ public class MainView extends Stage
             }
         }
         
-        return FXCollections.observableList(options);
+        return options;
     }
     
     /**
