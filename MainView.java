@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
 public class MainView extends Stage
 {
     // The listings which get loaded from the database.
-    ArrayList<AirbnbListing> airbnbListings;
+    private ArrayList<AirbnbListing> airbnbListings;
     
     // The step in which the range box selector goes up.
     // (E.g. if min property price is 0 and the max is 6000 and the step is
