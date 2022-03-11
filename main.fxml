@@ -13,9 +13,9 @@
    <top>
       <BorderPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <right>
-            <HBox prefHeight="34.0" prefWidth="211.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <HBox spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="22.0" prefWidth="33.0" text="From:">
+                  <Label text="From:">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -42,6 +42,9 @@
                      </padding>
                   </ComboBox>
                </children>
+               <BorderPane.margin>
+                  <Insets right="10.0" />
+               </BorderPane.margin>
             </HBox>
          </right>
       </BorderPane>
