@@ -1,6 +1,7 @@
 import javafx.scene.control.ComboBox;
 import javafx.fxml.FXML;
 import java.util.ArrayList;
+import javafx.scene.layout.Pane;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -15,4 +16,5 @@ public class MainController
 {
     @FXML public ComboBox fromRangeBox;
     @FXML public ComboBox toRangeBox;
+    @FXML public Pane switchPane;
 }
