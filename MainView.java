@@ -42,6 +42,11 @@ public class MainView extends Stage
         mainController.fromRangeBox.getItems().addAll(getRangeBoxOptions("No min"));
         mainController.toRangeBox.getItems().addAll(getRangeBoxOptions("No max"));
         
+        // Remove this before merging back with application-window.
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("map-pane.fxml"));
+        loader2.setRoot(mainController.switchPane);
+        loader2.load();
+        
         setScene(scene);
         setTitle("Airbnb Property Viewer");
         show();
