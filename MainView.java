@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ScrollPane;
 
 /**
  * MainView creates the primary application window by loading it from

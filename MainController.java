@@ -1,6 +1,8 @@
 import javafx.scene.control.ComboBox;
 import javafx.fxml.FXML;
 import java.util.ArrayList;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
 
 /**

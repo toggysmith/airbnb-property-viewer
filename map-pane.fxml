@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root type="Pane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapController">
+<fx:root fx:id="root" type="Pane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapController">
    <children>
-      <AnchorPane fx:id="hexagonTileMap" prefHeight="200.0" prefWidth="200.0" />
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="100.0" prefWidth="200.0">
+         <content>
+            <AnchorPane fx:id="hexagonTileMap" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+         </content>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </ScrollPane>
    </children>
 </fx:root>

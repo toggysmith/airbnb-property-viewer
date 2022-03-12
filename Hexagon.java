@@ -11,6 +11,8 @@ public class Hexagon extends Polygon
     private double startingX = 0;
     private double startingY = 0;
     
+    public final static int STROKE_WIDTH = 4;
+    
     public Hexagon(double x, double y)
     {
         getPoints().addAll(x, y,
@@ -21,7 +23,7 @@ public class Hexagon extends Polygon
                            x + n, y - r * 0.5);
         
         setFill(Color.WHITE);
-        setStrokeWidth(5);
+        setStrokeWidth(STROKE_WIDTH);
         setStroke(Color.BLACK);
         
         this.startingX = x;
