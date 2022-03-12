@@ -45,10 +45,10 @@ public class MapController
     
     private void createHexagon(int x, int y)
     {
-        double xCoord = Hexagon.STROKE_WIDTH / 2.0 + x * (TILE_WIDTH + SEPARATION) + (y % 2) * n;
+        double xCoord = Hexagon.STROKE_WIDTH / 2.0 + x * (TILE_WIDTH + SEPARATION) + ((y+1) % 2) * n;
         double yCoord = Hexagon.STROKE_WIDTH / 2.0 + y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
         
-        if (y % 2 != 0) xCoord += SEPARATION / 2;
+        if ((y+1) % 2 != 0) xCoord += SEPARATION / 2;
         
         VBox vbox = new VBox();
         Label label = new Label("Southwark");
@@ -71,13 +71,26 @@ public class MapController
 
     private void createMap()
     {
-        createHexagon(0, 0);
-        createHexagon(1, 0);
-        createHexagon(2, 0);
-        createHexagon(0, 1);
+        createHexagon(3, 0);
+        
+        createHexagon(2, 1);
+        createHexagon(3, 1);
+        createHexagon(4, 1);
+        
+        for (int i = 0; i < 7; i++)
+            createHexagon(i, 2);
         
         for (int i = 0; i < 7; i++)
             createHexagon(i, 3);
+        
+        for (int i = 0; i < 6; i++)
+            createHexagon(i, 4);
+        
+        for (int i = 1; i < 6; i++)
+            createHexagon(i, 5);
+        
+        for (int i = 1; i < 5; i++)
+            createHexagon(i, 6);
     }
     
     private void createBoroughWindow(String windowTitle)
