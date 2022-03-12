@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * MainView creates the primary application window by loading it from
@@ -20,7 +23,7 @@ import javafx.scene.control.ScrollPane;
 public class MainView extends Stage
 {
     // The listings which get loaded from the database.
-    private ArrayList<AirbnbListing> airbnbListings;
+    private static List<AirbnbListing> airbnbListings;
     
     // The step in which the range box selector goes up.
     // (E.g. if min property price is 0 and the max is 6000 and the step is
@@ -99,5 +102,19 @@ public class MainView extends Stage
                              .map(listing -> listing.getPrice())
                              .max(Integer::compare)
                              .get();
+    }
+    
+    public static Set<AirbnbListing> getListingsInBorough(String targetBorough)
+    {
+        Object[] listingsInBorough = airbnbListings.stream()
+                             .filter(listing -> listing.getNeighbourhood() == targetBorough)
+                             .toArray();
+        Set<AirbnbListing> setListingsInBorough = new HashSet<>();
+        for (Object listing : listingsInBorough)
+        {
+            AirbnbListing listingAsAirBnb = (AirbnbListing)listing;
+            setListingsInBorough.add(listingAsAirBnb);
+        }
+        return setListingsInBorough;
     }
 }

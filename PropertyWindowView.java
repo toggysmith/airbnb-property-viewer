@@ -2,6 +2,9 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import java.util.Set;
+import javafx.scene.control.Label;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -11,7 +14,7 @@ import javafx.scene.Scene;
  */
 public class PropertyWindowView extends Stage
 {
-    
+    Set<AirbnbListing> listings;
     /**
      * Create a window and load the FXML file.
      */
@@ -21,11 +24,25 @@ public class PropertyWindowView extends Stage
         
         Scene scene = new Scene(loader.load());
         
+        listings = MainView.getListingsInBorough(boroughName);
+        
         PropertyWindowController propertyWindowController = loader.getController();
+        populateGrid(propertyWindowController.propertyGrid);
         
         setScene(scene);
         setTitle(boroughName);
         show();
+    }
+    
+    private void populateGrid(GridPane grid)
+    {
+        int i = 1;
+        for (AirbnbListing listing : listings)
+        {
+            grid.addRow(i, new Label(listing.getHost_name()), new Label("" + listing.getPrice()), 
+                        new Label("" + listing.getNumberOfReviews()), new Label("" + listing.getMinimumNights()));
+            i++;
+        }
     }
     
 }
