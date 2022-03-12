@@ -13,16 +13,10 @@ import javafx.scene.input.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.layout.Region;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.control.ScrollPane;
-import javafx.beans.InvalidationListener;
 
-public class MapController
+public class MapController extends Pane
 {
     @FXML private AnchorPane hexagonTileMap;
-    @FXML private ScrollPane scrollPane;
-    @FXML private Pane root;
     
     private Map<Object, String> boroughNames; 
 
@@ -31,66 +25,49 @@ public class MapController
     private final static double TILE_WIDTH = 2 * n;
     private final static double TILE_HEIGHT = 2 * r;
     private final static double SEPARATION = 15;
-    private final static int STROKE_WIDTH = 4;
 
     @FXML
     public void initialize()
     {
-        scrollPane.prefWidthProperty().bind(root.widthProperty());
-        scrollPane.prefHeightProperty().bind(root.heightProperty());
-        
         boroughNames = new HashMap<>();
         createMap();
-    }
-    
-    private void createHexagon(int x, int y)
-    {
-        double xCoord = Hexagon.STROKE_WIDTH / 2.0 + x * (TILE_WIDTH + SEPARATION) + ((y+1) % 2) * n;
-        double yCoord = Hexagon.STROKE_WIDTH / 2.0 + y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
-        
-        if ((y+1) % 2 != 0) xCoord += SEPARATION / 2;
-        
-        VBox vbox = new VBox();
-        Label label = new Label("Southwark");
-        vbox.getChildren().add(label);
-        
-        Hexagon hexagon = new Hexagon(xCoord, yCoord);
-        hexagonTileMap.getChildren().add(hexagon);
-        
-        hexagonTileMap.setLeftAnchor(vbox, xCoord);
-        hexagonTileMap.setTopAnchor(vbox, yCoord - TILE_HEIGHT * 0.25);
-        vbox.setPrefSize(TILE_WIDTH, TILE_HEIGHT);
-        vbox.setAlignment(Pos.CENTER);
-        hexagonTileMap.getChildren().add(vbox);
-        
-        vbox.setMouseTransparent(true);
-        hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughNames.get(hexagon)));
-        
-        boroughNames.put(hexagon, label.getText());
     }
 
     private void createMap()
     {
-        createHexagon(3, 0);
-        
-        createHexagon(2, 1);
-        createHexagon(3, 1);
-        createHexagon(4, 1);
-        
-        for (int i = 0; i < 7; i++)
-            createHexagon(i, 2);
-        
-        for (int i = 0; i < 7; i++)
-            createHexagon(i, 3);
-        
-        for (int i = 0; i < 6; i++)
-            createHexagon(i, 4);
-        
-        for (int i = 1; i < 6; i++)
-            createHexagon(i, 5);
-        
-        for (int i = 1; i < 5; i++)
-            createHexagon(i, 6);
+        int rowCount = 7;
+        int tilesPerRow = 7;
+        int xStartOffset = 40;
+        int yStartOffset = 40;
+
+        for (int x = 0; x < tilesPerRow; x++)
+        {
+            for (int y = 0; y < rowCount; y++)
+            {
+                double xCoord = x * (TILE_WIDTH + SEPARATION) + (y % 2) * n + xStartOffset;
+                double yCoord = y * (TILE_HEIGHT * 0.75 + SEPARATION) + yStartOffset;
+
+                if (y % 2 != 0) {xCoord += SEPARATION / 2;}
+
+                VBox vbox = new VBox();
+                Label label = new Label("Southwark");
+                vbox.getChildren().add(label);
+                
+                Hexagon hexagon = new Hexagon(xCoord, yCoord);
+                hexagonTileMap.getChildren().add(hexagon);
+
+                hexagonTileMap.setLeftAnchor(vbox, xCoord);
+                hexagonTileMap.setTopAnchor(vbox, yCoord - TILE_HEIGHT * 0.25);
+                vbox.setPrefSize(TILE_WIDTH, TILE_HEIGHT);
+                vbox.setAlignment(Pos.CENTER);
+                hexagonTileMap.getChildren().add(vbox);
+                
+                vbox.setMouseTransparent(true);
+                hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughNames.get(hexagon)));
+                
+                boroughNames.put(hexagon, label.getText());
+            }
+        }
     }
     
     private void createBoroughWindow(String windowTitle)
