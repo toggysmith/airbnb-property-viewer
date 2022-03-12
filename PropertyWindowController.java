@@ -1,5 +1,6 @@
 import javafx.scene.layout.GridPane;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -12,5 +13,6 @@ import javafx.fxml.FXML;
  */
 public class PropertyWindowController
 {
-    @FXML public GridPane fromRangeBox;
+    @FXML public GridPane propertyGrid;
+    @FXML public Pane dropdownMenu;
 }
