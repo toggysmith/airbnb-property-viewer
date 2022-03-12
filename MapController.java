@@ -63,7 +63,7 @@ public class MapController extends Pane
                 hexagonTileMap.getChildren().add(vbox);
                 
                 vbox.setMouseTransparent(true);
-                hexagon.setOnMouseEntered(e -> createBoroughWindow(boroughNames.get(hexagon)));
+                hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughNames.get(hexagon)));
                 
                 boroughNames.put(hexagon, label.getText());
             }
