@@ -17,9 +17,4 @@ public class PropertyWindowController
 {
     @FXML public GridPane propertyGrid;
     @FXML public ComboBox dropdownMenu;
-    
-    public void sort(Sort sort, List<AirbnbListing> listings)
-    {
-        sort.sort(listings);
-    }
 }
