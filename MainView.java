@@ -5,6 +5,10 @@ import javafx.scene.Scene;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 
+import javafx.scene.layout.Pane;
+import java.util.LinkedList;
+
+
 /**
  * MainView creates the primary application window by loading it from
  * an FXML file. It also uses the AirbnbDataLoader to load the Airbnb
@@ -25,6 +29,8 @@ public class MainView extends Stage
     // (E.g. if min property price is 0 and the max is 6000 and the step is
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
     private final int RANGE_BOX_STEP = 250;
+    
+    //private LinkedList<Pane> panes = new NodePositionList<Pane>();
     
     /**
      * Create a window and load the FXML file.

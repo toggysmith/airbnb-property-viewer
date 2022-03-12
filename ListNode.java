@@ -49,7 +49,7 @@ public class ListNode<E>
      * Sets the next node.
      * @param The next node.
      */
-    public void setNext(ListNode next)
+    public void setNext(ListNode<E> next)
     {
         this.next = next;
     }
@@ -58,7 +58,7 @@ public class ListNode<E>
      * Sets the previous node.
      * @param The previous node.
      */
-    public void setPrev(ListNode prev)
+    public void setPrev(ListNode<E> prev)
     {
         this.prev = prev;
     }
