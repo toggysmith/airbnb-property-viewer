@@ -104,12 +104,12 @@ public class MainView extends Stage
                              .get();
     }
     
-    public static Set<AirbnbListing> getListingsInBorough(String targetBorough)
+    public static List<AirbnbListing> getListingsInBorough(String targetBorough)
     {
         Object[] listingsInBorough = airbnbListings.stream()
-                             .filter(listing -> listing.getNeighbourhood() == targetBorough)
+                             .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
                              .toArray();
-        Set<AirbnbListing> setListingsInBorough = new HashSet<>();
+        List<AirbnbListing> setListingsInBorough = new ArrayList<>();
         for (Object listing : listingsInBorough)
         {
             AirbnbListing listingAsAirBnb = (AirbnbListing)listing;

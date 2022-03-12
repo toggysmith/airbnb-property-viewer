@@ -2,6 +2,7 @@ import javafx.scene.layout.GridPane;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.ComboBox;
+import java.util.List;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -16,4 +17,9 @@ public class PropertyWindowController
 {
     @FXML public GridPane propertyGrid;
     @FXML public ComboBox dropdownMenu;
+    
+    public void sort(Sort sort, List<AirbnbListing> listings)
+    {
+        sort.sort(listings);
+    }
 }
