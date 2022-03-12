@@ -27,14 +27,4 @@ public class Hexagon extends Polygon
         this.startingX = x;
         this.startingY = y;
     }
-    
-    public double getCenterX()
-    {
-        return startingX + TILE_WIDTH / 2;
-    }
-    
-    public double getCenterY()
-    {
-        return startingY + TILE_HEIGHT / 4;
-    }
 }
