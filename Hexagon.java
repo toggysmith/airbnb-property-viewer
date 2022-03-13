@@ -1,4 +1,5 @@
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.paint.Color;
 
 public class Hexagon extends Polygon
@@ -23,6 +24,7 @@ public class Hexagon extends Polygon
                            x + n, y - r * 0.5);
         
         setFill(Color.WHITE);
+        setStrokeType(StrokeType.INSIDE);
         setStrokeWidth(STROKE_WIDTH);
         setStroke(Color.BLACK);
         
