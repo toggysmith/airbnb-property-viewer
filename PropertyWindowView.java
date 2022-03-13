@@ -13,6 +13,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -62,19 +63,22 @@ public class PropertyWindowView extends Stage
     public void setListings(ObservableList<AirbnbListing> listings)
     {
         this.listings = listings;
-        clearGrid(propertyWindowController.propertyTable);
+        clearTable(propertyWindowController.propertyTable);
         populateTable(propertyWindowController.propertyTable);
     }
     
-    private void clearGrid(TableView table)
+    private void clearTable(TableView table)
     {
-        //table.getChildren().remove(4, table.getChildren().size());
+        table.getRowFactory();
     }
     
     private void populateTable(TableView table)
     {
         table.setItems(listings);
-        //propertyWindowController.nameColumn.
+        propertyWindowController.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        propertyWindowController.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        propertyWindowController.reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
+        propertyWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
     }
     
     private List<Sort> createSorts()
