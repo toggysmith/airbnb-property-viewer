@@ -5,6 +5,7 @@ import javafx.scene.control.ComboBox;
 import java.util.List;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.ChoiceBox;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -17,9 +18,11 @@ import javafx.scene.control.TableColumn;
  */
 public class BoroughWindowController
 {
-    @FXML public TableView propertyTable;
+    @FXML public TableView boroughTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;
     @FXML public TableColumn<AirbnbListing, String> priceColumn;
     @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
     @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
+    
+    @FXML public ComboBox<String> sortBox;
 }

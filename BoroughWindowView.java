@@ -38,23 +38,14 @@ public class BoroughWindowView extends Stage
         listings = MainView.getListingsInBorough(boroughName);
         
         boroughWindowController = loader.getController();
-        populateTable(boroughWindowController.propertyTable);
+        populateTable(boroughWindowController.boroughTable);
+        
+        boroughWindowController.sortBox.getItems().addAll(getSortBoxOptions());
+        assignSort(boroughWindowController.sortBox);
         
         setScene(scene);
         setTitle(boroughName);
         show();
-    }
-    
-    public void setListings(ObservableList<AirbnbListing> listings)
-    {
-        this.listings = listings;
-        clearTable(boroughWindowController.propertyTable);
-        populateTable(boroughWindowController.propertyTable);
-    }
-    
-    private void clearTable(TableView table)
-    {
-        table.getRowFactory();
     }
     
     private void populateTable(TableView table)
@@ -64,6 +55,25 @@ public class BoroughWindowView extends Stage
         boroughWindowController.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         boroughWindowController.reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
         boroughWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
+    }
+    
+    private ArrayList<String> getSortBoxOptions()
+    {
+        ArrayList<String> options = new ArrayList<>();
+        
+        options.add("Host Name (Ascending)");
+        options.add("Host Name (Descending)");
+        options.add("Price (Ascending)");
+        options.add("Price (Descending)");
+        options.add("Number of reviews (Ascending)");
+        options.add("Number of reviews (Descending)");
+        
+        return options;
+    }
+    
+    private void assignSort(ComboBox box)
+    {
+        box.setOnMouseClicked(e -> boroughWindowController.boroughTable.sort());
     }
     
 }
