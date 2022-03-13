@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ComboBoxSorts
+public class ComboBoxOrder
 {
     private String displayText;
     private TableColumn<AirbnbListing, String> column;
@@ -15,7 +15,7 @@ public class ComboBoxSorts
     /**
      * Constructor for objects of class ComboBoxSorts
      */
-    public ComboBoxSorts(String displayText, TableColumn<AirbnbListing, String> column, TableColumn.SortType type)
+    public ComboBoxOrder(String displayText, TableColumn<AirbnbListing, String> column, TableColumn.SortType type)
     {
         this.displayText = displayText;
         this.column = column;

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
    <children>
@@ -15,6 +18,14 @@
             <TableColumn fx:id="minNightsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Min number of nights" />
         </columns>
       </TableView>
-      <ComboBox fx:id="sortBox" promptText="None" />
+      <Label text="Order:">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+      </Label>
+      <ComboBox fx:id="orderBox" promptText="None" />
    </children>
 </HBox>

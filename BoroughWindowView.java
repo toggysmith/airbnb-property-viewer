@@ -45,8 +45,8 @@ public class BoroughWindowView extends Stage
         boroughWindowController = loader.getController();
         populateTable(boroughWindowController.boroughTable);
 
-        boroughWindowController.sortBox.getItems().addAll(getSortBoxOptions());
-        assignSort(boroughWindowController.sortBox);
+        boroughWindowController.orderBox.getItems().addAll(getSortBoxOptions());
+        assignSort(boroughWindowController.orderBox);
 
         setScene(scene);
         setTitle(boroughName);
@@ -62,16 +62,16 @@ public class BoroughWindowView extends Stage
         boroughWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
     }
 
-    private ArrayList<ComboBoxSorts> getSortBoxOptions()
+    private ArrayList<ComboBoxOrder> getSortBoxOptions()
     {
-        ArrayList<ComboBoxSorts> options = new ArrayList<>();
+        ArrayList<ComboBoxOrder> options = new ArrayList<>();
 
-        options.add(new ComboBoxSorts("Host Name (Ascending)", boroughWindowController.nameColumn, TableColumn.SortType.ASCENDING));
-        options.add(new ComboBoxSorts("Host Name (Descending)", boroughWindowController.nameColumn, TableColumn.SortType.DESCENDING));
-        options.add(new ComboBoxSorts("Price (Ascending)", boroughWindowController.priceColumn, TableColumn.SortType.ASCENDING));
-        options.add(new ComboBoxSorts("Price (Descending)", boroughWindowController.priceColumn, TableColumn.SortType.DESCENDING));
-        options.add(new ComboBoxSorts("Number of reviews (Ascending)", boroughWindowController.reviewsColumn, TableColumn.SortType.ASCENDING));
-        options.add(new ComboBoxSorts("Number of reviews (Descending)", boroughWindowController.reviewsColumn, TableColumn.SortType.DESCENDING));
+        options.add(new ComboBoxOrder("Host Name (Ascending)", boroughWindowController.nameColumn, TableColumn.SortType.ASCENDING));
+        options.add(new ComboBoxOrder("Host Name (Descending)", boroughWindowController.nameColumn, TableColumn.SortType.DESCENDING));
+        options.add(new ComboBoxOrder("Price (Ascending)", boroughWindowController.priceColumn, TableColumn.SortType.ASCENDING));
+        options.add(new ComboBoxOrder("Price (Descending)", boroughWindowController.priceColumn, TableColumn.SortType.DESCENDING));
+        options.add(new ComboBoxOrder("Number of reviews (Ascending)", boroughWindowController.reviewsColumn, TableColumn.SortType.ASCENDING));
+        options.add(new ComboBoxOrder("Number of reviews (Descending)", boroughWindowController.reviewsColumn, TableColumn.SortType.DESCENDING));
 
         return options;
     }
@@ -81,25 +81,25 @@ public class BoroughWindowView extends Stage
         box.setOnAction(e -> sort(box.getValue()));
     }
 
-    private void sort(Object comboBoxSortsObject)
+    private void sort(Object comboBoxOrderObject)
     {
-        if (!(comboBoxSortsObject instanceof ComboBoxSorts))
+        if (!(comboBoxOrderObject instanceof ComboBoxOrder))
         {
             return;
         }
-        ComboBoxSorts comboBoxSorts = (ComboBoxSorts) comboBoxSortsObject;
-        if (comboBoxSorts == null)
+        ComboBoxOrder comboBoxOrder = (ComboBoxOrder) comboBoxOrderObject;
+        if (comboBoxOrder == null)
         {
             return;    
         }
 
-        TableColumn<AirbnbListing, String> column = comboBoxSorts.getColumn();
+        TableColumn<AirbnbListing, String> column = comboBoxOrder.getColumn();
         TableView table = boroughWindowController.boroughTable;
         column.setSortable(true);
         ObservableList<TableColumn> sortBy = table.getSortOrder();
         sortBy.clear();
         sortBy.add(column);
-        column.setSortType(comboBoxSorts.getOrder());
+        column.setSortType(comboBoxOrder.getOrder());
         table.sort();
         column.setSortable(false);
     }
