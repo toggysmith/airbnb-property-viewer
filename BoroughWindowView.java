@@ -66,12 +66,7 @@ public class BoroughWindowView extends Stage
     {
         ArrayList<ComboBoxOrder> options = new ArrayList<>();
 
-        options.add(new ComboBoxOrder("Host Name (Ascending)", boroughWindowController.nameColumn, TableColumn.SortType.ASCENDING));
-        options.add(new ComboBoxOrder("Host Name (Descending)", boroughWindowController.nameColumn, TableColumn.SortType.DESCENDING));
-        options.add(new ComboBoxOrder("Price (Ascending)", boroughWindowController.priceColumn, TableColumn.SortType.ASCENDING));
-        options.add(new ComboBoxOrder("Price (Descending)", boroughWindowController.priceColumn, TableColumn.SortType.DESCENDING));
-        options.add(new ComboBoxOrder("Number of reviews (Ascending)", boroughWindowController.reviewsColumn, TableColumn.SortType.ASCENDING));
-        options.add(new ComboBoxOrder("Number of reviews (Descending)", boroughWindowController.reviewsColumn, TableColumn.SortType.DESCENDING));
+        options.addAll(ComboBoxOrder.getAll());
 
         return options;
     }
@@ -93,7 +88,7 @@ public class BoroughWindowView extends Stage
             return;    
         }
 
-        TableColumn<AirbnbListing, String> column = comboBoxOrder.getColumn();
+        TableColumn<AirbnbListing, String> column = comboBoxOrder.getColumn(boroughWindowController);
         TableView table = boroughWindowController.boroughTable;
         column.setSortable(true);
         ObservableList<TableColumn> sortBy = table.getSortOrder();

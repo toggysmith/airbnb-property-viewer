@@ -25,4 +25,24 @@ public class BoroughWindowController
     @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
     
     @FXML public ComboBox<ComboBoxOrder> orderBox;
+    
+    public TableColumn<AirbnbListing, String> getColumn(ComboBoxOrder order)
+    {
+        if (order == ComboBoxOrder.HOST_NAME_ASCENDING || order == ComboBoxOrder.HOST_NAME_DECENDING)
+        {
+            return nameColumn;
+        }
+        else if (order == ComboBoxOrder.PRICE_ASCENDING || order == ComboBoxOrder.PRICE_DECENDING)
+        {
+            return priceColumn;
+        }
+        else if (order == ComboBoxOrder.NUMBER_OF_REVIEWS_ASCENDING || order == ComboBoxOrder.NUMBER_OF_REVIEWS_DECENDING)
+        {
+            return reviewsColumn;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
