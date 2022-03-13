@@ -13,10 +13,13 @@ import javafx.scene.input.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.control.ScrollPane;
 
 public class MapController extends Pane
 {
     @FXML private AnchorPane hexagonTileMap;
+    @FXML private ScrollPane scrollPane;
+    @FXML private Pane root;
     
     private Map<Object, String> boroughNames; 
 
@@ -29,43 +32,49 @@ public class MapController extends Pane
     @FXML
     public void initialize()
     {
+        scrollPane.prefWidthProperty().bind(root.widthProperty());
+        scrollPane.prefHeightProperty().bind(root.heightProperty());
+        
         boroughNames = new HashMap<>();
         createMap();
+    }
+    
+    private void createBoroughButton(int x, int y)
+    {
+        double xCoord = x * (TILE_WIDTH + SEPARATION) + (y % 2) * n;
+        double yCoord = y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
+
+        if (y % 2 != 0) {xCoord += SEPARATION / 2;}
+
+        VBox vbox = new VBox();
+        Label label = new Label("Southwark");
+        vbox.getChildren().add(label);
+        
+        Hexagon hexagon = new Hexagon(xCoord, yCoord);
+        hexagonTileMap.getChildren().add(hexagon);
+
+        hexagonTileMap.setLeftAnchor(vbox, xCoord);
+        hexagonTileMap.setTopAnchor(vbox, yCoord - TILE_HEIGHT * 0.25);
+        vbox.setPrefSize(TILE_WIDTH, TILE_HEIGHT);
+        vbox.setAlignment(Pos.CENTER);
+        hexagonTileMap.getChildren().add(vbox);
+                
+        vbox.setMouseTransparent(true);
+        hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughNames.get(hexagon)));
+                
+        boroughNames.put(hexagon, label.getText());
     }
 
     private void createMap()
     {
         int rowCount = 7;
         int tilesPerRow = 7;
-        int xStartOffset = 40;
-        int yStartOffset = 40;
 
         for (int x = 0; x < tilesPerRow; x++)
         {
             for (int y = 0; y < rowCount; y++)
             {
-                double xCoord = x * (TILE_WIDTH + SEPARATION) + (y % 2) * n + xStartOffset;
-                double yCoord = y * (TILE_HEIGHT * 0.75 + SEPARATION) + yStartOffset;
-
-                if (y % 2 != 0) {xCoord += SEPARATION / 2;}
-
-                VBox vbox = new VBox();
-                Label label = new Label("Southwark");
-                vbox.getChildren().add(label);
-                
-                Hexagon hexagon = new Hexagon(xCoord, yCoord);
-                hexagonTileMap.getChildren().add(hexagon);
-
-                hexagonTileMap.setLeftAnchor(vbox, xCoord);
-                hexagonTileMap.setTopAnchor(vbox, yCoord - TILE_HEIGHT * 0.25);
-                vbox.setPrefSize(TILE_WIDTH, TILE_HEIGHT);
-                vbox.setAlignment(Pos.CENTER);
-                hexagonTileMap.getChildren().add(vbox);
-                
-                vbox.setMouseTransparent(true);
-                hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughNames.get(hexagon)));
-                
-                boroughNames.put(hexagon, label.getText());
+                createBoroughButton(x, y);
             }
         }
     }
