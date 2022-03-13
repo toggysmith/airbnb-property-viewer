@@ -24,5 +24,5 @@ public class BoroughWindowController
     @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
     @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
     
-    @FXML public ComboBox<String> sortBox;
+    @FXML public ComboBox<ComboBoxSorts> sortBox;
 }
