@@ -13,10 +13,13 @@ import javafx.scene.input.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.control.ScrollPane;
 
 public class MapController extends Pane
 {
     @FXML private AnchorPane hexagonTileMap;
+    @FXML private ScrollPane scrollPane;
+    @FXML private Pane root;
     
     private Map<Object, String> boroughNames; 
 
@@ -29,6 +32,9 @@ public class MapController extends Pane
     @FXML
     public void initialize()
     {
+        scrollPane.prefWidthProperty().bind(root.widthProperty());
+        scrollPane.prefHeightProperty().bind(root.heightProperty());
+        
         boroughNames = new HashMap<>();
         createMap();
     }
