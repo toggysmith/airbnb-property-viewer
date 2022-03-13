@@ -5,6 +5,7 @@
  * If the last pane is selected and the next button in the GUI is pressed then the application loops back to the head and the first item it points to
  *
  * @author Adam Murray K21003575
+ * @author Augusto Favero K21059800
  * @version 11/03/2022
  */
 public class DoublyLinkedList<E>

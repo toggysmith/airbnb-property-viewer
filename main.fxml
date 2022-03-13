@@ -12,10 +12,10 @@
    <bottom>
       <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
          <left>
-            <Button mnemonicParsing="false" text="&lt;" BorderPane.alignment="CENTER" />
+            <Button fx:id="leftButton" disable="true" mnemonicParsing="false" text="&lt;" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Button mnemonicParsing="false" text="&gt;" BorderPane.alignment="CENTER" />
+            <Button fx:id="rightButton" disable="true" mnemonicParsing="false" text="&gt;" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </bottom>
@@ -25,8 +25,8 @@
             <HBox alignment="CENTER_RIGHT" spacing="15.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
                   <Label alignment="CENTER_RIGHT" text="Price Range (£)" />
-                  <ComboBox fx:id="fromRangeBox" prefWidth="150.0" promptText="From:" />
-                  <ComboBox fx:id="toRangeBox" prefWidth="150.0" promptText="To:" />
+                  <ComboBox fx:id="fromRangeBox" onAction="#enableButtons" prefWidth="150.0" promptText="From:" />
+                  <ComboBox fx:id="toRangeBox" onAction="#enableButtons" prefWidth="150.0" promptText="To:" />
                </children>
             </HBox>
          </top>

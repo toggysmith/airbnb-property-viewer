@@ -5,10 +5,6 @@ import javafx.scene.Scene;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 
-import javafx.scene.layout.Pane;
-import java.util.LinkedList;
-
-
 /**
  * MainView creates the primary application window by loading it from
  * an FXML file. It also uses the AirbnbDataLoader to load the Airbnb
@@ -30,7 +26,8 @@ public class MainView extends Stage
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
     private final int RANGE_BOX_STEP = 250;
     
-    //private LinkedList<Pane> panes = new NodePositionList<Pane>();
+    //Doubly Linked List that stores the a list of type panes 
+    //private DoublyLinkedList<Pane> applicationPanes = new DoubleLinkedList<Pane>();
     
     /**
      * Create a window and load the FXML file.
@@ -100,4 +97,6 @@ public class MainView extends Stage
                              .max(Integer::compare)
                              .get();
     }
+
+    
 }
