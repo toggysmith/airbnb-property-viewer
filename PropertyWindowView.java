@@ -10,6 +10,9 @@ import javafx.scene.control.ComboBox;
 import java.util.ArrayList;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Control;
+import javafx.scene.control.TableView;
+import javafx.collections.ObservableList;
+import javafx.util.Callback;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -19,7 +22,7 @@ import javafx.scene.control.Control;
  */
 public class PropertyWindowView extends Stage
 {
-    private List<AirbnbListing> listings;
+    private ObservableList<AirbnbListing> listings;
     private List<Sort> sorts;
     PropertyWindowController propertyWindowController;
     /**
@@ -36,7 +39,7 @@ public class PropertyWindowView extends Stage
         listings = MainView.getListingsInBorough(boroughName);
         
         propertyWindowController = loader.getController();
-        populateGrid(propertyWindowController.propertyGrid);
+        populateTable(propertyWindowController.propertyTable);
         ComboBox comboBox = propertyWindowController.dropdownMenu;
         
         for(Sort sort : sorts) {
@@ -50,33 +53,28 @@ public class PropertyWindowView extends Stage
         show();
     }
     
-    public void sort(Sort sort, List<AirbnbListing> listings)
+    public void sort(Sort sort, ObservableList<AirbnbListing> listings)
     {
         listings = sort.sort(listings);
         setListings(listings);
     }
     
-    public void setListings(List<AirbnbListing> listings)
+    public void setListings(ObservableList<AirbnbListing> listings)
     {
         this.listings = listings;
-        clearGrid(propertyWindowController.propertyGrid);
-        populateGrid(propertyWindowController.propertyGrid);
+        clearGrid(propertyWindowController.propertyTable);
+        populateTable(propertyWindowController.propertyTable);
     }
     
-    private void clearGrid(GridPane grid)
+    private void clearGrid(TableView table)
     {
-        grid.getChildren().remove(4, grid.getChildren().size());
+        //table.getChildren().remove(4, table.getChildren().size());
     }
     
-    private void populateGrid(GridPane grid)
+    private void populateTable(TableView table)
     {
-        int i = 1;
-        for (AirbnbListing listing : listings)
-        {
-            grid.addRow(i, new Label(listing.getHost_name()), new Label("" + listing.getPrice()), 
-                        new Label("" + listing.getNumberOfReviews()), new Label("" + listing.getMinimumNights()));
-            i++;
-        }
+        table.setItems(listings);
+        //propertyWindowController.nameColumn.
     }
     
     private List<Sort> createSorts()

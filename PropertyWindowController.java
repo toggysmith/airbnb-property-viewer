@@ -3,6 +3,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.ComboBox;
 import java.util.List;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -15,6 +17,11 @@ import java.util.List;
  */
 public class PropertyWindowController
 {
-    @FXML public GridPane propertyGrid;
     @FXML public ComboBox dropdownMenu;
+    
+    @FXML public TableView propertyTable;
+    @FXML public TableColumn<AirbnbListing, String> nameColumn;
+    @FXML public TableColumn<AirbnbListing, String> priceColumn;
+    @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
+    @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
 }

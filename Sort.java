@@ -1,4 +1,5 @@
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  * Write a description of class Sort here.
@@ -14,7 +15,7 @@ public class Sort
         this.name = name;
     }
 
-    public List<AirbnbListing> sort(List<AirbnbListing> listings)
+    public ObservableList<AirbnbListing> sort(List<AirbnbListing> listings)
     {
         return null;
     }
