@@ -83,7 +83,7 @@ public class MapController extends Pane
     {
         try
         {
-            new PropertyWindowView(windowTitle);
+            new BoroughWindowView(windowTitle);
         }
         catch (Exception e)
         {

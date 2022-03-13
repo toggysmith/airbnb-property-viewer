@@ -15,7 +15,7 @@ import javafx.scene.control.TableColumn;
  * @author Tony Smith (K21064940)
  * @version 1.0
  */
-public class PropertyWindowController
+public class BoroughWindowController
 {
     @FXML public TableView propertyTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;

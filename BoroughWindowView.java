@@ -21,24 +21,24 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class PropertyWindowView extends Stage
+public class BoroughWindowView extends Stage
 {
     private ObservableList<AirbnbListing> listings;
-    PropertyWindowController propertyWindowController;
+    BoroughWindowController boroughWindowController;
     /**
      * Create a window and load the FXML file.
      */
-    public PropertyWindowView(String boroughName) throws Exception
+    public BoroughWindowView(String boroughName) throws Exception
     {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("borough-window.fxml"));
         
         Scene scene = new Scene(loader.load());
         
         listings = MainView.getListingsInBorough(boroughName);
         
-        propertyWindowController = loader.getController();
-        populateTable(propertyWindowController.propertyTable);
+        boroughWindowController = loader.getController();
+        populateTable(boroughWindowController.propertyTable);
         
         setScene(scene);
         setTitle(boroughName);
@@ -48,8 +48,8 @@ public class PropertyWindowView extends Stage
     public void setListings(ObservableList<AirbnbListing> listings)
     {
         this.listings = listings;
-        clearTable(propertyWindowController.propertyTable);
-        populateTable(propertyWindowController.propertyTable);
+        clearTable(boroughWindowController.propertyTable);
+        populateTable(boroughWindowController.propertyTable);
     }
     
     private void clearTable(TableView table)
@@ -60,10 +60,10 @@ public class PropertyWindowView extends Stage
     private void populateTable(TableView table)
     {
         table.setItems(listings);
-        propertyWindowController.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        propertyWindowController.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        propertyWindowController.reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
-        propertyWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
+        boroughWindowController.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        boroughWindowController.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        boroughWindowController.reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
+        boroughWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
     }
     
 }
