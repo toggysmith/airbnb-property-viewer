@@ -11,23 +11,14 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import java.awt.event.ActionEvent;
-import java.util.HashMap;
-import java.util.Map;
 import javafx.scene.control.ScrollPane;
+import javafx.application.Platform;
 
 public class MapController extends Pane
 {
-    @FXML private AnchorPane hexagonTileMap;
+    @FXML private AnchorPane boroughMap;
     @FXML private ScrollPane scrollPane;
     @FXML private Pane root;
-    
-    private Map<Object, String> boroughNames; 
-
-    private final static double r = 60.0;
-    private final static double n = Math.sqrt(r * r * 0.75);
-    private final static double TILE_WIDTH = 2 * n;
-    private final static double TILE_HEIGHT = 2 * r;
-    private final static double SEPARATION = 15;
 
     @FXML
     public void initialize()
@@ -35,59 +26,52 @@ public class MapController extends Pane
         scrollPane.prefWidthProperty().bind(root.widthProperty());
         scrollPane.prefHeightProperty().bind(root.heightProperty());
         
-        boroughNames = new HashMap<>();
         createMap();
-    }
-    
-    private void createBoroughButton(int x, int y)
-    {
-        double xCoord = x * (TILE_WIDTH + SEPARATION) + (y % 2) * n;
-        double yCoord = y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
-
-        if (y % 2 != 0) {xCoord += SEPARATION / 2;}
-
-        VBox vbox = new VBox();
-        Label label = new Label("Southwark");
-        vbox.getChildren().add(label);
-        
-        Hexagon hexagon = new Hexagon(xCoord, yCoord);
-        hexagonTileMap.getChildren().add(hexagon);
-
-        hexagonTileMap.setLeftAnchor(vbox, xCoord);
-        hexagonTileMap.setTopAnchor(vbox, yCoord - TILE_HEIGHT * 0.25);
-        vbox.setPrefSize(TILE_WIDTH, TILE_HEIGHT);
-        vbox.setAlignment(Pos.CENTER);
-        hexagonTileMap.getChildren().add(vbox);
-                
-        vbox.setMouseTransparent(true);
-        hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughNames.get(hexagon)));
-                
-        boroughNames.put(hexagon, label.getText());
     }
 
     private void createMap()
     {
-        int rowCount = 7;
-        int tilesPerRow = 7;
-
-        for (int x = 0; x < tilesPerRow; x++)
-        {
-            for (int y = 0; y < rowCount; y++)
-            {
-                createBoroughButton(x, y);
-            }
-        }
-    }
-    
-    private void createBoroughWindow(String windowTitle)
-    {
-        try
-        {
-            new PropertyWindowView(windowTitle);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        BoroughButton.setBoroughMap(boroughMap);
+        
+        // Row 1:
+        new BoroughButton(3, 0, "ENFI", "Enfield");
+        // Row 2:
+        new BoroughButton(2, 1, "BARN", "Barnet");
+        new BoroughButton(3, 1, "HRGY", "Haringey");
+        new BoroughButton(4, 1, "WALT", "Waltham Forest");
+        // Row 3:
+        new BoroughButton(0, 2, "HRRW", "Harrow");
+        new BoroughButton(1, 2, "BREN", "Brent");
+        new BoroughButton(2, 2, "CAMD", "Camden");
+        new BoroughButton(3, 2, "ISLI", "Islington");
+        new BoroughButton(4, 2, "HACK", "Hackney");
+        new BoroughButton(5, 2, "REDB", "Redbridge");
+        new BoroughButton(6, 2, "HAVE", "Havering");
+        // Row 4:
+        new BoroughButton(0, 3, "HILL", "Hillingdon");
+        new BoroughButton(1, 3, "EALI", "Ealing");
+        new BoroughButton(2, 3, "KENS", "Kensington & Chelsea");
+        new BoroughButton(3, 3, "WSTM", "Westminster");
+        new BoroughButton(4, 3, "TOWH", "Tower Hamlets");
+        new BoroughButton(5, 3, "NEWH", "Newham");
+        new BoroughButton(6, 3, "BARK", "Barking & Dagenham");
+        // Row 5:
+        new BoroughButton(0, 4, "HOUN", "Hounslow");
+        new BoroughButton(1, 4, "HAMM", "Hammersmith & Fulham");
+        new BoroughButton(2, 4, "WAND", "Wandsworth");
+        new BoroughButton(3, 4, "CITY", "City");
+        new BoroughButton(4, 4, "GWCH", "Greenwich");
+        new BoroughButton(5, 4, "BEXL", "Bexley");
+        // Row 6:
+        new BoroughButton(1, 5, "RICH", "Richmond upon Thames");
+        new BoroughButton(2, 5, "MERT", "Merton");
+        new BoroughButton(3, 5, "LAMB", "Lambeth");
+        new BoroughButton(4, 5, "STHW", "Southwark");
+        new BoroughButton(5, 5, "LEWS", "Lewisham");
+        // Row 7:
+        new BoroughButton(1, 6, "KING", "Kingston upon Thames");
+        new BoroughButton(2, 6, "SUTT", "Sutton");
+        new BoroughButton(3, 6, "CROY", "Croydon");
+        new BoroughButton(4, 6, "BROM", "Bromley");
     }
 }
