@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -11,9 +10,6 @@
          <content>
             <AnchorPane fx:id="hexagonTileMap" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </content>
-         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </padding>
       </ScrollPane>
    </children>
 </fx:root>
