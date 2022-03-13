@@ -60,7 +60,7 @@ public class BoroughWindowView extends Stage
     private void populateTable(TableView table)
     {
         table.setItems(listings);
-        boroughWindowController.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        boroughWindowController.nameColumn.setCellValueFactory(new PropertyValueFactory<>("host_name"));
         boroughWindowController.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         boroughWindowController.reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
         boroughWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
