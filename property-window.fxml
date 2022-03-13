@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 
-<Pane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PropertyWindowController">
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PropertyWindowController">
    <children>
-      <ComboBox fx:id="dropdownMenu" layoutX="489.0" layoutY="14.0" prefWidth="150.0" />
-      <TableView fx:id="propertyTable" prefHeight="200.0" prefWidth="437.0">
+      <TableView fx:id="propertyTable" prefWidth="615.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="87.5" text="Name" />
-          <TableColumn fx:id="priceColumn" prefWidth="79.5" text="Price" />
-            <TableColumn fx:id="reviewsColumn" prefWidth="129.0" text="Number of reviews" />
-            <TableColumn fx:id="minNightsColumn" prefWidth="139.5" text="Min number of nights" />
+          <TableColumn fx:id="nameColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Name" />
+          <TableColumn fx:id="priceColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Price" />
+            <TableColumn fx:id="reviewsColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Number of reviews" />
+            <TableColumn fx:id="minNightsColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Min number of nights" />
         </columns>
       </TableView>
    </children>
-</Pane>
+</HBox>
