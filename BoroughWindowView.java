@@ -14,6 +14,11 @@ import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableColumn;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Comparator;
+import javafx.scene.Node;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -24,7 +29,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class BoroughWindowView extends Stage
 {
     private ObservableList<AirbnbListing> listings;
-    BoroughWindowController boroughWindowController;
+    private BoroughWindowController boroughWindowController;
+    private Map<String, SortConditions> comboBoxSortToTabelmap;
     /**
      * Create a window and load the FXML file.
      */
@@ -34,6 +40,8 @@ public class BoroughWindowView extends Stage
         FXMLLoader loader = new FXMLLoader(getClass().getResource("borough-window.fxml"));
         
         Scene scene = new Scene(loader.load());
+        
+        comboBoxSortToTabelmap = new HashMap<>();
         
         listings = MainView.getListingsInBorough(boroughName);
         
@@ -62,18 +70,47 @@ public class BoroughWindowView extends Stage
         ArrayList<String> options = new ArrayList<>();
         
         options.add("Host Name (Ascending)");
+        comboBoxSortToTabelmap.put("Host Name (Ascending)", new SortConditions(boroughWindowController.nameColumn, true));
         options.add("Host Name (Descending)");
+        comboBoxSortToTabelmap.put("Host Name (Descending)", new SortConditions(boroughWindowController.nameColumn, false));
         options.add("Price (Ascending)");
+        comboBoxSortToTabelmap.put("Price (Ascending)", new SortConditions(boroughWindowController.priceColumn, true));
         options.add("Price (Descending)");
+        comboBoxSortToTabelmap.put("Price (Descending)", new SortConditions(boroughWindowController.priceColumn, false));
         options.add("Number of reviews (Ascending)");
+        comboBoxSortToTabelmap.put("Number of reviews (Ascending)", new SortConditions(boroughWindowController.reviewsColumn, true));
         options.add("Number of reviews (Descending)");
-        
+        comboBoxSortToTabelmap.put("Number of reviews (Descending)", new SortConditions(boroughWindowController.reviewsColumn, false));
+
         return options;
     }
     
     private void assignSort(ComboBox box)
     {
-        box.setOnMouseClicked(e -> boroughWindowController.boroughTable.sort());
+        box.setOnMouseClicked(e -> getSort(box));
+    }
+    
+    private void getSort(ComboBox box)
+    {
+        sort(comboBoxSortToTabelmap.get("Host Name (Ascending)"));
+    }
+    
+    private void sort(SortConditions sortCondtions)
+    {
+        if (sortCondtions == null)
+        {
+            return;    
+        }
+        
+        TableColumn<AirbnbListing, String> column = sortCondtions.getColumn();
+        TableView table = boroughWindowController.boroughTable;
+        column.setSortable(true);
+        ObservableList<TableColumn> sortBy = table.getSortOrder();
+        sortBy.clear();
+        sortBy.add(column);
+        column.setSortType(TableColumn.SortType.valueOf(sortCondtions.getOrder()));
+        table.sort();
+        column.setSortable(false);
     }
     
 }
