@@ -70,17 +70,17 @@ public class BoroughWindowView extends Stage
         ArrayList<String> options = new ArrayList<>();
         
         options.add("Host Name (Ascending)");
-        comboBoxSortToTabelmap.put("Host Name (Ascending)", new SortConditions(boroughWindowController.nameColumn, true));
+        comboBoxSortToTabelmap.put("Host Name (Ascending)", new SortConditions(boroughWindowController.nameColumn, TableColumn.SortType.ASCENDING));
         options.add("Host Name (Descending)");
-        comboBoxSortToTabelmap.put("Host Name (Descending)", new SortConditions(boroughWindowController.nameColumn, false));
+        comboBoxSortToTabelmap.put("Host Name (Descending)", new SortConditions(boroughWindowController.nameColumn, TableColumn.SortType.DESCENDING));
         options.add("Price (Ascending)");
-        comboBoxSortToTabelmap.put("Price (Ascending)", new SortConditions(boroughWindowController.priceColumn, true));
+        comboBoxSortToTabelmap.put("Price (Ascending)", new SortConditions(boroughWindowController.priceColumn, TableColumn.SortType.ASCENDING));
         options.add("Price (Descending)");
-        comboBoxSortToTabelmap.put("Price (Descending)", new SortConditions(boroughWindowController.priceColumn, false));
+        comboBoxSortToTabelmap.put("Price (Descending)", new SortConditions(boroughWindowController.priceColumn, TableColumn.SortType.DESCENDING));
         options.add("Number of reviews (Ascending)");
-        comboBoxSortToTabelmap.put("Number of reviews (Ascending)", new SortConditions(boroughWindowController.reviewsColumn, true));
+        comboBoxSortToTabelmap.put("Number of reviews (Ascending)", new SortConditions(boroughWindowController.reviewsColumn, TableColumn.SortType.ASCENDING));
         options.add("Number of reviews (Descending)");
-        comboBoxSortToTabelmap.put("Number of reviews (Descending)", new SortConditions(boroughWindowController.reviewsColumn, false));
+        comboBoxSortToTabelmap.put("Number of reviews (Descending)", new SortConditions(boroughWindowController.reviewsColumn, TableColumn.SortType.DESCENDING));
 
         return options;
     }
@@ -92,7 +92,7 @@ public class BoroughWindowView extends Stage
     
     private void getSort(ComboBox box)
     {
-        sort(comboBoxSortToTabelmap.get("Host Name (Ascending)"));
+        sort(comboBoxSortToTabelmap.get(box.getValue()));
     }
     
     private void sort(SortConditions sortCondtions)
@@ -108,7 +108,7 @@ public class BoroughWindowView extends Stage
         ObservableList<TableColumn> sortBy = table.getSortOrder();
         sortBy.clear();
         sortBy.add(column);
-        column.setSortType(TableColumn.SortType.valueOf(sortCondtions.getOrder()));
+        column.setSortType(sortCondtions.getOrder());
         table.sort();
         column.setSortable(false);
     }

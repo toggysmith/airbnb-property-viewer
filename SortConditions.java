@@ -9,12 +9,12 @@ import javafx.scene.control.TableColumn;
 public class SortConditions
 {
     private TableColumn<AirbnbListing, String> column;
-    private boolean ascending;
+    private TableColumn.SortType type;
     
-    public SortConditions(TableColumn<AirbnbListing, String> column, boolean ascending)
+    public SortConditions(TableColumn<AirbnbListing, String> column, TableColumn.SortType type)
     {
         this.column = column;
-        this.ascending = ascending;
+        this.type = type;
     }
     
     public TableColumn<AirbnbListing, String> getColumn()
@@ -22,12 +22,8 @@ public class SortConditions
         return column;
     }
     
-    public String getOrder()
+    public TableColumn.SortType getOrder()
     {
-        if (ascending)
-        {
-            return "Ascending";
-        }
-        return "Descending";
+        return type;
     }
 }
