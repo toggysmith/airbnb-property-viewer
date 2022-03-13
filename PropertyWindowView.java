@@ -24,14 +24,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class PropertyWindowView extends Stage
 {
     private ObservableList<AirbnbListing> listings;
-    private List<Sort> sorts;
     PropertyWindowController propertyWindowController;
     /**
      * Create a window and load the FXML file.
      */
     public PropertyWindowView(String boroughName) throws Exception
     {
-        sorts = createSorts();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
         
@@ -41,23 +39,10 @@ public class PropertyWindowView extends Stage
         
         propertyWindowController = loader.getController();
         populateTable(propertyWindowController.propertyTable);
-        ComboBox comboBox = propertyWindowController.dropdownMenu;
-        
-        for(Sort sort : sorts) {
-            Control item = new Label(sort.getName());
-            item.setOnMouseClicked(e -> sort(sort, listings));
-            comboBox.getItems().add(item);
-        }
         
         setScene(scene);
         setTitle(boroughName);
         show();
-    }
-    
-    public void sort(Sort sort, ObservableList<AirbnbListing> listings)
-    {
-        listings = sort.sort(listings);
-        setListings(listings);
     }
     
     public void setListings(ObservableList<AirbnbListing> listings)
@@ -79,15 +64,6 @@ public class PropertyWindowView extends Stage
         propertyWindowController.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         propertyWindowController.reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
         propertyWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
-    }
-    
-    private List<Sort> createSorts()
-    {
-        List<Sort> sortList = new ArrayList<>();
-        sortList.add(new Sort1("sort1"));
-        sortList.add(new Sort2("sort2"));
-
-        return sortList;
     }
     
 }

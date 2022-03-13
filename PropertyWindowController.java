@@ -17,8 +17,6 @@ import javafx.scene.control.TableColumn;
  */
 public class PropertyWindowController
 {
-    @FXML public ComboBox dropdownMenu;
-    
     @FXML public TableView propertyTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;
     @FXML public TableColumn<AirbnbListing, String> priceColumn;
