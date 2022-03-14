@@ -78,18 +78,13 @@ public class BoroughWindowView extends Stage
         return options;
     }
 
-    private void assignSort(ComboBox box)
+    private void assignSort(ComboBox<ComboBoxOrderEnum> box)
     {
         box.setOnAction(e -> sort(box.getValue()));
     }
 
-    private void sort(Object comboBoxOrderObject)
+    private void sort(ComboBoxOrderEnum comboBoxOrderEnum)
     {
-        if (!(comboBoxOrderObject instanceof ComboBoxOrderEnum))
-        {
-            return;
-        }
-        ComboBoxOrderEnum comboBoxOrderEnum = (ComboBoxOrderEnum) comboBoxOrderObject;
         if (comboBoxOrder == null)
         {
             return;    
