@@ -109,12 +109,12 @@ public class MainView extends Stage
         Object[] listingsInBorough = airbnbListings.stream()
                              .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
                              .toArray();
-        ObservableList<AirbnbListing> setListingsInBorough = FXCollections.observableArrayList();
+        ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
         for (Object listing : listingsInBorough)
         {
             AirbnbListing listingAsAirBnb = (AirbnbListing)listing;
-            setListingsInBorough.add(listingAsAirBnb);
+            listListingsInBorough.add(listingAsAirBnb);
         }
-        return setListingsInBorough;
+        return listListingsInBorough;
     }
 }

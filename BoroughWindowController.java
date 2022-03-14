@@ -8,7 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.ChoiceBox;
 
 /**
- * MainController hosts FXML GUI elements and onAction methods.
+ * BoroughWindowController hosts FXML GUI elements.
  * 
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)

@@ -41,7 +41,7 @@ public enum ComboBoxOrderEnum
      */
     public static List<ComboBoxOrderEnum> getAll()
     {
-        List<ComboBoxOrderEnum> list = new ArrayList<>();
+        List<ComboBoxOrderEnum> list = new ArrayList<>(6);
         list.add(HOST_NAME_ASCENDING);
         list.add(HOST_NAME_DESCENDING);
         list.add(PRICE_ASCENDING);

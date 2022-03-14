@@ -7,7 +7,6 @@ import java.util.Set;
 import javafx.scene.control.Label;
 import java.util.List;
 import javafx.scene.control.ComboBox;
-import java.util.ArrayList;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableView;
