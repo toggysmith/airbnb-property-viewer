@@ -74,4 +74,16 @@ public class MapController extends Pane
         new BoroughButton(3, 6, "CROY", "Croydon");
         new BoroughButton(4, 6, "BROM", "Bromley");
     }
+    
+    private void createBoroughWindow(String windowTitle)
+    {
+        try
+        {
+            new BoroughWindowView(windowTitle);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
