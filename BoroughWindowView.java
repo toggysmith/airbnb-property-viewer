@@ -30,6 +30,7 @@ public class BoroughWindowView extends Stage
 {
     private ObservableList<AirbnbListing> listings;
     private BoroughWindowController boroughWindowController;
+    private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
     /**
      * Create a window and load the FXML file.
      */
@@ -62,12 +63,19 @@ public class BoroughWindowView extends Stage
         boroughWindowController.minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
     }
 
-    private ArrayList<ComboBoxOrder> getSortBoxOptions()
+    private List<ComboBoxOrderEnum> getSortBoxOptions()
     {
-        ArrayList<ComboBoxOrder> options = new ArrayList<>();
-
-        options.addAll(ComboBoxOrder.getAll());
-
+        comboBoxOrder = new HashMap<>();
+        
+        comboBoxOrder.put(ComboBoxOrderEnum.HOST_NAME_ASCENDING, boroughWindowController.nameColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.HOST_NAME_DESCENDING, boroughWindowController.nameColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.PRICE_ASCENDING, boroughWindowController.priceColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.PRICE_DESCENDING, boroughWindowController.priceColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_ASCENDING, boroughWindowController.reviewsColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_DESCENDING, boroughWindowController.reviewsColumn);
+        
+        List<ComboBoxOrderEnum> options = ComboBoxOrderEnum.getAll();
+        
         return options;
     }
 
@@ -78,23 +86,23 @@ public class BoroughWindowView extends Stage
 
     private void sort(Object comboBoxOrderObject)
     {
-        if (!(comboBoxOrderObject instanceof ComboBoxOrder))
+        if (!(comboBoxOrderObject instanceof ComboBoxOrderEnum))
         {
             return;
         }
-        ComboBoxOrder comboBoxOrder = (ComboBoxOrder) comboBoxOrderObject;
+        ComboBoxOrderEnum comboBoxOrderEnum = (ComboBoxOrderEnum) comboBoxOrderObject;
         if (comboBoxOrder == null)
         {
             return;    
         }
 
-        TableColumn<AirbnbListing, String> column = comboBoxOrder.getColumn(boroughWindowController);
+        TableColumn<AirbnbListing, String> column = comboBoxOrder.get(comboBoxOrderEnum);
         TableView table = boroughWindowController.boroughTable;
         column.setSortable(true);
         ObservableList<TableColumn> sortBy = table.getSortOrder();
         sortBy.clear();
         sortBy.add(column);
-        column.setSortType(comboBoxOrder.getOrder());
+        column.setSortType(comboBoxOrderEnum.getOrder());
         table.sort();
         column.setSortable(false);
     }
