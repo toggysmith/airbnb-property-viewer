@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+
 
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
-
+import javafx.fxml.FXMLLoader;
 /**
  * MainController hosts FXML GUI elements and onAction methods.
  * 
@@ -23,9 +26,28 @@ public class MainController
     @FXML public ComboBox fromRangeBox;
     @FXML public ComboBox toRangeBox;
     @FXML public Pane switchPane;
-    
     @FXML public Button leftButton;
     @FXML public Button rightButton;
+    
+    private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
+    
+    
+    //welcome window message components
+    @FXML public BorderPane welcomePane;    
+    @FXML public TextField welcomeTitle;
+    
+     
+    private void setUpPanes()
+    {
+       windowPanes.add(welcomePane);
+       
+    }
+    
+    public void loadWelcome() throws java.io.IOException
+    {
+        welcomePane = FXMLLoader.load(getClass().getResource("welcomeWindow.fxml"));
+        switchPane.getChildren().setAll(welcomePane);
+    }
     
     /**
      * Method to enable use of the buttons
@@ -44,11 +66,11 @@ public class MainController
     {   
         try{
         String selectedFromStr = (String)fromRangeBox.getValue();
-        String selectedToStr = (String) toRangeBox.getValue();
-            
+        String selectedToStr = (String) toRangeBox.getValue();    
         if(selectedFromStr != null & selectedToStr != null){
             int selectedFromInt = Integer.parseInt(selectedFromStr);
             int selectedToInt = Integer.parseInt(selectedToStr);
+            
             if(selectedFromInt < selectedToInt){
                return false;
             }else{
