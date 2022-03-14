@@ -54,7 +54,7 @@ public class BoroughButton
     {
         try
         {
-            new PropertyWindowView(windowTitle);
+            new BoroughWindowView(windowTitle);
         }
         catch (Exception e)
         {

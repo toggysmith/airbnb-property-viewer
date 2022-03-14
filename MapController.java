@@ -50,16 +50,16 @@ public class MapController extends Pane
         // Row 4:
         new BoroughButton(0, 3, "HILL", "Hillingdon");
         new BoroughButton(1, 3, "EALI", "Ealing");
-        new BoroughButton(2, 3, "KENS", "Kensington & Chelsea");
+        new BoroughButton(2, 3, "KENS", "Kensington and Chelsea");
         new BoroughButton(3, 3, "WSTM", "Westminster");
         new BoroughButton(4, 3, "TOWH", "Tower Hamlets");
         new BoroughButton(5, 3, "NEWH", "Newham");
-        new BoroughButton(6, 3, "BARK", "Barking & Dagenham");
+        new BoroughButton(6, 3, "BARK", "Barking and Dagenham");
         // Row 5:
         new BoroughButton(0, 4, "HOUN", "Hounslow");
-        new BoroughButton(1, 4, "HAMM", "Hammersmith & Fulham");
+        new BoroughButton(1, 4, "HAMM", "Hammersmith and Fulham");
         new BoroughButton(2, 4, "WAND", "Wandsworth");
-        new BoroughButton(3, 4, "CITY", "City");
+        new BoroughButton(3, 4, "CITY", "City of London");
         new BoroughButton(4, 4, "GWCH", "Greenwich");
         new BoroughButton(5, 4, "BEXL", "Bexley");
         // Row 6:
