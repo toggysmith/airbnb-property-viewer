@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import javafx.scene.layout.Pane;
 
 
 /**
@@ -30,6 +31,7 @@ public class MainView extends Stage
     // (E.g. if min property price is 0 and the max is 6000 and the step is
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
     private final int RANGE_BOX_STEP = 250;
+    
     /**
      * Create a window and load the FXML file.
      */
@@ -37,27 +39,17 @@ public class MainView extends Stage
     {
         airbnbListings = new AirbnbDataLoader().load();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         
         
-        Scene scene = new Scene(loader.load());
+       Scene scene = new Scene(loader.load());
         
-        //scene.getStylesheets().add("mainWindow.css");
-        
-<<<<<<< Updated upstream
-        // Remove this before merging back with application-window.
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("map-pane.fxml"));
-        loader2.setRoot(mainController.switchPane);
-        loader2.load();
-        
-=======
        MainController mainController = loader.getController();
-       mainController.loadWelcome();
+       //windowPanes.add(mainController.getWelcomePane());
+       mainController.setUpPanes();
        
        mainController.fromRangeBox.getItems().addAll(getRangeBoxOptions("No min"));
        mainController.toRangeBox.getItems().addAll(getRangeBoxOptions("No max"));
-       
->>>>>>> Stashed changes
         setScene(scene);
         setTitle("Airbnb Property Viewer");
         show();

@@ -29,24 +29,41 @@ public class MainController
     @FXML public Button leftButton;
     @FXML public Button rightButton;
     
-    private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
-    
-    
     //welcome window message components
     @FXML public BorderPane welcomePane;    
     @FXML public TextField welcomeTitle;
-    
-     
-    private void setUpPanes()
-    {
-       windowPanes.add(welcomePane);
-       
-    }
-    
+    @FXML public Pane mapPane;
+    private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
+    private Pane currentPane;
     public void loadWelcome() throws java.io.IOException
     {
         welcomePane = FXMLLoader.load(getClass().getResource("welcomeWindow.fxml"));
         switchPane.getChildren().setAll(welcomePane);
+        windowPanes.add(welcomePane);
+        currentPane = welcomePane;
+    }
+    
+    public void setUpPanes() throws java.io.IOException
+    {
+       loadWelcome();
+       mapPane = FXMLLoader.load(getClass().getResource("map-pane.fxml"));
+       windowPanes.add(mapPane);
+    }
+    
+    @FXML
+    private void nextPane()
+    {
+       Pane nextPane =  windowPanes.getNextElement(currentPane);
+       currentPane = nextPane;
+       switchPane.getChildren().setAll(nextPane); 
+    }
+    
+    @FXML
+    private void prevPane()
+    {
+        Pane prevPane =  windowPanes.getPrevElement(currentPane);
+        currentPane = prevPane;
+        switchPane.getChildren().setAll(prevPane); 
     }
     
     /**

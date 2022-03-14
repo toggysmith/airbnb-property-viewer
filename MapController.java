@@ -90,4 +90,9 @@ public class MapController extends Pane
             e.printStackTrace();
         }
     }
+    
+    public Pane getMapPane()
+    {
+        return root;
+    }
 }

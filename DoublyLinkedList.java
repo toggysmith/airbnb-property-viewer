@@ -124,30 +124,6 @@ public class DoublyLinkedList<E>
      */
     public void add(E element)
     {
-        /**
-        
-        if (lastAdded == null)
-        {
-            lastAdded = newNode;
-            nextNode = newNode;
-        }
-        else
-        {
-            nextNode = lastAdded.getNext();
-        }
-        newNode.setNext(nextNode);
-        newNode.setPrev(lastAdded);
-        lastAdded.setNext(newNode);
-        nextNode.setPrev(newNode);
-        if (size == 0)
-        {
-            currentNode = newNode;
-        }
-        lastAdded = newNode;
-        size++;
-        */
-       
-       
        ListNode<E> newNode = new ListNode(element);
        
        ListNode<E> beforeTail = tail.getPrev(); 

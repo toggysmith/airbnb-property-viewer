@@ -4,8 +4,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane fx:id="welcomePane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+<BorderPane fx:id="welcomePane" prefHeight="288.8" prefWidth="570.4" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <center>
       <TextArea BorderPane.alignment="CENTER" />
    </center>
