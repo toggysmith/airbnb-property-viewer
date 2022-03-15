@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import javafx.scene.layout.Pane;
+import java.util.Arrays;
 
 
 /**
@@ -24,8 +25,10 @@ import javafx.scene.layout.Pane;
  */
 public class MainView extends Stage
 {
-    // The listings which get loaded from the database.
+    private final static String WINDOW_TITLE = "Airbnb Property Viewer";
     private static List<AirbnbListing> airbnbListings;
+
+    private MainController mainController;
     
     // The step in which the range box selector goes up.
     // (E.g. if min property price is 0 and the max is 6000 and the step is
@@ -35,57 +38,53 @@ public class MainView extends Stage
     private static MainController mainController;
     
     /**
-     * Create a window and load the FXML file.
+     * Create the main application window.
      */
     public MainView() throws Exception
     {
+        // Load the contents of the FXML file into the scene.
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        
+        Scene scene = new Scene(loader.load());
+        
+        // Initialise instance variables.
         airbnbListings = AirbnbDataLoader.getListings();
-        
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-        
-       Scene scene = new Scene(loader.load());
-       mainController = loader.getController();
-        
-       //windowPanes.add(mainController.getWelcomePane());
-       mainController.setUpPanes();
-       
-       
-       
-    
-       
-       mainController.fromRangeBox.getItems().addAll(getRangeBoxOptions(RangeBoxEnum.NOMIN));
-       mainController.toRangeBox.getItems().addAll(getRangeBoxOptions(RangeBoxEnum.NOMAX));
+        mainController = loader.getController();
+
+        // Perform basic setup work.
+        mainController.setUpPanes();
+        setRangeBoxOptions();
         setScene(scene);
-        setTitle("Airbnb Property Viewer");
+        setTitle(WINDOW_TITLE);
+        sizeToScene();
         show();
+    }
+
+    /**
+     * Set the options shown in the range combo boxes.
+     */
+    private void setRangeBoxOptions()
+    {
+        mainController.fromRangeBox.getItems().addAll(generatePriceOptions(RangeBoxEnum.NOMIN.toString()));
+        mainController.toRangeBox.getItems().addAll(generatePriceOptions(RangeBoxEnum.NOMAX.toString()));
     }
     
     /**
-     * Get a list of possible price options for the range boxes.
-     * @param noOptionString The string to show to select no option, e.g. "No min".
-     * @return The list of possible price options for the range boxes.
+     * Generate a list of possible price options.
+     * @param noOptionString The string to show to represent none of the other options, e.g. "No min".
+     * @return The list of possible price options.
      */
-    public ArrayList<String> getRangeBoxOptions(RangeBoxEnum noOptionString)
+    public List<String> generatePriceOptions(String noOptionString)
     {
-        ArrayList<String> options = new ArrayList<>();
+        List<String> options = new ArrayList<>();
         
         int stepAmount = 10;
         
         for (int currentPrice = 0; currentPrice <= getMaxPropertyPrice(); currentPrice += stepAmount)
         {
-            if (currentPrice == stepAmount * 10)
-            {
-                stepAmount = stepAmount * 10;
-            }
+            if (currentPrice == stepAmount * 10) stepAmount = stepAmount * 10;
             
-            if (currentPrice == 0)
-            {
-                options.add(noOptionString.toString());
-            }
-            else
-            {
-                options.add(Integer.toString(currentPrice));
-            }
+            options.add(currentPrice == 0 ? noOptionString : Integer.toString(currentPrice));
         }
         
         return options;
@@ -115,6 +114,9 @@ public class MainView extends Stage
                              .get();
     }
     
+    /**
+     * 
+     */
     public static ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
     {
         Object[] listingsInBorough = airbnbListings.stream()
@@ -123,6 +125,7 @@ public class MainView extends Stage
                             // .filter(listing -> listing.getPrice() < mainController.getToComboValue())
                              .toArray();
         ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
+
         for (Object listing : listingsInBorough)
         {
             AirbnbListing listingAsAirBnb = (AirbnbListing)listing;
