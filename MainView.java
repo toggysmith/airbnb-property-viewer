@@ -27,7 +27,6 @@ public class MainView extends Stage
     // The listings which get loaded from the database.
     private static List<AirbnbListing> airbnbListings;
     
-<<<<<<< HEAD
     // The step in which the range box selector goes up.
     // (E.g. if min property price is 0 and the max is 6000 and the step is
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
@@ -35,8 +34,6 @@ public class MainView extends Stage
     
     private static MainController mainController;
     
-=======
->>>>>>> 9f0d66d78ed79ef2a1da1bd05616b2fa0abe2c56
     /**
      * Create a window and load the FXML file.
      */
