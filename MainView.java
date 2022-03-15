@@ -27,11 +27,6 @@ public class MainView extends Stage
     // The listings which get loaded from the database.
     private static List<AirbnbListing> airbnbListings;
     
-    // The step in which the range box selector goes up.
-    // (E.g. if min property price is 0 and the max is 6000 and the step is
-    // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
-    private final int RANGE_BOX_STEP = 250;
-    
     /**
      * Create a window and load the FXML file.
      */
@@ -67,8 +62,15 @@ public class MainView extends Stage
     {
         ArrayList<String> options = new ArrayList<>();
         
-        for (int currentPrice = 0; currentPrice <= getMaxPropertyPrice(); currentPrice += RANGE_BOX_STEP)
+        int stepAmount = 10;
+        
+        for (int currentPrice = 0; currentPrice <= getMaxPropertyPrice(); currentPrice += stepAmount)
         {
+            if (currentPrice == stepAmount * 10)
+            {
+                stepAmount = stepAmount * 10;
+            }
+            
             if (currentPrice == 0)
             {
                 options.add(noOptionString.toString());
