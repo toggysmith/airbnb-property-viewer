@@ -115,7 +115,8 @@ public class MainView extends Stage
     }
     
     /**
-     * 
+     * Get the listings in a specific borough.
+     * @return The listings in a specific borough.
      */
     public static ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
     {
@@ -124,13 +125,12 @@ public class MainView extends Stage
                              .filter(listing -> listing.getPrice() > mainController.getFromComboValue())
                              .filter(listing -> listing.getPrice() < mainController.getToComboValue())
                              .toArray();
+        
         ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
 
         for (Object listing : listingsInBorough)
-        {
-            AirbnbListing listingAsAirBnb = (AirbnbListing)listing;
-            listListingsInBorough.add(listingAsAirBnb);
-        }
+            listListingsInBorough.add((AirbnbListing) listing);
+
         return listListingsInBorough;
     }
 }
