@@ -10,6 +10,15 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.Collections;
 
+/**
+ * 
+ * 
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0
+ */
 public class BoroughButton
 {
     private Hexagon hexagon;
