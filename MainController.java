@@ -24,8 +24,8 @@ import javafx.fxml.FXMLLoader;
  */
 public class MainController
 {
-    @FXML public ComboBox fromRangeBox;
-    @FXML public ComboBox toRangeBox;
+    @FXML public ComboBox<String> fromRangeBox;
+    @FXML public ComboBox<String> toRangeBox;
     @FXML public Pane switchPane;
     @FXML public Button leftButton;
     @FXML public Button rightButton;
@@ -35,8 +35,8 @@ public class MainController
     @FXML public Text welcomeTitle;
     
     private Pane mapPane;
-    public static int fromRangeValue;
-    public static int toRangeValue;
+    private int fromRangeValue;
+    private int toRangeValue;
     
     private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
     private Pane currentPane;
@@ -170,5 +170,15 @@ public class MainController
         invalidRange.setContentText("The From Price Selected Should Be Lower Than The To Price");
         
         invalidRange.showAndWait();
+    }
+    
+    public int getFromComboValue()
+    {
+        return fromRangeValue;
+    }
+    
+    public int getToComboValue()
+    {
+        return toRangeValue;
     }
 }
