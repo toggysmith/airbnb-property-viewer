@@ -34,9 +34,11 @@ public class MainController
     public Pane welcomePane;    
     @FXML public Text welcomeTitle;
     
+    private RangeValues comboBoxRangeValues;
+    
     private Pane mapPane;
-    private int fromRangeValue;
-    private int toRangeValue;
+    //private int fromRangeValue;
+    //private int toRangeValue;
     
     private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
     private Pane currentPane;
@@ -49,6 +51,8 @@ public class MainController
        mapPane = loadPane("map-pane.fxml");
        windowPanes.add(mapPane);
        setSwitchPaneChild(welcomePane); 
+       
+       comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
     }
     
     private void setSwitchPaneChild(Pane childPane)
@@ -88,6 +92,7 @@ public class MainController
       }
     }
     
+    /**
     private int getMinPrice()
     {
         return AirbnbDataLoader.getListings().stream()
@@ -103,16 +108,16 @@ public class MainController
                                              .max(Integer::compare)
                                              .get();
     }
-    
+    */
     private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
     {
-        if(prevFromValue == getMinPrice()){
+        if(prevFromValue == 0){
             fromRangeBox.setValue(RangeBoxEnum.NOMIN.toString());
         }else{
             fromRangeBox.setValue(Integer.toString(prevFromValue)); 
         }
                    
-        if(prevToValue == getMaxPrice()){
+        if(prevToValue == Integer.MAX_VALUE){
             toRangeBox.setValue(RangeBoxEnum.NOMAX.toString());
         }else{
             toRangeBox.setValue(Integer.toString(prevToValue));
@@ -122,15 +127,15 @@ public class MainController
     private void processRangeValues(String fromValue, String toRange)
     {
         if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
-            fromRangeValue = getMinPrice();
+            comboBoxRangeValues.setFromValue("0");
         }else{
-                fromRangeValue = Integer.parseInt(fromValue);                                         
+                comboBoxRangeValues.setFromValue(fromValue);                                         
         }
         
         if(toRange.equals(RangeBoxEnum.NOMAX.toString())){
-            toRangeValue = getMaxPrice();
+            comboBoxRangeValues.setToValue(Integer.toString(Integer.MAX_VALUE));
         }else{
-            toRangeValue = Integer.parseInt(toRange);
+            comboBoxRangeValues.setToValue(toRange);
         }
     }
     
@@ -138,30 +143,28 @@ public class MainController
     {
         boolean isValidRange = true;
         
+        //set defualt value to no min and no max
+        //object class, that stores two strings 
         
-        try{
-            String selectedFromStr = (String)fromRangeBox.getValue();
-            String selectedToStr = (String) toRangeBox.getValue();    
-            if(selectedFromStr != null && selectedToStr != null){
-                int prevFromValue = fromRangeValue;
-                int prevToValue = toRangeValue;
+        String selectedFromStr = fromRangeBox.getValue();
+        String selectedToStr = toRangeBox.getValue();
+        
+        if(selectedFromStr != null && selectedToStr != null){
+            
+            int prevFromValue = comboBoxRangeValues.getFromValue();
+            int prevToValue = comboBoxRangeValues.getToValue();
                 
-                processRangeValues(selectedFromStr,selectedToStr);
-                if(fromRangeValue < toRangeValue){
-                   isValidRange = false;
-                }else{
-                   rangeWarningAlert();
-                   retrievePrevRangeValues(prevFromValue,prevToValue);
-                }
+            processRangeValues(selectedFromStr,selectedToStr);
+            if(comboBoxRangeValues.getFromValue() < comboBoxRangeValues.getToValue()){
+            isValidRange = false;
+            }else{
+            rangeWarningAlert();
+            retrievePrevRangeValues(prevFromValue,prevToValue);
+            return isValidRange;
             }
         }
-        catch (NumberFormatException ex){
-            ex.printStackTrace();
-        }
-        
         return isValidRange;
-    }
-    
+   }
     private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
@@ -172,13 +175,8 @@ public class MainController
         invalidRange.showAndWait();
     }
     
-    public int getFromComboValue()
+    public RangeValues getRangeValues()
     {
-        return fromRangeValue;
-    }
-    
-    public int getToComboValue()
-    {
-        return toRangeValue;
+        return comboBoxRangeValues;
     }
 }
