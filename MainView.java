@@ -32,8 +32,6 @@ public class MainView extends Stage
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
     private final int RANGE_BOX_STEP = 250;
     
-    private MainController mainController;
-    
     /**
      * Create a window and load the FXML file.
      */
@@ -43,9 +41,8 @@ public class MainView extends Stage
         
        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         
-        mainController = loader.getController();
-        
        Scene scene = new Scene(loader.load());
+    MainController mainController = loader.getController();
         
        //windowPanes.add(mainController.getWelcomePane());
        mainController.setUpPanes();

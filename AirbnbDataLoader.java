@@ -57,16 +57,6 @@ public class AirbnbDataLoader {
         return listings;
     }
     
-    public static List<AirbnbListing> getListings()
-    {
-        if(savedListings == null)
-        {
-           savedListings = new AirbnbDataLoader().load(); 
-        }
-        
-        return savedListings;
-    }
-    
     /**
       * Retrieves the loaded listings. This is used for efficiency - if the
       * listings have already been loaded, it will return those instead of
