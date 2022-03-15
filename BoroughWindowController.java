@@ -36,25 +36,22 @@ public class BoroughWindowController
     private TableRow<AirbnbListing> tableClicked()
     {
         TableRow<AirbnbListing> row = new TableRow<>();
-        row.setOnMouseClicked(event ->
-        {
+        row.setOnMouseClicked(event -> rowClicked(row));
+        return row;
+    }
+
+    private void rowClicked(TableRow<AirbnbListing> row)
+    {
+        if (! row.isEmpty()) {
+            AirbnbListing listing = row.getItem();
             try
             {
-                 rowClicked(row);
+                new PropertyWindowView(listing);
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
-        });
-        return row;
-    }
-
-    private void rowClicked(TableRow<AirbnbListing> row) throws Exception
-    {
-        if (! row.isEmpty()) {
-            AirbnbListing listing = row.getItem();
-            new PropertyWindowView(listing);
         }
     }
 }
