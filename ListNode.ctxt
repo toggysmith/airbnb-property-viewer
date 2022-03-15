@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ListNode
-comment0.text=\r\n\ A\ node\ in\ a\ list.\r\n\r\n\ @author\ Adam\ Murray\ K21003575\r\n\ @version\ 11/03/2022\r\n
+comment0.text=\r\n\ A\ node\ in\ a\ list.\r\n\r\n\ @author\ Adam\ Murray\ K21003575\r\n\ @author\ Augusto\ Favero\ K21059800\r\n\ @version\ 11/03/2022\r\n
 comment1.params=element
 comment1.target=ListNode(java.lang.Object)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ ListNode\r\n

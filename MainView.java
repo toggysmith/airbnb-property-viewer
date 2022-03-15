@@ -30,6 +30,13 @@ public class MainView extends Stage
 
     private MainController mainController;
     
+    // The step in which the range box selector goes up.
+    // (E.g. if min property price is 0 and the max is 6000 and the step is
+    // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
+    private final int RANGE_BOX_STEP = 250;
+    
+    private static MainController mainController;
+    
     /**
      * Create the main application window.
      */
@@ -113,9 +120,10 @@ public class MainView extends Stage
     public static ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
     {
         Object[] listingsInBorough = airbnbListings.stream()
-                                                   .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
-                                                   .toArray();
-        
+                             .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
+                             .filter(listing -> listing.getPrice() > mainController.getFromComboValue())
+                             .filter(listing -> listing.getPrice() < mainController.getToComboValue())
+                             .toArray();
         ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
 
         for (Object listing : listingsInBorough)
