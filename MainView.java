@@ -112,8 +112,8 @@ public class MainView extends Stage
     {
         Object[] listingsInBorough = airbnbListings.stream()
                              .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
-                             //.filter(listing -> listing.getPrice() > mainController.getMinPrice())
-                             //.filter(listing -> listing.getPrice() < mainController.getMaxPrice())
+                             //.filter(listing -> listing.getPrice() > mainController.getFromComboValue())
+                             //.filter(listing -> listing.getPrice() < mainController.getToComboValue())
                              .toArray();
         ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
         for (Object listing : listingsInBorough)
