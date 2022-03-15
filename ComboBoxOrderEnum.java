@@ -1,7 +1,4 @@
 import javafx.scene.control.TableColumn;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * This enum stores the values in the borough window ComboBox
@@ -33,22 +30,6 @@ public enum ComboBoxOrderEnum
     {
         this.displayText = displayText;
         this.order = order;
-    }
-    
-    /**
-     * Returns a list of all the enums values.
-     * @return A list of all the enums values.
-     */
-    public static List<ComboBoxOrderEnum> getAll()
-    {
-        List<ComboBoxOrderEnum> list = new ArrayList<>(6);
-        list.add(HOST_NAME_ASCENDING);
-        list.add(HOST_NAME_DESCENDING);
-        list.add(PRICE_ASCENDING);
-        list.add(PRICE_DESCENDING);
-        list.add(NUMBER_OF_REVIEWS_ASCENDING);
-        list.add(NUMBER_OF_REVIEWS_DESCENDING);
-        return list;
     }
     
     /**
