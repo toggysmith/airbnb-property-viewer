@@ -92,23 +92,7 @@ public class MainController
       }
     }
     
-    /**
-    private int getMinPrice()
-    {
-        return AirbnbDataLoader.getListings().stream()
-                                             .map(listing -> listing.getPrice())
-                                             .min(Integer::compare)
-                                             .get();
-    }
     
-    private int getMaxPrice()
-    {
-        return AirbnbDataLoader.getListings().stream()
-                                             .map(listing -> listing.getPrice())
-                                             .max(Integer::compare)
-                                             .get();
-    }
-    */
     private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
     {
         if(prevFromValue == 0){
