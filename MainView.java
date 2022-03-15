@@ -48,8 +48,12 @@ public class MainView extends Stage
        //windowPanes.add(mainController.getWelcomePane());
        mainController.setUpPanes();
        
-       mainController.fromRangeBox.getItems().addAll(getRangeBoxOptions("No min"));
-       mainController.toRangeBox.getItems().addAll(getRangeBoxOptions("No max"));
+       
+       
+    
+       
+       mainController.fromRangeBox.getItems().addAll(getRangeBoxOptions(RangeBoxEnum.NOMIN));
+       mainController.toRangeBox.getItems().addAll(getRangeBoxOptions(RangeBoxEnum.NOMAX));
         setScene(scene);
         setTitle("Airbnb Property Viewer");
         show();
@@ -60,7 +64,7 @@ public class MainView extends Stage
      * @param noOptionString The string to show to select no option, e.g. "No min".
      * @return The list of possible price options for the range boxes.
      */
-    public ArrayList<String> getRangeBoxOptions(String noOptionString)
+    public ArrayList<String> getRangeBoxOptions(RangeBoxEnum noOptionString)
     {
         ArrayList<String> options = new ArrayList<>();
         
@@ -68,7 +72,7 @@ public class MainView extends Stage
         {
             if (currentPrice == 0)
             {
-                options.add(noOptionString);
+                options.add(noOptionString.toString());
             }
             else
             {

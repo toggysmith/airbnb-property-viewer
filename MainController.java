@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
@@ -30,40 +31,49 @@ public class MainController
     @FXML public Button rightButton;
     
     //welcome window message components
-    @FXML public BorderPane welcomePane;    
-    @FXML public TextField welcomeTitle;
-    @FXML public Pane mapPane;
+    public Pane welcomePane;    
+    @FXML public Text welcomeTitle;
+    
+    private Pane mapPane;
+    public static int fromRangeValue;
+    public static int toRangeValue;
+    
     private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
     private Pane currentPane;
-    public void loadWelcome() throws java.io.IOException
+    
+    public void setUpPanes() throws IOException
     {
-        welcomePane = FXMLLoader.load(getClass().getResource("welcomeWindow.fxml"));
-        switchPane.getChildren().setAll(welcomePane);
-        windowPanes.add(welcomePane);
-        currentPane = welcomePane;
+       welcomePane = loadPane( "welcomeWindow.fxml");
+       windowPanes.add(welcomePane);
+       
+       mapPane = loadPane("map-pane.fxml");
+       windowPanes.add(mapPane);
+       setSwitchPaneChild(welcomePane); 
     }
     
-    public void setUpPanes() throws java.io.IOException
+    private void setSwitchPaneChild(Pane childPane)
     {
-       loadWelcome();
-       mapPane = FXMLLoader.load(getClass().getResource("map-pane.fxml"));
-       windowPanes.add(mapPane);
+        currentPane = childPane;
+        switchPane.getChildren().setAll(childPane);
+    }
+    
+    private Pane loadPane(String fxmlFileName) throws IOException
+    {
+        return FXMLLoader.load(getClass().getResource(fxmlFileName));
     }
     
     @FXML
     private void nextPane()
     {
        Pane nextPane =  windowPanes.getNextElement(currentPane);
-       currentPane = nextPane;
-       switchPane.getChildren().setAll(nextPane); 
+       setSwitchPaneChild(nextPane);
     }
     
     @FXML
     private void prevPane()
     {
-        Pane prevPane =  windowPanes.getPrevElement(currentPane);
-        currentPane = prevPane;
-        switchPane.getChildren().setAll(prevPane); 
+        Pane prevPane = (Pane) windowPanes.getPrevElement(currentPane);
+        setSwitchPaneChild(prevPane); 
     }
     
     /**
@@ -75,31 +85,81 @@ public class MainController
       if(!invalidRangeCheck()){
           rightButton.setDisable(false);
           leftButton.setDisable(false);
+      }
+    }
+    
+    private int getMinPrice()
+    {
+        return AirbnbDataLoader.getListings().stream()
+                                             .map(listing -> listing.getPrice())
+                                             .min(Integer::compare)
+                                             .get();
+    }
+    
+    private int getMaxPrice()
+    {
+        return AirbnbDataLoader.getListings().stream()
+                                             .map(listing -> listing.getPrice())
+                                             .max(Integer::compare)
+                                             .get();
+    }
+    
+    private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
+    {
+        if(prevFromValue == getMinPrice()){
+            fromRangeBox.setValue(RangeBoxEnum.NOMIN.toString());
+        }else{
+            fromRangeBox.setValue(Integer.toString(prevFromValue)); 
+        }
+                   
+        if(prevToValue == getMaxPrice()){
+            toRangeBox.setValue(RangeBoxEnum.NOMAX.toString());
+        }else{
+            toRangeBox.setValue(Integer.toString(prevToValue));
         }
     }
     
-    @FXML
-    private boolean invalidRangeCheck()
-    {   
-        try{
-        String selectedFromStr = (String)fromRangeBox.getValue();
-        String selectedToStr = (String) toRangeBox.getValue();    
-        if(selectedFromStr != null & selectedToStr != null){
-            int selectedFromInt = Integer.parseInt(selectedFromStr);
-            int selectedToInt = Integer.parseInt(selectedToStr);
-            
-            if(selectedFromInt < selectedToInt){
-               return false;
-            }else{
-               rangeWarningAlert();
-               return true;
-            }
+    private void processRangeValues(String fromValue, String toRange)
+    {
+        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
+            fromRangeValue = getMinPrice();
+        }else{
+                fromRangeValue = Integer.parseInt(fromValue);                                         
         }
+        
+        if(toRange.equals(RangeBoxEnum.NOMAX.toString())){
+            toRangeValue = getMaxPrice();
+        }else{
+            toRangeValue = Integer.parseInt(toRange);
+        }
+    }
+    
+    private boolean invalidRangeCheck()
+    {
+        boolean isValidRange = true;
+        
+        
+        try{
+            String selectedFromStr = (String)fromRangeBox.getValue();
+            String selectedToStr = (String) toRangeBox.getValue();    
+            if(selectedFromStr != null && selectedToStr != null){
+                int prevFromValue = fromRangeValue;
+                int prevToValue = toRangeValue;
+                
+                processRangeValues(selectedFromStr,selectedToStr);
+                if(fromRangeValue < toRangeValue){
+                   isValidRange = false;
+                }else{
+                   rangeWarningAlert();
+                   retrievePrevRangeValues(prevFromValue,prevToValue);
+                }
+            }
         }
         catch (NumberFormatException ex){
             ex.printStackTrace();
         }
-        return true;
+        
+        return isValidRange;
     }
     
     private void rangeWarningAlert()

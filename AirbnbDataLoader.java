@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import com.opencsv.CSVReader;
 import java.net.URISyntaxException;
+import java.util.List;
 
 public class AirbnbDataLoader {
- 
+    
+    private static ArrayList<AirbnbListing> savedListings;
+    
     /** 
      * Return an ArrayList containing the rows in the AirBnB London data set csv file.
      */
@@ -53,7 +56,17 @@ public class AirbnbDataLoader {
         System.out.println("Success! Number of loaded records: " + listings.size());
         return listings;
     }
-
+    
+    public static List<AirbnbListing> getListings()
+    {
+        if(savedListings == null)
+        {
+           savedListings = new AirbnbDataLoader().load(); 
+        }
+        
+        return savedListings;
+    }
+    
     /**
      *
      * @param doubleString the string to be converted to Double type
