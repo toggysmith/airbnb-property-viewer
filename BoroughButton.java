@@ -31,15 +31,15 @@ public class BoroughButton
         BoroughButton.boroughMap = boroughMap;
     }
 
-    public BoroughButton(int x, int y, String boroughAbbreviation, String boroughFullName)
+    public BoroughButton(BoroughEnum borough)
     {
-        this.boroughAbbreviation = boroughAbbreviation;
-        this.boroughFullName = boroughFullName;
+        this.boroughAbbreviation = borough.ABBREVIATION;
+        this.boroughFullName = borough.NAME;
 
-        double xCoord = x * (TILE_WIDTH + SEPARATION) + ((y+1) % 2) * n;
-        double yCoord = y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
+        double xCoord = borough.X * (TILE_WIDTH + SEPARATION) + ((borough.Y + 1) % 2) * n;
+        double yCoord = borough.Y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
 
-        if ((y+1) % 2 != 0) {xCoord += SEPARATION / 2;}
+        if ((borough.Y + 1) % 2 != 0) {xCoord += SEPARATION / 2;}
 
         VBox vbox = new VBox();
         Label label = new Label(boroughAbbreviation);

@@ -33,46 +33,10 @@ public class MapController extends Pane
     {
         BoroughButton.setBoroughMap(boroughMap);
         
-        // Row 1:
-        new BoroughButton(3, 0, "ENFI", "Enfield");
-        // Row 2:
-        new BoroughButton(2, 1, "BARN", "Barnet");
-        new BoroughButton(3, 1, "HRGY", "Haringey");
-        new BoroughButton(4, 1, "WALT", "Waltham Forest");
-        // Row 3:
-        new BoroughButton(0, 2, "HRRW", "Harrow");
-        new BoroughButton(1, 2, "BREN", "Brent");
-        new BoroughButton(2, 2, "CAMD", "Camden");
-        new BoroughButton(3, 2, "ISLI", "Islington");
-        new BoroughButton(4, 2, "HACK", "Hackney");
-        new BoroughButton(5, 2, "REDB", "Redbridge");
-        new BoroughButton(6, 2, "HAVE", "Havering");
-        // Row 4:
-        new BoroughButton(0, 3, "HILL", "Hillingdon");
-        new BoroughButton(1, 3, "EALI", "Ealing");
-        new BoroughButton(2, 3, "KENS", "Kensington and Chelsea");
-        new BoroughButton(3, 3, "WSTM", "Westminster");
-        new BoroughButton(4, 3, "TOWH", "Tower Hamlets");
-        new BoroughButton(5, 3, "NEWH", "Newham");
-        new BoroughButton(6, 3, "BARK", "Barking and Dagenham");
-        // Row 5:
-        new BoroughButton(0, 4, "HOUN", "Hounslow");
-        new BoroughButton(1, 4, "HAMM", "Hammersmith and Fulham");
-        new BoroughButton(2, 4, "WAND", "Wandsworth");
-        new BoroughButton(3, 4, "CITY", "City of London");
-        new BoroughButton(4, 4, "GWCH", "Greenwich");
-        new BoroughButton(5, 4, "BEXL", "Bexley");
-        // Row 6:
-        new BoroughButton(1, 5, "RICH", "Richmond upon Thames");
-        new BoroughButton(2, 5, "MERT", "Merton");
-        new BoroughButton(3, 5, "LAMB", "Lambeth");
-        new BoroughButton(4, 5, "STHW", "Southwark");
-        new BoroughButton(5, 5, "LEWS", "Lewisham");
-        // Row 7:
-        new BoroughButton(1, 6, "KING", "Kingston upon Thames");
-        new BoroughButton(2, 6, "SUTT", "Sutton");
-        new BoroughButton(3, 6, "CROY", "Croydon");
-        new BoroughButton(4, 6, "BROM", "Bromley");
+        for (BoroughEnum borough : BoroughEnum.values())
+        {
+            new BoroughButton(borough);
+        }
     }
     
     private void createBoroughWindow(String windowTitle)
