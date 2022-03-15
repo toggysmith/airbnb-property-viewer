@@ -7,6 +7,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
 
 import java.io.IOException;
 
