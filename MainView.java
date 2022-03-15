@@ -37,7 +37,7 @@ public class MainView extends Stage
      */
     public MainView() throws Exception
     {
-        airbnbListings = new AirbnbDataLoader().load();
+        airbnbListings = AirbnbDataLoader.getListings();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         
