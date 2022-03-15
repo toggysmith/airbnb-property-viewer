@@ -2,6 +2,7 @@
  * A node in a list.
  *
  * @author Adam Murray K21003575
+ * @author Augusto Favero K21059800
  * @version 11/03/2022
  */
 public class ListNode<E>

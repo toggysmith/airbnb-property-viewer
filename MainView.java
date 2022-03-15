@@ -32,7 +32,7 @@ public class MainView extends Stage
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
     private final int RANGE_BOX_STEP = 250;
     
-    MainController mainController;
+    private static MainController mainController;
     
     /**
      * Create a window and load the FXML file.
@@ -112,8 +112,8 @@ public class MainView extends Stage
     {
         Object[] listingsInBorough = airbnbListings.stream()
                              .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
-                             //.filter(listing -> listing.getPrice() > mainController.getFromComboValue())
-                             //.filter(listing -> listing.getPrice() < mainController.getToComboValue())
+                             .filter(listing -> listing.getPrice() > mainController.getFromComboValue())
+                             .filter(listing -> listing.getPrice() < mainController.getToComboValue())
                              .toArray();
         ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
         for (Object listing : listingsInBorough)
