@@ -6,9 +6,9 @@
 
 <Pane fx:id="root" prefHeight="288.8" prefWidth="570.4" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapController">
    <children>
-      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="100.0" prefWidth="200.0">
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="100.0" prefWidth="200.0">
          <content>
-            <AnchorPane fx:id="hexagonTileMap" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+            <AnchorPane fx:id="boroughMap" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </content>
       </ScrollPane>
    </children>

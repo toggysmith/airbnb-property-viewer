@@ -32,19 +32,21 @@ public class MainView extends Stage
     // 500, then the options would be 0, 500, 1000, 1500, 2000, 2500, etc)
     private final int RANGE_BOX_STEP = 250;
     
+    private MainController mainController;
+    
     /**
      * Create a window and load the FXML file.
      */
     public MainView() throws Exception
     {
-        airbnbListings = new AirbnbDataLoader().load();
+        airbnbListings = AirbnbDataLoader.getListings();
         
        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         
+        mainController = loader.getController();
         
        Scene scene = new Scene(loader.load());
         
-       MainController mainController = loader.getController();
        //windowPanes.add(mainController.getWelcomePane());
        mainController.setUpPanes();
        
@@ -111,13 +113,15 @@ public class MainView extends Stage
     {
         Object[] listingsInBorough = airbnbListings.stream()
                              .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
+                             //.filter(listing -> listing.getPrice() > mainController.getMinPrice())
+                             //.filter(listing -> listing.getPrice() < mainController.getMaxPrice())
                              .toArray();
-        ObservableList<AirbnbListing> setListingsInBorough = FXCollections.observableArrayList();
+        ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
         for (Object listing : listingsInBorough)
         {
             AirbnbListing listingAsAirBnb = (AirbnbListing)listing;
-            setListingsInBorough.add(listingAsAirBnb);
+            listListingsInBorough.add(listingAsAirBnb);
         }
-        return setListingsInBorough;
+        return listListingsInBorough;
     }
 }

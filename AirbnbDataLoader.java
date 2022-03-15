@@ -16,7 +16,7 @@ public class AirbnbDataLoader {
     /** 
      * Return an ArrayList containing the rows in the AirBnB London data set csv file.
      */
-    public ArrayList<AirbnbListing> load() {
+    private ArrayList<AirbnbListing> load() {
         System.out.print("Begin loading Airbnb london dataset...");
         ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
         try{
@@ -68,9 +68,26 @@ public class AirbnbDataLoader {
     }
     
     /**
+      * Retrieves the loaded listings. This is used for efficiency - if the
+      * listings have already been loaded, it will return those instead of
+      * loading them again.
+      *
+      * @return The Airbnb listings.
+      */
+    public static List<AirbnbListing> getListings()
+    {
+        if (savedListings == null)
+        {
+            savedListings = new AirbnbDataLoader().load();
+        }
+
+        return savedListings;
+    }
+
+    /**
      *
      * @param doubleString the string to be converted to Double type
-     * @return the Double value of the string, or -1.0 if the string is 
+     * @return the Double value of the string, or -1.0 if the string is
      * either empty or just whitespace
      */
     private Double convertDouble(String doubleString){
@@ -83,7 +100,7 @@ public class AirbnbDataLoader {
     /**
      *
      * @param intString the string to be converted to Integer type
-     * @return the Integer value of the string, or -1 if the string is 
+     * @return the Integer value of the string, or -1 if the string is
      * either empty or just whitespace
      */
     private Integer convertInt(String intString){

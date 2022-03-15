@@ -7,7 +7,6 @@ import java.util.Set;
 import javafx.scene.control.Label;
 import java.util.List;
 import javafx.scene.control.ComboBox;
-import java.util.ArrayList;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableView;
@@ -19,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Comparator;
 import javafx.scene.Node;
+import java.util.Arrays;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -45,7 +45,9 @@ public class BoroughWindowView extends Stage
 
         boroughWindowController = loader.getController();
         populateTable(boroughWindowController.boroughTable);
-
+        
+        boroughWindowController.setOnRowClicked();
+        
         boroughWindowController.orderBox.getItems().addAll(getSortBoxOptions());
         assignSort(boroughWindowController.orderBox);
 
@@ -74,23 +76,18 @@ public class BoroughWindowView extends Stage
         comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_ASCENDING, boroughWindowController.reviewsColumn);
         comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_DESCENDING, boroughWindowController.reviewsColumn);
         
-        List<ComboBoxOrderEnum> options = ComboBoxOrderEnum.getAll();
+        List<ComboBoxOrderEnum> options = Arrays.asList(ComboBoxOrderEnum.values());
         
         return options;
     }
 
-    private void assignSort(ComboBox box)
+    private void assignSort(ComboBox<ComboBoxOrderEnum> box)
     {
         box.setOnAction(e -> sort(box.getValue()));
     }
 
-    private void sort(Object comboBoxOrderObject)
+    private void sort(ComboBoxOrderEnum comboBoxOrderEnum)
     {
-        if (!(comboBoxOrderObject instanceof ComboBoxOrderEnum))
-        {
-            return;
-        }
-        ComboBoxOrderEnum comboBoxOrderEnum = (ComboBoxOrderEnum) comboBoxOrderObject;
         if (comboBoxOrder == null)
         {
             return;    
