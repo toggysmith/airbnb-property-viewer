@@ -44,7 +44,9 @@ public class BoroughWindowView extends Stage
 
         boroughWindowController = loader.getController();
         populateTable(boroughWindowController.boroughTable);
-
+        
+        boroughWindowController.setOnRowClicked();
+        
         boroughWindowController.orderBox.getItems().addAll(getSortBoxOptions());
         assignSort(boroughWindowController.orderBox);
 

@@ -6,6 +6,8 @@ import java.util.List;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableRow;
+import javafx.scene.input.MouseEvent;
 
 /**
  * BoroughWindowController hosts FXML GUI elements.
@@ -23,6 +25,33 @@ public class BoroughWindowController
     @FXML public TableColumn<AirbnbListing, String> priceColumn;
     @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
     @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
-    
+
     @FXML public ComboBox<ComboBoxOrderEnum> orderBox;
+
+    public void setOnRowClicked ()
+    {
+        boroughTable.setRowFactory(e -> tableClicked());
+    }
+
+    private TableRow<AirbnbListing> tableClicked()
+    {
+        TableRow<AirbnbListing> row = new TableRow<>();
+        row.setOnMouseClicked(event -> rowClicked(row));
+        return row;
+    }
+
+    private void rowClicked(TableRow<AirbnbListing> row)
+    {
+        if (! row.isEmpty()) {
+            AirbnbListing listing = row.getItem();
+            try
+            {
+                new PropertyWindowView(listing);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 }

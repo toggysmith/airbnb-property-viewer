@@ -12,10 +12,10 @@
    <children>
       <TableView fx:id="boroughTable" prefWidth="615.0">
         <columns>
-          <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Name" />
-          <TableColumn fx:id="priceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Price" />
-            <TableColumn fx:id="reviewsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Number of reviews" />
-            <TableColumn fx:id="minNightsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Min number of nights" />
+          <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Name" />
+          <TableColumn fx:id="priceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Price" />
+            <TableColumn fx:id="reviewsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Number of reviews" />
+            <TableColumn fx:id="minNightsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Min number of nights" />
         </columns>
       </TableView>
       <Label text="Order:">
