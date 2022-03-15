@@ -40,7 +40,7 @@ public class MainController
     //private int fromRangeValue;
     //private int toRangeValue;
     
-    private DoublyLinkedList<Pane> windowPanes = new DoublyLinkedList<Pane>();
+    private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
     private Pane currentPane;
     
     public void setUpPanes() throws IOException
@@ -69,14 +69,14 @@ public class MainController
     @FXML
     private void nextPane()
     {
-       Pane nextPane =  windowPanes.getNextElement(currentPane);
+       Pane nextPane =  windowPanes.getNext();
        setSwitchPaneChild(nextPane);
     }
     
     @FXML
     private void prevPane()
     {
-        Pane prevPane = (Pane) windowPanes.getPrevElement(currentPane);
+        Pane prevPane = windowPanes.getPrev();
         setSwitchPaneChild(prevPane); 
     }
     
