@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Comparator;
 import javafx.scene.Node;
+import java.util.Arrays;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -75,7 +76,7 @@ public class BoroughWindowView extends Stage
         comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_ASCENDING, boroughWindowController.reviewsColumn);
         comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_DESCENDING, boroughWindowController.reviewsColumn);
         
-        List<ComboBoxOrderEnum> options = ComboBoxOrderEnum.getAll();
+        List<ComboBoxOrderEnum> options = Arrays.asList(ComboBoxOrderEnum.values());
         
         return options;
     }
