@@ -7,8 +7,8 @@
  */
 public class RangeValues
 {
-    String fromValue;
-    String toValue;
+    private String fromValue;
+    private String toValue;
 
     /**
      * Constructor for objects of class RangeValues
@@ -53,5 +53,10 @@ public class RangeValues
         }else{
             return Integer.parseInt(toValue);
         }
+    }
+    
+    public PriceRange getPriceRange()
+    {
+        return new PriceRange(fromValue, toValue);
     }
 }
