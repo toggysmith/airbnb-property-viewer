@@ -74,20 +74,20 @@ public class MainWindow
      */
     public ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
     {
+        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
+        
         int fromValue = rangeValues.getFromValue();
         int toValue = rangeValues.getToValue();
-        Object[] listingsInBorough = airbnbListings.stream()
-                             .filter(listing -> listing.getNeighbourhood().equals(targetBorough))
-                             .filter(listing -> listing.getPrice() > fromValue)
-                             .filter(listing -> listing.getPrice() < toValue)
-                             .toArray();
         
-        ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
+        listings = AirbnbDataManipulator.filterByPriceRange(AirbnbDataManipulator.filterByBorough(listings, targetBorough),
+                                                            fromValue,
+                                                            toValue);
+        
+        ObservableList<AirbnbListing> returnListings = FXCollections.observableArrayList();
 
-        for (Object listing : listingsInBorough)
-        {
-            listListingsInBorough.add((AirbnbListing) listing);
-        }
-        return listListingsInBorough;
+        for (AirbnbListing listing : listings)
+            returnListings.add(listing);
+        
+        return returnListings;
     }
 }
