@@ -79,9 +79,9 @@ public class MainWindow
         int fromValue = rangeValues.getFromValue();
         int toValue = rangeValues.getToValue();
         
-        listings = AirbnbDataManipulator.filterByPriceRange(AirbnbDataManipulator.filterByBorough(listings, targetBorough),
-                                                            fromValue,
-                                                            toValue);
+        listings = ListingManipulator.filterByPriceRange(ListingManipulator.filterByBorough(listings, targetBorough),
+                                                         fromValue,
+                                                         toValue);
         
         ObservableList<AirbnbListing> returnListings = FXCollections.observableArrayList();
 

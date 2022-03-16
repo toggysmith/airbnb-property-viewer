@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AirbnbDataManipulator
+public class ListingManipulator
 {
     /**
      * Filter listings to only include those in a specific borough.
