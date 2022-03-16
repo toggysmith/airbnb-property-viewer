@@ -172,16 +172,12 @@ public class AirbnbListing {
         {
             return true;
         }
-        if (!(object instanceof PropertyWindow))
+        if (!(object instanceof AirbnbListing))
         {
             return false;
         }
-        PropertyWindow propertyWindow = (PropertyWindow) object;
-        if (id.equals(propertyWindow.getListing()))
-        {
-            return true;
-        }
-        return false;
+        AirbnbListing listing = (AirbnbListing) object;
+        return id.equals(listing.getId());
     }
     
     public int hashCode()

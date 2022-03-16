@@ -68,16 +68,22 @@ public class MainWindow
                              .get();
     }
     
+    public RangeValues getRangeValues()
+    {
+        return rangeValues;
+    }
+    
+    
     /**
      * Get the listings in a specific borough.
      * @return The listings in a specific borough.
      */
-    public ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
+    public ObservableList<AirbnbListing> getListingsInBorough(String targetBorough, PriceRange priceRange)
     {
         List<AirbnbListing> listings = AirbnbDataLoader.getListings();
         
-        int fromValue = rangeValues.getFromValue();
-        int toValue = rangeValues.getToValue();
+        int fromValue = priceRange.getFromValue();
+        int toValue = priceRange.getToValue();
         
         listings = ListingManipulator.filterByPriceRange(ListingManipulator.filterByBorough(listings, targetBorough),
                                                          fromValue,

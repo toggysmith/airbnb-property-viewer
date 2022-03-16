@@ -25,6 +25,8 @@ public class BoroughWindowView extends Stage
         BoroughWindowController boroughWindowController = loader.getController();
         boroughWindowController.Initialise(listings, boroughWindow);
                         
+        setOnCloseRequest(e -> boroughWindow.windowClosed());
+        
         setScene(scene);
         setTitle(boroughName);
         show();

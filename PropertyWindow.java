@@ -51,11 +51,7 @@ public class PropertyWindow
             return false;
         }
         PropertyWindow propertyWindow = (PropertyWindow) object;
-        if (listing.equals(propertyWindow.getListing()))
-        {
-            return true;
-        }
-        return false;
+        return listing.equals(propertyWindow.getListing());
     }
     
     public int hashCode()
