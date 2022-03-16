@@ -23,7 +23,7 @@ public class PropertyWindowView extends Stage
         PropertyWindowController propertyWindowController = loader.getController();
 
         setScene(scene);
-        setTitle(listing.getName());
+        setTitle(listing.getHost_name());
         show();
     }
 }

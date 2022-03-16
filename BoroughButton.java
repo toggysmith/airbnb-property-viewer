@@ -75,19 +75,12 @@ public class BoroughButton
         boroughMap.getChildren().add(vbox);
 
         vbox.setMouseTransparent(true);
-        hexagon.setOnMouseClicked(e -> createBoroughWindow(boroughFullName));
+        hexagon.setOnMouseClicked(e -> createBoroughWindow(borough));
     }
 
-    private void createBoroughWindow(String windowTitle)
+    private void createBoroughWindow(BoroughEnum borough)
     {
-        try
-        {
-            new BoroughWindowView(windowTitle);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        new BoroughWindow(borough);
     }
 
     private long getNoOfPropertiesInThisBorough()

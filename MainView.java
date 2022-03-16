@@ -124,8 +124,9 @@ public class MainView extends Stage
         ObservableList<AirbnbListing> listListingsInBorough = FXCollections.observableArrayList();
 
         for (Object listing : listingsInBorough)
+        {
             listListingsInBorough.add((AirbnbListing) listing);
-
+        }
         return listListingsInBorough;
     }
 }

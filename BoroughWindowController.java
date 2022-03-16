@@ -8,6 +8,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableRow;
 import javafx.scene.input.MouseEvent;
+import javafx.collections.ObservableList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Arrays;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * BoroughWindowController hosts FXML GUI elements.
@@ -27,8 +32,48 @@ public class BoroughWindowController
     @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
 
     @FXML public ComboBox<ComboBoxOrderEnum> orderBox;
+    
+    private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
+    
+    public void Initialise(ObservableList<AirbnbListing> listings)
+    {
+        populateTable(listings);
+        populateOrderBox();
+        setOnRowClicked();
+        assignSort();
+    }
+    
+    protected void populateTable(ObservableList<AirbnbListing> listings)
+    {
+        boroughTable.setItems(listings);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("host_name"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
+        minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
+    }
+    
+    protected void populateOrderBox()
+    {
+        orderBox.getItems().addAll(getSortBoxOptions());
+    }
+    
+    private List<ComboBoxOrderEnum> getSortBoxOptions()
+    {
+        comboBoxOrder = new HashMap<>();
+        
+        comboBoxOrder.put(ComboBoxOrderEnum.HOST_NAME_ASCENDING, nameColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.HOST_NAME_DESCENDING, nameColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.PRICE_ASCENDING, priceColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.PRICE_DESCENDING, priceColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_ASCENDING, reviewsColumn);
+        comboBoxOrder.put(ComboBoxOrderEnum.NUMBER_OF_REVIEWS_DESCENDING, reviewsColumn);
+        
+        List<ComboBoxOrderEnum> options = Arrays.asList(ComboBoxOrderEnum.values());
+        
+        return options;
+    }
 
-    public void setOnRowClicked ()
+    protected void setOnRowClicked()
     {
         boroughTable.setRowFactory(e -> tableClicked());
     }
@@ -44,14 +89,30 @@ public class BoroughWindowController
     {
         if (! row.isEmpty()) {
             AirbnbListing listing = row.getItem();
-            try
-            {
-                new PropertyWindowView(listing);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            new PropertyWindow(listing);
         }
+    }
+    
+    protected void assignSort()
+    {
+        orderBox.setOnAction(e -> sort(orderBox.getValue()));
+    }
+    
+    private void sort(ComboBoxOrderEnum comboBoxOrderEnum)
+    {
+        if (comboBoxOrderEnum == null)
+        {
+            return;    
+        }
+
+        TableColumn<AirbnbListing, String> column = comboBoxOrder.get(comboBoxOrderEnum);
+        TableView table = boroughTable;
+        column.setSortable(true);
+        ObservableList<TableColumn> sortBy = table.getSortOrder();
+        sortBy.clear();
+        sortBy.add(column);
+        column.setSortType(comboBoxOrderEnum.getOrder());
+        table.sort();
+        column.setSortable(false);
     }
 }

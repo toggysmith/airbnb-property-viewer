@@ -39,18 +39,6 @@ public class MapController extends Pane
         }
     }
     
-    private void createBoroughWindow(String windowTitle)
-    {
-        try
-        {
-            new BoroughWindowView(windowTitle);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-    
     public Pane getMapPane()
     {
         return root;
