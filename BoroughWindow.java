@@ -13,7 +13,7 @@ public class BoroughWindow
     private ObservableList<AirbnbListing> listings;
     private MainWindow mainWindow;
     
-    public BoroughWindow(BoroughEnum borough)
+    public BoroughWindow(Borough borough)
     {
         listings = MainWindow.getMainWindow().getListingsInBorough(borough.NAME);
         try

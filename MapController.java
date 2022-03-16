@@ -33,7 +33,7 @@ public class MapController extends Pane
     {
         BoroughButton.setBoroughMap(boroughMap);
         
-        for (BoroughEnum borough : BoroughEnum.values())
+        for (Borough borough : Borough.values())
         {
             new BoroughButton(borough);
         }

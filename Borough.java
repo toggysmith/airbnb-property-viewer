@@ -1,4 +1,4 @@
-public enum BoroughEnum
+public enum Borough
 {
     // Row 1:
     ENFI(3, 0, "Enfield"),
@@ -46,11 +46,11 @@ public enum BoroughEnum
     public final String ABBREVIATION;
     public final String NAME;
     
-    private BoroughEnum(int x, int y, String name)
+    private Borough(int x, int y, String name)
     {
         this.X = x;
         this.Y = y;
-        this.ABBREVIATION = name(); // Because calling BoroughEnum.name() and BoroughEnum.NAME is confusing
+        this.ABBREVIATION = name(); // Because calling Borough.name() and Borough.NAME is confusing
         this.NAME = name;
     }
 }
