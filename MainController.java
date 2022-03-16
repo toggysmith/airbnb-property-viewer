@@ -43,13 +43,21 @@ public class MainController
     public void setUpPanes() throws IOException
     {
      welcomePane = new WelcomePaneView(570.4,288.8).getPane();
-     windowPanes.add(welcomePane);   
+     addPaneToWindowPanes(welcomePane);   
      BoroughButton.mainController = this;
      mapPane = loadPane("map-pane.fxml");
-     windowPanes.add(mapPane);
+     addPaneToWindowPanes(mapPane);
      setSwitchPaneChild(welcomePane); 
        
      comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
+    }
+    
+    private void addPaneToWindowPanes(Pane newPane)
+    {
+        windowPanes.add(newPane);
+        
+        newPane.prefWidthProperty().bind(switchPane.widthProperty());
+        newPane.prefHeightProperty().bind(switchPane.heightProperty());
     }
         
     private void setSwitchPaneChild(Pane childPane)

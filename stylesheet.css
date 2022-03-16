@@ -1,0 +1,68 @@
+
+@font-face
+{
+    fx-font-family: 'Inter';
+    src: ('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+}
+
+.root
+{
+    -fx-font-size: 12px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background: #FFFFFF;
+}
+
+.label
+{
+    -fx-text-fill: #515167;
+}
+
+#title
+{
+    -fx-font-weight: 900;
+    -fx-font-size: 25px;
+    -fx-text-fill: linear-gradient(to top right,#8b37ff,#5dbcf4);
+}
+
+.navigation_button
+{
+    -fx-background-color: #3668FF;
+    -fx-text-fill: #FFFFFF;
+    -fx-transition: all .3 ease;
+}
+
+.navigation_button:hover
+{
+    -fx-background-color: #3898EC;
+}
+
+.navigation_button:disabled, .navigation_button:disabled > *
+{
+    -fx-background-color: #CBCBCB;
+    -fx-text-fill: #000000;
+}
+
+#left_navigation_button
+{
+    -fx-graphic: url("resources/white-left-arrow.png");
+}
+
+#left_navigation_button:disabled
+{
+    -fx-graphic: url("resources/black-left-arrow.png");
+}
+
+#right_navigation_button
+{
+    -fx-graphic: url("resources/white-right-arrow.png");
+}
+
+#right_navigation_button:disabled
+{
+    -fx-graphic: url("resources/black-right-arrow.png");
+}
+
+#header, #footer
+{
+    -fx-background-color: #E8ECFF;
+}

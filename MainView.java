@@ -40,7 +40,7 @@ public class MainView extends Stage
         
         this.mainWindow = mainWindow;
         
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load(), 870, 870);
         
         mainController = loader.getController();
 

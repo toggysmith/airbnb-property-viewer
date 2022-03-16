@@ -31,7 +31,8 @@ public class BoroughButton
     private final static double n = Math.sqrt(r * r * 0.75);
     private final static double TILE_WIDTH = 2 * n;
     private final static double TILE_HEIGHT = 2 * r;
-    private final static double SEPARATION = 15;
+    private final static double SEPARATION = 7.5;
+    private final static double STARTING_OFFSET = 15;
 
     private static AnchorPane boroughMap;
     
@@ -49,6 +50,9 @@ public class BoroughButton
 
         double xCoord = borough.X * (TILE_WIDTH + SEPARATION) + ((borough.Y + 1) % 2) * n;
         double yCoord = borough.Y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
+        
+        xCoord += STARTING_OFFSET;
+        yCoord += STARTING_OFFSET;
 
         if ((borough.Y + 1) % 2 != 0) {xCoord += SEPARATION / 2;}
 

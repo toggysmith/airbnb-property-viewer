@@ -4,48 +4,42 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <bottom>
-      <BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-         <left>
-            <Button fx:id="leftButton" disable="true" mnemonicParsing="false" onAction="#prevPane" text="&lt;" BorderPane.alignment="CENTER" />
-         </left>
-         <right>
-            <Button fx:id="rightButton" disable="true" mnemonicParsing="false" onAction="#nextPane" text="&gt;" BorderPane.alignment="CENTER" />
-         </right>
-      </BorderPane>
+      <AnchorPane id="footer" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="left_navigation_button" fx:id="leftButton" disable="true" mnemonicParsing="false" onAction="#prevPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Button id="right_navigation_button" fx:id="rightButton" disable="true" mnemonicParsing="false" onAction="#nextPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+         </children>
+      </AnchorPane>
    </bottom>
+   <center>
+      <Pane fx:id="switchPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Pane>
+   </center>
    <top>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER_RIGHT">
-         <top>
-            <HBox alignment="CENTER_RIGHT" spacing="15.0" BorderPane.alignment="CENTER_RIGHT">
+      <AnchorPane id="header" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label alignment="CENTER_RIGHT" text="Price Range (£)" />
                   <ComboBox fx:id="fromRangeBox" onAction="#checkComboBoxes" prefWidth="150.0" promptText="From:" />
                   <ComboBox fx:id="toRangeBox" onAction="#checkComboBoxes" prefWidth="150.0" promptText="To:" />
                </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
             </HBox>
-         </top>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </BorderPane>
+            <Label id="title" text="Airbnb Property Viewer" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+         </children>
+      </AnchorPane>
    </top>
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
-   <center>
-      <Pane fx:id="switchPane" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="15.0" top="15.0" />
-         </BorderPane.margin>
-      </Pane>
-   </center>
 </BorderPane>
