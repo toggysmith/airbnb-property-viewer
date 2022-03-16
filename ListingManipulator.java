@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 public class ListingManipulator
 {
@@ -31,5 +32,51 @@ public class ListingManipulator
                        .filter(listing -> listing.getPrice() >= fromPrice
                                           && listing.getPrice() <= toPrice)
                        .collect(Collectors.toList());
+    }
+    
+    /**
+     * Get the number of properties in the borough with the least properties.
+     * @param listings The listings to be used to check.
+     * @return The number of properties.
+     */
+    public static int getNoOfPropertiesInBoroughWithLeast
+    (List<AirbnbListing> listings)
+    {
+        int least = Integer.MAX_VALUE;
+        
+        for (Borough borough : Borough.values())
+        {
+            List<AirbnbListing> listingsInBorough = filterByBorough(listings, borough.NAME);
+            
+            if (listingsInBorough.size() < least)
+            {
+                least = listingsInBorough.size();
+            }
+        }
+        
+        return least;
+    }
+    
+    /**
+     * Get the number of properties in the borough with the most properties.
+     * @param listings The listings to be used to check.
+     * @return The number of properties.
+     */
+    public static int getNoOfPropertiesInBoroughWithMost
+    (List<AirbnbListing> listings)
+    {
+        int most = 0;
+        
+        for (Borough borough : Borough.values())
+        {
+            List<AirbnbListing> listingsInBorough = filterByBorough(listings, borough.NAME);
+            
+            if (listingsInBorough.size() > most)
+            {
+                most = listingsInBorough.size();
+            }
+        }
+        
+        return most;
     }
 }

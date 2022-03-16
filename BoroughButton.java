@@ -54,9 +54,11 @@ public class BoroughButton
         Label label = new Label(boroughAbbreviation);
         try
         {
-            quantityVisualiser = new QuantityVisualiser(getNoOfPropertiesInThisBorough(),
-                                                        getMinNoOfPropertiesInAnyBorough(),
-                                                        getMaxNoOfPropertiesInAnyBorough());
+            List<AirbnbListing> listings = AirbnbDataLoader.getListings();
+            
+            quantityVisualiser = new QuantityVisualiser(ListingManipulator.filterByBorough(listings, boroughFullName).size(),
+                                                        ListingManipulator.getNoOfPropertiesInBoroughWithLeast(listings),
+                                                        ListingManipulator.getNoOfPropertiesInBoroughWithMost(listings));
         }
         catch (Exception e)
         {
@@ -81,34 +83,5 @@ public class BoroughButton
     private void createBoroughWindow(Borough borough)
     {
         new BoroughWindow(borough);
-    }
-
-    private long getNoOfPropertiesInThisBorough()
-    {
-        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
-
-        return listings.stream()
-                       .filter(listing -> listing.getNeighbourhood().equals(boroughFullName))
-                       .count();
-    }
-
-    private long getMinNoOfPropertiesInAnyBorough()
-    {
-        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
-
-        Map<String, Long> mins = listings.stream()
-                                         .collect(Collectors.groupingBy(AirbnbListing::getNeighbourhood, Collectors.counting()));
-        
-        return Collections.min(mins.values());
-    }
-        
-    private long getMaxNoOfPropertiesInAnyBorough()
-    {
-        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
-
-        Map<String, Long> maxs = listings.stream()
-                                         .collect(Collectors.groupingBy(AirbnbListing::getNeighbourhood, Collectors.counting()));
-        
-        return Collections.max(maxs.values());
     }
 }
