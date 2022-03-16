@@ -15,7 +15,7 @@ public class BoroughWindowView extends Stage
     /**
      * Create a window and load the FXML file.
      */
-    public BoroughWindowView(String boroughName, ObservableList<AirbnbListing> listings) throws Exception
+    public BoroughWindowView(String boroughName, ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow) throws Exception
     {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("borough-window.fxml"));
@@ -23,7 +23,7 @@ public class BoroughWindowView extends Stage
         Scene scene = new Scene(loader.load());
 
         BoroughWindowController boroughWindowController = loader.getController();
-        boroughWindowController.Initialise(listings);
+        boroughWindowController.Initialise(listings, boroughWindow);
                         
         setScene(scene);
         setTitle(boroughName);
