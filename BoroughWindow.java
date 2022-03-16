@@ -1,5 +1,9 @@
 import java.util.List;
 import javafx.collections.ObservableList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Write a description of class BoroughWindow here.
@@ -18,11 +22,16 @@ public class BoroughWindow
         listings = MainWindow.getMainWindow().getListingsInBorough(borough.NAME);
         try
         {
-            boroughView = new BoroughWindowView(borough.NAME, listings);
+            boroughView = new BoroughWindowView(borough.NAME, listings, this);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+    
+    public void createPropertyWindow(AirbnbListing listing)
+    {
+        PropertyWindowFactory.getPropertyWindowFactory().newPropertyWindow(listing);
     }
 }

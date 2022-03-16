@@ -165,4 +165,29 @@ public class AirbnbListing {
                 ", availability365=" + availability365 +
                 '}';
     }
+    
+    public boolean eqauls(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+        if (!(object instanceof PropertyWindow))
+        {
+            return false;
+        }
+        PropertyWindow propertyWindow = (PropertyWindow) object;
+        if (id.equals(propertyWindow.getListing()))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public int hashCode()
+    {
+        int result = 17;
+        result = 37 * 17 + id.hashCode();
+        return result;
+    }
 }

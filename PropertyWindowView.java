@@ -10,10 +10,12 @@ import javafx.scene.Scene;
  */
 public class PropertyWindowView extends Stage
 {
+    private PropertyWindow propertyWindow;
+    
     /**
      * Create a window and load the FXML file.
      */
-    public PropertyWindowView(AirbnbListing listing) throws Exception
+    public PropertyWindowView(AirbnbListing listing, PropertyWindow propertyWindow) throws Exception
     {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
@@ -22,6 +24,9 @@ public class PropertyWindowView extends Stage
 
         PropertyWindowController propertyWindowController = loader.getController();
 
+        this.propertyWindow = propertyWindow;
+        setOnCloseRequest(e -> propertyWindow.windowClosed());
+        
         setScene(scene);
         setTitle(listing.getHost_name());
         show();

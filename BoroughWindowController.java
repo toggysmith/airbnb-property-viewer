@@ -33,10 +33,12 @@ public class BoroughWindowController
 
     @FXML public ComboBox<ComboBoxOrderEnum> orderBox;
     
+    private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
     
-    public void Initialise(ObservableList<AirbnbListing> listings)
+    public void Initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
+        this.boroughWindow = boroughWindow;
         populateTable(listings);
         populateOrderBox();
         setOnRowClicked();
@@ -89,7 +91,7 @@ public class BoroughWindowController
     {
         if (! row.isEmpty()) {
             AirbnbListing listing = row.getItem();
-            new PropertyWindow(listing);
+            boroughWindow.createPropertyWindow(listing);
         }
     }
     

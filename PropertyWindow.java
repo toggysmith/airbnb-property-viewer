@@ -7,20 +7,62 @@
  */
 public class PropertyWindow
 {
-
+    private AirbnbListing listing;
+    private PropertyWindowView propertyView;
     /**
      * Constructor for objects of class PropertyWindow
      */
     public PropertyWindow(AirbnbListing listing)
     {
+        this.listing = listing;
         try
         {
-            new PropertyWindowView(listing);
+            propertyView = new PropertyWindowView(listing, this);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+    
+    public AirbnbListing getListing()
+    {
+        return listing;
+    }
+    
+    public void setFront()
+    {
+        propertyView.toFront();
+    }
+    
+    public void windowClosed()
+    {
+        PropertyWindowFactory.getPropertyWindowFactory().propertyWindowClosed(this);
+    }
+    
+    public boolean equals(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+        if (!(object instanceof PropertyWindow))
+        {
+            return false;
+        }
+        PropertyWindow propertyWindow = (PropertyWindow) object;
+        if (listing.equals(propertyWindow.getListing()))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public int hashCode()
+    {
+        int result = 17;
+        result = 37 * 17 + listing.hashCode();
+        return result;
     }
 
 }
