@@ -51,6 +51,16 @@ public class BoroughWindow
         return boroughPriceRange;
     }
     
+    public int getFromPrice()
+    {
+        return boroughPriceRange.getFromPrice();
+    }
+    
+    public int getToPrice()
+    {
+        return boroughPriceRange.getToPrice();
+    }
+    
     public boolean equals(Object object)
     {
         if (this == object)

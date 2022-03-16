@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Label;
 
 /**
  * BoroughWindowController hosts FXML GUI elements.
@@ -33,6 +34,9 @@ public class BoroughWindowController
 
     @FXML public ComboBox<ComboBoxOrderEnum> orderBox;
     
+    @FXML public Label fromPrice;
+    @FXML public Label toPrice;
+    
     private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
     
@@ -43,6 +47,7 @@ public class BoroughWindowController
         populateOrderBox();
         setOnRowClicked();
         assignSort();
+        assignPriceLabels();
     }
     
     protected void populateTable(ObservableList<AirbnbListing> listings)
@@ -116,5 +121,11 @@ public class BoroughWindowController
         column.setSortType(comboBoxOrderEnum.getOrder());
         table.sort();
         column.setSortable(false);
+    }
+    
+    protected void assignPriceLabels()
+    {
+        fromPrice.setText(String.valueOf(boroughWindow.getFromPrice()));
+        toPrice.setText(String.valueOf(boroughWindow.getToPrice()));
     }
 }

@@ -5,27 +5,79 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
-   <children>
-      <TableView fx:id="boroughTable" prefWidth="615.0">
-        <columns>
-          <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Name" />
-          <TableColumn fx:id="priceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Price" />
-            <TableColumn fx:id="reviewsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Number of reviews" />
-            <TableColumn fx:id="minNightsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Min number of nights" />
-        </columns>
-      </TableView>
-      <Label text="Order:">
-         <font>
-            <Font size="16.0" />
-         </font>
-         <padding>
-            <Insets left="5.0" right="5.0" />
-         </padding>
-      </Label>
-      <ComboBox fx:id="orderBox" promptText="None" />
-   </children>
-</HBox>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
+   <center>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <TableView fx:id="boroughTable" prefWidth="615.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Name" />
+                <TableColumn fx:id="priceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Price" />
+                  <TableColumn fx:id="reviewsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Number of reviews" />
+                  <TableColumn fx:id="minNightsColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Min number of nights" />
+              </columns>
+            </TableView>
+            <VBox>
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="Order by:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="orderBox" promptText="None" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Price Range:" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="From: " textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="fromPrice">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="To:" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="toPrice">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>
