@@ -11,10 +11,11 @@ public class BoroughWindow
 {
     private BoroughWindowView boroughView;
     private ObservableList<AirbnbListing> listings;
+    private MainWindow mainWindow;
     
     public BoroughWindow(BoroughEnum borough)
     {
-        listings = MainView.getListingsInBorough(borough.NAME);
+        listings = MainWindow.getMainWindow().getListingsInBorough(borough.NAME);
         try
         {
             boroughView = new BoroughWindowView(borough.NAME, listings);
