@@ -40,7 +40,7 @@ public class BoroughButton
         BoroughButton.boroughMap = boroughMap;
     }
 
-    public BoroughButton(BoroughEnum borough)
+    public BoroughButton(Borough borough)
     {
         this.boroughAbbreviation = borough.ABBREVIATION;
         this.boroughFullName = borough.NAME;
@@ -78,7 +78,7 @@ public class BoroughButton
         hexagon.setOnMouseClicked(e -> createBoroughWindow(borough));
     }
 
-    private void createBoroughWindow(BoroughEnum borough)
+    private void createBoroughWindow(Borough borough)
     {
         new BoroughWindow(borough);
     }
