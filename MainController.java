@@ -5,62 +5,53 @@ import java.util.ArrayList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.scene.control.Label;
 
 
 import java.io.IOException;
-
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.fxml.FXMLLoader;
+
 /**
  * MainController hosts FXML GUI elements and onAction methods.
  * 
  * @author Adam Murray (K21003575)
- * @author Augusto Favero (K21059800)
+ * @author Augusto   Favero (K21059800)
  * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
  * @version 1.0
  */
 public class MainController
 {
-    @FXML public ComboBox<String> fromRangeBox;
-    @FXML public ComboBox<String> toRangeBox;
-    @FXML public Pane switchPane;
-    @FXML public Button leftButton;
-    @FXML public Button rightButton;
+    @FXML private ComboBox<String> fromRangeBox;
+    @FXML private ComboBox<String> toRangeBox;
+    @FXML private Pane switchPane;
+    @FXML private Button leftButton;
+    @FXML private Button rightButton;
     
-    //welcome window message components
-    public Pane welcomePane;    
-    @FXML public Text welcomeTitle;
-    
+    private Pane welcomePane;
     private RangeValues comboBoxRangeValues;
     
     private Pane mapPane;
-    //private int fromRangeValue;
-    //private int toRangeValue;
-    
     private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
-    private Pane currentPane;
     
     public void setUpPanes() throws IOException
     {
-       welcomePane = loadPane( "welcomeWindow.fxml");
-       windowPanes.add(welcomePane);
+     welcomePane = new WelcomePaneView(570.4,288.8).getPane();
+     windowPanes.add(welcomePane);   
+     mapPane = loadPane("map-pane.fxml");
+     windowPanes.add(mapPane);
+     setSwitchPaneChild(welcomePane); 
        
-       mapPane = loadPane("map-pane.fxml");
-       windowPanes.add(mapPane);
-       setSwitchPaneChild(welcomePane); 
-       
-       comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
+     comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
     }
-    
+        
     private void setSwitchPaneChild(Pane childPane)
     {
-        currentPane = childPane;
         switchPane.getChildren().setAll(childPane);
     }
     
@@ -95,7 +86,6 @@ public class MainController
       }
     }
     
-    
     private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
     {
         if(prevFromValue == 0){
@@ -128,11 +118,6 @@ public class MainController
     
     private boolean invalidRangeCheck()
     {
-        boolean isValidRange = true;
-        
-        //set defualt value to no min and no max
-        //object class, that stores two strings 
-        
         String selectedFromStr = fromRangeBox.getValue();
         String selectedToStr = toRangeBox.getValue();
         
@@ -143,15 +128,15 @@ public class MainController
                 
             processRangeValues(selectedFromStr,selectedToStr);
             if(comboBoxRangeValues.getFromValue() < comboBoxRangeValues.getToValue()){
-            isValidRange = false;
+            return false;
             }else{
             rangeWarningAlert();
             retrievePrevRangeValues(prevFromValue,prevToValue);
-            return isValidRange;
             }
         }
-        return isValidRange;
-   }
+        return true;
+    }
+   
     private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
@@ -160,10 +145,20 @@ public class MainController
         invalidRange.setContentText("The From Price Selected Should Be Lower Than The To Price");
         
         invalidRange.showAndWait();
-    }
+    } 
     
     public RangeValues getRangeValues()
     {
         return comboBoxRangeValues;
+    }
+    
+    public ComboBox<String> getFromBox()
+    {
+        return fromRangeBox;
+    }
+    
+    public ComboBox<String> getToBox()
+    {
+        return toRangeBox;
     }
 }

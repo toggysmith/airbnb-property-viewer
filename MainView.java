@@ -38,6 +38,8 @@ public class MainView extends Stage
         // Load the contents of the FXML file into the scene.
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         
+        
+        
         Scene scene = new Scene(loader.load());
         
         // Initialise instance variables.
@@ -58,8 +60,8 @@ public class MainView extends Stage
      */
     private void setRangeBoxOptions()
     {
-        mainController.fromRangeBox.getItems().addAll(generatePriceOptions(RangeBoxEnum.NOMIN.toString()));
-        mainController.toRangeBox.getItems().addAll(generatePriceOptions(RangeBoxEnum.NOMAX.toString()));
+        mainController.getFromBox().getItems().addAll(generatePriceOptions(RangeBoxEnum.NOMIN.toString()));
+        mainController.getToBox().getItems().addAll(generatePriceOptions(RangeBoxEnum.NOMAX.toString()));
     }
     
     /**
