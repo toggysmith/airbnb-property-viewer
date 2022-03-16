@@ -70,7 +70,6 @@ public class BoroughButton
                                                              toValue);
             
             quantityVisualiser = new QuantityVisualiser(ListingManipulator.filterByBorough(listings, boroughFullName).size(),
-                                                        ListingManipulator.getNoOfPropertiesInBoroughWithLeast(listings),
                                                         ListingManipulator.getNoOfPropertiesInBoroughWithMost(listings));
         }
         catch (Exception e)

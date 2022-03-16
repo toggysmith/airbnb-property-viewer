@@ -6,7 +6,7 @@
 
 <Pane fx:id="root" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapController">
    <children>
-      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="100.0" prefWidth="200.0">
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" pannable="true" prefHeight="100.0" prefWidth="200.0">
          <content>
             <AnchorPane fx:id="boroughMap" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </content>

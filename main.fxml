@@ -13,8 +13,8 @@
    <bottom>
       <AnchorPane id="footer" BorderPane.alignment="CENTER">
          <children>
-            <Button id="left_navigation_button" fx:id="leftButton" disable="true" mnemonicParsing="false" onAction="#prevPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
-            <Button id="right_navigation_button" fx:id="rightButton" disable="true" mnemonicParsing="false" onAction="#nextPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Button id="left_navigation_button" fx:id="leftButton" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#prevPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Button id="right_navigation_button" fx:id="rightButton" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#nextPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
          </children>
       </AnchorPane>
    </bottom>
@@ -31,8 +31,8 @@
             <HBox alignment="CENTER_RIGHT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label alignment="CENTER_RIGHT" text="Price Range (£)" />
-                  <ComboBox fx:id="fromRangeBox" onAction="#checkComboBoxes" prefWidth="150.0" promptText="From:" />
-                  <ComboBox fx:id="toRangeBox" onAction="#checkComboBoxes" prefWidth="150.0" promptText="To:" />
+                  <ComboBox fx:id="fromRangeBox" focusTraversable="false" onAction="#checkComboBoxes" prefWidth="150.0" promptText="From:" />
+                  <ComboBox fx:id="toRangeBox" focusTraversable="false" onAction="#checkComboBoxes" prefWidth="150.0" promptText="To:" />
                </children>
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

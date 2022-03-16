@@ -17,11 +17,22 @@
     -fx-text-fill: #515167;
 }
 
-#title
+#title, #special
 {
     -fx-font-weight: 900;
     -fx-font-size: 25px;
-    -fx-text-fill: linear-gradient(to top right,#8b37ff,#5dbcf4);
+    -fx-text-fill: linear-gradient(to top right, #8b37ff, #5dbcf4);
+}
+
+#special
+{
+    -fx-font-size: 100px;
+}
+
+#heading
+{
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
 }
 
 .navigation_button

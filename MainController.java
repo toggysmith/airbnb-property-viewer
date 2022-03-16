@@ -42,7 +42,7 @@ public class MainController
     private boolean parsing = false;
     public void setUpPanes() throws IOException
     {
-     welcomePane = new WelcomePaneView(570.4,288.8).getPane();
+     welcomePane = loadPane("welcome-pane.fxml");
      addPaneToWindowPanes(welcomePane);   
      BoroughButton.mainController = this;
      mapPane = loadPane("map-pane.fxml");
