@@ -25,11 +25,9 @@ public class MapController extends Pane
     {
         scrollPane.prefWidthProperty().bind(root.widthProperty());
         scrollPane.prefHeightProperty().bind(root.heightProperty());
-        
-        createMap();
     }
 
-    private void createMap()
+    public void createMap()
     {
         BoroughButton.setBoroughMap(boroughMap);
         
@@ -37,6 +35,11 @@ public class MapController extends Pane
         {
             new BoroughButton(borough);
         }
+    }
+    
+    public void deleteMap()
+    {
+        getChildren().clear();
     }
     
     public Pane getMapPane()

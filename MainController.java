@@ -38,11 +38,13 @@ public class MainController
     
     private Pane mapPane;
     private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
+    private MapController mapController;
     private boolean parsing = false;
     public void setUpPanes() throws IOException
     {
      welcomePane = new WelcomePaneView(570.4,288.8).getPane();
      windowPanes.add(welcomePane);   
+     BoroughButton.mainController = this;
      mapPane = loadPane("map-pane.fxml");
      windowPanes.add(mapPane);
      setSwitchPaneChild(welcomePane); 
@@ -57,7 +59,14 @@ public class MainController
     
     private Pane loadPane(String fxmlFileName) throws IOException
     {
-        return FXMLLoader.load(getClass().getResource(fxmlFileName));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
+        
+        Pane pane = loader.load();
+        
+        if (fxmlFileName == "map-pane.fxml")
+            mapController = loader.getController();
+        
+        return pane;
     }
     
     @FXML
@@ -101,6 +110,9 @@ public class MainController
         if(selectedFromStr != null && selectedToStr != null && !parsing){
             invalidRangeCheck(selectedFromStr, selectedToStr);
         }
+        
+        mapController.deleteMap();
+        mapController.createMap();
     }
     
    private void retrievePrevRangeValues(int prevFromValue, int prevToValue)

@@ -34,6 +34,8 @@ public class BoroughButton
     private final static double SEPARATION = 15;
 
     private static AnchorPane boroughMap;
+    
+    public static MainController mainController;
 
     public static void setBoroughMap(AnchorPane boroughMap)
     {
@@ -55,6 +57,13 @@ public class BoroughButton
         try
         {
             List<AirbnbListing> listings = AirbnbDataLoader.getListings();
+            
+            int fromValue = mainController.getRangeValues().getFromValue();
+            int toValue = mainController.getRangeValues().getToValue();
+            
+            listings = ListingManipulator.filterByPriceRange(listings,
+                                                             fromValue,
+                                                             toValue);
             
             quantityVisualiser = new QuantityVisualiser(ListingManipulator.filterByBorough(listings, boroughFullName).size(),
                                                         ListingManipulator.getNoOfPropertiesInBoroughWithLeast(listings),
