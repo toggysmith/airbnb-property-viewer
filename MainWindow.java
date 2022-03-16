@@ -37,11 +37,11 @@ public class MainWindow
     
     public static MainWindow getMainWindow()
     {
-        if (mainWindow != null)
+        if (mainWindow == null)
         {
-            return mainWindow;
+            mainWindow = new MainWindow();
         }
-        return new MainWindow();
+        return mainWindow;
     }
     
     /**
