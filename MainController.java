@@ -38,7 +38,7 @@ public class MainController
     
     private Pane mapPane;
     private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
-    
+    private boolean parsing = false;
     public void setUpPanes() throws IOException
     {
      welcomePane = new WelcomePaneView(570.4,288.8).getPane();
@@ -74,19 +74,36 @@ public class MainController
         setSwitchPaneChild(prevPane); 
     }
     
+    
+    
+    
     /**
-     * Method to enable use of the buttons
-     */
-    @FXML 
-    private void enableButtons()
+    private void processRangeValues(String fromValue, String toRange)
     {
-      if(!invalidRangeCheck()){
-          rightButton.setDisable(false);
-          leftButton.setDisable(false);
-      }
+        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
+            comboBoxRangeValues.setFromValue("0");
+        }else{
+            comboBoxRangeValues.setFromValue(fromValue);                                         
+        }
+        
+        if(toRange.equals(RangeBoxEnum.NOMAX.toString())){
+            comboBoxRangeValues.setToValue(Integer.toString(Integer.MAX_VALUE));
+        }else{
+            comboBoxRangeValues.setToValue(toRange);
+        }
+    }
+    */
+   @FXML
+    private void checkComboBoxes()
+    {
+        String selectedFromStr = fromRangeBox.getValue();
+        String selectedToStr = toRangeBox.getValue();
+        if(selectedFromStr != null && selectedToStr != null && !parsing){
+            invalidRangeCheck(selectedFromStr, selectedToStr);
+        }
     }
     
-    private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
+   private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
     {
         if(prevFromValue == 0){
             fromRangeBox.setValue(RangeBoxEnum.NOMIN.toString());
@@ -101,49 +118,40 @@ public class MainController
         }
     }
     
-    private void processRangeValues(String fromValue, String toRange)
+   private void invalidRangeCheck(String fromValue, String toValue)
     {
-        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
-            comboBoxRangeValues.setFromValue("0");
-        }else{
-                comboBoxRangeValues.setFromValue(fromValue);                                         
-        }
+        int currentFromValue = Integer.parseInt(fromValue);
+        int currentToValue =  Integer.parseInt(toValue);
         
-        if(toRange.equals(RangeBoxEnum.NOMAX.toString())){
-            comboBoxRangeValues.setToValue(Integer.toString(Integer.MAX_VALUE));
-        }else{
-            comboBoxRangeValues.setToValue(toRange);
-        }
-    }
-    
-    private boolean invalidRangeCheck()
-    {
-        String selectedFromStr = fromRangeBox.getValue();
-        String selectedToStr = toRangeBox.getValue();
+        int prevFromValue = comboBoxRangeValues.getFromValue();
+        int prevToValue = comboBoxRangeValues.getToValue();
         
-        if(selectedFromStr != null && selectedToStr != null){
+        comboBoxRangeValues.setFromValue(fromValue);
+        comboBoxRangeValues.setToValue(toValue);
             
-            int prevFromValue = comboBoxRangeValues.getFromValue();
-            int prevToValue = comboBoxRangeValues.getToValue();
-                
-            processRangeValues(selectedFromStr,selectedToStr);
-            if(comboBoxRangeValues.getFromValue() < comboBoxRangeValues.getToValue()){
-            return false;
+            if(currentFromValue < currentToValue){
+                enableButtons();
             }else{
+            parsing = true;
             rangeWarningAlert();
             retrievePrevRangeValues(prevFromValue,prevToValue);
+            enableButtons();
+            comboBoxRangeValues.setFromValue(Integer.toString(prevFromValue));
+            comboBoxRangeValues.setToValue(Integer.toString(prevToValue));    
             }
-        }
-        return true;
+        parsing = false;
     }
    
+    private void enableButtons(){
+        rightButton.setDisable(false);
+        leftButton.setDisable(false);
+    }
     private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
         invalidRange.setTitle("Warning");
         invalidRange.setHeaderText("Invalid Range Selected");
         invalidRange.setContentText("The From Price Selected Should Be Lower Than The To Price");
-        
         invalidRange.showAndWait();
     } 
     

@@ -25,8 +25,8 @@
             <HBox alignment="CENTER_RIGHT" spacing="15.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
                   <Label alignment="CENTER_RIGHT" text="Price Range (£)" />
-                  <ComboBox fx:id="fromRangeBox" onAction="#enableButtons" prefWidth="150.0" promptText="From:" />
-                  <ComboBox fx:id="toRangeBox" onAction="#enableButtons" prefWidth="150.0" promptText="To:" />
+                  <ComboBox fx:id="fromRangeBox" onAction="#checkComboBoxes" prefWidth="150.0" promptText="From:" />
+                  <ComboBox fx:id="toRangeBox" onAction="#checkComboBoxes" prefWidth="150.0" promptText="To:" />
                </children>
             </HBox>
          </top>

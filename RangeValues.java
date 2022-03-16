@@ -21,12 +21,20 @@ public class RangeValues
     
     public void setFromValue(String fromValue)
     {
-        this.fromValue = fromValue;
+        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
+            fromValue = "0";
+        }else{
+            this.fromValue = fromValue;                                         
+        }
     }
     
     public void setToValue(String toValue)
     {
-        this.toValue = toValue;
+        if(toValue.equals(RangeBoxEnum.NOMAX.toString())){
+            toValue = Integer.toString(Integer.MAX_VALUE);
+        }else{
+            this.toValue = toValue;
+        }
     }
     
     public int getFromValue()
