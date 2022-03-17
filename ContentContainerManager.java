@@ -45,7 +45,7 @@ public class ContentContainerManager
         // Add content panes:
         try
         {
-            loadContentPane("welcome-pane.fxml", "map-pane.fxml");
+            loadContentPane("welcome-pane.fxml", "map-pane.fxml", "stat-pane.fxml");
         }
         catch (IOException ioe)
         {
@@ -80,6 +80,10 @@ public class ContentContainerManager
         }
     }
     
+    /**
+     * Adds a controller and its class Class to a Map.
+     * @param controller The controller to be added to the map.
+     */
     private void addControllerToMap(Controller controller)
     {
         classControllerMap.put(controller.getClass(), controller);

@@ -9,6 +9,7 @@ comment2.target=void\ loadContentPane(java.lang.String[])
 comment2.text=\r\n\ Load\ multiple\ content\ panes\ at\ once.\r\n\ \r\n\ @param\ paths\ A\ list\ of\ paths\ to\ content\ panes.\r\n
 comment3.params=controller
 comment3.target=void\ addControllerToMap(Controller)
+comment3.text=\r\n\ Adds\ a\ controller\ and\ its\ class\ Class\ to\ a\ Map.\r\n\ @param\ controller\ The\ controller\ to\ be\ added\ to\ the\ map.\r\n
 comment4.params=controllerClass
 comment4.target=Controller\ getController(java.lang.Class)
 comment4.text=\r\n\ Get\ a\ controller\ by\ class.\r\n\ \r\n\ @return\ The\ controller\ of\ that\ class.\r\n
