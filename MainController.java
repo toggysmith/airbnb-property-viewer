@@ -47,10 +47,9 @@ public class MainController
      BoroughButton.mainController = this;
      mapPane = loadPane("map-pane.fxml");
      addPaneToWindowPanes(mapPane);
-     setSwitchPaneChild(welcomePane); 
-     
-     
+     setSwitchPaneChild(welcomePane);
      comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
+     mapController.createMap();
     }
     
     private void addPaneToWindowPanes(Pane newPane)
@@ -123,8 +122,7 @@ public class MainController
                fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
                toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
            }
-           mapController.deleteMap();
-           mapController.createMap();
+        mapController.updateMap();
        }
    }
    

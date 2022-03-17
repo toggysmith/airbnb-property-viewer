@@ -13,16 +13,21 @@ import javafx.scene.input.MouseEvent;
 import java.awt.event.ActionEvent;
 import javafx.scene.control.ScrollPane;
 import javafx.application.Platform;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MapController extends Pane
 {
     @FXML private AnchorPane boroughMap;
     @FXML private ScrollPane scrollPane;
     @FXML private Pane root;
+    
+    private List<BoroughButton> buttons;
 
     @FXML
     public void initialize()
     {
+        buttons = new ArrayList<>();
         scrollPane.prefWidthProperty().bind(root.widthProperty());
         scrollPane.prefHeightProperty().bind(root.heightProperty());
     }
@@ -33,13 +38,16 @@ public class MapController extends Pane
         
         for (Borough borough : Borough.values())
         {
-            new BoroughButton(borough);
+            buttons.add(new BoroughButton(borough));
         }
     }
     
-    public void deleteMap()
+    public void updateMap()
     {
-        getChildren().clear();
+        for (BoroughButton button : buttons)
+        {
+            button.update();
+        }
     }
     
     public Pane getMapPane()
