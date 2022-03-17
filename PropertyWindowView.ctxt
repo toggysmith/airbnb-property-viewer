@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=PropertyWindowView
+comment0.text=\n\ Write\ a\ description\ of\ class\ PropertyWindowView\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=listing\ propertyWindow
+comment1.target=PropertyWindowView(AirbnbListing,\ PropertyWindow)
+comment1.text=\n\ Create\ a\ window\ and\ load\ the\ FXML\ file.\n
+numComments=2

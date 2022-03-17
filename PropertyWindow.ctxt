@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=PropertyWindow
+comment0.text=\n\ Write\ a\ description\ of\ class\ PropertyWindow\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=listing
+comment1.target=PropertyWindow(AirbnbListing)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ PropertyWindow\n
+comment2.params=
+comment2.target=AirbnbListing\ getListing()
+comment3.params=
+comment3.target=void\ setFront()
+comment4.params=
+comment4.target=void\ windowClosed()
+comment5.params=object
+comment5.target=boolean\ equals(java.lang.Object)
+comment6.params=
+comment6.target=int\ hashCode()
+numComments=7

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=WelcomeController
+comment1.params=actionEvent
+comment1.target=void\ visitOurGitHubButtonOnClick(javafx.event.ActionEvent)
+comment2.params=actionEvent
+comment2.target=void\ swapColorModeOnClick(javafx.event.ActionEvent)
+numComments=3
