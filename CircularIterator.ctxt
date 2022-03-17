@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=CircularIterator
-comment0.text=\n\ A\ circular\ iterator.\n
+comment0.text=\r\n\ A\ circular\ iterator.\r\n
 comment1.params=list
 comment1.target=CircularIterator(java.util.List)
 comment2.params=

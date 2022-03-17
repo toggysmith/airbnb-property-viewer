@@ -20,9 +20,21 @@ public interface CircularList<E>
     public E getPrev();
     
     /**
+     * Gets the current element from the list.
+     * @return The current element in the list.
+     */
+    public E getCurrent();
+    
+    /**
      * Adds an element to the list.
      * The element is added so that it will appear after the previously added element.
      * @param element The element to be added.
      */
     public void add(E element);
+    
+    /**
+     * Gets the number of elements in the list.
+     * @return The number of elements in the list.
+     */
+    public int size();
 }

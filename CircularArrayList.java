@@ -12,6 +12,7 @@ public class CircularArrayList<E> implements CircularList<E>
 {
     private List<E> list;
     private int currentItem;
+    private int size;
 
     /**
      * Constructor for objects of class CircularArrayList
@@ -20,6 +21,20 @@ public class CircularArrayList<E> implements CircularList<E>
     {
         list = new ArrayList<>();
         currentItem = 0;
+        size = 0;
+    }
+
+    /**
+     * Gets the current element from the list.
+     * @return The current element in the list.
+     */
+    public E getCurrent()
+    {
+        if (list.size() == 0)
+        {
+            return null;
+        }
+        return list.get(currentItem);
     }
     
     /**
@@ -28,7 +43,7 @@ public class CircularArrayList<E> implements CircularList<E>
      */
     public E getNext()
     {
-        if (list.size() == 0)
+        if (size == 0)
         {
             return null;
         }
@@ -42,7 +57,7 @@ public class CircularArrayList<E> implements CircularList<E>
      */
     public E getPrev()
     {
-        if (list.size() == 0)
+        if (size == 0)
         {
             return null;
         }
@@ -58,5 +73,15 @@ public class CircularArrayList<E> implements CircularList<E>
     public void add(E element)
     {
         list.add(element);
+        size++;
+    }
+    
+    /**
+     * Gets the number of elements in the list.
+     * @return The number of elements in the list.
+     */
+    public int size()
+    {
+        return size;
     }
 }

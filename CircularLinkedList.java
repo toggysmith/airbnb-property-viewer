@@ -20,6 +20,19 @@ public class CircularLinkedList<E> implements CircularList<E>
     }
     
     /**
+     * Gets the current element from the list.
+     * @return The current element in the list.
+     */
+    public E getCurrent()
+    {
+        if (currentNode == null)
+        {
+            return null;
+        }
+        return currentNode.getElement();
+    }
+    
+    /**
      * Gets the next element from the list.
      * @return The next element in the list.
      */
@@ -75,5 +88,14 @@ public class CircularLinkedList<E> implements CircularList<E>
         }
         lastAdded = newNode;
         size++;
+    }
+    
+    /**
+     * Gets the number of elements in the list.
+     * @return The number of elements in the list.
+     */
+    public int size()
+    {
+        return size;
     }
 }
