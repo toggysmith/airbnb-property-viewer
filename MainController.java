@@ -117,10 +117,10 @@ public class MainController
         String selectedToStr = toRangeBox.getValue();
         if(selectedFromStr != null && selectedToStr != null && !parsing){
             invalidRangeCheck(selectedFromStr, selectedToStr);
+            
+            mapController.deleteMap();
+            mapController.createMap();
         }
-        
-        mapController.deleteMap();
-        mapController.createMap();
     }
     
    private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
