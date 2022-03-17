@@ -12,6 +12,8 @@ import javafx.stage.Stage;
  */
 public class App extends Application
 {
+    public static App instance;
+    
     /**
      * Create the MainView which starts the application window.
      * @param stage The JavaFX stage.
@@ -20,5 +22,19 @@ public class App extends Application
     public void start(Stage stage) throws Exception
     {
         MainWindow.getMainWindow();
+        
+        instance = this;
+    }
+    
+    /**
+     * Open the website at a specified URL.
+     * @param URL The URL of the website.
+     */
+    public static void openWebsite(String URL)
+    {
+        if (instance != null)
+        {
+            instance.getHostServices().showDocument(URL);
+        }
     }
 }

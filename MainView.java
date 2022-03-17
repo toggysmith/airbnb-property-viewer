@@ -30,17 +30,28 @@ public class MainView extends Stage
     private MainWindow mainWindow;
     private MainController mainController;
     
+    private static boolean isInLightMode = false;
+    private static Scene scene;
+    private static String lightModeStylesheet;
+    private static String darkModeStylesheet;
+    
     /**
      * Create the main application window.
      */
     public MainView(MainWindow mainWindow) throws Exception
     {
+        // Get the paths to the stylesheets
+        lightModeStylesheet = getClass().getResource("light-mode.css").toExternalForm();
+        darkModeStylesheet = getClass().getResource("dark-mode.css").toExternalForm();
+        
         // Load the contents of the FXML file into the scene.
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         
         this.mainWindow = mainWindow;
         
-        Scene scene = new Scene(loader.load(), 870, 870);
+        scene = new Scene(loader.load(), 870, 870);
+        
+        swapColorMode();
         
         mainController = loader.getController();
 
@@ -51,6 +62,25 @@ public class MainView extends Stage
         setTitle(WINDOW_TITLE);
         sizeToScene();
         show();
+    }
+    
+    /**
+     * Swap color mode.
+     */
+    public static void swapColorMode()
+    {
+        isInLightMode = !isInLightMode;
+        
+        if (isInLightMode)
+        {
+            scene.getStylesheets().remove(darkModeStylesheet);
+            scene.getStylesheets().add(lightModeStylesheet);
+        }
+        else
+        {
+            scene.getStylesheets().remove(lightModeStylesheet);
+            scene.getStylesheets().add(darkModeStylesheet);
+        }
     }
 
     /**
