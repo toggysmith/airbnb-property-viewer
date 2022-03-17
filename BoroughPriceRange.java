@@ -30,16 +30,6 @@ public class BoroughPriceRange
         return priceRange;
     }
     
-    public int getFromPrice()
-    {
-        return priceRange.getFromValue();
-    }
-    
-    public int getToPrice()
-    {
-        return priceRange.getToValue();
-    }
-    
     public boolean equals(Object object)
     {
         if (this == object)

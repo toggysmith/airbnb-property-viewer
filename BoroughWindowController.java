@@ -125,7 +125,7 @@ public class BoroughWindowController
     
     protected void assignPriceLabels()
     {
-        fromPrice.setText(String.valueOf(boroughWindow.getFromPrice()));
-        toPrice.setText(String.valueOf(boroughWindow.getToPrice()));
+        fromPrice.setText(boroughWindow.getFromPrice());
+        toPrice.setText(boroughWindow.getToPrice());
     }
 }

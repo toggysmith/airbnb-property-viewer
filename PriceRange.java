@@ -37,6 +37,16 @@ public class PriceRange
         }
     }
     
+    public String getFromValueStr()
+    {
+        return this.fromValue;
+    }
+    
+    public String getToValueStr()
+    {
+        return this.toValue;
+    }
+    
     public boolean equals(Object object)
     {
         if (this == object)

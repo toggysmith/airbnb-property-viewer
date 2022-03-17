@@ -51,14 +51,14 @@ public class BoroughWindow
         return boroughPriceRange;
     }
     
-    public int getFromPrice()
+    public String getFromPrice()
     {
-        return boroughPriceRange.getFromPrice();
+        return boroughPriceRange.getPriceRange().getFromValueStr();
     }
     
-    public int getToPrice()
+    public String getToPrice()
     {
-        return boroughPriceRange.getToPrice();
+        return boroughPriceRange.getPriceRange().getToValueStr();
     }
     
     public boolean equals(Object object)
