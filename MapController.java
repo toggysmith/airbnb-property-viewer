@@ -16,13 +16,20 @@ import javafx.application.Platform;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MapController extends Pane
+public class MapController extends Controller
 {
     @FXML private AnchorPane boroughMap;
     @FXML private ScrollPane scrollPane;
     @FXML private Pane root;
     
     private List<BoroughButton> buttons;
+    
+    private List<Controller> controllers;
+    
+    public void setControllers(List<Controller> controllers)
+    {
+        this.controllers = controllers;
+    }
 
     @FXML
     public void initialize()

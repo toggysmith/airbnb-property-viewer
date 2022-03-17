@@ -9,12 +9,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
-
-
 import java.io.IOException;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.fxml.FXMLLoader;
+import java.util.List;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -25,7 +24,7 @@ import javafx.fxml.FXMLLoader;
  * @author Tony Smith (K21064940)
  * @version 1.0
  */
-public class MainController
+public class MainController extends Controller
 {
     @FXML private ComboBox<String> fromRangeBox;
     @FXML private ComboBox<String> toRangeBox;
@@ -33,63 +32,37 @@ public class MainController
     @FXML private Button leftButton;
     @FXML private Button rightButton;
     
-    private Pane welcomePane;
     private RangeValues comboBoxRangeValues;
+    private ContentContainerManager contentContainerManager;
     
-    private Pane mapPane;
-    private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
-
-    private MapController mapController;
+    private List<Controller> controllers;
+    
     public void setUpPanes() throws IOException
     {
-     welcomePane = loadPane("welcome-pane.fxml");
-     addPaneToWindowPanes(welcomePane);
-     mapPane = loadPane("map-pane.fxml");
-     addPaneToWindowPanes(mapPane);
-     setSwitchPaneChild(welcomePane); 
-     
+        contentContainerManager = new ContentContainerManager(switchPane);
      
      comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
      
-           mapController.createMap();
+        ((MapController) contentContainerManager.getController(MapController.class)).createMap();
     }
     
-    private void addPaneToWindowPanes(Pane newPane)
+    public void setControllers(List<Controller> controllers)
     {
-        windowPanes.add(newPane);
-        newPane.prefWidthProperty().bind(switchPane.widthProperty());
-        newPane.prefHeightProperty().bind(switchPane.heightProperty());
-    }
-        
-    private void setSwitchPaneChild(Pane childPane)
-    {
-        switchPane.getChildren().setAll(childPane);
-    }
-    
-    private Pane loadPane(String fxmlFileName) throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
-        
-        Pane pane = loader.load();
-        
-        if (fxmlFileName == "map-pane.fxml")
-            mapController = loader.getController();
-        
-        return pane;
+        this.controllers = controllers;
     }
     
     @FXML
     private void nextPane()
     {
-       Pane nextPane =  windowPanes.getNext();
-       setSwitchPaneChild(nextPane);
+       Pane nextPane = contentContainerManager.getPrevious();
+        switchPane.getChildren().setAll(nextPane);
     }
     
     @FXML
     private void prevPane()
     {
-        Pane prevPane = windowPanes.getPrev();
-        setSwitchPaneChild(prevPane); 
+        Pane previousPane = contentContainerManager.getPrevious();
+        switchPane.getChildren().setAll(previousPane);
     }
    
     private void enableButtons(){
@@ -124,7 +97,7 @@ public class MainController
                fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
                toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
            }
-           mapController.updateMap();
+           ((MapController) contentContainerManager.getController(MapController.class)).updateMap();
        }
    }
    
