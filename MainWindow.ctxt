@@ -1,20 +1,20 @@
 #BlueJ class context
 comment0.target=MainWindow
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ MainWindow\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ MainWindow\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
 comment1.target=MainWindow()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ MainWindow\r\n
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ MainWindow\n
 comment2.params=
 comment2.target=MainWindow\ getMainWindow()
 comment3.params=
 comment3.target=int\ getMinPropertyPrice()
-comment3.text=\r\n\ Get\ the\ minimum\ property\ price.\r\n\ @return\ The\ minimum\ property\ price.\r\n
+comment3.text=\n\ Get\ the\ minimum\ property\ price.\n\ @return\ The\ minimum\ property\ price.\n
 comment4.params=
 comment4.target=int\ getMaxPropertyPrice()
-comment4.text=\r\n\ Get\ the\ maximum\ property\ price.\r\n\ @return\ The\ maximum\ property\ price.\r\n
+comment4.text=\n\ Get\ the\ maximum\ property\ price.\n\ @return\ The\ maximum\ property\ price.\n
 comment5.params=
 comment5.target=RangeValues\ getRangeValues()
 comment6.params=targetBorough\ priceRange
 comment6.target=javafx.collections.ObservableList\ getListingsInBorough(java.lang.String,\ PriceRange)
-comment6.text=\r\n\ Get\ the\ listings\ in\ a\ specific\ borough.\r\n\ @return\ The\ listings\ in\ a\ specific\ borough.\r\n
+comment6.text=\n\ Get\ the\ listings\ in\ a\ specific\ borough.\n\ @return\ The\ listings\ in\ a\ specific\ borough.\n
 numComments=7

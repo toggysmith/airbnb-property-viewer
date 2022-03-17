@@ -1,18 +1,18 @@
 #BlueJ class context
 comment0.target=MainView
-comment0.text=\r\n\ MainView\ creates\ the\ primary\ application\ window\ by\ loading\ it\ from\r\n\ an\ FXML\ file.\ It\ also\ uses\ the\ AirbnbDataLoader\ to\ load\ the\ Airbnb\r\n\ listings\ from\ the\ database.\r\n\ \r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @author\ Augusto\ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 1.0\r\n
+comment0.text=\n\ MainView\ creates\ the\ primary\ application\ window\ by\ loading\ it\ from\n\ an\ FXML\ file.\ It\ also\ uses\ the\ AirbnbDataLoader\ to\ load\ the\ Airbnb\n\ listings\ from\ the\ database.\n\ \n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0\n
 comment1.params=mainWindow
 comment1.target=MainView(MainWindow)
-comment1.text=\r\n\ Create\ the\ main\ application\ window.\r\n
+comment1.text=\n\ Create\ the\ main\ application\ window.\n
 comment2.params=
 comment2.target=void\ swapColorMode()
-comment2.text=\r\n\ Swap\ color\ mode.\r\n
+comment2.text=\n\ Swap\ color\ mode.\n
 comment3.params=
 comment3.target=void\ setRangeBoxOptions()
-comment3.text=\r\n\ Set\ the\ options\ shown\ in\ the\ range\ combo\ boxes.\r\n
+comment3.text=\n\ Set\ the\ options\ shown\ in\ the\ range\ combo\ boxes.\n
 comment4.params=noOptionString
 comment4.target=java.util.List\ generatePriceOptions(java.lang.String)
-comment4.text=\r\n\ Generate\ a\ list\ of\ possible\ price\ options.\r\n\ @param\ noOptionString\ The\ string\ to\ show\ to\ represent\ none\ of\ the\ other\ options,\ e.g.\ "No\ min".\r\n\ @return\ The\ list\ of\ possible\ price\ options.\r\n
+comment4.text=\n\ Generate\ a\ list\ of\ possible\ price\ options.\n\ @param\ noOptionString\ The\ string\ to\ show\ to\ represent\ none\ of\ the\ other\ options,\ e.g.\ "No\ min".\n\ @return\ The\ list\ of\ possible\ price\ options.\n
 comment5.params=
 comment5.target=MainController\ getMainController()
 numComments=6

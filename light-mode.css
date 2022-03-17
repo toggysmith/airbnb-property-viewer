@@ -42,8 +42,6 @@
     -fx-transition: all .3 ease;
 }
 
-
-
 .button:hover
 {
     -fx-background-color: #3898EC;
@@ -82,22 +80,4 @@
 #header, #footer
 {
     -fx-background-color: #E8ECFF;
-}
-
-
-
-.combo-box{
-    -fx-background-color: #3668FF;
-    -fx-text-fill: #FFFFFF;
-     border: 1px solid #999;
-}
-.combo-box .list-cell {
-    -fx-background-insets: 2.0;
-    -fx-background-radius: 3.0;
-    -fx-background-color: blue;
-    -fx-text-fill: white;
-}
-
-.combo-box .list-cell:hover {
-    -fx-background-color: #0096C9;
 }
