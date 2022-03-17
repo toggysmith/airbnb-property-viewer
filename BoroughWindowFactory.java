@@ -1,5 +1,8 @@
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 /**
  * Write a description of class PropertyWindowFactory here.
@@ -11,11 +14,11 @@ public class BoroughWindowFactory
 {
     private static BoroughWindowFactory boroughWindowFactory;
     private MainWindow mainWindow;
-    private Map<BoroughPriceRange, BoroughWindow> openBoroughWindows;
+    private WindowHashSet<BoroughWindow> openBoroughWindows;
 
     public BoroughWindowFactory()
     {
-        openBoroughWindows = new HashMap<>();
+        openBoroughWindows = new WindowHashSet<>();
         mainWindow = MainWindow.getMainWindow();
     }
     
@@ -28,15 +31,32 @@ public class BoroughWindowFactory
         return boroughWindowFactory;
     }
     
+    public BoroughWindow newBoroughWindowWithListings(Borough borough, List<AirbnbListing> listings)
+    {
+        BoroughWindow boroughWindow = checkWindow(borough, FXCollections.observableList(listings));
+        return boroughWindow;
+    }
+    
     public BoroughWindow newBoroughWindow(Borough borough)
+    {
+        ObservableList<AirbnbListing> listings = FXCollections.observableList(mainWindow.getListingsInBorough(borough.NAME));
+        BoroughWindow boroughWindow = checkWindow(borough, listings);
+        return boroughWindow;
+    }
+    
+    private BoroughWindow checkWindow(Borough borough, ObservableList<AirbnbListing> listings)
     {
         PriceRange priceRange = mainWindow.getRangeValues().getPriceRange();
         BoroughPriceRange boroughPriceRange = new BoroughPriceRange(borough, priceRange);
-        BoroughWindow boroughWindow = openBoroughWindows.get(boroughPriceRange);
-        if (boroughWindow == null)
+
+        BoroughWindow boroughWindow = new BoroughWindow(boroughPriceRange);
+        if (!(openBoroughWindows.add(boroughWindow)))
         {
-            boroughWindow = new BoroughWindow(boroughPriceRange);
-            openBoroughWindows.put(boroughPriceRange, boroughWindow);
+            boroughWindow = openBoroughWindows.getElementInSet(boroughWindow);
+        }
+        else
+        {
+            boroughWindow.createBoroughWindow(listings);
         }
         boroughWindow.setFront();
         return boroughWindow;
@@ -44,6 +64,6 @@ public class BoroughWindowFactory
     
     public void boroughWindowClosed(BoroughWindow boroughWindow)
     {
-        openBoroughWindows.remove(boroughWindow.getBoroughPriceRange());
+        openBoroughWindows.remove(boroughWindow);
     }
 }

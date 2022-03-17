@@ -5,14 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
-   <center>
+<Pane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
+   <children>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
             <TableView fx:id="boroughTable" prefWidth="615.0">
@@ -79,5 +79,5 @@
             </VBox>
          </children>
       </HBox>
-   </center>
-</BorderPane>
+   </children>
+</Pane>

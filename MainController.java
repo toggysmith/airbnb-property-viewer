@@ -88,7 +88,7 @@ public class MainController extends Controller
            int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
            int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
            
-           if(fromValueInt < toValueInt){
+           if(fromValueInt <= toValueInt){
                comboBoxRangeValues.setFromValue(fromValue);
                comboBoxRangeValues.setToValue(toValue);
                enableButtons();
