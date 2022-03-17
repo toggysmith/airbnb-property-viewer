@@ -31,8 +31,8 @@
             <HBox alignment="CENTER_RIGHT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label alignment="CENTER_RIGHT" text="Price Range (£)" />
-                  <ComboBox fx:id="fromRangeBox" focusTraversable="false" onAction="#checkComboBoxes" prefWidth="150.0" promptText="From:" />
-                  <ComboBox fx:id="toRangeBox" focusTraversable="false" onAction="#checkComboBoxes" prefWidth="150.0" promptText="To:" />
+                  <ComboBox fx:id="fromRangeBox" focusTraversable="false" onAction="#processFromBox" prefWidth="150.0" promptText="From:" />
+                  <ComboBox fx:id="toRangeBox" focusTraversable="false" onAction="#processToBox" prefWidth="150.0" promptText="To:" />
                </children>
                <padding>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

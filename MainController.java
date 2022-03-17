@@ -38,8 +38,8 @@ public class MainController
     
     private Pane mapPane;
     private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
+
     private MapController mapController;
-    private boolean parsing = false;
     public void setUpPanes() throws IOException
     {
      welcomePane = loadPane("welcome-pane.fxml");
@@ -48,14 +48,14 @@ public class MainController
      mapPane = loadPane("map-pane.fxml");
      addPaneToWindowPanes(mapPane);
      setSwitchPaneChild(welcomePane); 
-       
+     
+     
      comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
     }
     
     private void addPaneToWindowPanes(Pane newPane)
     {
         windowPanes.add(newPane);
-        
         newPane.prefWidthProperty().bind(switchPane.widthProperty());
         newPane.prefHeightProperty().bind(switchPane.heightProperty());
     }
@@ -90,83 +90,46 @@ public class MainController
         Pane prevPane = windowPanes.getPrev();
         setSwitchPaneChild(prevPane); 
     }
-    
-    
-    
-    
-    /**
-    private void processRangeValues(String fromValue, String toRange)
-    {
-        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
-            comboBoxRangeValues.setFromValue("0");
-        }else{
-            comboBoxRangeValues.setFromValue(fromValue);                                         
-        }
-        
-        if(toRange.equals(RangeBoxEnum.NOMAX.toString())){
-            comboBoxRangeValues.setToValue(Integer.toString(Integer.MAX_VALUE));
-        }else{
-            comboBoxRangeValues.setToValue(toRange);
-        }
-    }
-    */
-   @FXML
-    private void checkComboBoxes()
-    {
-        String selectedFromStr = fromRangeBox.getValue();
-        String selectedToStr = toRangeBox.getValue();
-        if(selectedFromStr != null && selectedToStr != null && !parsing){
-            invalidRangeCheck(selectedFromStr, selectedToStr);
-            
-            mapController.deleteMap();
-            mapController.createMap();
-        }
-    }
-    
-   private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
-    {
-        if(prevFromValue == 0){
-            fromRangeBox.setValue(RangeBoxEnum.NOMIN.toString());
-        }else{
-            fromRangeBox.setValue(Integer.toString(prevFromValue)); 
-        }
-                   
-        if(prevToValue == Integer.MAX_VALUE){
-            toRangeBox.setValue(RangeBoxEnum.NOMAX.toString());
-        }else{
-            toRangeBox.setValue(Integer.toString(prevToValue));
-        }
-    }
-    
-   private void invalidRangeCheck(String fromValue, String toValue)
-    {
-        int currentFromValue = Integer.parseInt(fromValue);
-        int currentToValue =  Integer.parseInt(toValue);
-        
-        int prevFromValue = comboBoxRangeValues.getFromValue();
-        int prevToValue = comboBoxRangeValues.getToValue();
-        
-        comboBoxRangeValues.setFromValue(fromValue);
-        comboBoxRangeValues.setToValue(toValue);
-            
-            if(currentFromValue < currentToValue){
-                enableButtons();
-            }else{
-            parsing = true;
-            rangeWarningAlert();
-            retrievePrevRangeValues(prevFromValue,prevToValue);
-            enableButtons();
-            comboBoxRangeValues.setFromValue(Integer.toString(prevFromValue));
-            comboBoxRangeValues.setToValue(Integer.toString(prevToValue));    
-            }
-        parsing = false;
-    }
    
     private void enableButtons(){
         rightButton.setDisable(false);
         leftButton.setDisable(false);
-    }
-    private void rangeWarningAlert()
+   }
+   
+   @FXML
+   private void processFromBox()
+   {
+       checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
+   }
+   
+   @FXML
+   private void processToBox()
+   {
+       checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
+   }
+   
+   private void checkBoxes(String fromValue, String toValue)
+   {
+       if(toValue != null && fromValue != null){
+           mapController.deleteMap();
+           mapController.createMap();
+           
+           int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
+           int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
+           
+           if(fromValueInt < toValueInt){
+               comboBoxRangeValues.setFromValue(fromValue);
+               comboBoxRangeValues.setToValue(toValue);
+               enableButtons();
+           }else{
+               rangeWarningAlert();
+               fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
+               toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
+           }
+       }
+   }
+   
+   private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
         invalidRange.setTitle("Warning");
