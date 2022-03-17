@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=BoroughEnum
+comment1.params=x\ y\ name
+comment1.target=BoroughEnum(int,\ int,\ java.lang.String)
+numComments=2
