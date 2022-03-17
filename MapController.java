@@ -13,18 +13,24 @@ import javafx.scene.input.MouseEvent;
 import java.awt.event.ActionEvent;
 import javafx.scene.control.ScrollPane;
 import javafx.application.Platform;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MapController extends Pane
 {
     @FXML private AnchorPane boroughMap;
     @FXML private ScrollPane scrollPane;
     @FXML private Pane root;
+    
+    private List<BoroughButton> buttons;
 
     @FXML
     public void initialize()
     {
         scrollPane.prefWidthProperty().bind(root.widthProperty());
         scrollPane.prefHeightProperty().bind(root.heightProperty());
+        
+        buttons = new ArrayList<>();
     }
 
     public void createMap()
@@ -33,13 +39,20 @@ public class MapController extends Pane
         
         for (Borough borough : Borough.values())
         {
-            new BoroughButton(borough);
+            buttons.add(new BoroughButton(borough));
         }
     }
     
-    public void deleteMap()
+    public void updateMap()
     {
-        getChildren().clear();
+        int fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
+        int toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
+        long noOfPropertiesInBoroughWithMost = ListingManipulator.getNoOfPropertiesInBoroughWithMost(ListingManipulator.filterByPriceRange(AirbnbDataLoader.getListings(), fromValue, toValue));
+        
+        for (BoroughButton button : buttons)
+        {
+            button.update(noOfPropertiesInBoroughWithMost);
+        }
     }
     
     public Pane getMapPane()

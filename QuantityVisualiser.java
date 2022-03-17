@@ -31,14 +31,8 @@ public class QuantityVisualiser extends Group
     /**
      * Retrieve the starting current quantity of this
      * visualiser and the (inclusive) range.
-     *
-     * If the lower bound of the range is more than
-     * the upper bound of the range, the two are swapped.
-     *
-     * @param startingQuantity The initial quantity visualised.
-     * @param rangeUpperBound The greatest quantity that can be visualised.
      */
-    public QuantityVisualiser(long startingQuantity, long rangeUpperBound) throws Exception
+    public QuantityVisualiser()
     {
         super();
 
@@ -46,24 +40,6 @@ public class QuantityVisualiser extends Group
         iconContainer = new HBox();
         getChildren().add(iconContainer);
         this.rangeUpperBound = rangeUpperBound;
-        setCurrentQuantity(startingQuantity);
-
-        // Make sure the starting quantity is within the range.
-        if (!isWithinRange(startingQuantity))
-        {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * Check whether a given quantity is within the
-     * range of quantities allowed.
-     *
-     * @param quantity The quantity being checked.
-     */
-    private boolean isWithinRange(long quantity)
-    {
-        return quantity <= rangeUpperBound;
     }
 
     /**
@@ -76,6 +52,17 @@ public class QuantityVisualiser extends Group
         this.currentQuantity = newQuantity;
         updateGraphic();
     }
+    
+    /**
+     * Set the upper range bound.
+     * 
+     * @param rangeUpperBound The upper range bound.
+     */
+    public void setRangeUpperBound(long rangeUpperBound)
+    {
+        this.rangeUpperBound = rangeUpperBound;
+        updateGraphic();
+    }
 
     /**
      * Update the circle graphic by changing its
@@ -83,6 +70,8 @@ public class QuantityVisualiser extends Group
      */
     private void updateGraphic()
     {
+        iconContainer.getChildren().clear();
+        
         double normalisedValue = currentQuantity / (double) rangeUpperBound;
         
         int noOfPropertyIcons = 0;
@@ -97,10 +86,10 @@ public class QuantityVisualiser extends Group
             for (int i = 0; i < noOfPropertyIcons; i++)
             {
                 SVGPath icon = new SVGPath();
+                
                 icon.setContent(propertyIconSVG);
                 icon.setScaleX(0.8);
                 icon.setScaleY(0.8);
-                
                 
                 iconContainer.getChildren().add(icon);
             }

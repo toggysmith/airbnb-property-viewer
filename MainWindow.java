@@ -35,6 +35,11 @@ public class MainWindow
         }
     }
     
+    public MainController getMainController()
+    {
+        return mainController;
+    }
+    
     public static MainWindow getMainWindow()
     {
         if (mainWindow == null)
