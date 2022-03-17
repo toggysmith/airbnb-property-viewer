@@ -11,11 +11,11 @@ public class PropertyWindowFactory
 {
     private static PropertyWindowFactory propertyWindowFactory;
     
-    private Map<AirbnbListing, PropertyWindow> openPropertyWindows;
+    private WindowHashSet<PropertyWindow> openPropertyWindows;
 
     public PropertyWindowFactory()
     {
-        openPropertyWindows = new HashMap<>();
+        openPropertyWindows = new WindowHashSet<>();
     }
     
     public static PropertyWindowFactory getPropertyWindowFactory()
@@ -29,11 +29,14 @@ public class PropertyWindowFactory
     
     public PropertyWindow newPropertyWindow(AirbnbListing listing)
     {
-        PropertyWindow propertyWindow = openPropertyWindows.get(listing);
-        if (propertyWindow == null)
+        PropertyWindow propertyWindow = new PropertyWindow(listing);
+        if (!(openPropertyWindows.add(propertyWindow)))
         {
-            propertyWindow = new PropertyWindow(listing);
-            openPropertyWindows.put(listing, propertyWindow);
+            propertyWindow = openPropertyWindows.getElementInSet(propertyWindow);
+        }
+        else
+        {
+            propertyWindow.createPropertyWindow();
         }
         propertyWindow.setFront();
         return propertyWindow;
@@ -41,6 +44,6 @@ public class PropertyWindowFactory
     
     public void propertyWindowClosed(PropertyWindow propertyWindow)
     {
-        openPropertyWindows.remove(propertyWindow.getListing());
+        openPropertyWindows.remove(propertyWindow);
     }
 }

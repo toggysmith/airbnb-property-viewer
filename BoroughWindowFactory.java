@@ -14,11 +14,11 @@ public class BoroughWindowFactory
 {
     private static BoroughWindowFactory boroughWindowFactory;
     private MainWindow mainWindow;
-    private Map<BoroughPriceRange, BoroughWindow> openBoroughWindows;
+    private WindowHashSet<BoroughWindow> openBoroughWindows;
 
     public BoroughWindowFactory()
     {
-        openBoroughWindows = new HashMap<>();
+        openBoroughWindows = new WindowHashSet<>();
         mainWindow = MainWindow.getMainWindow();
     }
     
@@ -48,11 +48,15 @@ public class BoroughWindowFactory
     {
         PriceRange priceRange = mainWindow.getRangeValues().getPriceRange();
         BoroughPriceRange boroughPriceRange = new BoroughPriceRange(borough, priceRange);
-        BoroughWindow boroughWindow = openBoroughWindows.get(boroughPriceRange);
-        if (boroughWindow == null)
+
+        BoroughWindow boroughWindow = new BoroughWindow(boroughPriceRange);
+        if (!(openBoroughWindows.add(boroughWindow)))
         {
-            boroughWindow = new BoroughWindow(boroughPriceRange, listings);
-            openBoroughWindows.put(boroughPriceRange, boroughWindow);
+            boroughWindow = openBoroughWindows.getElementInSet(boroughWindow);
+        }
+        else
+        {
+            boroughWindow.createBoroughWindow(listings);
         }
         boroughWindow.setFront();
         return boroughWindow;
@@ -60,6 +64,6 @@ public class BoroughWindowFactory
     
     public void boroughWindowClosed(BoroughWindow boroughWindow)
     {
-        openBoroughWindows.remove(boroughWindow.getBoroughPriceRange());
+        openBoroughWindows.remove(boroughWindow);
     }
 }

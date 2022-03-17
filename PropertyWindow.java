@@ -15,6 +15,10 @@ public class PropertyWindow
     public PropertyWindow(AirbnbListing listing)
     {
         this.listing = listing;
+    }
+    
+    public void createPropertyWindow()
+    {
         try
         {
             propertyView = new PropertyWindowView(listing, this);

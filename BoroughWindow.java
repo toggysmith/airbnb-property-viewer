@@ -18,9 +18,13 @@ public class BoroughWindow
     private ObservableList<AirbnbListing> listings;
     private BoroughPriceRange boroughPriceRange;
     
-    public BoroughWindow(BoroughPriceRange boroughPriceRange, ObservableList<AirbnbListing> listingsInBorough)
+    public BoroughWindow(BoroughPriceRange boroughPriceRange)
     {
         this.boroughPriceRange = boroughPriceRange;
+    }
+    
+    public void createBoroughWindow(ObservableList<AirbnbListing> listingsInBorough)
+    {
         PriceRange priceRange = boroughPriceRange.getPriceRange();
         listings = FXCollections.observableList(ListingManipulator.filterByPriceRange(listingsInBorough, priceRange.getFromValue(), priceRange.getToValue()));
         try
