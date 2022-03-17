@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MainController
-comment0.text=\n\ MainController\ hosts\ FXML\ GUI\ elements\ and\ onAction\ methods.\n\ \n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ \ \ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0\n
+comment0.text=\r\n\ MainController\ hosts\ FXML\ GUI\ elements\ and\ onAction\ methods.\r\n\ \r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @author\ Augusto\ \ \ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 1.0\r\n
 comment1.params=
 comment1.target=void\ setUpPanes()
 comment10.params=fromValue\ toValue
