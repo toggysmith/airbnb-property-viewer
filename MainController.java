@@ -40,8 +40,6 @@ public class MainController
     private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
 
     private MapController mapController;
-    private int prevFromValue;
-    private int prevToValue;
     public void setUpPanes() throws IOException
     {
      welcomePane = loadPane("welcome-pane.fxml");
@@ -53,9 +51,6 @@ public class MainController
      
      
      comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
-     
-     prevFromValue = comboBoxRangeValues.getFromValue();
-     prevToValue = comboBoxRangeValues.getToValue();
     }
     
     private void addPaneToWindowPanes(Pane newPane)
@@ -96,63 +91,6 @@ public class MainController
         Pane prevPane = windowPanes.getPrev();
         setSwitchPaneChild(prevPane); 
     }
-    
-   /**
-   @FXML
-    private void checkComboBoxes()
-    {    
-        String selectedFromStr = fromRangeBox.getValue();
-        String selectedToStr = toRangeBox.getValue();
-        
-        
-        if(selectedFromStr != null && selectedToStr != null && !parsing){
-            invalidRangeCheck(selectedFromStr,selectedToStr);
-        }
-<<<<<<< Updated upstream
-        
-        mapController.deleteMap();
-        mapController.createMap();
-=======
-        parsing = false;
->>>>>>> Stashed changes
-    }
-    
-   private void retrievePrevRangeValues()
-    {//onMouseExited
-        if(prevFromValue == 0){
-            fromRangeBox.setValue(RangeBoxEnum.NOMIN.toString());
-        }else{
-            fromRangeBox.setValue(Integer.toString(prevFromValue)); 
-        }
-        
-        if(prevToValue == Integer.MAX_VALUE){
-            toRangeBox.setValue(RangeBoxEnum.NOMAX.toString());
-        }else{
-            toRangeBox.setValue(Integer.toString(prevToValue));
-        }
-    }
-    
-   private void invalidRangeCheck(String selectedFromStr, String selectedToStr)
-    { 
-        comboBoxRangeValues.setFromValue(selectedFromStr);
-        comboBoxRangeValues.setToValue(selectedToStr);
-        if(comboBoxRangeValues.getFromValue() < comboBoxRangeValues.getToValue()){
-            prevFromValue = comboBoxRangeValues.getFromValue();
-            prevToValue = comboBoxRangeValues.getToValue();
-            enableButtons();
-        }else{
-        parsing = true;
-        retrievePrevRangeValues();
-                
-        comboBoxRangeValues.setFromValue(Integer.toString(prevFromValue));
-        comboBoxRangeValues.setToValue(Integer.toString(prevToValue));
-        rangeWarningAlert();
-        enableButtons();
-        }
-        parsing = false;
-    }
-   */
-  
    
     private void enableButtons(){
         rightButton.setDisable(false);
@@ -183,6 +121,8 @@ public class MainController
                enableButtons();
            }else{
                rangeWarningAlert();
+               fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
+               toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
            }
        }
    }
