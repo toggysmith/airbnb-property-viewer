@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <bottom>
       <AnchorPane id="footer" BorderPane.alignment="CENTER">
          <children>
@@ -30,7 +30,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="Price Range (£)" />
+                  <Label id="heading" alignment="CENTER_RIGHT" text="Price Range (£)" />
                   <ComboBox fx:id="fromRangeBox" focusTraversable="false" onAction="#processFromBox" prefWidth="150.0" promptText="From:" />
                   <ComboBox fx:id="toRangeBox" focusTraversable="false" onAction="#processToBox" prefWidth="150.0" promptText="To:" />
                </children>
