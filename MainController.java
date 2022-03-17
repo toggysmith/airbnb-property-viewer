@@ -111,9 +111,6 @@ public class MainController
    private void checkBoxes(String fromValue, String toValue)
    {
        if(toValue != null && fromValue != null){
-           mapController.deleteMap();
-           mapController.createMap();
-           
            int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
            int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
            
@@ -126,6 +123,8 @@ public class MainController
                fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
                toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
            }
+           mapController.deleteMap();
+           mapController.createMap();
        }
    }
    

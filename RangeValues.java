@@ -39,6 +39,10 @@ public class RangeValues
         return convertToStrToInt(this.toValue);
     }
     
+    public String getFromValueStr()
+    {
+        return null;
+    }
     public int convertFromStrToInt(String fromValue)
     {
         if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
