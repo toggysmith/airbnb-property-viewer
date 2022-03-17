@@ -10,7 +10,7 @@ import java.util.List;
  * @author Tony Smith (K21064940)
  * @version 1.0
  */
-public abstract class Controller
+public interface Controller
 {
     public abstract void setControllers(List<Controller> controllers);
 }

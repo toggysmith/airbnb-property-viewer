@@ -24,7 +24,7 @@ import java.util.List;
  * @author Tony Smith (K21064940)
  * @version 1.0
  */
-public class MainController extends Controller
+public class MainController implements Controller
 {
     @FXML private ComboBox<String> fromRangeBox;
     @FXML private ComboBox<String> toRangeBox;

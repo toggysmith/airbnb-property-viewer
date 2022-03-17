@@ -2,7 +2,7 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import java.util.List;
 
-public class WelcomeController extends Controller
+public class WelcomeController implements Controller
 {
     private List<Controller> controllers;
     

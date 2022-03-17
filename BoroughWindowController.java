@@ -24,7 +24,7 @@ import javafx.scene.control.Label;
  * @author Tony Smith (K21064940)
  * @version 1.0
  */
-public class BoroughWindowController
+public class BoroughWindowController implements Controller
 {
     @FXML public TableView boroughTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;
@@ -40,6 +40,8 @@ public class BoroughWindowController
     private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
     
+    private List<Controller> controllers;
+    
     public void Initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
         this.boroughWindow = boroughWindow;
@@ -48,6 +50,11 @@ public class BoroughWindowController
         setOnRowClicked();
         assignSort();
         assignPriceLabels();
+    }
+    
+    public void setControllers(List<Controller> controllers)
+    {
+        this.controllers = controllers;
     }
     
     protected void populateTable(ObservableList<AirbnbListing> listings)

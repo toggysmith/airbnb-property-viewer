@@ -16,7 +16,7 @@ import javafx.application.Platform;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MapController extends Controller
+public class MapController implements Controller
 {
     @FXML private AnchorPane boroughMap;
     @FXML private ScrollPane scrollPane;

@@ -1,6 +1,8 @@
 // JavaFX
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXMLLoader;
+import java.util.Map;
+import java.util.HashMap;
 
 // Java
 import java.io.IOException;
@@ -20,11 +22,6 @@ import java.util.ArrayList;
 public class ContentContainerManager
 {
     /**
-     * A list of content pane and controller pairs.
-     */
-    private List<PaneControllerPair> contentPanes;
-    
-    /**
      * The content container that holds the currently selected content.
      */
     private Pane contentContainer;
@@ -32,7 +29,9 @@ public class ContentContainerManager
     /**
      * The circular iterator keeping track of the current pane.
      */
-    private CircularIterator<PaneControllerPair> circularIterator;
+    private CircularList<PaneControllerPair> circularList;
+    
+    private Map<Class, Controller> classControllerMap;
     
     /**
      * Initialise the instance variables; load all the content panes;
@@ -41,9 +40,8 @@ public class ContentContainerManager
     public ContentContainerManager(Pane contentContainer)
     {
         this.contentContainer = contentContainer;
-        this.contentPanes = new ArrayList<>();
-        this.circularIterator = new CircularIterator<PaneControllerPair>(contentPanes);
-        
+        this.circularList = new CircularLinkedList<>();
+        classControllerMap = new HashMap<>();
         // Add content panes:
         try
         {
@@ -56,7 +54,7 @@ public class ContentContainerManager
             ioe.printStackTrace();
         }
         
-        Pane firstPane = contentPanes.get(0).getPane();
+        Pane firstPane = circularList.getCurrent().getPane();
         contentContainer.getChildren().setAll(firstPane);
     }
     
@@ -72,13 +70,21 @@ public class ContentContainerManager
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             
             Pane contentPane = loader.load();
-            
-            contentPanes.add(new PaneControllerPair(contentPane, loader.getController()));
+            Controller controller = loader.getController();
+            circularList.add(new PaneControllerPair(contentPane, controller));
             
             contentPane.prefWidthProperty().bind(contentContainer.widthProperty());
             contentPane.prefHeightProperty().bind(contentContainer.heightProperty());
+            
+            addControllerToMap(controller);
         }
     }
+    
+    private void addControllerToMap(Controller controller)
+    {
+        classControllerMap.put(controller.getClass(), controller);
+    }
+    
     
     /**
      * Get a controller by class.
@@ -87,17 +93,7 @@ public class ContentContainerManager
      */
     public Controller getController(Class controllerClass)
     {
-        List<Controller> controllers = new ArrayList<>();
-        
-        for (PaneControllerPair contentPane : contentPanes)
-        {
-            if (contentPane.getController().getClass() == controllerClass)
-            {
-                return contentPane.getController();
-            }
-        }
-        
-        return null;
+        return classControllerMap.get(controllerClass);
     }
     
     /**
@@ -107,7 +103,7 @@ public class ContentContainerManager
      */
     public Pane getPrevious()
     {
-        return circularIterator.previous().getPane();
+        return circularList.getPrev().getPane();
     }
     
     /**
@@ -117,7 +113,7 @@ public class ContentContainerManager
      */
     public Pane getNext()
     {
-        return circularIterator.next().getPane();
+        return circularList.getNext().getPane();
     }
     
     /**
