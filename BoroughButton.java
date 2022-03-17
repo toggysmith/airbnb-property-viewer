@@ -37,8 +37,6 @@ public class BoroughButton
     private static AnchorPane boroughMap;
     
     public static MainController mainController;
-    
-    private Borough borough;
 
     public static void setBoroughMap(AnchorPane boroughMap)
     {
@@ -49,7 +47,6 @@ public class BoroughButton
     {
         this.boroughAbbreviation = borough.ABBREVIATION;
         this.boroughFullName = borough.NAME;
-        this.borough = borough;
 
         double xCoord = borough.X * (TILE_WIDTH + SEPARATION) + ((borough.Y + 1) % 2) * n;
         double yCoord = borough.Y * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
@@ -59,10 +56,26 @@ public class BoroughButton
 
         if ((borough.Y + 1) % 2 != 0) {xCoord += SEPARATION / 2;}
 
-        vbox = new VBox();
+        VBox vbox = new VBox();
         Label label = new Label(boroughAbbreviation);
-        
-        update();
+        try
+        {
+            List<AirbnbListing> listings = AirbnbDataLoader.getListings();
+            
+            int fromValue = mainController.getRangeValues().getFromValue();
+            int toValue = mainController.getRangeValues().getToValue();
+            
+            listings = ListingManipulator.filterByPriceRange(listings,
+                                                             fromValue,
+                                                             toValue);
+            
+            quantityVisualiser = new QuantityVisualiser(ListingManipulator.filterByBorough(listings, boroughFullName).size(),
+                                                        ListingManipulator.getNoOfPropertiesInBoroughWithMost(listings));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         vbox.getChildren().addAll(label, quantityVisualiser);
         vbox.setSpacing(12);
 
@@ -77,30 +90,6 @@ public class BoroughButton
 
         vbox.setMouseTransparent(true);
         hexagon.setOnMouseClicked(e -> createBoroughWindow(borough));
-    }
-    
-    public void update()
-    {   
-        try
-        {
-            List<AirbnbListing> listings = AirbnbDataLoader.getListings();
-            
-            int fromValue = mainController.getRangeValues().getFromValue();
-            int toValue = mainController.getRangeValues().getToValue();
-            
-            
-            
-            listings = ListingManipulator.filterByPriceRange(listings,
-                                                             fromValue,
-                                                             toValue);
-            
-            quantityVisualiser = new QuantityVisualiser(ListingManipulator.filterByBorough(listings, boroughFullName).size(),
-                                                        ListingManipulator.getNoOfPropertiesInBoroughWithMost(listings));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     private void createBoroughWindow(Borough borough)
