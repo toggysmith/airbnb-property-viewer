@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PieChartController">
+   <children>
+      <PieChart fx:id="pieChart" prefHeight="400.0" prefWidth="442.0" />
+      <ComboBox fx:id="attributesBox" layoutX="443.0" layoutY="2.0" prefWidth="150.0" promptText="Property Attribute:" />
+   </children>
+</AnchorPane>
