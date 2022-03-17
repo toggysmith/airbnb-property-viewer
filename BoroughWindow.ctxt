@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=BoroughWindow
-comment0.text=\n\ Write\ a\ description\ of\ class\ BoroughWindow\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=boroughPriceRange
-comment1.target=BoroughWindow(BoroughPriceRange)
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BoroughWindow\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=boroughPriceRange\ listingsInBorough
+comment1.target=BoroughWindow(BoroughPriceRange,\ javafx.collections.ObservableList)
 comment2.params=listing
 comment2.target=void\ createPropertyWindow(AirbnbListing)
 comment3.params=

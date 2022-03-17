@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.collections.FXCollections;
 
 /**
  * Write a description of class BoroughWindow here.
@@ -17,10 +18,11 @@ public class BoroughWindow
     private ObservableList<AirbnbListing> listings;
     private BoroughPriceRange boroughPriceRange;
     
-    public BoroughWindow(BoroughPriceRange boroughPriceRange)
+    public BoroughWindow(BoroughPriceRange boroughPriceRange, ObservableList<AirbnbListing> listingsInBorough)
     {
         this.boroughPriceRange = boroughPriceRange;
-        listings = MainWindow.getMainWindow().getListingsInBorough(boroughPriceRange.getBorough().NAME, boroughPriceRange.getPriceRange());
+        PriceRange priceRange = boroughPriceRange.getPriceRange();
+        listings = FXCollections.observableList(ListingManipulator.filterByPriceRange(listingsInBorough, priceRange.getFromValue(), priceRange.getToValue()));
         try
         {
             boroughView = new BoroughWindowView(boroughPriceRange.getBorough().NAME, listings, this);

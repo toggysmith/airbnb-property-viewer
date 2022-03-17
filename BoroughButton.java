@@ -92,6 +92,6 @@ public class BoroughButton
 
     private void createBoroughWindow(Borough borough)
     {
-        BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindow(borough);
+        BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindowWithListings(borough, boroughListings);
     }
 }

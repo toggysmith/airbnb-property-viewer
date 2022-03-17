@@ -59,16 +59,11 @@ public class MainWindow
      * Get the listings in a specific borough.
      * @return The listings in a specific borough.
      */
-    public ObservableList<AirbnbListing> getListingsInBorough(String targetBorough, PriceRange priceRange)
+    public ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
     {
         List<AirbnbListing> listings = AirbnbDataLoader.getListings();
         
-        int fromValue = priceRange.getFromValue();
-        int toValue = priceRange.getToValue();
-        
-        listings = ListingManipulator.filterByPriceRange(ListingManipulator.filterByBorough(listings, targetBorough),
-                                                         fromValue,
-                                                         toValue);
+        listings = ListingManipulator.filterByBorough(listings, targetBorough);
         
         ObservableList<AirbnbListing> returnListings = FXCollections.observableArrayList();
 
