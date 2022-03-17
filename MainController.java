@@ -56,7 +56,6 @@ public class MainController
     private void addPaneToWindowPanes(Pane newPane)
     {
         windowPanes.add(newPane);
-        
         newPane.prefWidthProperty().bind(switchPane.widthProperty());
         newPane.prefHeightProperty().bind(switchPane.heightProperty());
     }
@@ -72,9 +71,9 @@ public class MainController
         
         Pane pane = loader.load();
         
-        if (fxmlFileName == "map-pane.fxml"){
+        if (fxmlFileName == "map-pane.fxml")
             mapController = loader.getController();
-        }
+        
         return pane;
     }
     
@@ -112,6 +111,9 @@ public class MainController
    private void checkBoxes(String fromValue, String toValue)
    {
        if(toValue != null && fromValue != null){
+           mapController.deleteMap();
+           mapController.createMap();
+           
            int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
            int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
            
