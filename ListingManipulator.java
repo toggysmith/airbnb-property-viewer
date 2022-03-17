@@ -79,4 +79,16 @@ public class ListingManipulator
         
         return most;
     }
+    
+    /**
+     * Get the maximum property price.
+     * @return The maximum property price.
+     */
+    public static int getMaxPropertyPrice()
+    {
+        return AirbnbDataLoader.getListings().stream()
+                                             .map(listing -> listing.getPrice())
+                                             .max(Integer::compare)
+                                             .get();
+    }
 }

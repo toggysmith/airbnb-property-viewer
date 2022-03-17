@@ -46,38 +46,14 @@ public class MainWindow
         {
             mainWindow = new MainWindow();
         }
+        
         return mainWindow;
-    }
-    
-    /**
-     * Get the minimum property price.
-     * @return The minimum property price.
-     */
-    public int getMinPropertyPrice()
-    {
-        return airbnbListings.stream()
-                             .map(listing -> listing.getPrice())
-                             .min(Integer::compare)
-                             .get();
-    }
-    
-    /**
-     * Get the maximum property price.
-     * @return The maximum property price.
-     */
-    public int getMaxPropertyPrice()
-    {
-        return airbnbListings.stream()
-                             .map(listing -> listing.getPrice())
-                             .max(Integer::compare)
-                             .get();
     }
     
     public RangeValues getRangeValues()
     {
         return rangeValues;
     }
-    
     
     /**
      * Get the listings in a specific borough.
