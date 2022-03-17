@@ -1,10 +1,10 @@
 
 /**
- * Write a description of class RangeValues here.
- *
- * @author (Augusto Favero K21059800)
- * @version (a version number or a date)
- */
+@author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+*/
 public class RangeValues
 {
     private String fromValue;
@@ -21,23 +21,25 @@ public class RangeValues
     
     public void setFromValue(String fromValue)
     {
-        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
-            fromValue = "0";
-        }else{
-            this.fromValue = fromValue;                                         
-        }
+        this.fromValue = fromValue;
     }
     
     public void setToValue(String toValue)
     {
-        if(toValue.equals(RangeBoxEnum.NOMAX.toString())){
-            toValue = Integer.toString(Integer.MAX_VALUE);
-        }else{
-            this.toValue = toValue;
-        }
+        this.toValue = toValue;
     }
     
     public int getFromValue()
+    {
+        return convertFromStrToInt(this.fromValue);
+    }
+    
+    public int getToValue()
+    {
+        return convertToStrToInt(this.toValue);
+    }
+    
+    public int convertFromStrToInt(String fromValue)
     {
         if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
             return 0;
@@ -46,7 +48,7 @@ public class RangeValues
         }
     }
     
-    public int getToValue()
+    public int convertToStrToInt(String toValue)
     {
         if(toValue.equals(RangeBoxEnum.NOMAX.toString())){
             return Integer.MAX_VALUE;
@@ -55,8 +57,27 @@ public class RangeValues
         }
     }
     
+
     public PriceRange getPriceRange()
     {
         return new PriceRange(fromValue, toValue);
+    }
+    
+    public String convertFromIntToStr(int fromValue)
+    {
+        if(fromValue == 0){
+            return RangeBoxEnum.NOMIN.toString();
+        }else{
+            return Integer.toString(fromValue);
+        }
+    }
+    
+    public String convertToIntToStr(int toValue)
+    {
+        if(toValue == Integer.MAX_VALUE){
+            return RangeBoxEnum.NOMAX.toString();
+        }else{
+            return Integer.toString(toValue);
+        }
     }
 }

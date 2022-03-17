@@ -38,8 +38,10 @@ public class MainController
     
     private Pane mapPane;
     private CircularList<Pane> windowPanes = new CircularLinkedList<Pane>();
+
     private MapController mapController;
-    private boolean parsing = false;
+    private int prevFromValue;
+    private int prevToValue;
     public void setUpPanes() throws IOException
     {
      welcomePane = loadPane("welcome-pane.fxml");
@@ -48,8 +50,12 @@ public class MainController
      mapPane = loadPane("map-pane.fxml");
      addPaneToWindowPanes(mapPane);
      setSwitchPaneChild(welcomePane); 
-       
+     
+     
      comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
+     
+     prevFromValue = comboBoxRangeValues.getFromValue();
+     prevToValue = comboBoxRangeValues.getToValue();
     }
     
     private void addPaneToWindowPanes(Pane newPane)
@@ -71,9 +77,9 @@ public class MainController
         
         Pane pane = loader.load();
         
-        if (fxmlFileName == "map-pane.fxml")
+        if (fxmlFileName == "map-pane.fxml"){
             mapController = loader.getController();
-        
+        }
         return pane;
     }
     
@@ -91,46 +97,34 @@ public class MainController
         setSwitchPaneChild(prevPane); 
     }
     
-    
-    
-    
-    /**
-    private void processRangeValues(String fromValue, String toRange)
-    {
-        if(fromValue.equals(RangeBoxEnum.NOMIN.toString())){
-            comboBoxRangeValues.setFromValue("0");
-        }else{
-            comboBoxRangeValues.setFromValue(fromValue);                                         
-        }
-        
-        if(toRange.equals(RangeBoxEnum.NOMAX.toString())){
-            comboBoxRangeValues.setToValue(Integer.toString(Integer.MAX_VALUE));
-        }else{
-            comboBoxRangeValues.setToValue(toRange);
-        }
-    }
-    */
+   /**
    @FXML
     private void checkComboBoxes()
-    {
+    {    
         String selectedFromStr = fromRangeBox.getValue();
         String selectedToStr = toRangeBox.getValue();
+        
+        
         if(selectedFromStr != null && selectedToStr != null && !parsing){
-            invalidRangeCheck(selectedFromStr, selectedToStr);
+            invalidRangeCheck(selectedFromStr,selectedToStr);
         }
+<<<<<<< Updated upstream
         
         mapController.deleteMap();
         mapController.createMap();
+=======
+        parsing = false;
+>>>>>>> Stashed changes
     }
     
-   private void retrievePrevRangeValues(int prevFromValue, int prevToValue)
-    {
+   private void retrievePrevRangeValues()
+    {//onMouseExited
         if(prevFromValue == 0){
             fromRangeBox.setValue(RangeBoxEnum.NOMIN.toString());
         }else{
             fromRangeBox.setValue(Integer.toString(prevFromValue)); 
         }
-                   
+        
         if(prevToValue == Integer.MAX_VALUE){
             toRangeBox.setValue(RangeBoxEnum.NOMAX.toString());
         }else{
@@ -138,35 +132,62 @@ public class MainController
         }
     }
     
-   private void invalidRangeCheck(String fromValue, String toValue)
-    {
-        int currentFromValue = Integer.parseInt(fromValue);
-        int currentToValue =  Integer.parseInt(toValue);
-        
-        int prevFromValue = comboBoxRangeValues.getFromValue();
-        int prevToValue = comboBoxRangeValues.getToValue();
-        
-        comboBoxRangeValues.setFromValue(fromValue);
-        comboBoxRangeValues.setToValue(toValue);
-            
-            if(currentFromValue < currentToValue){
-                enableButtons();
-            }else{
-            parsing = true;
-            rangeWarningAlert();
-            retrievePrevRangeValues(prevFromValue,prevToValue);
+   private void invalidRangeCheck(String selectedFromStr, String selectedToStr)
+    { 
+        comboBoxRangeValues.setFromValue(selectedFromStr);
+        comboBoxRangeValues.setToValue(selectedToStr);
+        if(comboBoxRangeValues.getFromValue() < comboBoxRangeValues.getToValue()){
+            prevFromValue = comboBoxRangeValues.getFromValue();
+            prevToValue = comboBoxRangeValues.getToValue();
             enableButtons();
-            comboBoxRangeValues.setFromValue(Integer.toString(prevFromValue));
-            comboBoxRangeValues.setToValue(Integer.toString(prevToValue));    
-            }
+        }else{
+        parsing = true;
+        retrievePrevRangeValues();
+                
+        comboBoxRangeValues.setFromValue(Integer.toString(prevFromValue));
+        comboBoxRangeValues.setToValue(Integer.toString(prevToValue));
+        rangeWarningAlert();
+        enableButtons();
+        }
         parsing = false;
     }
+   */
+  
    
     private void enableButtons(){
         rightButton.setDisable(false);
         leftButton.setDisable(false);
-    }
-    private void rangeWarningAlert()
+   }
+   
+   @FXML
+   private void processFromBox()
+   {
+       checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
+   }
+   
+   @FXML
+   private void processToBox()
+   {
+       checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
+   }
+   
+   private void checkBoxes(String fromValue, String toValue)
+   {
+       if(toValue != null && fromValue != null){
+           int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
+           int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
+           
+           if(fromValueInt < toValueInt){
+               comboBoxRangeValues.setFromValue(fromValue);
+               comboBoxRangeValues.setToValue(toValue);
+               enableButtons();
+           }else{
+               rangeWarningAlert();
+           }
+       }
+   }
+   
+   private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
         invalidRange.setTitle("Warning");
