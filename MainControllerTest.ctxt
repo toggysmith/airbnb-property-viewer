@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=MainControllerTest
+comment0.text=\r\n\ The\ test\ class\ MainControllerTest.\r\n\r\n\ author\ Tony\ Smith\ (K21064940)\r\n\ @author\ Augusto\ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=MainControllerTest()
+comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ MainControllerTest\r\n
+comment2.params=
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\r\n\ Called\ before\ every\ test\ case\ method.\r\n
+comment3.params=
+comment3.target=void\ tearDown()
+comment3.text=\r\n\ Tears\ down\ the\ test\ fixture.\r\n\r\n\ Called\ after\ every\ test\ case\ method.\r\n
+comment4.params=
+comment4.target=void\ testGetMinPropertyPrice()
+comment4.text=\r\n\ Test\ that\ the\ correct\ minimum\ property\ price\ is\ returned.\r\n
+comment5.params=
+comment5.target=void\ testGetMaxPropertyPrice()
+comment5.text=\r\n\ Test\ that\ the\ correct\ maximum\ property\ price\ is\ returned.\r\n
+numComments=6
