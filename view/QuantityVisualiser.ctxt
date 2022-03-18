@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=QuantityVisualiser
+comment0.text=\n\ This\ class\ should\ create\ a\ graphical\ representation\n\ of\ a\ given\ quantity\ within\ a\ range.\n\n\ It\ does\ this\ by\ using\ size\ and\ color\ as\ visual\n\ indicators.\n
+comment1.params=
+comment1.target=QuantityVisualiser()
+comment1.text=\n\ Retrieve\ the\ starting\ current\ quantity\ of\ this\n\ visualiser\ and\ the\ (inclusive)\ range.\n
+comment2.params=newQuantity
+comment2.target=void\ setCurrentQuantity(long)
+comment2.text=\n\ Set\ the\ current\ quantity.\n\n\ @param\ newQuantity\ The\ new\ current\ quantity.\n
+comment3.params=rangeUpperBound
+comment3.target=void\ setRangeUpperBound(long)
+comment3.text=\n\ Set\ the\ upper\ range\ bound.\n\ \n\ @param\ rangeUpperBound\ The\ upper\ range\ bound.\n
+comment4.params=
+comment4.target=void\ updateGraphic()
+comment4.text=\n\ Update\ the\ circle\ graphic\ by\ changing\ its\n\ size\ and\ color\ to\ reflect\ the\ quantity.\n
+numComments=5

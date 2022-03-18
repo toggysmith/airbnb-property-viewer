@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=BoroughWindowFactory
+comment0.text=\n\ Write\ a\ description\ of\ class\ PropertyWindowFactory\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=BoroughWindowFactory()
+comment2.params=
+comment2.target=BoroughWindowFactory\ getBoroughWindowFactory()
+comment3.params=borough\ listings
+comment3.target=BoroughWindow\ newBoroughWindowWithListings(Borough,\ java.util.List)
+comment4.params=borough
+comment4.target=BoroughWindow\ newBoroughWindow(Borough)
+comment5.params=borough\ listings
+comment5.target=BoroughWindow\ checkWindow(Borough,\ javafx.collections.ObservableList)
+comment6.params=boroughWindow
+comment6.target=void\ boroughWindowClosed(BoroughWindow)
+numComments=7
