@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=ContentContainerManager
+comment0.text=\r\n\ ContentContainerManager\ is\ used\ to\ control\ the\ pane\ currently\ shown\ in\ the\r\n\ content\ container.\r\n\ \r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @author\ Augusto\ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 1.0\r\n
+comment1.params=contentContainer
+comment1.target=ContentContainerManager(javafx.scene.layout.Pane)
+comment1.text=\r\n\ Initialise\ the\ instance\ variables;\ load\ all\ the\ content\ panes;\r\n\ and\ set\ the\ first\ pane.\r\n
+comment2.params=paths
+comment2.target=void\ loadContentPane(java.lang.String[])
+comment2.text=\r\n\ Load\ multiple\ content\ panes\ at\ once.\r\n\ \r\n\ @param\ paths\ A\ list\ of\ paths\ to\ content\ panes.\r\n
+comment3.params=controller
+comment3.target=void\ addControllerToMap(Controller)
+comment3.text=\r\n\ Adds\ a\ controller\ and\ its\ class\ Class\ to\ a\ Map.\r\n\ @param\ controller\ The\ controller\ to\ be\ added\ to\ the\ map.\r\n
+comment4.params=controllerClass
+comment4.target=Controller\ getController(java.lang.Class)
+comment4.text=\r\n\ Get\ a\ controller\ by\ class.\r\n\ \r\n\ @return\ The\ controller\ of\ that\ class.\r\n
+comment5.params=
+comment5.target=javafx.scene.layout.Pane\ getPrevious()
+comment5.text=\r\n\ Get\ the\ previous\ pane.\r\n\ \r\n\ @param\ The\ previous\ pane.\r\n
+comment6.params=
+comment6.target=javafx.scene.layout.Pane\ getNext()
+comment6.text=\r\n\ Get\ the\ next\ pane.\r\n\ \r\n\ @param\ The\ next\ pane.\r\n
+numComments=7

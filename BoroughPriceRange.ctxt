@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=BoroughPriceRange
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BoroughPriceRange\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=borough\ priceRange
+comment1.target=BoroughPriceRange(Borough,\ PriceRange)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ BoroughPriceRange\r\n
+comment2.params=
+comment2.target=Borough\ getBorough()
+comment3.params=
+comment3.target=PriceRange\ getPriceRange()
+comment4.params=object
+comment4.target=boolean\ equals(java.lang.Object)
+comment5.params=
+comment5.target=int\ hashCode()
+numComments=6

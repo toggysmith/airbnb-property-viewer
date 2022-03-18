@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=CircularList
+comment0.text=\r\n\ A\ circular\ list\ that\ has\ no\ end\ and\ no\ beginning,\ only\ the\ current\ position.\r\n\r\n\ @author\ Adam\ Murray\ K21003575\r\n\ @author\ Augusto\ Favero\ K21059800\r\n\ @version\ 11/03/2022\r\n
+comment1.params=
+comment1.target=java.lang.Object\ getNext()
+comment1.text=\r\n\ Gets\ the\ next\ element\ from\ the\ list.\r\n\ @return\ The\ next\ element\ in\ the\ list.\r\n
+comment2.params=
+comment2.target=java.lang.Object\ getPrev()
+comment2.text=\r\n\ Gets\ the\ previous\ element\ from\ the\ list.\r\n\ @return\ The\ previous\ element\ in\ the\ list.\r\n
+comment3.params=
+comment3.target=java.lang.Object\ getCurrent()
+comment3.text=\r\n\ Gets\ the\ current\ element\ from\ the\ list.\r\n\ @return\ The\ current\ element\ in\ the\ list.\r\n
+comment4.params=element
+comment4.target=void\ add(java.lang.Object)
+comment4.text=\r\n\ Adds\ an\ element\ to\ the\ list.\r\n\ The\ element\ is\ added\ so\ that\ it\ will\ appear\ after\ the\ previously\ added\ element.\r\n\ @param\ element\ The\ element\ to\ be\ added.\r\n
+comment5.params=
+comment5.target=int\ size()
+comment5.text=\r\n\ Gets\ the\ number\ of\ elements\ in\ the\ list.\r\n\ @return\ The\ number\ of\ elements\ in\ the\ list.\r\n
+numComments=6

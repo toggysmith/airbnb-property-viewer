@@ -1,7 +1,6 @@
 // JavaFX
-import javafx.application.Application;
 // Project
-import model.App;
+
 
 /**
  * A class to start the program (for convenience in BlueJ).
@@ -26,5 +25,13 @@ public class Start
                 javafx.application.Application.launch(App.class);
             }
         }.start();
+    }
+
+    /**
+     * The program entry point.
+     */
+    public static void main(String[] args)
+    {
+        start();
     }
 }

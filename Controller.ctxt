@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Controller
+comment0.text=\r\n\ Controller\ provides\ a\ setup\ method\ common\ to\ all\ controllers\r\n\ that\ allows\ for\ the\ passing\ of\ references\ to\ other\ controllers.\r\n\ \r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @author\ Augusto\ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 1.0\r\n
+comment1.params=controllers
+comment1.target=void\ setControllers(java.util.List)
+numComments=2

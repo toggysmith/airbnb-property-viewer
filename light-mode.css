@@ -61,22 +61,22 @@
 
 #left_navigation_button
 {
-    -fx-graphic: url("resources/white-left-arrow.png");
+    -fx-graphic: url("white-left-arrow.png");
 }
 
 #left_navigation_button:disabled
 {
-    -fx-graphic: url("resources/black-left-arrow.png");
+    -fx-graphic: url("black-left-arrow.png");
 }
 
 #right_navigation_button
 {
-    -fx-graphic: url("resources/white-right-arrow.png");
+    -fx-graphic: url("white-right-arrow.png");
 }
 
 #right_navigation_button:disabled
 {
-    -fx-graphic: url("resources/black-right-arrow.png");
+    -fx-graphic: url("black-right-arrow.png");
 }
 
 #header, #footer

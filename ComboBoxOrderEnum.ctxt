@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=ComboBoxOrderEnum
+comment0.text=\r\n\ This\ enum\ stores\ the\ values\ in\ the\ borough\ window\ ComboBox\r\n\ and\ the\ sorting\ info\ for\ those\ values\r\n\ \r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @author\ Augusto\ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 14/03/2022\r\n
+comment1.params=displayText\ order
+comment1.target=ComboBoxOrderEnum(java.lang.String,\ javafx.scene.control.TableColumn.SortType)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ ComboBoxOrderEnum\r\n
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment2.text=\r\n\ Over\ rides\ the\ toString\ method\ \ to\ return\ text\ to\ be\ displayed\ on\ screen.\r\n\ @return\ The\ display\ text\ of\ the\ enum\ value.\r\n
+comment3.params=
+comment3.target=javafx.scene.control.TableColumn.SortType\ getOrder()
+comment3.text=\r\n\ Returns\ whether\ to\ sort\ the\ table\ in\ ascending\ or\ descending\ order.\r\n\ @return\ Whether\ to\ sort\ the\ table\ in\ ascending\ or\ descending\ order.\r\n
+numComments=4

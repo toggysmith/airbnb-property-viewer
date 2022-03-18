@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WelcomeController">
    <center>
       <VBox alignment="CENTER" fillWidth="false" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
@@ -16,7 +16,7 @@
                <children>
                   <ImageView fitHeight="200.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
-                        <Image url="@resources/hand-waving-emoji.png" />
+                        <Image url="@hand-waving-emoji.png" />
                      </image>
                   </ImageView>
                   <Label id="special" text="Welcome!" />
