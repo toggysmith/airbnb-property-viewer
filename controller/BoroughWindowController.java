@@ -55,6 +55,7 @@ public class BoroughWindowController implements Controller
 
     @FXML public HBox pieChart;
     @FXML public ComboBox attributeBox;
+
     public void Initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
         this.boroughWindow = boroughWindow;
@@ -63,7 +64,6 @@ public class BoroughWindowController implements Controller
         setOnRowClicked();
         assignSort();
         assignPriceLabels();
-        
     
         setUpComboBox();
     }

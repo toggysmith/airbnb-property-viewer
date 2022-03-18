@@ -38,7 +38,7 @@ public class PieChartView extends Stage
     
     public AnchorPane setUpPieChart() throws java.io.IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("pieChart.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../pieChart.fxml"));
         
         AnchorPane pane = loader.load();
         
