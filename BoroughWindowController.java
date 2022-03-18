@@ -14,6 +14,16 @@ import java.util.HashMap;
 import java.util.Arrays;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Label;
+import java.util.ArrayList;
+
+
+import java.util.stream.IntStream;
+
+
+
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import java.util.stream.Collectors;
 
 /**
  * BoroughWindowController hosts FXML GUI elements.
@@ -26,7 +36,7 @@ import javafx.scene.control.Label;
  */
 public class BoroughWindowController
 {
-    @FXML public TableView boroughTable;
+    @FXML public TableView<AirbnbListing> boroughTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;
     @FXML public TableColumn<AirbnbListing, String> priceColumn;
     @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
@@ -40,6 +50,8 @@ public class BoroughWindowController
     private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
     
+    @FXML public HBox pieChart;
+    @FXML public ComboBox attributeBox;
     public void Initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
         this.boroughWindow = boroughWindow;
@@ -48,6 +60,9 @@ public class BoroughWindowController
         setOnRowClicked();
         assignSort();
         assignPriceLabels();
+        
+    
+        setUpComboBox();
     }
     
     protected void populateTable(ObservableList<AirbnbListing> listings)
@@ -127,5 +142,52 @@ public class BoroughWindowController
     {
         fromPrice.setText(String.valueOf(boroughWindow.getFromPrice()));
         toPrice.setText(String.valueOf(boroughWindow.getToPrice()));
+    }
+    
+    private void setUpPieChart(String selectedAttribute)
+    {
+        int[] attributeValues = new int[boroughTable.getItems().size()];   
+        
+        if(selectedAttribute.equals("Price")){
+            attributeValues = boroughTable.getItems().stream()
+                                                     .mapToInt(listing -> listing.getPrice())
+                                                     .toArray();
+        }else if(selectedAttribute.equals("Number of reviews")){
+            attributeValues = boroughTable.getItems().stream()
+                                                     .mapToInt(listing -> listing.getNumberOfReviews())
+                                                     .toArray();
+        }else if(selectedAttribute.equals("Min number of nights")){
+            attributeValues = boroughTable.getItems().stream()
+                                                     .mapToInt(listing -> listing.getNumberOfReviews())
+                                                     .toArray();
+        }
+                                                    
+        
+        try
+        {
+            PieChartView view = new PieChartView(attributeValues);
+            AnchorPane chartPane = view.setUpPieChart();
+            pieChart.getChildren().setAll(chartPane);
+        }
+        catch (java.io.IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+         
+    }
+    
+    private void setUpComboBox()
+    {
+        List<String> comboBoxStrings = new ArrayList<String>();
+        comboBoxStrings.add("Price");
+        comboBoxStrings.add("Number of reviews");
+        comboBoxStrings.add("Min number of nights");
+        attributeBox.getItems().addAll(comboBoxStrings);
+    }
+    
+    @FXML
+    public void selectedBox()
+    {
+            setUpPieChart(attributeBox.getValue().toString());
     }
 }

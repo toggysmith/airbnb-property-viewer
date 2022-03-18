@@ -3,36 +3,74 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.util.HashMap;
 import javafx.application.Platform;
+import javafx.scene.layout.AnchorPane;
+import java.util.List;
+import java.util.Arrays;
+
+
 
 public class PieChartView extends Stage
 {
-    private Scene scene;
+    PieChartController controller;
+    HashMap<String,Integer> pieValues;
     
-    public PieChartView() throws java.io.IOException
+    
+    public PieChartView(int[] values)
+    {
+      int min = Arrays.stream(values)
+                      .boxed()
+                      .min(Integer::compare)
+                      .get();
+                      
+      int max = Arrays.stream(values)
+                      .boxed()
+                      .max(Integer::compare)
+                      .get();
+                      
+      pieValues = new HashMap<String,Integer>();                
+      populatePieChart(min, max, values);                
+    }
+    
+    public AnchorPane setUpPieChart() throws java.io.IOException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pieChart.fxml"));
-        scene = new Scene(loader.load(), 870, 870);
         
-         HashMap<String,Integer> values = new HashMap<String,Integer>();
+        AnchorPane pane = loader.load();
         
-        PieChartController controller = loader.getController();
         
+        
+        controller = loader.getController();
+        
+        //setUpComboBox();
+        controller.setup(pieValues);
+        /**
         Platform.runLater(new Runnable() {
             public void run()
             {
+                setUpComboBox();
                 controller.setup(values);
             }
         });
+        */
+        return pane;
+    }
+    
+    private void populatePieChart(int min, int max, int[] values)
+    {
         
-       
-        values.put("Augusto",15);
-        values.put("Toggy", 20);
-        values.put("Adam", 25);
         
+        int stepAmount = (max - min) / 5;
         
-        
-        setScene(scene);
-        show();
-        
+        for(int i = min; min < max; min += stepAmount){
+            pieValues.put("£ " + min  + " < " + "x" + " < " + (min+stepAmount), (int)retrieveSpeciedAmount(values,min, (min+stepAmount)));
+        } 
+    }
+    
+    private long retrieveSpeciedAmount(int[] values , int from, int to)
+    {
+        return Arrays.stream(values)
+                      .boxed()
+                      .filter(i -> i > from && i < to)
+                      .count();
     }
 }

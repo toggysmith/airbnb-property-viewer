@@ -1,7 +1,11 @@
 #BlueJ class context
 comment0.target=PieChartView
-comment1.params=
-comment1.target=PieChartView()
+comment1.params=values
+comment1.target=PieChartView(int[])
 comment2.params=
-comment2.target=void\ run()
-numComments=3
+comment2.target=javafx.scene.layout.AnchorPane\ setUpPieChart()
+comment3.params=min\ max\ values
+comment3.target=void\ populatePieChart(int,\ int,\ int[])
+comment4.params=values\ from\ to
+comment4.target=long\ retrieveSpeciedAmount(int[],\ int,\ int)
+numComments=5

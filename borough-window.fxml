@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
    <center>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
@@ -75,6 +74,12 @@
                         </Label>
                      </children>
                   </HBox>
+                  <HBox prefHeight="30.0" prefWidth="200.0" />
+                  <HBox prefHeight="28.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox fx:id="attributeBox" onAction="#selectedBox" prefWidth="150.0" promptText="Borough Atribute:" />
+                     </children></HBox>
+                  <HBox fx:id="pieChart" prefHeight="240.0" prefWidth="200.0" />
                </children>
             </VBox>
          </children>

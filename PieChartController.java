@@ -4,24 +4,20 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 
 public class PieChartController
 {
     @FXML
-    private PieChart pieChart;
-    
-    @FXML
-    private ComboBox attributesBox;
-    
-    
+    private PieChart pieChart;    
     public void setup(HashMap<String,Integer> attributeValues){
-        
-        for(String eachKey : attributeValues.keySet()){
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                                                     new PieChart.Data(eachKey, attributeValues.get(eachKey)));
-        pieChart.setData(pieChartData);
+    ArrayList<PieChart.Data> data = new ArrayList<PieChart.Data>();
+    for(String eachKey : attributeValues.keySet()){
+        data.add(new PieChart.Data(eachKey, attributeValues.get(eachKey)));    
     }
     
+    ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(data);
+    pieChart.setData(pieChartData);
     }
 }
