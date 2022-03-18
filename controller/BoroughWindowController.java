@@ -33,7 +33,7 @@ import controller.*;
  */
 public class BoroughWindowController implements Controller
 {
-    @FXML public TableView boroughTable;
+    @FXML public TableView<AirbnbListing> boroughTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;
     @FXML public TableColumn<AirbnbListing, String> priceColumn;
     @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
