@@ -15,12 +15,6 @@ import java.util.Arrays;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
-
-
-import java.util.stream.IntStream;
-
-
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import java.util.stream.Collectors;
