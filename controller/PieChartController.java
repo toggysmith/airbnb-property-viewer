@@ -1,3 +1,5 @@
+package controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.collections.ObservableList;
@@ -6,6 +8,10 @@ import javafx.scene.control.ComboBox;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+// Project
+import model.*;
+import view.*;
+import controller.*;
 
 public class PieChartController
 {

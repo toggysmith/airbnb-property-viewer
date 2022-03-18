@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=StatController
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ StatController\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ StatController\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=controllers
 comment1.target=void\ setControllers(java.util.List)
 comment10.params=

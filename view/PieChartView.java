@@ -1,3 +1,5 @@
+package view;
+
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -7,7 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import java.util.List;
 import java.util.Arrays;
 
-
+// Project
+import model.*;
+import view.*;
+import controller.*;
 
 public class PieChartView extends Stage
 {
