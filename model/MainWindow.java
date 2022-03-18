@@ -22,6 +22,7 @@ public class MainWindow
     
     private List<AirbnbListing> airbnbListings;
     private MainController mainController;
+    private MainView mainView;
     private RangeValues rangeValues;
 
     /**
@@ -32,7 +33,7 @@ public class MainWindow
         airbnbListings = AirbnbDataLoader.getListings();
         try
         {
-            MainView mainView = new MainView(this);
+            mainView = new MainView(this);
             mainController = mainView.getMainController();
             rangeValues = mainController.getRangeValues();
         }
@@ -45,6 +46,11 @@ public class MainWindow
     public MainController getMainController()
     {
         return mainController;
+    }
+    
+    public MainView getMainView()
+    {
+        return mainView;
     }
     
     public static MainWindow getMainWindow()

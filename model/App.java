@@ -28,8 +28,9 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        MainWindow.getMainWindow();
-        
+        MainWindow mainWindow = MainWindow.getMainWindow();
+        mainWindow.getMainView().setAlwaysOnTop(true);
+        mainWindow.getMainView().setAlwaysOnTop(false);
         instance = this;
     }
     
