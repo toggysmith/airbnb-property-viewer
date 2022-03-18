@@ -61,7 +61,7 @@ public class MainController implements Controller
     @FXML
     private void nextPane()
     {
-       Pane nextPane = contentContainerManager.getPrevious();
+       Pane nextPane = contentContainerManager.getNext();
         switchPane.getChildren().setAll(nextPane);
     }
     

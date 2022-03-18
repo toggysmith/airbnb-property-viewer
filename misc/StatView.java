@@ -3,6 +3,11 @@ package misc;
 import java.util.*;
 import java.util.stream.*;
 import java.util.ArrayList;
+import javafx.stage.Stage;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
 
 // Project
 import model.*;
@@ -15,10 +20,24 @@ import controller.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StatView
+public class StatView extends Pane
 {
     private static List<AirbnbListing> airbnbListings;
     private static final String roomNeeded = "Entire home/apt";
+    
+    public StatView() throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("stat-pane.fxml"));
+        
+        Scene scene = new Scene(loader.load());
+        
+        StatController statController = loader.getController();
+        statController.initialize();
+    
+        // setScene(scene);
+        // setTitle("A");
+        // show();
+    }
+    
     public int averagePropertyView() {
          int average = airbnbListings.stream()
                        .mapToInt(listing -> listing.getNumberOfReviews())
@@ -67,7 +86,7 @@ public class StatView
         int max = 0;
         int price= 0;
         int nights = 0;
-        for(AirbnbListing x: listPrice()) {
+        for(AirbnbListing x: AirbnbDataLoader.getListings()) {
             int calcPrice = x.getPrice() * x.getMinimumNights();
             if(calcPrice > max) {
                 max = calcPrice;
