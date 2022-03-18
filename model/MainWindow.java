@@ -23,7 +23,6 @@ public class MainWindow
     private List<AirbnbListing> airbnbListings;
     private MainController mainController;
     private RangeValues rangeValues;
-
     /**
      * Constructor for objects of class MainWindow
      */
@@ -79,4 +78,6 @@ public class MainWindow
         
         return returnListings;
     }
+    
+  
 }
