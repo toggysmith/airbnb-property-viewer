@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=BoroughWindowView
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ PropertyWindowView\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=boroughName\ listings\ boroughWindow
-comment1.target=BoroughWindowView(java.lang.String,\ javafx.collections.ObservableList,\ BoroughWindow)
-comment1.text=\r\n\ Create\ a\ window\ and\ load\ the\ FXML\ file.\r\n
-numComments=2

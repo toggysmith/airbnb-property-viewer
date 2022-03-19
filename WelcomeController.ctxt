@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=WelcomeController
-comment1.params=controllers
-comment1.target=void\ setControllers(java.util.List)
-comment2.params=actionEvent
-comment2.target=void\ visitOurGitHubButtonOnClick(javafx.event.ActionEvent)
-comment3.params=actionEvent
-comment3.target=void\ swapColorModeOnClick(javafx.event.ActionEvent)
-numComments=4
