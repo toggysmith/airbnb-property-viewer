@@ -1,9 +1,6 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
-// Project
-
-
 public class ListingManipulator
 {
     /**
