@@ -29,7 +29,15 @@ public class App extends Application
         mainWindow.getMainView().setAlwaysOnTop(false);
         instance = this;
     }
-    
+
+    /**
+     * The entry point. (For IntelliJ)
+     */
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+
     /**
      * Open the website at a specified URL.
      * @param URL The URL of the website.
