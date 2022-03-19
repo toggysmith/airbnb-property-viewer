@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 

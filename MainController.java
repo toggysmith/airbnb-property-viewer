@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
@@ -5,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 import javafx.fxml.FXML;
-import java.util.List;
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class MainController implements Controller
+public class MainController extends Controller
 {
     @FXML private ComboBox<String> fromRangeBox;
     @FXML private ComboBox<String> toRangeBox;
@@ -27,7 +28,6 @@ public class MainController implements Controller
     private RangeValues comboBoxRangeValues;
     
     private ContentContainerManager contentContainerManager;
-    private List<Controller> controllers;
     private MapController mapController;
     
     public void setUpPanes() throws IOException
@@ -38,11 +38,6 @@ public class MainController implements Controller
      
         mapController = (MapController) contentContainerManager.getController(MapController.class);
         mapController.createMap();
-    }
-    
-    public void setControllers(List<Controller> controllers)
-    {
-        this.controllers = controllers;
     }
     
     @FXML

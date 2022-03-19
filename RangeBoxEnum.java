@@ -1,3 +1,4 @@
+// @TODO: Refactor class
 
 /**
  * Enumeration class RangeBoxEnum - write a description of the enum class here

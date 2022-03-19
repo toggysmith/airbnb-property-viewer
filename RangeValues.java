@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 /**
 @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)

@@ -25,7 +25,7 @@ import javafx.scene.layout.HBox;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class BoroughWindowController implements Controller
+public class BoroughWindowController extends Controller
 {
     @FXML public TableView<AirbnbListing> boroughTable;
     @FXML public TableColumn<AirbnbListing, String> nameColumn;
@@ -40,8 +40,6 @@ public class BoroughWindowController implements Controller
     
     private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
-    private List<Controller> controllers;
-    
 
     @FXML public HBox pieChart;
     @FXML public ComboBox attributeBox;
@@ -56,11 +54,6 @@ public class BoroughWindowController implements Controller
         assignPriceLabels();
     
         setUpComboBox();
-    }
-    
-    public void setControllers(List<Controller> controllers)
-    {
-        this.controllers = controllers;
     }
     
     protected void populateTable(ObservableList<AirbnbListing> listings)

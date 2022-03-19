@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.collections.ObservableList;

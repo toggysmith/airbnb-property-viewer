@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import javafx.event.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StatController implements Controller
+public class StatController extends Controller
 {
     @FXML public Button lButton1;
     @FXML public Button rButton1;
@@ -54,12 +56,6 @@ public class StatController implements Controller
     
     boolean nextOrPrev;
     HashMap<String, String> statOutput = new HashMap<String, String>();
-    private List<Controller> controllers;
-    
-    public void setControllers(List<Controller> controllers)
-    {
-        this.controllers = controllers;
-    }
     
     @FXML
     public void initialize() {

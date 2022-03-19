@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.scene.shape.Circle;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;

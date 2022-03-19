@@ -1,21 +1,23 @@
 import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
-
-import java.awt.*;
+import java.awt.Desktop;
 import java.net.URL;
-import java.util.List;
 
-public class WelcomeController implements Controller
+/**
+ * Responsible accepting input from the welcome view and converting it into commands for the model or view.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */
+public class WelcomeController extends Controller
 {
-    private List<Controller> controllers;
-    
-    public void setControllers(List<Controller> controllers)
-    {
-        this.controllers = controllers;
-    }
-    
+    /**
+     * Open up the GitHub repo for the project in the browser.
+     */
     @FXML
-    public void visitOurGitHubButtonOnClick(ActionEvent actionEvent)
+    public void visitOurGitHubButtonOnClick()
     {
         try
         {
@@ -29,8 +31,11 @@ public class WelcomeController implements Controller
         }
     }
     
+    /**
+     * Swap the color mode from dark to light or light to dark.
+     */
     @FXML
-    public void swapColorModeOnClick(ActionEvent actionEvent)
+    public void swapColorModeOnClick()
     {
         MainView.swapColorMode();
     }

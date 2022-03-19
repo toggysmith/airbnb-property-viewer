@@ -10,7 +10,12 @@ import java.util.List;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public interface Controller
+public class Controller
 {
-    void setControllers(List<Controller> controllers);
+    protected List<Controller> controllers;
+    
+    public void setControllers(List<Controller> controllers)
+    {
+        this.controllers = controllers;
+    }
 }

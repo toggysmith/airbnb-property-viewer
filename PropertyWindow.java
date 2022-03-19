@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 /**
  * Write a description of class PropertyWindow here.
  *

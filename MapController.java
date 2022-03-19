@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -6,20 +8,13 @@ import javafx.scene.control.ScrollPane;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MapController implements Controller
+public class MapController extends Controller
 {
     @FXML private AnchorPane boroughMap;
     @FXML private ScrollPane scrollPane;
     @FXML private Pane root;
     
     private List<BoroughButton> buttons;
-    
-    private List<Controller> controllers;
-    
-    public void setControllers(List<Controller> controllers)
-    {
-        this.controllers = controllers;
-    }
 
     @FXML
     public void initialize()
