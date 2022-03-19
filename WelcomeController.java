@@ -1,9 +1,9 @@
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
+
+import java.awt.*;
+import java.net.URL;
 import java.util.List;
-
-// Project
-
 
 public class WelcomeController implements Controller
 {
@@ -17,7 +17,16 @@ public class WelcomeController implements Controller
     @FXML
     public void visitOurGitHubButtonOnClick(ActionEvent actionEvent)
     {
-        App.openWebsite("https://github.kcl.ac.uk/k21064940/airbnb");
+        try
+        {
+            Desktop.getDesktop().browse(new URL("https://github.kcl.ac.uk/k21064940/airbnb").toURI());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            
+            AlertManager.showNonTerminatingError("Unable to open website.");
+        }
     }
     
     @FXML

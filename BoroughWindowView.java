@@ -1,10 +1,9 @@
+// @TODO: Refactor class
+
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
-
-// Project
-
 
 /**
  * Write a description of class PropertyWindowView here.

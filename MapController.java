@@ -6,9 +6,6 @@ import javafx.scene.control.ScrollPane;
 import java.util.List;
 import java.util.ArrayList;
 
-// Project
-
-
 public class MapController implements Controller
 {
     @FXML private AnchorPane boroughMap;
@@ -35,11 +32,9 @@ public class MapController implements Controller
 
     public void createMap()
     {
-        BoroughButton.setBoroughMap(boroughMap);
-        
         for (Borough borough : Borough.values())
         {
-            buttons.add(new BoroughButton(borough));
+            buttons.add(new BoroughButton(borough, boroughMap));
         }
     }
     

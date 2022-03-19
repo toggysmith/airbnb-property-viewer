@@ -4,9 +4,6 @@ import javafx.scene.Scene;
 import java.util.ArrayList;
 import java.util.List;
 
-// Project
-
-
 /**
  * MainView creates the primary application window by loading it from
  * an FXML file. It also uses the AirbnbDataLoader to load the Airbnb

@@ -1,25 +1,20 @@
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
-import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-
-import java.io.IOException;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
-
+import javafx.scene.layout.Pane;
+import java.io.IOException;
+import javafx.fxml.FXML;
 import java.util.List;
-
-// Project
-
 
 /**
  * MainController hosts FXML GUI elements and onAction methods.
- * 
+ *
  * @author Adam Murray (K21003575)
- * @author Augusto   Favero (K21059800)
+ * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
- * @version 1.0
+ * @version 1.0.0
  */
 public class MainController implements Controller
 {
@@ -30,17 +25,19 @@ public class MainController implements Controller
     @FXML private Button rightButton;
     
     private RangeValues comboBoxRangeValues;
-    private ContentContainerManager contentContainerManager;
     
+    private ContentContainerManager contentContainerManager;
     private List<Controller> controllers;
+    private MapController mapController;
     
     public void setUpPanes() throws IOException
     {
         contentContainerManager = new ContentContainerManager(switchPane);
+        
+        comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
      
-     comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
-     
-        ((MapController) contentContainerManager.getController(MapController.class)).createMap();
+        mapController = (MapController) contentContainerManager.getController(MapController.class);
+        mapController.createMap();
     }
     
     public void setControllers(List<Controller> controllers)
@@ -51,7 +48,7 @@ public class MainController implements Controller
     @FXML
     private void nextPane()
     {
-       Pane nextPane = contentContainerManager.getNext();
+        Pane nextPane = contentContainerManager.getNext();
         switchPane.getChildren().setAll(nextPane);
     }
     
@@ -61,44 +58,50 @@ public class MainController implements Controller
         Pane previousPane = contentContainerManager.getPrevious();
         switchPane.getChildren().setAll(previousPane);
     }
-   
-    private void enableButtons(){
+    
+    private void enableButtons()
+    {
         rightButton.setDisable(false);
         leftButton.setDisable(false);
-   }
+    }
    
-   @FXML
-   private void processFromBox()
-   {
-       checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
-   }
-   
-   @FXML
-   private void processToBox()
-   {
-       checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
-   }
-   
-   private void checkBoxes(String fromValue, String toValue)
-   {
-       if(toValue != null && fromValue != null){
-           int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
-           int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
-           
-           if(fromValueInt <= toValueInt){
-               comboBoxRangeValues.setFromValue(fromValue);
-               comboBoxRangeValues.setToValue(toValue);
-               enableButtons();
-           }else{
-               rangeWarningAlert();
-               fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
-               toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
-           }
-           ((MapController) contentContainerManager.getController(MapController.class)).updateMap();
-       }
-   }
-   
-   private void rangeWarningAlert()
+    @FXML
+    private void processFromBox()
+    {
+        checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
+    }
+    
+    @FXML
+    private void processToBox()
+    {
+        checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
+    }
+    
+    private void checkBoxes(String fromValue, String toValue)
+    {
+        if (toValue != null && fromValue != null)
+        {
+            int fromValueInt = comboBoxRangeValues.convertFromStrToInt(fromValue);
+            int toValueInt = comboBoxRangeValues.convertToStrToInt(toValue);
+            
+            if (fromValueInt <= toValueInt)
+            {
+                comboBoxRangeValues.setFromValue(fromValue);
+                comboBoxRangeValues.setToValue(toValue);
+                enableButtons();
+            }
+            else
+            {
+                rangeWarningAlert();
+                fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
+                toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
+            }
+            
+            mapController.updateMap();
+        }
+    }
+    
+    private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
         invalidRange.setTitle("Warning");

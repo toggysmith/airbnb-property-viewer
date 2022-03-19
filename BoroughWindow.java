@@ -1,4 +1,4 @@
-// Project
+// @TODO: Refactor class
 
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -6,8 +6,11 @@ import javafx.collections.FXCollections;
 /**
  * Write a description of class BoroughWindow here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class BoroughWindow
 {
@@ -26,7 +29,7 @@ public class BoroughWindow
         listings = FXCollections.observableList(ListingManipulator.filterByPriceRange(listingsInBorough, priceRange.getFromValue(), priceRange.getToValue()));
         try
         {
-            boroughView = new BoroughWindowView(boroughPriceRange.getBorough().NAME, listings, this);
+            boroughView = new BoroughWindowView(boroughPriceRange.getBorough().getName(), listings, this);
         }
         catch (Exception e)
         {

@@ -1,20 +1,21 @@
-// Project
-
 /**
  * A node in a list.
  *
- * @author Adam Murray K21003575
- * @author Augusto Favero K21059800
- * @version 11/03/2022
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class ListNode<E>
 {
-    private E element;
-    private ListNode next;
-    private ListNode prev;
+    private final E element;
+    private ListNode<E> next;
+    private ListNode<E> prev;
     
     /**
-     * Constructor for objects of class ListNode
+     * Sets the initial element stored in this node.
+     * @param element The initial element.
      */
     public ListNode(E element)
     {
@@ -22,7 +23,6 @@ public class ListNode<E>
     }
     
     /**
-     * Gets the element stored in this node.
      * @return The element stored in this node.
      */
     public E getElement()
@@ -31,26 +31,23 @@ public class ListNode<E>
     }
     
     /**
-     * Gets the next node.
      * @return The next node.
      */
-    public ListNode getNext()
+    public ListNode<E> getNext()
     {
         return next;
     }
     
     /**
-     * Gets the previous node.
      * @return The previous node.
      */
-    public ListNode getPrev()
+    public ListNode<E> getPrev()
     {
         return prev;
     }
     
     /**
-     * Sets the next node.
-     * @param The next node.
+     * @param next The next node.
      */
     public void setNext(ListNode<E> next)
     {
@@ -58,8 +55,7 @@ public class ListNode<E>
     }
     
     /**
-     * Sets the previous node.
-     * @param The previous node.
+     * @param prev The previous node.
      */
     public void setPrev(ListNode<E> prev)
     {

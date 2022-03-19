@@ -1,33 +1,47 @@
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-
 import com.opencsv.CSVReader;
-import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.io.FileReader;
+import java.util.Objects;
 import java.util.List;
+import java.net.URI;
+import java.io.File;
+import java.net.URL;
 
-// Project
-
-
-public class AirbnbDataLoader {
-    
-    private static ArrayList<AirbnbListing> savedListings;
+/**
+ * Responsible for loading Airbnb listings from secondary memory once and holding them in main memory so that they can
+ * be used by other parts of the program.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */
+public class AirbnbDataLoader
+{
+    /**
+     * Holds the Airbnb listings once they have been loaded from secondary memory.
+     */
+    private static ArrayList<AirbnbListing> listings;
     
     /** 
-     * Return an ArrayList containing the rows in the AirBnB London data set csv file.
+     * Loads and saves Airbnb listings from a CSV file. Each row in the CSV file corresponds to a single listing.
      */
-    private ArrayList<AirbnbListing> load() {
-        System.out.print("Begin loading Airbnb london dataset...");
-        ArrayList<AirbnbListing> listings = new ArrayList<AirbnbListing>();
-        try{
-            URL url = getClass().getResource("airbnb-london.csv");
-            CSVReader reader = new CSVReader(new FileReader(new File(url.toURI()).getAbsolutePath()));
-            String [] line;
-            //skip the first row (column headers)
-            reader.readNext();
-            while ((line = reader.readNext()) != null) {
+    private static void load()
+    {
+        listings = new ArrayList<>();
+        
+        try
+        {
+            URL url = AirbnbDataLoader.class.getResource("airbnb-london.csv");
+            URI uri = Objects.requireNonNull(url).toURI();
+            CSVReader reader = new CSVReader(new FileReader(new File(uri).getAbsolutePath()));
+            String[] line;
+            
+            reader.readNext(); // Skip the first row (column headers).
+    
+            while ((line = reader.readNext()) != null)
+            {
                 String id = line[0];
                 String name = line[1];
                 String host_id = line[2];
@@ -43,63 +57,55 @@ public class AirbnbDataLoader {
                 double reviewsPerMonth = convertDouble(line[12]);
                 int calculatedHostListingsCount = convertInt(line[13]);
                 int availability365 = convertInt(line[14]);
-
-                AirbnbListing listing = new AirbnbListing(id, name, host_id,
-                        host_name, neighbourhood, latitude, longitude, room_type,
-                        price, minimumNights, numberOfReviews, lastReview,
-                        reviewsPerMonth, calculatedHostListingsCount, availability365
-                    );
-                listings.add(listing);
+        
+                listings.add(new AirbnbListing(id, name, host_id, host_name, neighbourhood, latitude, longitude,
+                                               room_type, price, minimumNights, numberOfReviews, lastReview,
+                                               reviewsPerMonth, calculatedHostListingsCount, availability365));
             }
-        } catch(IOException | URISyntaxException e){
-            System.out.println("Failure! Something went wrong");
-            e.printStackTrace();
         }
-        System.out.println("Success! Number of loaded records: " + listings.size());
+        catch (Exception e)
+        {
+            AlertManager.showTerminatingError("Unable to open Airbnb CSV file.");
+        }
+    }
+    
+    /**
+     * These listings should only be loaded once during the program's lifetime so this method will load them if and
+     * only if they haven't already been loaded and saved.
+     * @return The Airbnb listings saved in main memory.
+     */
+    public static List<AirbnbListing> getListings()
+    {
+        if (listings == null) load();
+        
         return listings;
     }
     
     /**
-      * Retrieves the loaded listings. This is used for efficiency - if the
-      * listings have already been loaded, it will return those instead of
-      * loading them again.
-      *
-      * @return The Airbnb listings.
-      */
-    public static List<AirbnbListing> getListings()
-    {
-        if (savedListings == null)
-        {
-            savedListings = new AirbnbDataLoader().load();
-        }
-
-        return savedListings;
-    }
-
-    /**
-     *
-     * @param doubleString the string to be converted to Double type
-     * @return the Double value of the string, or -1.0 if the string is
-     * either empty or just whitespace
+     * @param doubleString The string to be converted to Double type.
+     * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
      */
-    private Double convertDouble(String doubleString){
-        if(doubleString != null && !doubleString.trim().equals("")){
+    private static Double convertDouble(String doubleString) throws Exception
+    {
+        if (doubleString != null && !doubleString.trim().equals(""))
+        {
             return Double.parseDouble(doubleString);
         }
+
         return -1.0;
     }
 
     /**
-     *
-     * @param intString the string to be converted to Integer type
-     * @return the Integer value of the string, or -1 if the string is
-     * either empty or just whitespace
+     * @param intString The string to be converted to Integer type.
+     * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
      */
-    private Integer convertInt(String intString){
-        if(intString != null && !intString.trim().equals("")){
+    private static Integer convertInt(String intString)
+    {
+        if (intString != null && !intString.trim().equals(""))
+        {
             return Integer.parseInt(intString);
         }
+
         return -1;
     }
-
 }

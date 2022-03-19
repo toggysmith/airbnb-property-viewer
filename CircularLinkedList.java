@@ -1,11 +1,13 @@
-// Project
+// @TODO: Refactor class
 
 /**
  * A circular list that has no end and no beginning, only the current position.
  *
- * @author Adam Murray K21003575
- * @author Augusto Favero K21059800
- * @version 11/03/2022
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class CircularLinkedList<E> implements CircularList<E>
 {
@@ -25,12 +27,14 @@ public class CircularLinkedList<E> implements CircularList<E>
      * Gets the current element from the list.
      * @return The current element in the list.
      */
+    @Override
     public E getCurrent()
     {
         if (currentNode == null)
         {
             return null;
         }
+        
         return currentNode.getElement();
     }
     
@@ -38,6 +42,7 @@ public class CircularLinkedList<E> implements CircularList<E>
      * Gets the next element from the list.
      * @return The next element in the list.
      */
+    @Override
     public E getNext()
     {
         if (currentNode == null)
@@ -52,6 +57,7 @@ public class CircularLinkedList<E> implements CircularList<E>
      * Gets the previous element from the list.
      * @return The previous element in the list.
      */
+    @Override
     public E getPrev()
     {
         if (currentNode == null)
@@ -67,6 +73,7 @@ public class CircularLinkedList<E> implements CircularList<E>
      * The element is added so that it will appear after the previously added element.
      * @param element The element to be added.
      */
+    @Override
     public void add(E element)
     {
         ListNode newNode = new ListNode(element);
@@ -96,6 +103,7 @@ public class CircularLinkedList<E> implements CircularList<E>
      * Gets the number of elements in the list.
      * @return The number of elements in the list.
      */
+    @Override
     public int size()
     {
         return size;

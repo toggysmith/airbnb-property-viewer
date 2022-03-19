@@ -1,5 +1,3 @@
-// Project
-
 /**
  * Write a description of class PriceRange here.
  *

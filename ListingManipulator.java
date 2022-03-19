@@ -1,6 +1,15 @@
-import java.util.List;
 import java.util.stream.Collectors;
+import java.util.List;
 
+/**
+ * Responsible for providing methods to usefully manipulate individual Airbnb listings and lists of listings.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */
 public class ListingManipulator
 {
     /**
@@ -34,29 +43,6 @@ public class ListingManipulator
     }
     
     /**
-     * Get the number of properties in the borough with the least properties.
-     * @param listings The listings to be used to check.
-     * @return The number of properties.
-     */
-    public static int getNoOfPropertiesInBoroughWithLeast
-    (List<AirbnbListing> listings)
-    {
-        int least = Integer.MAX_VALUE;
-        
-        for (Borough borough : Borough.values())
-        {
-            List<AirbnbListing> listingsInBorough = filterByBorough(listings, borough.NAME);
-            
-            if (listingsInBorough.size() < least)
-            {
-                least = listingsInBorough.size();
-            }
-        }
-        
-        return least;
-    }
-    
-    /**
      * Get the number of properties in the borough with the most properties.
      * @param listings The listings to be used to check.
      * @return The number of properties.
@@ -68,7 +54,7 @@ public class ListingManipulator
         
         for (Borough borough : Borough.values())
         {
-            List<AirbnbListing> listingsInBorough = filterByBorough(listings, borough.NAME);
+            List<AirbnbListing> listingsInBorough = filterByBorough(listings, borough.getName());
             
             if (listingsInBorough.size() > most)
             {
@@ -80,14 +66,13 @@ public class ListingManipulator
     }
     
     /**
-     * Get the maximum property price.
-     * @return The maximum property price.
+     * @return The maximum property price or zero if there is none.
      */
     public static int getMaxPropertyPrice()
     {
         return AirbnbDataLoader.getListings().stream()
-                                             .map(listing -> listing.getPrice())
-                                             .max(Integer::compare)
-                                             .get();
+                .map(AirbnbListing::getPrice)
+                .max(Integer::compare)
+                .orElse(0);
     }
 }

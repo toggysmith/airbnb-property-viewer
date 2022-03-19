@@ -2,9 +2,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-// Project
-
-
 /**
  * Write a description of class PropertyWindowView here.
  *

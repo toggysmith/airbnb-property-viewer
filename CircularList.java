@@ -1,9 +1,11 @@
 /**
  * A circular list that has no end and no beginning, only the current position.
  *
- * @author Adam Murray K21003575
- * @author Augusto Favero K21059800
- * @version 11/03/2022
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public interface CircularList<E>
 {

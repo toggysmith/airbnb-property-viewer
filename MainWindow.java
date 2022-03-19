@@ -2,8 +2,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-// Project
-
 
 /**
  * Write a description of class MainWindow here.

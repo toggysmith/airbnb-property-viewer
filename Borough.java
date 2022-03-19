@@ -1,3 +1,13 @@
+/**
+ * Responsible for holding every borough on the map along with their relative x- and y-coordinates, long name and
+ * the abbreviation of their name.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */
 public enum Borough
 {
     // Row 1:
@@ -41,16 +51,53 @@ public enum Borough
     CROY(3, 6, "Croydon"),
     BROM(4, 6, "Bromley");
     
-    public final int X;
-    public final int Y;
-    public final String ABBREVIATION;
-    public final String NAME;
+    /**
+     * The relative x-position of the borough on the map.
+     */
+    private final int X;
     
-    private Borough(int x, int y, String name)
+    /**
+     * The relative y-position of the borough on the map.
+     */
+    private final int Y;
+    
+    /**
+     * The long name of the borough. (E.g. "Kingston upon Thames" instead of "KING")
+     */
+    private final String NAME;
+    
+    /**
+     * Initialises the enum fields.
+     * @param x The relative x-position of the borough on the map.
+     * @param y The relative y-position of the borough on the map.
+     * @param name The long name of the borough.
+     */
+    Borough(int x, int y, String name)
     {
         this.X = x;
         this.Y = y;
-        this.ABBREVIATION = name(); // Because calling Borough.name() and Borough.NAME is confusing
         this.NAME = name;
     }
+    
+    /**
+     * @return The relative x-position of the borough on the map.
+     */
+    public int getX() { return X; }
+    
+    /**
+     * @return The relative y-position of the borough on the map.
+     */
+    public int getY() { return Y; }
+    
+    /**
+     * @return The long name of the borough. (E.g. "Kingston upon Thames" instead of "KING")
+     */
+    public String getName() { return NAME; }
+    
+    /**
+     * @return The abbreviation of the borough's name. (E.g. "KING" instead of "Kingston upon Thames"). NOTE: This is
+     *         the same as the enum's name and therefore `name()` could be used instead but this is confusing given
+     *         the `NAME` field and `getName()` methods.
+     */
+    public String getAbbreviation() { return name(); }
 }

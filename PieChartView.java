@@ -7,9 +7,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.Arrays;
 
-// Project
-
-
 public class PieChartView extends Stage
 {
     PieChartController controller;

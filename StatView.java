@@ -6,9 +6,6 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-// Project
-
-
 /**
  * Write a description of class StatView here.
  *

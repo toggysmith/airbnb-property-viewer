@@ -1,3 +1,5 @@
+// @TODO: Refactor class
+
 import javafx.scene.control.TableColumn;
 
 /**
@@ -26,7 +28,7 @@ public enum ComboBoxOrderEnum
     /**
      * Constructor for objects of class ComboBoxOrderEnum
      */
-    private ComboBoxOrderEnum(String displayText, TableColumn.SortType order)
+    ComboBoxOrderEnum(String displayText, TableColumn.SortType order)
     {
         this.displayText = displayText;
         this.order = order;

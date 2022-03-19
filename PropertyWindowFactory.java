@@ -1,6 +1,3 @@
-// Project
-
-
 /**
  * Write a description of class PropertyWindowFactory here.
  *

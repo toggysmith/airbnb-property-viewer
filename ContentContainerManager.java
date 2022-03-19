@@ -1,38 +1,33 @@
-// JavaFX
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXMLLoader;
-import java.util.Map;
 import java.util.HashMap;
-
-// Java
-import java.io.IOException;
-
-// Project
-
+import java.util.Map;
 
 /**
- * ContentContainerManager is used to control the pane currently shown in the
- * content container.
- * 
+ * Responsible for controlling the content pane currently shown in the center content container.
+ *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
- * @version 1.0
+ * @version 1.0.0
  */
 public class ContentContainerManager
 {
     /**
-     * The content container that holds the currently selected content.
+     * Holds the currently selected content as a child node.
      */
-    private Pane contentContainer;
+    private final Pane contentContainer;
     
     /**
-     * The circular iterator keeping track of the current pane.
+     * Holds all the content panes in a circular list that can be moved forward and backward.
      */
-    private CircularList<PaneControllerPair> circularList;
+    private final CircularList<PaneControllerPair> circularList;
     
-    private Map<Class, Controller> classControllerMap;
+    /**
+     * Holds all the controllers of the content panes matched to their classes.
+     */
+    private final Map<Class, Controller> classControllerMap;
     
     /**
      * Initialise the instance variables; load all the content panes;
@@ -41,7 +36,7 @@ public class ContentContainerManager
     public ContentContainerManager(Pane contentContainer)
     {
         this.contentContainer = contentContainer;
-        this.circularList = new CircularLinkedList<>();
+        circularList = new CircularLinkedList<>();
         classControllerMap = new HashMap<>();
         
         // Add content panes:
@@ -49,11 +44,11 @@ public class ContentContainerManager
         {
             loadContentPane("welcome-pane.fxml", "map-pane.fxml", "stat-pane.fxml");
         }
-        catch (IOException ioe)
+        catch (Exception e)
         {
-            System.out.println("Error : Unable to load content panes.");
+            e.printStackTrace();
             
-            ioe.printStackTrace();
+            AlertManager.showTerminatingError("Unable to load content panes.");
         }
         
         Pane firstPane = circularList.getCurrent().getPane();
@@ -62,10 +57,9 @@ public class ContentContainerManager
     
     /**
      * Load multiple content panes at once.
-     * 
      * @param paths A list of paths to content panes.
      */
-    private void loadContentPane(String ... paths) throws IOException
+    private void loadContentPane(String ... paths) throws Exception
     {
         for (String path : paths)
         {
@@ -83,7 +77,6 @@ public class ContentContainerManager
     }
     
     /**
-     * Adds a controller and its class Class to a Map.
      * @param controller The controller to be added to the map.
      */
     private void addControllerToMap(Controller controller)
@@ -93,9 +86,9 @@ public class ContentContainerManager
     
     
     /**
-     * Get a controller by class.
-     * 
-     * @return The controller of that class.
+     * Retrieve an instance of a controller from its class.
+     * @param controllerClass The class of the controller wanted.
+     * @return The controller of a specific class.
      */
     public Controller getController(Class controllerClass)
     {
@@ -103,9 +96,7 @@ public class ContentContainerManager
     }
     
     /**
-     * Get the previous pane.
-     * 
-     * @param The previous pane.
+     * @return The previous pane.
      */
     public Pane getPrevious()
     {
@@ -113,9 +104,7 @@ public class ContentContainerManager
     }
     
     /**
-     * Get the next pane.
-     * 
-     * @param The next pane.
+     * @return The next pane.
      */
     public Pane getNext()
     {
@@ -126,7 +115,7 @@ public class ContentContainerManager
      * PaneControllerPair can hold a pane and controller, is immutable and
      * provides respective getters.
      */
-    private class PaneControllerPair
+    private static class PaneControllerPair
     {
         private final Pane pane;
         private final Controller controller;
