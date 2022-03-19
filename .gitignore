@@ -2,7 +2,7 @@
 *.class
 
 # BlueJ
-.ctxt
+*.ctxt
 package.bluej
 
 # OS X
