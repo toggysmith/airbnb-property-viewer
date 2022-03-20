@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.HashMap;
 import javafx.event.*;
 
+import java.util.stream.Collectors;
+
 /**
  * Write a description of class StatController here.
  *
@@ -57,13 +59,21 @@ public class StatController extends Controller
     boolean nextOrPrev;
     HashMap<String, String> statOutput = new HashMap<String, String>();
     
-    @FXML
+    private static List<AirbnbListing> airbnbListings;
+    private static final String roomNeeded = "Entire home/apt";
+    
     public void initialize() {
-        setupHash();
+        airbnbListings = AirbnbDataLoader.getListings();
+        
         assignObject();
         setupQueue();
         startStats();
-       
+        setupHash();       
+    }
+    
+    private void setUpValues()
+    {
+        //set up value 1 to corresponding function
     }
     
     @FXML
@@ -164,6 +174,70 @@ public class StatController extends Controller
             connectObjects.put(button, childMap = new HashMap<>());
         }
         childMap.put(label, statLabel);
+    }
+    
+    public int averagePropertyView() {
+         int average = airbnbListings.stream()
+                       .mapToInt(listing -> listing.getNumberOfReviews())
+                       .sum();
+         long count = airbnbListings.stream()
+                     .count();
+        int l = (int)count;
+                     return average/l;
+                     
+    }
+    
+    public int totalAvailableProperties(int lower, int upper) {
+        long available = airbnbListings.stream()
+                    .filter(listing -> listing.getAvailability365() > 0 && listing.getPrice() >= lower && listing.getPrice() <= upper)
+                    .count();
+        int total = (int)available;
+        return total;
+    }
+    
+    public int nonPrivateRoom(int lower, int upper) {
+        long nonPrivate = airbnbListings.stream()
+                                        .filter(listing -> listing.getRoom_type().equals(roomNeeded) && listing.getPrice() >= lower && listing.getPrice() <= upper)
+                                        .count();
+                                        
+        int privateCount = (int)nonPrivate;
+        return privateCount;
+    }
+    
+    public ArrayList<AirbnbListing> listPrice() {
+        return airbnbListings.stream()
+                             .filter(listing -> listing.getPrice() > 0)
+                             .collect(Collectors.toCollection(ArrayList::new));
+    }
+    
+    public ArrayList<AirbnbListing> listMinimumNights() {
+        return airbnbListings.stream()
+                             .filter(listing -> listing.getMinimumNights() > 0)
+                             .collect(Collectors.toCollection(ArrayList::new));
+    }
+    
+    public ArrayList<AirbnbListing> expensiveNeighbourhood() {
+        Iterator<AirbnbListing> it1 = listPrice().iterator();
+        Iterator<AirbnbListing> it2 = listMinimumNights().iterator();
+        int max = 0;
+        int price= 0;
+        int nights = 0;
+        for(AirbnbListing x: AirbnbDataLoader.getListings()) {
+            int calcPrice = x.getPrice() * x.getMinimumNights();
+            if(calcPrice > max){
+                max = calcPrice;
+                price = x.getPrice();
+                nights = x.getMinimumNights();
+            }
+            
+        }
+        final int finalPrice = price;
+        final int finalNight = nights;
+        
+        return airbnbListings.stream()
+                             .filter(listing -> listing.getPrice() == finalPrice && listing.getMinimumNights() == finalNight)
+                             .collect(Collectors.toCollection(ArrayList::new));
+        //Will return an arraylist with one element
     }
     
     
