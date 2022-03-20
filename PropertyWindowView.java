@@ -24,7 +24,8 @@ public class PropertyWindowView extends Stage
         Scene scene = new Scene(loader.load());
 
         PropertyWindowController propertyWindowController = loader.getController();
-
+        propertyWindowController.initialise(listing);
+        
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
