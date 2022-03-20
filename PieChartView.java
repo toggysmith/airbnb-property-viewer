@@ -13,8 +13,6 @@ public class PieChartView extends Stage
 {
     PieChartController controller;
     HashMap<String,Integer> pieValues;
-    
-    
     public PieChartView(int[] values)
     {
       int min = Arrays.stream(values)
@@ -59,10 +57,11 @@ public class PieChartView extends Stage
     {
         
         
-        int stepAmount = (max - min) / 5;
+        int stepAmount = (max - min) / 7;
         
         for(int i = min; min < max; min += stepAmount){
-            pieValues.put("Â£ " + min  + " < " + "x" + " < " + (min+stepAmount), (int)retrieveSpeciedAmount(values,min, (min+stepAmount)));
+            int toValue = (int)retrieveSpeciedAmount(values,min, (min+stepAmount));
+            pieValues.put("£ " + min  + " - " + (min+stepAmount),toValue);
         } 
     }
     

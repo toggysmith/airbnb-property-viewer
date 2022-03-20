@@ -49,7 +49,7 @@ public class StatController extends Controller
     //Label that will show the statistic
     String value1, value2, value3, value4, value5, value6, value7, value8;
     
-    private List<Label>  labelList = new ArrayList<>();
+    private List<Label>  labelList = new ArrayList<Label>();
     Deque<String> dq;
     
     HashMap<Button, HashMap<Label, Label>> connectObjects = new HashMap<>();
@@ -71,10 +71,6 @@ public class StatController extends Controller
         nextOrPrev = true;
         Button b =  (Button) event.getSource();
         changeLabels(b, nextOrPrev);
-        
-        
-          
-        
     }
      
     private void changeLabels(Button clickedButton, boolean checkState) {
@@ -92,11 +88,10 @@ public class StatController extends Controller
                         seeLabels.getKey().setText(prevString);
                         seeLabels.getValue().setText(statOutput.get(prevString));
                     }
-                } 
-            
-                
+                }     
             }
     }
+    
     @FXML
     private void prevStat(ActionEvent event) {
         nextOrPrev = false;
@@ -124,14 +119,10 @@ public class StatController extends Controller
                 }
             }
         }
-        
     }
-    
-   
     
     private void setupQueue() {
         dq = new ArrayDeque<String>();
-        
         dq.addLast(stat1);
         dq.addLast(stat2);
         dq.addLast(stat3);
@@ -142,8 +133,8 @@ public class StatController extends Controller
         dq.addLast(stat8);
     }
     
+    //actual data 
     private void setupHash() {
-        
         statOutput.put(stat1, value1);
         statOutput.put(stat2, value2);
         statOutput.put(stat3, value3);
