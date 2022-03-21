@@ -23,6 +23,7 @@ public class App extends Application
         
         mainWindow.getMainView().setAlwaysOnTop(true);
         mainWindow.getMainView().setAlwaysOnTop(false);
+        mainWindow.getMainView().setMaximized(true);
     }
 
     /**

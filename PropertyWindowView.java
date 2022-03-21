@@ -21,7 +21,7 @@ public class PropertyWindowView extends Stage
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
 
-        Scene scene = new Scene(loader.load(), 1800, 900);
+        Scene scene = new Scene(loader.load());
 
         PropertyWindowController propertyWindowController = loader.getController();
         propertyWindowController.initialise(listing);
@@ -29,6 +29,7 @@ public class PropertyWindowView extends Stage
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
+        this.setMaximized(true);
         setScene(scene);
         setTitle(listing.getHost_name());
         show();
