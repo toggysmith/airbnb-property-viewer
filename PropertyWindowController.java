@@ -2,6 +2,8 @@
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ChangeListener;
 import java.net.URL;
 
 /**
@@ -13,26 +15,29 @@ import java.net.URL;
 public class PropertyWindowController extends Controller
 {
     @FXML private WebView mapsView;
-    
-    
+    double latitude;
+    double longitude;
+
     public void initialise(AirbnbListing listing)
     {
-        double latitude = listing.getLatitude();
-        double longitude = listing.getLongitude();
+        latitude = listing.getLatitude();
+        longitude = listing.getLongitude();
 
-        //String url = "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=" + listing.getLatitude() +  "," + listing.getLongitude();
-        //String url = "https://www.google.com/maps/@" + listing.getLatitude() +  "," + listing.getLongitude() +  ",12.96z";
-        //String url = "https://www.google.com/maps/search/?api=1&query=" + listing.getLatitude() +  "," + listing.getLongitude();
-        
-        /*String url = "https://www.openstreetmap.org/?mlat=" + latitude + "&mlon=" + longitude + "#map=15/" + latitude +  "/" + longitude;
-        System.out.println(url);
-        mapsView.getEngine().load(url);*/
-        
         URL pathToFile = getClass().getClassLoader().getResource("property-map.html");
-        
         WebEngine webEngine = mapsView.getEngine();
         webEngine.load(pathToFile.toExternalForm());
-        
-        webEngine.executeScript("setLocation()");
+        webEngine.getLoadWorker().stateProperty().addListener(e -> thing(webEngine));
+
+    }
+
+    public void thing(WebEngine webEngine)
+    {
+        ChangeListener listener = new ChangeListener() {
+                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                    Double num = (Double) webEngine.executeScript("setLocation(" + latitude + "," + longitude + ")");
+                    System.out.println(num);
+                }
+            };
+        listener.changed(null, null, null);
     }
 }
