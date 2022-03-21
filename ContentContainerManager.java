@@ -42,7 +42,7 @@ public class ContentContainerManager
         // Add content panes:
         try
         {
-            loadContentPane("welcome-pane.fxml", "map-pane.fxml", "stat-pane.fxml", "drawing-map-pane.fxml");
+            loadContentPane("drawing-map-pane.fxml", "welcome-pane.fxml", "map-pane.fxml", "stat-pane.fxml");
         }
         catch (Exception e)
         {
