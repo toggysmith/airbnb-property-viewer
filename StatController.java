@@ -68,20 +68,28 @@ public class StatController extends Controller
     private static List<AirbnbListing> airbnbListings;
     private static final String roomNeeded = "Entire home/apt";
     
+    private MainController mainController;
+    private int fromValue;
+    private int toValue;
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
     public void initialize() {
         airbnbListings = AirbnbDataLoader.getListings();
+        mainController = (MainController) ContentContainerManager.getController(MainController.class);
+        updateValues();
         
         assignObject();
         setUpValues();
         setupHash();  
         setupQueue();
-        
         startStats();
-        
-        
+    }
+    
+    private void updateValues()
+    {
+        fromValue = mainController.getRangeValues().getFromValue();
+        toValue = mainController.getRangeValues().getToValue();
     }
     
     /**
@@ -94,7 +102,6 @@ public class StatController extends Controller
         value2 = String.valueOf(totalAvailableProperties());
         value3 = String.valueOf(nonPrivateRoom());
         value4 = expensiveNeighbourhood();
-        
     }
     
     /**
