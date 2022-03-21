@@ -7,8 +7,8 @@ window.onload = init;
 function init() {
     const map = new ol.Map({
         view: new ol.View({
-            center: [0, 0],
-            zoom: 2
+            center: new ol.proj.fromLonLat([-0.115937, 51.511437]),
+            zoom: 10
         }),
         layers: [
             new ol.layer.Tile({
