@@ -38,7 +38,7 @@ public class StatController extends Controller
     @FXML public Label statLabel3;
     @FXML public Label statLabel4;
    
-    //Title label
+    //These will be the title of the statistics shown
     String stat1 = "Average Number of reviews per property:"; 
     String stat2 = "Total number of available properties:";
     String stat3 = "Number of entire home and apartments:";   
@@ -48,34 +48,60 @@ public class StatController extends Controller
     String stat7 = "stat7";
     String stat8 = "stat8";
     
-    //Label that will show the statistic
+    //Labels that contain the actual statistic
     String value1, value2, value3, value4, value5, value6, value7, value8;
     
+    //Creating a list so that I could iterate through them
     private List<Label>  labelList = new ArrayList<Label>();
+    
+    //Declaring the double sided queue
     Deque<String> dq;
     
+    //Creating a hashmap that links a button to the specified labels within their gridpane
     HashMap<Button, HashMap<Label, Label>> connectObjects = new HashMap<>();
     
+    //To check if the button pressed is forward or backwards
     boolean nextOrPrev;
-    HashMap<String, String> statOutput = new HashMap<String, String>();
     
+    //Creating a hashmap that links the title of the statistic to the statistic
+    HashMap<String, String> statOutput;
     private static List<AirbnbListing> airbnbListings;
     private static final String roomNeeded = "Entire home/apt";
     
+    /**
+     * Initializing the view of the pane  when you first click  onto it
+     */
     public void initialize() {
         airbnbListings = AirbnbDataLoader.getListings();
         
         assignObject();
+        setUpValues();
+        setupHash();  
         setupQueue();
+        
         startStats();
-        setupHash();       
+        
+        
     }
     
+    /**
+     * Assigning the value of the statistic to the specific string
+     */
     private void setUpValues()
     {
-        //set up value 1 to corresponding function
+        //set up values to corresponding function
+        value1 = String.valueOf(averagePropertyView());
+        value2 = String.valueOf(totalAvailableProperties());
+        value3 = String.valueOf(nonPrivateRoom());
+        value4 = expensiveNeighbourhood();
+        
     }
     
+    /**
+     * Called when the forward button is pressed
+     * Allows me to get the variable name of the button pressed which is used to access the
+     *     hashmap and change the relevant labels
+     */
     @FXML
     private void nextStat(ActionEvent event) {
         nextOrPrev = true;
@@ -83,16 +109,24 @@ public class StatController extends Controller
         changeLabels(b, nextOrPrev);
     }
      
+    /**
+     * To change labels I iterate through the nested hashmap created, using the button parameter
+     * to find the child hashmap which links that button to the two labels.
+     * Depending on which button on the specific gridpane pressed, that end of the queue is taken off
+     * and then assigned to the labels
+     */
     private void changeLabels(Button clickedButton, boolean checkState) {
         for(Map.Entry<Button, HashMap<Label, Label>> seeSet :  connectObjects.entrySet()) {
             Button seeButton = seeSet.getKey();
                for (Map.Entry<Label, Label>  seeLabels : seeSet.getValue().entrySet()) {
-                    if(seeButton.equals(clickedButton) && checkState == true) {
+                    if(seeButton.equals(clickedButton) && checkState == false) {
+                        //if the forward button is pressed
                         dq.addFirst(seeLabels.getKey().getText());
                         String nextString = dq.removeLast();
                         seeLabels.getKey().setText(nextString);
                         seeLabels.getValue().setText(statOutput.get(nextString));
-                    } else if (seeButton.equals(clickedButton) && checkState == false){
+                    } else if (seeButton.equals(clickedButton) && checkState == true){
+                        //if the backward  button is pressed
                         dq.addLast(seeLabels.getKey().getText());
                         String prevString = dq.removeFirst();
                         seeLabels.getKey().setText(prevString);
@@ -102,6 +136,11 @@ public class StatController extends Controller
             }
     }
     
+    /**
+     * Called when the backward button is pressed
+     * Allows me to get the variable name of the button pressed which is used to access the
+     *     hashmap and change the relevant labels
+     */
     @FXML
     private void prevStat(ActionEvent event) {
         nextOrPrev = false;
@@ -109,6 +148,10 @@ public class StatController extends Controller
         changeLabels(b, nextOrPrev);
     }
     
+    /**
+     * Populating the label list so I wouldn't need to repeat code when initializing them when
+     * the panel is accessed
+     */
     private void addLabelList() {
         labelList.add(label1);
         labelList.add(label2);
@@ -116,22 +159,36 @@ public class StatController extends Controller
         labelList.add(label4);
     }
     
+    /**
+     * The starting statistics shown when accessing the panel
+     * The first 4 values in the queue is popped, each time I do this I get the strings associated
+     * with the popped values
+     * I then access the  nested  hashmap and use the (i) value in labellist to find  the key in the
+     * child hashmap and then set the labels to the values in that  hashmap
+     */
     private void startStats() {
         addLabelList();
         for (int i = 0; i < 4; i++) {
             String labelPop = dq.pollFirst();
             String statPop = statOutput.get(labelPop);
-            //labelList.get(i).setText(labelPop);
+            
+            Label babel = labelList.get(i);
             for(Map.Entry<Button, HashMap<Label, Label>> seeSet :  connectObjects.entrySet()) {
                 for (Map.Entry<Label, Label>  seeLabels : seeSet.getValue().entrySet()) {
+                    if(seeLabels.getKey().equals(babel)) {
                     seeLabels.getKey().setText(labelPop);
                     seeLabels.getValue().setText(statPop);
+                    }
+                    
                 }
             }
+            
+            
         }
     }
     
     private void setupQueue() {
+        //Setting up my queue, first 4 values will be removed when initializing the pane
         dq = new ArrayDeque<String>();
         dq.addLast(stat1);
         dq.addLast(stat2);
@@ -143,8 +200,11 @@ public class StatController extends Controller
         dq.addLast(stat8);
     }
     
-    //actual data 
+    /**
+     * Setting up the hashmap that contains the title of the statistic and the statistic itself
+     */
     private void setupHash() {
+        statOutput = new HashMap<String, String>();
         statOutput.put(stat1, value1);
         statOutput.put(stat2, value2);
         statOutput.put(stat3, value3);
@@ -156,7 +216,9 @@ public class StatController extends Controller
     }
     
     
-    
+    /**
+     * Setting up the nested hashmap that links each button to the  two labels within the gridpane
+     */
     private void assignObject() {
         nestedHash(lButton1, label1, statLabel1);
         nestedHash(rButton1, label1, statLabel1);
@@ -168,6 +230,9 @@ public class StatController extends Controller
         nestedHash(rButton4, label4, statLabel4);
     }
     
+    /**
+     * Populates the nested hashmap
+     */
     private void nestedHash(Button button, Label label, Label statLabel) {
         HashMap<Label, Label> childMap = connectObjects.get(button);
         if(childMap == null) {
@@ -176,9 +241,14 @@ public class StatController extends Controller
         childMap.put(label, statLabel);
     }
     
+    /**
+     * returns the average number of reviews per property
+     * (statistic 1)
+     */
     public int averagePropertyView() {
          int average = airbnbListings.stream()
                        .mapToInt(listing -> listing.getNumberOfReviews())
+                       
                        .sum();
          long count = airbnbListings.stream()
                      .count();
@@ -187,38 +257,38 @@ public class StatController extends Controller
                      
     }
     
-    public int totalAvailableProperties(int lower, int upper) {
+    /**
+     * returns the total available properties
+     * (statistic 2)
+     */
+    public int totalAvailableProperties() { //int lower, int upper
         long available = airbnbListings.stream()
-                    .filter(listing -> listing.getAvailability365() > 0 && listing.getPrice() >= lower && listing.getPrice() <= upper)
+                    .filter(listing -> listing.getAvailability365() > 0) //&& listing.getPrice() >= lower && listing.getPrice() <= upper)
                     .count();
         int total = (int)available;
         return total;
     }
     
-    public int nonPrivateRoom(int lower, int upper) {
+    /**
+     * returns the number of non-private rooms
+     * (statistic 3)
+     */
+    public int nonPrivateRoom() { //int lower, int upper
         long nonPrivate = airbnbListings.stream()
-                                        .filter(listing -> listing.getRoom_type().equals(roomNeeded) && listing.getPrice() >= lower && listing.getPrice() <= upper)
+                                        .filter(listing -> listing.getRoom_type().equals(roomNeeded)) //&& listing.getPrice() >= lower && listing.getPrice() <= upper)
                                         .count();
                                         
         int privateCount = (int)nonPrivate;
         return privateCount;
     }
     
-    public ArrayList<AirbnbListing> listPrice() {
-        return airbnbListings.stream()
-                             .filter(listing -> listing.getPrice() > 0)
-                             .collect(Collectors.toCollection(ArrayList::new));
-    }
-    
-    public ArrayList<AirbnbListing> listMinimumNights() {
-        return airbnbListings.stream()
-                             .filter(listing -> listing.getMinimumNights() > 0)
-                             .collect(Collectors.toCollection(ArrayList::new));
-    }
-    
-    public ArrayList<AirbnbListing> expensiveNeighbourhood() {
-        Iterator<AirbnbListing> it1 = listPrice().iterator();
-        Iterator<AirbnbListing> it2 = listMinimumNights().iterator();
+
+    /**
+     * returns the most expensive neighbourhood
+     * (statistic 3)
+     */
+    public String expensiveNeighbourhood() {
+        
         int max = 0;
         int price= 0;
         int nights = 0;
@@ -234,10 +304,12 @@ public class StatController extends Controller
         final int finalPrice = price;
         final int finalNight = nights;
         
-        return airbnbListings.stream()
+        ArrayList<AirbnbListing> abnb = new ArrayList<>();
+        abnb = airbnbListings.stream()
                              .filter(listing -> listing.getPrice() == finalPrice && listing.getMinimumNights() == finalNight)
                              .collect(Collectors.toCollection(ArrayList::new));
-        //Will return an arraylist with one element
+        
+                return abnb.get(0).getNeighbourhood();
     }
     
     
