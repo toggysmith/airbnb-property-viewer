@@ -21,7 +21,7 @@ public class PropertyWindowView extends Stage
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
 
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load(), 1800, 900);
 
         PropertyWindowController propertyWindowController = loader.getController();
         propertyWindowController.initialise(listing);
