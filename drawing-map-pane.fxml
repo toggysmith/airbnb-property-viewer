@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.web.WebView?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DrawingMapController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DrawingMapController">
    <bottom>
-      <Label text="This is a test label" BorderPane.alignment="CENTER" />
+      <HBox alignment="CENTER_RIGHT" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Double click to finish drawing" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#drawingModeButtonOnAction" text="Drawing Mode" />
+            <Button mnemonicParsing="false" onAction="#markerModeButtonOnAction" text="Marker Mode" />
+            <Button fx:id="refreshButton" disable="true" layoutX="507.0" layoutY="25.0" mnemonicParsing="false" onAction="#refreshButtonOnAction" text="Refresh" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
    </bottom>
-   <center>
-      <WebView fx:id="browser" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>

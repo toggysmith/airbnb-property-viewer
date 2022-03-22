@@ -36,7 +36,7 @@ public class MainController extends Controller
         
         comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
      
-        mapController = (MapController) contentContainerManager.getController(MapController.class);
+        mapController = (MapController) ContentContainerManager.getController(MapController.class);
         mapController.createMap();
     }
     

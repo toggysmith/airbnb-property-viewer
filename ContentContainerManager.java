@@ -27,7 +27,7 @@ public class ContentContainerManager
     /**
      * Holds all the controllers of the content panes matched to their classes.
      */
-    private final Map<Class, Controller> classControllerMap;
+    private static final Map<Class, Controller> classControllerMap = new HashMap<>();
     
     /**
      * Initialise the instance variables; load all the content panes;
@@ -37,7 +37,6 @@ public class ContentContainerManager
     {
         this.contentContainer = contentContainer;
         circularList = new CircularLinkedList<>();
-        classControllerMap = new HashMap<>();
         
         // Add content panes:
         try
@@ -90,7 +89,7 @@ public class ContentContainerManager
      * @param controllerClass The class of the controller wanted.
      * @return The controller of a specific class.
      */
-    public Controller getController(Class controllerClass)
+    public static Controller getController(Class controllerClass)
     {
         return classControllerMap.get(controllerClass);
     }
