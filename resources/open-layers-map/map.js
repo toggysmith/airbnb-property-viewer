@@ -54,6 +54,15 @@ const map = new ol.Map({
     target: "js-map" // Change this to 'map'
 });
 
+map.on("click", function(e) {
+	map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+		if (layer == propertyMarkersLayer)
+		{
+			openPropertyWindow(feature.getId());
+		}
+	})
+});
+
 
 /*
     Other
@@ -82,6 +91,8 @@ drawInteraction.on('drawend', (e) => {
 
 map.addInteraction(drawInteraction);
 
+var propertyMarkers = {};
+
 /*
     Methods for interaction with JavaFX
 */
@@ -92,13 +103,9 @@ function addMarkers(fromPrice, toPrice) {
     properties.forEach(function(property) {
         if (property.price >= fromPrice && property.price <= toPrice) {
             if (completedPolygon.feature.getGeometry().intersectsCoordinate(new ol.proj.fromLonLat([property.longitude, property.latitude]))) {
-		    var markerPoint = new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude]));
-                var marker = new ol.Feature(markerPoint);
-                    
+                var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
+			marker.setId(property.id);
                 propertyMarkersLayer.getSource().addFeature(marker);
-
-		    //marker.onclick = function() {openPropertyWindow(property.id)};
-		    marker.on('click', function(event) {openPropertyWindow("grdgd")});
             }
         }
     });

@@ -10,7 +10,6 @@ public class JavaMarker
     private static PropertyWindowFactory propertyWindowFactory = PropertyWindowFactory.getPropertyWindowFactory();
     public void openPropertyWindow(String listingId)
     {
-        System.out.println(listingId);
         propertyWindowFactory.newPropertyWindow(listingId);
     }
 }
