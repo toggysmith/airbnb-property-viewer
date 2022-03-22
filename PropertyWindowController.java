@@ -26,6 +26,7 @@ public class PropertyWindowController extends Controller
         URL pathToFile = getClass().getClassLoader().getResource("property-map.html");
         WebEngine webEngine = mapsView.getEngine();
         webEngine.load(pathToFile.toExternalForm());
+        //webEngine.load("https://www.bing.com/maps/embed?h=400&w=500&cp=51.48577030797654~-0.09616984135084294&lvl=10.73468731310459&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
         webEngine.getLoadWorker().stateProperty().addListener(e -> thing(webEngine));
 
     }
@@ -34,8 +35,7 @@ public class PropertyWindowController extends Controller
     {
         ChangeListener listener = new ChangeListener() {
                 public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                    Double num = (Double) webEngine.executeScript("setLocation(" + latitude + "," + longitude + ")");
-                    System.out.println(num);
+                    webEngine.executeScript("setLocation(" + latitude + "," + longitude + ")");
                 }
             };
         listener.changed(null, null, null);

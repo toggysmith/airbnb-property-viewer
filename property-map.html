@@ -1,12 +1,42 @@
-
-<html>
-<iframe id="link" width="window.outerWidth" height="window.outerHeight" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=" + lat + "%2C" + long + "%2C" + lat + "%2C" + long + "&amp;layer=mapnik" style="border: 1px solid black"></iframe>
-<br/>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.13.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.13.0/build/ol.js"></script>
+    <title>OpenLayers example</title>
+  </head>
+  <body>
+    <h2>My Map</h2>
+    <div id="map" class="map"></div>
+<script type="text/javascript">
+function createMap(latitude, longitude)
+{
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([longitude, latitude]),
+          zoom: 13
+        })
+      });
+}
+</script>
 <script type="text/javascript">
 function setLocation(latitude, longitude)
 {
-	document.getElementById('link').value = "https://www.openstreetmap.org/export/embed.html?bbox=" + latitude+ "%2C" + longitude+ "%2C" + latitude+ "%2C" + longitude+ "&amp;layer=mapnik"
-	return longitude;
+	createMap(latitude, longitude);
 }
 </script>
+  </body>
 </html>
