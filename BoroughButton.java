@@ -15,17 +15,24 @@ import java.util.List;
  */
 public class BoroughButton
 {
+    private final QuantityVisualiser quantityVisualiser;
+    private final List<AirbnbListing> boroughListings;
+    
+    /**
+     * The inner radius from the center of the hexagon to its edge.
+     */
     private final static double r = 60.0;
+    
+    /**
+     * The inner radius from the center of the hexagon to the middle of the axis.
+     */
     private final static double n = Math.sqrt(r * r * 0.75);
+    
+    
     private final static double TILE_WIDTH = 2 * n;
     private final static double TILE_HEIGHT = 2 * r;
     private final static double SEPARATION = 7.5;
     private final static double STARTING_OFFSET = 15;
-
-    private final QuantityVisualiser quantityVisualiser;
-    private final List<AirbnbListing> boroughListings;
-    
-
     
     public BoroughButton(Borough borough, AnchorPane boroughMap)
     {
