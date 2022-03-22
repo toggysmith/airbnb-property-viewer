@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Map</title>
+        
+        <!-- OpenLayers v6.13.0 (https://openlayers.org/) -->
+        <script src = "ol-v6.13.0/ol.js"></script>
+        <link rel = "stylesheet" href = "ol-v6.13.0/ol.css">
+
+        <!-- There is a bug with the WebView node in the version of JavaFX used by BlueJ where mouse input
+        is ignored in certain situations. This affected OpenLayers, and prevented the user from panning
+        around the map and adding points.
+        See: https://bugs.openjdk.java.net/browse/JDK-8278759 -->
+        <script src="https://unpkg.com/elm-pep"></script>
+
+        <!-- Ensures the map takes up the full amount of space. -->
+        <link rel = "stylesheet" href = "./map.css">
+    </head>
+
+    <body>
+        <div id="js-map" class="map"></div>
+    
+        <script src = "./map.js"></script>
+    </body>
+</html>
