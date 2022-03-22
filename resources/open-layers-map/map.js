@@ -36,7 +36,7 @@ var propertyMarkersLayer = new ol.layer.Vector({
     style: new ol.style.Style({
         image: new ol.style.Icon({
             anchor: [0.5, 1],
-            scale: [0.1, 0.1],
+            scale: [0.04, 0.04],
             src: "marker.png",
         }),
     }),
@@ -48,7 +48,7 @@ var propertyMarkersLayer = new ol.layer.Vector({
 const map = new ol.Map({
     view: new ol.View({
         center: new ol.proj.fromLonLat([-0.115937, 51.511437]),
-        zoom: 10,
+        zoom: 11,
     }),
     layers: [rasterLayer, drawnPolygonsLayer, propertyMarkersLayer],
     target: "js-map" // Change this to 'map'
@@ -109,7 +109,10 @@ drawInteraction.on('drawstart', () => {
     drawing = true;
 });
 
-drawInteraction.on('drawend', () => {
+let completedPolygon = null;
+
+drawInteraction.on('drawend', (e) => {
+    completedPolygon = e;
     drawing = false;
     previewLine.getGeometry().setCoordinates([]);
     tracingFeature = null;
@@ -121,9 +124,18 @@ map.addInteraction(drawInteraction);
     Methods for interaction with JavaFX
 */
 
-function addMarkers(longitude, latitude) {
-    var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([longitude, latitude])));
-    propertyMarkersLayer.getSource().addFeature(marker);
+let properties = [];
+
+function addMarkers(fromPrice, toPrice) {
+    properties.forEach(function(property) {
+        if (property.price >= fromPrice && property.price <= toPrice) {
+            if (completedPolygon.feature.getGeometry().intersectsCoordinate(new ol.proj.fromLonLat([property.longitude, property.latitude]))) {
+                var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
+                    
+                propertyMarkersLayer.getSource().addFeature(marker);
+            }
+        }
+    });
 }
 
 function clearMarkers() {
@@ -135,10 +147,17 @@ function switchToDrawingMode() {
     map.addInteraction(drawInteraction);
 }
 
-function switchToMarkerMode() {
+function switchToMarkerMode(fromPrice, toPrice) {
     map.removeInteraction(drawInteraction);
+    addMarkers(fromPrice, toPrice);
 }
 
-function setListOfProperties(listOfProperties) {
-
+function refreshMarkers(fromPrice, toPrice) {
+    clearMarkers();
+    addMarkers(fromPrice, toPrice);
 }
+
+function addProperty(property) {
+    properties.push(property);
+}
+

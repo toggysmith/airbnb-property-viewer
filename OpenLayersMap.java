@@ -45,8 +45,6 @@ public class OpenLayersMap extends AnchorPane
                         if (newState == State.SUCCEEDED)
                         {
                             webEngine.executeScript(script);
-                        } else {
-                            System.out.println("Failed");
                         }
                     }
                 }
