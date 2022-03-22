@@ -61,44 +61,6 @@ const map = new ol.Map({
 let drawing = false;
 let drawInteraction, tracingFeature, startPoint, endPoint;
 
-// Used to start/end tracing around a feature
-map.on("click", (event) => {
-    if (!drawing) {
-        return;
-    }
-
-    // Clear current tracing feature + preview
-    previewLine.getGeometry().setCoordinates([]);
-    tracingFeature = null;
-});
-
-// Used to show a preview of the result of the tracing
-map.on('pointermove', (event) => {
-    if (tracingFeature && drawing) {
-        let coord = null;
-        map.forEachFeatureAtPixel(
-            event.pixel,
-            (feature) => {
-            if (tracingFeature === feature) {
-                coord = map.getCoordinateFromPixel(event.pixel);
-            }
-          },
-          getFeatureOptions
-        );
-
-        let previewCoords = [];
-        if (coord) {
-            endPoint = tracingFeature.getGeometry().getClosestPoint(coord);
-            previewCoords = getPartialRingCoords(
-                tracingFeature,
-                startPoint,
-                endPoint
-            );
-        }
-        previewLine.getGeometry().setCoordinates(previewCoords);
-    }
-});
-
 drawInteraction = new ol.interaction.Draw({
     source: drawnPolygonsLayer.getSource(),
     type: "Polygon",
