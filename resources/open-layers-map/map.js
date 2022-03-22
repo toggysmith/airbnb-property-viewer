@@ -130,6 +130,15 @@ function clearMarkers() {
     propertyMarkersLayer.getSource().clear();
 }
 
+function switchToDrawingMode() {
+    clearMarkers();
+    map.addInteraction(drawInteraction);
+}
+
+function switchToMarkerMode() {
+    map.removeInteraction(drawInteraction);
+}
+
 function setListOfProperties(listOfProperties) {
 
 }

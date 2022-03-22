@@ -19,7 +19,7 @@ public class OpenLayersMap extends AnchorPane
     WebView webView;
     WebEngine webEngine;
 
-    public OpenLayersMap(String address, double startLatitude, double startLongitude)
+    public OpenLayersMap(String address)
     {
         webView = new WebView();
         webEngine = webView.getEngine();
@@ -27,30 +27,34 @@ public class OpenLayersMap extends AnchorPane
         URL url = getClass().getClassLoader().getResource(address);
         
         webEngine.load(url.toExternalForm());
-        
-        webEngine.getLoadWorker().stateProperty().addListener(
-            new ChangeListener<State>() {
-                @Override
-                public void changed(ObservableValue ov, State oldState, State newState) {
-                    if (newState == State.SUCCEEDED)
-                    {
-                        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
-                        
-                        for (AirbnbListing listing : listings)
-                        {
-                            Double longitude = listing.getLongitude();
-                            Double latitude = listing.getLatitude();
-                            
-                            webEngine.executeScript("addMarkers(" + longitude.toString() + ", " + latitude.toString() + ");");
-                        }
-                    }
-                }
-            }
-        );
 
         webView.prefWidthProperty().bind(this.widthProperty());
         webView.prefHeightProperty().bind(this.heightProperty());
 
         this.getChildren().add(webView);
+    }
+    
+    public void executeScript(String script, boolean executedBeforeLoad)
+    {
+        if (executedBeforeLoad)
+        {
+            webEngine.getLoadWorker().stateProperty().addListener(
+                new ChangeListener<State>() {
+                    @Override
+                    public void changed(ObservableValue ov, State oldState, State newState) {
+                        if (newState == State.SUCCEEDED)
+                        {
+                            webEngine.executeScript(script);
+                        } else {
+                            System.out.println("Failed");
+                        }
+                    }
+                }
+            );
+        }
+        else
+        {
+            webEngine.executeScript(script);
+        }
     }
 }
