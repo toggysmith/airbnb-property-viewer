@@ -66,7 +66,6 @@ public class OpenLayersMap extends AnchorPane
         @Override
         public void changed(ObservableValue observable, Object oldValue, Object newValue) {
             if (newValue != State.SUCCEEDED) { return; }
-            System.out.println(1);
             javaMarker = new JavaMarker();
             JSObject window = (JSObject) webEngine.executeScript("window");
             window.setMember("javaMarker", javaMarker);

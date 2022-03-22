@@ -78,9 +78,16 @@ public class ListingManipulator
     
     public static AirbnbListing getListingWithId(String id)
     {
-        return AirbnbDataLoader.getListings().stream()
+        try
+        {
+            return AirbnbDataLoader.getListings().stream()
                 .filter(listing -> listing.getId().equals(id))
                 .findFirst()
                 .get();
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }
