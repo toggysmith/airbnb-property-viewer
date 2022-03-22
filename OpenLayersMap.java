@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
 import java.util.List;
+import netscape.javascript.JSObject;
 
 /**
  * Responsible for the creation of a WebView containing an OpenLayersMap. Also acts as a bridge between the
@@ -16,8 +17,9 @@ import java.util.List;
  */
 public class OpenLayersMap extends AnchorPane
 {
-    WebView webView;
-    WebEngine webEngine;
+    private WebView webView;
+    private WebEngine webEngine;
+    private JavaMarker javaMarker;
 
     public OpenLayersMap(String address)
     {
@@ -32,6 +34,7 @@ public class OpenLayersMap extends AnchorPane
         webView.prefHeightProperty().bind(this.heightProperty());
 
         this.getChildren().add(webView);
+        addCallFromJavaScript();
     }
     
     public void executeScript(String script, boolean executedBeforeLoad)
@@ -54,5 +57,21 @@ public class OpenLayersMap extends AnchorPane
         {
             webEngine.executeScript(script);
         }
+    }
+    
+    public void addCallFromJavaScript()
+    {
+        webEngine.getLoadWorker().stateProperty().addListener(
+        new ChangeListener() {
+        @Override
+        public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+            if (newValue != State.SUCCEEDED) { return; }
+            System.out.println(1);
+            javaMarker = new JavaMarker();
+            JSObject window = (JSObject) webEngine.executeScript("window");
+            window.setMember("javaMarker", javaMarker);
+        }
+    }
+    );
     }
 }

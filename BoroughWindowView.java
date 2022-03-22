@@ -28,7 +28,6 @@ public class BoroughWindowView extends Stage
                         
         setOnCloseRequest(e -> boroughWindow.windowClosed());
         
-        this.setMaximized(true);
         setScene(scene);
         setTitle(boroughName);
         show();

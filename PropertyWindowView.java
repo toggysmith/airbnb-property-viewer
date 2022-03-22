@@ -29,7 +29,6 @@ public class PropertyWindowView extends Stage
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
-        this.setMaximized(true);
         setScene(scene);
         setTitle(listing.getHost_name());
         show();

@@ -75,4 +75,12 @@ public class ListingManipulator
                 .max(Integer::compare)
                 .orElse(0);
     }
+    
+    public static AirbnbListing getListingWithId(String id)
+    {
+        return AirbnbDataLoader.getListings().stream()
+                .filter(listing -> listing.getId().equals(id))
+                .findFirst()
+                .get();
+    }
 }

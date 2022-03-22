@@ -92,12 +92,18 @@ function addMarkers(fromPrice, toPrice) {
     properties.forEach(function(property) {
         if (property.price >= fromPrice && property.price <= toPrice) {
             if (completedPolygon.feature.getGeometry().intersectsCoordinate(new ol.proj.fromLonLat([property.longitude, property.latitude]))) {
-                var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
+		    var markerPoint = new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude]));
+                var marker = new ol.Feature(markerPoint);
                     
                 propertyMarkersLayer.getSource().addFeature(marker);
+		    markerPoint.addEventListener("click", openPropertyWindow(property.id));
             }
         }
     });
+}
+
+function openPropertyWindow(property){ 
+        window.javaMarker.openPropertyWindow(property);
 }
 
 function clearMarkers() {

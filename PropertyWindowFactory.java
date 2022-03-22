@@ -26,8 +26,18 @@ public class PropertyWindowFactory
         return propertyWindowFactory;
     }
     
+    public PropertyWindow newPropertyWindow(String listingId)
+    {
+        AirbnbListing listing = ListingManipulator.getListingWithId(listingId);
+        return newPropertyWindow(listing);
+    }
+    
     public PropertyWindow newPropertyWindow(AirbnbListing listing)
     {
+        if (listing == null)
+        {
+            return null;
+        }
         PropertyWindow propertyWindow = new PropertyWindow(listing);
         if (!(openPropertyWindows.add(propertyWindow)))
         {
