@@ -51,20 +51,11 @@ public enum Borough
     CROY(3, 6, "Croydon"),
     BROM(4, 6, "Bromley");
     
-    /**
-     * The relative x-position of the borough on the map.
-     */
     private final int X;
-    
-    /**
-     * The relative y-position of the borough on the map.
-     */
     private final int Y;
+    private final String NAME; // E.g. "Kingston upon Thames" instead of "KING"
     
-    /**
-     * The long name of the borough. (E.g. "Kingston upon Thames" instead of "KING")
-     */
-    private final String NAME;
+
     
     /**
      * Initialises the enum fields.
