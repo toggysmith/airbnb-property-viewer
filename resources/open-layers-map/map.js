@@ -55,22 +55,17 @@ const map = new ol.Map({
 });
 
 map.on("click", function(e) {
-	/*var markerFound = false;
+	var markerFound = false;
 	map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 		if (layer == propertyMarkersLayer && markerFound == false)
 		{
 			openPropertyWindow(feature.getId());
 			markerFound = true;
 		}
-	})*/
+	})
 	
-	const featureArray = map.getFeaturesAtPixel(e.pixel, function(layer) { return layer === propertyMarkersLayer });	
-if (!featureArray) return;
-	/*for (const feature of featureArray) {
-			openPropertyWindow(feature.getId());
-			return;
-	} */
-	openPropertyWindow(featureArray[0].getId());
+	/*const featureArray = map.getFeaturesAtPixel(e.pixel, function(layer) { return layer === propertyMarkersLayer });	
+	openPropertyWindow(featureArray[0].getId());*/
 });
 
 
