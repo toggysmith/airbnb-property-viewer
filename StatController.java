@@ -71,14 +71,11 @@ public class StatController extends Controller
     private MainController mainController;
     private int fromValue;
     private int toValue;
-    
-    private static List<StatisticsListing> statListings;
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
     public void initialize() {
         airbnbListings = AirbnbDataLoader.getListings();
-        statListings = StatisticsLoader.getListings();
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
         updateValues();
         
@@ -322,9 +319,5 @@ public class StatController extends Controller
                 return abnb.get(0).getNeighbourhood();
     }
     
-    public double socialSatisfaction() {
-        socialSat = statListing.stream()
-                               .filter(statListing -> statListing.getBoroughName());
-    }
     
 }

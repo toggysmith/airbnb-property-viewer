@@ -169,7 +169,7 @@ public class AirbnbListing {
                 '}';
     }
     
-    public boolean equals(Object object)
+    public boolean eqauls(Object object)
     {
         if (this == object)
         {
