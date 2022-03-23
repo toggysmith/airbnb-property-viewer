@@ -19,7 +19,7 @@ public class StatView extends Pane
     
     
     
-    public StatView() throws Exception{
+        public StatView() throws Exception {
         
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("stat-pane.fxml"));
