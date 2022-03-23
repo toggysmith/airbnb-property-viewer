@@ -6,9 +6,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StatController">
+<GridPane fx:id="gridPane1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StatController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -18,7 +19,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane fx:id="borderPane1" prefHeight="200.0" prefWidth="200.0">
          <left>
             <Button fx:id="lButton1" mnemonicParsing="false" onAction="#prevStat" prefHeight="130.0" prefWidth="52.0" text="&lt;" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -41,10 +42,10 @@
             </Label>
          </top>
          <center>
-            <Label fx:id="statLabel1" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+            <Pane BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+      <BorderPane fx:id="borderPane2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
          <top>
             <Label fx:id="label2" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="230.0" text="Label" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -53,7 +54,7 @@
             </Label>
          </top>
          <center>
-            <Label fx:id="statLabel2" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+            <Pane BorderPane.alignment="CENTER" />
          </center>
          <left>
             <Button fx:id="lButton2" mnemonicParsing="false" onAction="#prevStat" prefHeight="130.0" prefWidth="52.0" text="&lt;" BorderPane.alignment="CENTER">
@@ -70,7 +71,7 @@
             </Button>
          </right>
       </BorderPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <BorderPane fx:id="borderPane3" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <top>
             <Label fx:id="label3" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="230.0" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -78,7 +79,7 @@
                </BorderPane.margin></Label>
          </top>
          <center>
-            <Label fx:id="statLabel3" alignment="CENTER" contentDisplay="CENTER" text="Label" BorderPane.alignment="CENTER" />
+            <Pane BorderPane.alignment="CENTER" />
          </center>
          <left>
             <Button fx:id="lButton3" mnemonicParsing="false" onAction="#prevStat" prefHeight="130.0" prefWidth="52.0" text="&lt;" BorderPane.alignment="CENTER">
@@ -95,7 +96,7 @@
             </Button>
          </right>
       </BorderPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <BorderPane fx:id="borderPane4" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <top>
             <Label fx:id="label4" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="230.0" text="Label" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -103,7 +104,7 @@
                </BorderPane.margin></Label>
          </top>
          <center>
-            <Label fx:id="statLabel4" alignment="CENTER" contentDisplay="CENTER" text="Label" BorderPane.alignment="CENTER" />
+            <Pane BorderPane.alignment="CENTER" />
          </center>
          <left>
             <Button fx:id="lButton4" mnemonicParsing="false" onAction="#prevStat" prefHeight="130.0" prefWidth="52.0" text="&lt;" BorderPane.alignment="CENTER">

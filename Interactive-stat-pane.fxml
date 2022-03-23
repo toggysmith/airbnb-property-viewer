@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -11,9 +10,6 @@
       <HBox BorderPane.alignment="CENTER">
          <children>
             <BorderPane>
-               <top>
-                  <Label fx:id="Title" text="Label" BorderPane.alignment="CENTER" />
-               </top>
                <left>
                   <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
                </left>
@@ -28,14 +24,6 @@
       </HBox>
    </top>
    <center>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="First" text="Label" />
-            <Label fx:id="Second" text="Label" />
-            <Label fx:id="Third" text="Label" />
-            <Label text="Label" />
-            <Label text="Label" />
-         </children>
-      </VBox>
+      <VBox BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

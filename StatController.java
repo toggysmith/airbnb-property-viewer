@@ -3,6 +3,11 @@
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import java.util.ArrayList;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.Pane;
 
 import javafx.scene.control.*;
 import java.util.*;
@@ -10,6 +15,7 @@ import java.util.HashMap;
 import javafx.event.*;
 import java.lang.Math;
 import java.util.stream.Collectors;
+import javafx.fxml.FXMLLoader;
 
 /**
  * Write a description of class StatController here.
@@ -33,20 +39,26 @@ public class StatController extends Controller
     @FXML public Label label3;
     @FXML public Label label4;
    
-    @FXML public Label statLabel1;
-    @FXML public Label statLabel2;
-    @FXML public Label statLabel3;
-    @FXML public Label statLabel4;
+    //XML public Label statLabel1;
+   // @FXML public Label statLabel2;
+   // @FXML public Label statLabel3;
+    //@FXML public Label statLabel4;
    
+    @FXML public BorderPane borderPane1;
+    @FXML public BorderPane borderPane2;
+    @FXML public BorderPane borderPane3;
+    @FXML public BorderPane borderPane4;
+
+    @FXML public GridPane gridPane1;
     //These will be the title of the statistics shown
-    String stat1 = "Average Number of reviews per property:"; 
-    String stat2 = "Total number of available properties:";
-    String stat3 = "Number of entire home and apartments:";   
-    String stat4 = "Borough with Most Expensive Borough:";
-    String stat5 = "Borough with Highest Social Score";
-    String stat6 = "Lowest Crime Rate";
-    String stat7 = "stat7";
-    String stat8 = "stat8";
+    private final String stat1 = "Average Number of reviews per property:"; 
+    private final String stat2 = "Total number of available properties:";
+    private final String stat3 = "Number of entire home and apartments:";   
+    private final String stat4 = "Borough with Most Expensive Property:";
+    private final String stat5 = "Borough with Highest Social Score";
+    private final String stat6 = "Lowest Crime Rate";
+    private final String stat7 = "Closest 5 Pubs";
+    private final String stat8 = "Closest 5 Attractions";
     
     //Labels that contain the actual statistic
     String value1, value2, value3, value4, value5, value6, value7, value8;
@@ -55,7 +67,7 @@ public class StatController extends Controller
     private List<Label>  labelList = new ArrayList<Label>();
     
     //Declaring the double sided queue
-    Deque<String> dq;
+    Deque<Node> dq;
     
     //Creating a hashmap that links a button to the specified labels within their gridpane
     HashMap<Button, HashMap<Label, Label>> connectObjects = new HashMap<>();
@@ -65,13 +77,31 @@ public class StatController extends Controller
     
     //Creating a hashmap that links the title of the statistic to the statistic
     HashMap<String, String> statOutput;
+    
     private static List<AirbnbListing> airbnbListings;
     private static final String roomNeeded = "Entire home/apt";
     private static List<StatisticsListing> statListings;
 
+    
+    
+    
+    
     private MainController mainController;
     private int fromValue;
     private int toValue;
+    
+       private HashMap<Button, BorderPane> linkBorder;
+    
+       private stat avgProperties;
+    
+       private stat totalProperties;
+       private stat noNonPrivate;
+       private stat mostExpensive;
+       private stat highSocial;
+       private stat lowCrime;
+       //error prone
+       private stat pubs;
+       private stat attractions;
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
@@ -81,7 +111,7 @@ public class StatController extends Controller
         statListings = StatisticsLoader.getStatListings();
 
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
-        assignObject();
+        //assignObject();
         setUpValues();
         setupHash();  
         setupQueue();
@@ -120,12 +150,16 @@ public class StatController extends Controller
         changeLabels(b, nextOrPrev);
     }
      
+    private void changeLabel()
+    {
+        
+    }
     /**
      * To change labels I iterate through the nested hashmap created, using the button parameter
      * to find the child hashmap which links that button to the two labels.
      * Depending on which button on the specific gridpane pressed, that end of the queue is taken off
      * and then assigned to the labels
-     */
+     
     private void changeLabels(Button clickedButton, boolean checkState) {
         for(Map.Entry<Button, HashMap<Label, Label>> seeSet :  connectObjects.entrySet()) {
             Button seeButton = seeSet.getKey();
@@ -145,6 +179,21 @@ public class StatController extends Controller
                     }
                 }     
             }
+    }*/
+    
+    private void changeLabels(Button clickedButton, boolean checkState) {
+        BorderPane clickedBorder = linkBorder.get(clickedButton);
+        if(checkState == false) {
+            dq.addFirst(clickedBorder.getChildren().get(0));
+            Node last = dq.removeLast();
+            clickedBorder.getChildren().setAll(last);
+        } else if (checkState == true) {
+             dq.addLast(clickedBorder.getChildren().get(0));
+            Node first = dq.removeFirst();
+            clickedBorder.getChildren().setAll(first);
+        }
+            
+        
     }
     
     /**
@@ -157,6 +206,7 @@ public class StatController extends Controller
         nextOrPrev = false;
         Button b =  (Button) event.getSource();
         changeLabels(b, nextOrPrev);
+        
     }
     
     /**
@@ -178,6 +228,7 @@ public class StatController extends Controller
      * child hashmap and then set the labels to the values in that  hashmap
      */
     private void startStats() {
+        /**
         addLabelList();
         for (int i = 0; i < 4; i++) {
             String labelPop = dq.pollFirst();
@@ -196,40 +247,71 @@ public class StatController extends Controller
             
             
         }
+        */
+       
+        borderPane1.getChildren().setAll(avgProperties);
+        borderPane2.getChildren().setAll(totalProperties);
+        borderPane3.getChildren().setAll(noNonPrivate);
+        borderPane4.getChildren().setAll(mostExpensive);
     }
     
     private void setupQueue() {
         //Setting up my queue, first 4 values will be removed when initializing the pane
-        dq = new ArrayDeque<String>();
-        dq.addLast(stat1);
-        dq.addLast(stat2);
-        dq.addLast(stat3);
-        dq.addLast(stat4);
-        dq.addLast(stat5);
-        dq.addLast(stat6);
-        dq.addLast(stat7);
-        dq.addLast(stat8);
+        dq = new ArrayDeque<Node>();
+        dq.addLast(highSocial);
+        dq.addLast(lowCrime);
+        dq.addLast(pubs);
+        dq.addLast(attractions);
     }
     
     /**
      * Setting up the hashmap that contains the title of the statistic and the statistic itself
      */
     private void setupHash() {
-        statOutput = new HashMap<String, String>();
-        statOutput.put(stat1, value1);
-        statOutput.put(stat2, value2);
-        statOutput.put(stat3, value3);
-        statOutput.put(stat4, value4);
-        statOutput.put(stat5, value5);
-        statOutput.put(stat6, value6);
-        statOutput.put(stat7, value7);
-        statOutput.put(stat8, value8);
+        //statOutput = new HashMap<String, String>();
+        //statOutput.put(stat1, value1);
+        //statOutput.put(stat2, value2);
+        //statOutput.put(stat3, value3);
+        //statOutput.put(stat4, value4);
+        //statOutput.put(stat5, value5);
+        //statOutput.put(stat6, value6);
+       // statOutput.put(stat7, value7);
+        //statOutput.put(stat8, value8);
+    
+        
+       
+       
+       avgProperties = new stat(new Pane(),new Label(), new Label(), stat1, value1);
+       totalProperties = new stat(new Pane(),new Label(), new Label(), stat2, value2);
+       noNonPrivate = new stat(new Pane(),new Label(), new Label(), stat3, value3);
+       mostExpensive = new stat(new Pane(),new Label(), new Label(), stat4, value4);
+       highSocial = new stat(new Pane(),new Label(), new Label(), stat5, value5);
+       lowCrime = new stat(new Pane(),new Label(), new Label(), stat6, value6);
+       //error prone
+       pubs = new stat(loadPane("Interactive-stat-pane"), new Label(), new Label(),stat7, "");
+       //attractions = new stat(loadPane("Interactive-stat-pane"),new Label(), new Label(), stat8, "");
     }
     
+    private Pane loadPane(String path)
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Pane contentPane = new Pane();
+        try
+        {
+            contentPane = loader.load();
+        }
+        catch (java.io.IOException ioe)
+        {
+            ioe.printStackTrace();
+            
+            AlertManager.showTerminatingError("Unable to load interactive pane correctly");        }
+        
+        return contentPane;
+    }
     
     /**
      * Setting up the nested hashmap that links each button to the  two labels within the gridpane
-     */
+     
     private void assignObject() {
         nestedHash(lButton1, label1, statLabel1);
         nestedHash(rButton1, label1, statLabel1);
@@ -240,7 +322,7 @@ public class StatController extends Controller
         nestedHash(lButton4, label4, statLabel4);
         nestedHash(rButton4, label4, statLabel4);
     }
-    
+    */
     /**
      * Populates the nested hashmap
      */
@@ -362,4 +444,19 @@ public class StatController extends Controller
     }
     return boroughCrime;
 }
+
+private void linkBorderPane() {
+        linkBorder = new HashMap<Button, BorderPane>();
+        linkBorder.put(lButton1, borderPane1);
+        linkBorder.put(rButton1, borderPane1);
+        linkBorder.put(lButton2, borderPane2);
+        linkBorder.put(rButton2, borderPane2);
+        linkBorder.put(lButton3, borderPane3);
+        linkBorder.put(rButton3, borderPane3);
+        linkBorder.put(lButton4, borderPane4);
+        linkBorder.put(rButton4, borderPane4);
+
+    }
+    
+
 }
