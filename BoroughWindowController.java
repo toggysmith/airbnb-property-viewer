@@ -44,7 +44,7 @@ public class BoroughWindowController extends Controller
     @FXML public HBox pieChart;
     @FXML public ComboBox attributeBox;
 
-    public void Initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
+    public void initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
         this.boroughWindow = boroughWindow;
         populateTable(listings);

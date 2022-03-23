@@ -55,10 +55,12 @@ const map = new ol.Map({
 });
 
 map.on("click", function(e) {
+	var markerFound = false;
 	map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
-		if (layer == propertyMarkersLayer)
+		if (layer == propertyMarkersLayer && markerFound == false)
 		{
 			openPropertyWindow(feature.getId());
+			markerFound = true;
 		}
 	})
 });
