@@ -64,7 +64,7 @@ map.on("click", function(e) {
 		}
 	})*/
 	
-	const featureArray = layerFilter: map.getFeaturesAtPixel(e.pixel, function(layer) { return layer === propertyMarkersLayer });	
+	const featureArray = map.getFeaturesAtPixel(e.pixel, function(layer) { return layer === propertyMarkersLayer });	
 if (!featureArray) return;
 	/*for (const feature of featureArray) {
 			openPropertyWindow(feature.getId());

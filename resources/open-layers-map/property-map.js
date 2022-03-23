@@ -141,9 +141,6 @@ function addProperty(property) {
 	var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
 			marker.setId(property.id);
                 propertyMarkersLayer.getSource().addFeature(marker);
-
-map.view.center.long = property.longitude;
-	
 }
 
 function setLongLat(long, lat)

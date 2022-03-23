@@ -23,7 +23,7 @@ public class DrawableSearchAreaMapController extends Controller
     @FXML private BorderPane borderPane;
     @FXML private Button refreshButton;
     
-    private OpenLayersMap openLayersMap = new OpenLayersMap("resources/open-layers-map/map.html", -0.115937, 1.511437);
+    private OpenLayersMap openLayersMap = new OpenLayersMap("resources/open-layers-map/map.html", -0.115937, 51.511437);
     private enum MapMode { DRAWING_MODE, MARKER_MODE; }
     private MapMode mapMode = MapMode.DRAWING_MODE;
 
