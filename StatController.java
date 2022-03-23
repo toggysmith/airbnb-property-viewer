@@ -112,6 +112,7 @@ public class StatController extends Controller
 
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
         //assignObject();
+        linkBorderPane();
         setUpValues();
         setupHash();  
         setupQueue();
@@ -260,8 +261,8 @@ public class StatController extends Controller
         dq = new ArrayDeque<Node>();
         dq.addLast(highSocial);
         dq.addLast(lowCrime);
-        dq.addLast(pubs);
-        dq.addLast(attractions);
+        //dq.addLast(pubs);
+        //dq.addLast(attractions);
     }
     
     /**
@@ -288,7 +289,7 @@ public class StatController extends Controller
        highSocial = new stat(new Pane(),new Label(), new Label(), stat5, value5);
        lowCrime = new stat(new Pane(),new Label(), new Label(), stat6, value6);
        //error prone
-       pubs = new stat(loadPane("Interactive-stat-pane"), new Label(), new Label(),stat7, "");
+       //pubs = new stat(loadPane("Interactive-stat-pane"), new Label(), new Label(),stat7, "");
        //attractions = new stat(loadPane("Interactive-stat-pane"),new Label(), new Label(), stat8, "");
     }
     
