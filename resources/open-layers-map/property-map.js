@@ -55,22 +55,14 @@ const map = new ol.Map({
 });
 
 map.on("click", function(e) {
-	/*var markerFound = false;
+	var markerFound = false;
 	map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 		if (layer == propertyMarkersLayer && markerFound == false)
 		{
 			openPropertyWindow(feature.getId());
 			markerFound = true;
 		}
-	})*/
-	
-	const featureArray = layerFilter: map.getFeaturesAtPixel(e.pixel, function(layer) { return layer === propertyMarkersLayer });	
-if (!featureArray) return;
-	/*for (const feature of featureArray) {
-			openPropertyWindow(feature.getId());
-			return;
-	} */
-	openPropertyWindow(featureArray[0].getId());
+	})
 });
 
 
@@ -121,7 +113,7 @@ function addMarkers(fromPrice, toPrice) {
     });
 }
 
-function openPropertyWindow(property){ 
+function openPropertyWindow(property){
         window.javaMarker.openPropertyWindow(property);
 }
 
@@ -146,10 +138,15 @@ function refreshMarkers(fromPrice, toPrice) {
 
 function addProperty(property) {
     properties.push(property);
+	var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
+			marker.setId(property.id);
+                propertyMarkersLayer.getSource().addFeature(marker);
+
+map.view.center.long = property.longitude;
+	
 }
 
 function setLongLat(long, lat)
 {
 	map.getView().setCenter(ol.proj.fromLonLat([long, lat]));
 }
-

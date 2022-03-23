@@ -21,7 +21,7 @@ public class OpenLayersMap extends AnchorPane
     private WebEngine webEngine;
     private JavaMarker javaMarker;
 
-    public OpenLayersMap(String address)
+    public OpenLayersMap(String address, double longitude, double latitude)
     {
         webView = new WebView();
         webEngine = webView.getEngine();
@@ -34,7 +34,8 @@ public class OpenLayersMap extends AnchorPane
         webView.prefHeightProperty().bind(this.heightProperty());
 
         this.getChildren().add(webView);
-        addCallFromJavaScript();
+        executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
+        setupCallFromJavaScript();
     }
     
     public void executeScript(String script, boolean executedBeforeLoad)
@@ -59,7 +60,11 @@ public class OpenLayersMap extends AnchorPane
         }
     }
     
-    public void addCallFromJavaScript()
+    /**
+     * Sets up an object and gives it to javascript so 
+     * javascript can call java methods in that object.
+     */
+    public void setupCallFromJavaScript()
     {
         webEngine.getLoadWorker().stateProperty().addListener(
         new ChangeListener() {

@@ -5,6 +5,7 @@ import javafx.scene.web.WebEngine;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.ChangeListener;
 import java.net.URL;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Write a description of class PropertyWindowController here.
@@ -14,30 +15,32 @@ import java.net.URL;
  */
 public class PropertyWindowController extends Controller
 {
-    @FXML private WebView mapsView;
-    double latitude;
-    double longitude;
+    @FXML private BorderPane borderPane;
+    
+    private OpenLayersMap openLayersMap;
 
+    private double longitude;
+    private double latitude;
+
+    
     public void initialise(AirbnbListing listing)
-    {
-        latitude = listing.getLatitude();
+    {   
         longitude = listing.getLongitude();
-
-        URL pathToFile = getClass().getClassLoader().getResource("property-map.html");
-        WebEngine webEngine = mapsView.getEngine();
-        webEngine.load(pathToFile.toExternalForm());
-        //webEngine.load("https://www.bing.com/maps/embed?h=400&w=500&cp=51.48577030797654~-0.09616984135084294&lvl=10.73468731310459&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
-        webEngine.getLoadWorker().stateProperty().addListener(e -> thing(webEngine));
-
+        latitude = listing.getLatitude();
+        openLayersMap = new OpenLayersMap("resources/open-layers-map/property-map.html", longitude, latitude);
+        borderPane.setCenter(openLayersMap);
+        
+        addPropertiesToJsFile(listing);
     }
-
-    public void thing(WebEngine webEngine)
+    
+    private void addPropertiesToJsFile(AirbnbListing listing)
     {
-        ChangeListener listener = new ChangeListener() {
-                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                    webEngine.executeScript("setLocation(" + latitude + "," + longitude + ")");
-                }
-            };
-        listener.changed(null, null, null);
+            String id = listing.getId();
+            int price = listing.getPrice();
+
+            String jsObject = String.format("{id: %s, longitude: %f, latitude: %f, price: %d}", id, longitude, latitude, price);
+            String jsScript = String.format("addProperty(%s)", jsObject);
+
+            openLayersMap.executeScript(jsScript, true);
     }
 }
