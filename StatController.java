@@ -185,13 +185,13 @@ public class StatController extends Controller
     private void changeLabels(Button clickedButton, boolean checkState) {
         BorderPane clickedBorder = linkBorder.get(clickedButton);
         if(checkState == false) {
-            dq.addFirst(clickedBorder.getChildren().get(0));
+            dq.addFirst(clickedBorder.getCenter());
             Node last = dq.removeLast();
-            clickedBorder.getChildren().setAll(last);
+            clickedBorder.setCenter(last);
         } else if (checkState == true) {
-             dq.addLast(clickedBorder.getChildren().get(0));
+             dq.addLast(clickedBorder.getCenter());
             Node first = dq.removeFirst();
-            clickedBorder.getChildren().setAll(first);
+            clickedBorder.setCenter(first);
         }
             
         
@@ -250,10 +250,10 @@ public class StatController extends Controller
         }
         */
        
-        borderPane1.getChildren().setAll(avgProperties);
-        borderPane2.getChildren().setAll(totalProperties);
-        borderPane3.getChildren().setAll(noNonPrivate);
-        borderPane4.getChildren().setAll(mostExpensive);
+        borderPane1.setCenter(avgProperties);
+        borderPane2.setCenter(totalProperties);
+        borderPane3.setCenter(noNonPrivate);
+        borderPane4.setCenter(mostExpensive);
     }
     
     private void setupQueue() {

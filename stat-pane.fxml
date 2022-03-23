@@ -42,7 +42,13 @@
             </Label>
          </top>
          <center>
-            <Pane BorderPane.alignment="CENTER" />
+            <Pane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets left="50.0" top="50.0" />
+               </padding></Pane>
          </center>
       </BorderPane>
       <BorderPane fx:id="borderPane2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">

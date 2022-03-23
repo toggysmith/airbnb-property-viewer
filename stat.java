@@ -23,11 +23,16 @@ public class stat extends Pane
     value.setText(valueText);
     
     wrapPane.getChildren().setAll(value);
+    this.getChildren().add(wrapPane);
     }
 
     public String getTitle()
     {
     return title.getText();
+    }
+    
+    public String getValue() {
+        return value.getText();
     }
 }
 
