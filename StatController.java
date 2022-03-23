@@ -74,10 +74,10 @@ public class StatController extends Controller
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
-    public void initialize(InteractiveStatController interactiveController) {
+    @FXML
+    public void initialize(){
         airbnbListings = AirbnbDataLoader.getListings();
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
-        updateValues();
         
         assignObject();
         setUpValues();
@@ -88,8 +88,10 @@ public class StatController extends Controller
     
     private void updateValues()
     {
+        
         fromValue = mainController.getRangeValues().getFromValue();
         toValue = mainController.getRangeValues().getToValue();
+        
     }
     
     /**
