@@ -83,7 +83,6 @@ public class ContentContainerManager
         classControllerMap.put(controller.getClass(), controller);
     }
     
-    
     /**
      * Retrieve an instance of a controller from its class.
      * @param controllerClass The class of the controller wanted.

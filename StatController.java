@@ -74,7 +74,7 @@ public class StatController extends Controller
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
-    public void initialize() {
+    public void initialize(InteractiveStatController interactiveController) {
         airbnbListings = AirbnbDataLoader.getListings();
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
         updateValues();

@@ -23,11 +23,13 @@ public class StatView extends Pane
         
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("stat-pane.fxml"));
-        
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("Interactive-stat-pane.fxml"));
         Scene scene = new Scene(loader.load());
         
         StatController statController = loader.getController();
-        statController.initialize();
+        InteractiveStatController interactivityController = loader2.getController();
+        
+        statController.initialize(interactivityController);
     
         // setScene(scene);
         // setTitle("A");
