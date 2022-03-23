@@ -47,7 +47,7 @@ public class ContentContainerManager
         {
             e.printStackTrace();
             
-            AlertManager.showTerminatingError("Unable to load content panes.");
+            AlertManager.showTerminatingError("Unable to load pane correctly");
         }
         
         Pane firstPane = circularList.getCurrent().getPane();

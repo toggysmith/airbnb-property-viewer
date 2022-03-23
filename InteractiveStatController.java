@@ -28,7 +28,10 @@ public class InteractiveStatController
     
     private ArrayList<DestinationListing> destinations;
     
-    private SmallestDistance distanceCalculator;
+    private ArrayList<DistanceDestinationPair> fiveClosestDestinations;
+    
+    private DestinationDistances desCalculator;
+   
     
     public void setUpBoxes(List<String> boroughsList, List<String> propertiesList, List<String> pricesList,ArrayList<DestinationListing> typesDestinations)
     {
@@ -72,9 +75,10 @@ public class InteractiveStatController
                                           .findFirst().orElse(null);
                                           
                                           
-           for(DestinationListing eachDestination: filteredDestinations){
-               distanceCalculator.addSmallest(eachDestination, selectedProperty);
-           }
+           desCalculator = new DestinationDistances();
+           desCalculator.addDestinations(filteredDestinations, selectedProperty);
+           fiveClosestDestinations = new ArrayList<DistanceDestinationPair>();
+           fiveClosestDestinations = desCalculator.getFiveSmallest();
         }
     }
 } 

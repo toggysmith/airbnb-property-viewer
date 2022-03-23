@@ -81,7 +81,6 @@ public class StatController extends Controller
         statListings = StatisticsLoader.getStatListings();
 
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
-        
         assignObject();
         setUpValues();
         setupHash();  
@@ -91,10 +90,8 @@ public class StatController extends Controller
     
     private void updateValues()
     {
-        
         fromValue = mainController.getRangeValues().getFromValue();
         toValue = mainController.getRangeValues().getToValue();
-        
     }
     
     /**

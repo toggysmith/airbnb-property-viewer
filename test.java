@@ -1,32 +1,24 @@
-import java.util.List;
-import java.util.HashMap;
-
+import java.util.ArrayList;
 /**
  * Write a description of class test here.
  *
  * @author (your name)
  * @version (a version number or a date)
- */
+ 
 public class test
 {
     public static void method()
     {
-        //List<DestinationListing> des = DestinationLoader.getPubs();
-        //List<DestinationListing> dess = DestinationLoader.getTouristDestinations();
+        DestinationDistances test = new DestinationDistances();
+        ArrayList<DistanceDestinationPair> destinations = new ArrayList<>();
         
-        testSmallestDistance test = new testSmallestDistance();
-        HashMap<Integer, String> destinations = new HashMap<>();
+        test.add("Augusto", 10);
+        test.add("Augusto", 11);
+        test.add("Augusto", 12);
+        test.add("Augusto", 11);
+        test.add("Mathew", 37);
         
-        destinations.put(10, "Augusto");
-        destinations.put(11, "Augusto");
-        destinations.put(12, "Augusto");
-        destinations.put(13, "Augusto");
-        destinations.put(14, "Augusto");
-         
-        for(Integer eachint: destinations.keySet()){
-            test.addSmallest(eachint, destinations.get(eachint));
-        }
-        
-        
+        destinations = test.getFiveSmallest();
     }
 }
+*/

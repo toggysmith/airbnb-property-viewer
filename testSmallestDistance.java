@@ -17,6 +17,10 @@ public class testSmallestDistance
     
     private int mapSize = 0;
 
+    public testSmallestDistance()
+    {
+        closestFive = new  HashMap<Integer, List<String>>();
+    }
     
     public HashMap<Integer, List<String>> getClosestFive()
     {
@@ -30,18 +34,23 @@ public class testSmallestDistance
            mapSize++;
            return;
        }
+       
         //adds duplicate distances //add else to check that the duplicate could be added even if the size is bigger then three
         if(closestFive.containsKey(distance) && checkMapSize()){
             closestFive.get(distance).add(place);
-            mapSize++;
+            int total = closestFive.get(distance).size();
+            mapSize = mapSize + total;
             return;
        }else if(closestFive.containsKey(distance) && !checkMapSize()){
            int currentMax = getBiggest();
            
            if(distance < currentMax){
+               int toRemove = closestFive.get(currentMax).size();            
                closestFive.remove(currentMax);
                closestFive.get(distance).add(place);
+               return;
            }
+           return;
        }
               
        if(!checkMapSize()){
