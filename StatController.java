@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import java.util.*;
 import java.util.HashMap;
 import javafx.event.*;
-
+import java.lang.Math;
 import java.util.stream.Collectors;
 
 /**
@@ -42,9 +42,9 @@ public class StatController extends Controller
     String stat1 = "Average Number of reviews per property:"; 
     String stat2 = "Total number of available properties:";
     String stat3 = "Number of entire home and apartments:";   
-    String stat4 = "Most Expensive Borough:";
-    String stat5 = "stat5";
-    String stat6 = "stat6";
+    String stat4 = "Borough with Most Expensive Borough:";
+    String stat5 = "Borough with Highest Social Score";
+    String stat6 = "Lowest Crime Rate";
     String stat7 = "stat7";
     String stat8 = "stat8";
     
@@ -67,7 +67,8 @@ public class StatController extends Controller
     HashMap<String, String> statOutput;
     private static List<AirbnbListing> airbnbListings;
     private static final String roomNeeded = "Entire home/apt";
-    
+    private static List<StatisticsListing> statListings;
+
     private MainController mainController;
     private int fromValue;
     private int toValue;
@@ -77,6 +78,8 @@ public class StatController extends Controller
     @FXML
     public void initialize(){
         airbnbListings = AirbnbDataLoader.getListings();
+        statListings = StatisticsLoader.getStatListings();
+
         mainController = (MainController) ContentContainerManager.getController(MainController.class);
         
         assignObject();
@@ -104,6 +107,8 @@ public class StatController extends Controller
         value2 = String.valueOf(totalAvailableProperties());
         value3 = String.valueOf(nonPrivateRoom());
         value4 = expensiveNeighbourhood();
+        value5 = socialScore();
+        value6 = highestCrime();
     }
     
     /**
@@ -321,5 +326,43 @@ public class StatController extends Controller
                 return abnb.get(0).getNeighbourhood();
     }
     
+    public HashSet<String> sortAirbnbNeighbourhood() {
+        return airbnbListings.stream()
+                             .map(listings -> listings.getNeighbourhood())
+                             .collect(Collectors.toCollection(HashSet::new));
+    }
     
+    public HashSet<String> sortLondonNeighbourhood() {
+        return statListings.stream()
+                             .map(statListings -> statListings.getBoroughName())
+                             .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    public String socialScore() {
+        double highestSocial = 0;
+        String boroughSocial = "";
+        for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+            double maxSocial = sScore.getAvgTransportAccess() + sScore.getLifeSatisfaction() +
+                               sScore.getWorthwileScore() + sScore.getHappinessScore() -
+                               sScore.getAnxietyScore();
+            if(maxSocial > highestSocial) {
+                highestSocial = maxSocial;
+                boroughSocial = sScore.getBoroughName() + ": " + Math.round(highestSocial) + "/30";
+            }
+        }
+        return boroughSocial;
+    }
+    
+    public String highestCrime() {
+        double lowCrime = 1000;
+        String boroughCrime = "";
+        for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+            double checkCrime = sScore.getCrimeRate() ;
+            if(checkCrime < lowCrime) {
+                lowCrime = checkCrime;
+                boroughCrime = sScore.getBoroughName();
+            }
+    }
+    return boroughCrime;
+}
 }
