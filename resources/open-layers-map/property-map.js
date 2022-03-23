@@ -11,19 +11,6 @@ const rasterLayer = new ol.layer.Tile({
     }),
 });
 
-// This layer shows the finished drawn polygons.
-const drawnPolygonsLayer = new ol.layer.Vector({
-    source: new ol.source.Vector(),
-    style: new ol.style.Style({
-        stroke: new ol.style.Stroke({
-            color: 'rgba(100, 255, 0, 1)', // Outline colour
-            width: 2,
-        }),
-        fill: new ol.style.Fill({
-            color: 'rgba(100, 255, 0, 0.3)', // Fill colour
-        }),
-    }),
-});
 
 // This layer show the line we're currently drawing.
 const previewLine = new ol.Feature({
@@ -50,94 +37,18 @@ const map = new ol.Map({
         center: new ol.proj.fromLonLat([-0.115937, 51.511437]),
         zoom: 11,
     }),
-    layers: [rasterLayer, drawnPolygonsLayer, propertyMarkersLayer],
+    layers: [rasterLayer, propertyMarkersLayer],
     target: "js-map" // Change this to 'map'
 });
 
-map.on("click", function(e) {
-	var markerFound = false;
-	map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
-		if (layer == propertyMarkersLayer && markerFound == false)
-		{
-			openPropertyWindow(feature.getId());
-			markerFound = true;
-		}
-	})
-});
-
-
-/*
-    Other
-*/
-let drawing = false;
-let drawInteraction, tracingFeature, startPoint, endPoint;
-
-drawInteraction = new ol.interaction.Draw({
-    source: drawnPolygonsLayer.getSource(),
-    type: "Polygon",
-});
-
-drawInteraction.on('drawstart', () => {
-    drawnPolygonsLayer.getSource().clear()
-    drawing = true;
-});
-
-let completedPolygon = null;
-
-drawInteraction.on('drawend', (e) => {
-    completedPolygon = e;
-    drawing = false;
-    previewLine.getGeometry().setCoordinates([]);
-    tracingFeature = null;
-});
-
-map.addInteraction(drawInteraction);
-
-var propertyMarkers = {};
 
 /*
     Methods for interaction with JavaFX
 */
 
-let properties = [];
 
-function addMarkers(fromPrice, toPrice) {
-    properties.forEach(function(property) {
-        if (property.price >= fromPrice && property.price <= toPrice) {
-            if (completedPolygon.feature.getGeometry().intersectsCoordinate(new ol.proj.fromLonLat([property.longitude, property.latitude]))) {
-                var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
-			marker.setId(property.id);
-                propertyMarkersLayer.getSource().addFeature(marker);
-            }
-        }
-    });
-}
-
-function openPropertyWindow(property){
-        window.javaMarker.openPropertyWindow(property);
-}
-
-function clearMarkers() {
-    propertyMarkersLayer.getSource().clear();
-}
-
-function switchToDrawingMode() {
-    clearMarkers();
-    map.addInteraction(drawInteraction);
-}
-
-function switchToMarkerMode(fromPrice, toPrice) {
-    map.removeInteraction(drawInteraction);
-    addMarkers(fromPrice, toPrice);
-}
-
-function refreshMarkers(fromPrice, toPrice) {
-    clearMarkers();
-    addMarkers(fromPrice, toPrice);
-}
 
 function addProperty(property) {
-    properties.push(property);
 	var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([property.longitude, property.latitude])));
 			marker.setId(property.id);
                 propertyMarkersLayer.getSource().addFeature(marker);
