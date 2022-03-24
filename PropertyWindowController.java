@@ -102,7 +102,7 @@ public class PropertyWindowController extends Controller
         propertyName.setText(String.format(propertyName.getText(), listing.getName()));
         hostName.setText(String.format(hostName.getText(), listing.getHost_name()));
         boroughName.setText(String.format(boroughName.getText(), listing.getNeighbourhood()));
-        roomType.setText(String.format(roomType.getText(), listing.getNeighbourhood()));
+        roomType.setText(String.format(roomType.getText(), listing.getRoom_type()));
         price.setText(String.format(price.getText(), listing.getPrice()));
         minimumNights.setText(String.format(minimumNights.getText(), listing.getMinimumNights()));
         numberOfReviews.setText(String.format(numberOfReviews.getText(), listing.getNumberOfReviews()));
