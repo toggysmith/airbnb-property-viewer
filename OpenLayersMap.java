@@ -10,6 +10,7 @@ import netscape.javascript.JSObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javafx.application.Platform;
 
 /**
  * Responsible for the creation of a WebView containing an OpenLayersMap. Also acts as a bridge between the
@@ -37,6 +38,7 @@ public class OpenLayersMap extends AnchorPane
         webEngine.load(url.toExternalForm());
         
         addScript("core-behaviour.js");
+        addScript("boundaries-behaviour.js");
 
         webView.prefWidthProperty().bind(this.widthProperty());
         webView.prefHeightProperty().bind(this.heightProperty());
@@ -48,10 +50,9 @@ public class OpenLayersMap extends AnchorPane
     
     private void addScript(String name) {
         try {
-        String content = new String(Files.readAllBytes(Paths.get("resources/open-layers-map/" + name)));
-        executeScript(content, true);
-    }
-    catch (Exception e) { }
+            String content = new String(Files.readAllBytes(Paths.get("resources/open-layers-map/" + name)));
+            executeScript(content, true);
+        } catch (Exception e) { }
     }
     
     public void executeScript(String script, boolean executedBeforeLoad)

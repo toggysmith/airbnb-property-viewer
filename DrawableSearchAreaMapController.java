@@ -6,6 +6,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
 
@@ -22,6 +23,7 @@ import javafx.application.Platform;
 public class DrawableSearchAreaMapController extends Controller
 {
     @FXML private BorderPane borderPane;
+    @FXML private CheckBox boroughBoundariesCheckBox;
     @FXML private Button refreshButton;
     
     private OpenLayersMap openLayersMap = new OpenLayersMap("resources/open-layers-map/map.html", 10, -0.115937, 51.511437);
@@ -44,6 +46,15 @@ public class DrawableSearchAreaMapController extends Controller
         
         openLayersMap.executeScript("enableMarkerClicking();", true);
     }
+    
+    /**
+     * Toggle whether or not the borough boundaries are shown.
+     */
+    @FXML
+    public void boroughBoundariesCheckBoxOnAction()
+    {
+        openLayersMap.executeScript(String.format("setBoroughBoundariesVisibility(%b)", boroughBoundariesCheckBox.isSelected()), false);
+    }
 
     /**
      * Switch to drawing mode and make sure the refresh button is disabled.
@@ -56,6 +67,7 @@ public class DrawableSearchAreaMapController extends Controller
         refreshButton.setDisable(true);
         
         mapMode = MapMode.DRAWING_MODE;
+        
         openLayersMap.executeScript("switchToDrawingMode()", false);
     }
 
