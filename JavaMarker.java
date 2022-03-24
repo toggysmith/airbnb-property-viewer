@@ -12,4 +12,5 @@ public class JavaMarker
     {
         propertyWindowFactory.newPropertyWindow(listingId);
     }
+    
 }

@@ -27,22 +27,22 @@ import javafx.scene.layout.HBox;
  */
 public class BoroughWindowController extends Controller
 {
-    @FXML public TableView<AirbnbListing> boroughTable;
-    @FXML public TableColumn<AirbnbListing, String> nameColumn;
-    @FXML public TableColumn<AirbnbListing, String> priceColumn;
-    @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
-    @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
+    @FXML private TableView<AirbnbListing> boroughTable;
+    @FXML private TableColumn<AirbnbListing, String> nameColumn;
+    @FXML private TableColumn<AirbnbListing, String> priceColumn;
+    @FXML private TableColumn<AirbnbListing, String> reviewsColumn;
+    @FXML private TableColumn<AirbnbListing, String> minNightsColumn;
 
-    @FXML public ComboBox<ComboBoxOrderEnum> orderBox;
+    @FXML private ComboBox<ComboBoxOrderEnum> orderBox;
     
-    @FXML public Label fromPrice;
-    @FXML public Label toPrice;
+    @FXML private Label fromPrice;
+    @FXML private Label toPrice;
     
     private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
 
-    @FXML public HBox pieChart;
-    @FXML public ComboBox attributeBox;
+    @FXML private HBox pieChart;
+    @FXML private ComboBox attributeBox;
 
     public void initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {

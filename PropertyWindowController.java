@@ -8,6 +8,12 @@ import java.net.URL;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.FXCollections;
+import javafx.scene.layout.VBox;
 
 /**
  * Write a description of class PropertyWindowController here.
@@ -18,6 +24,18 @@ import javafx.scene.layout.HBox;
 public class PropertyWindowController extends Controller
 {
     @FXML private BorderPane root;
+    
+    @FXML private BorderPane vbox;
+
+    
+    @FXML private TableView otherPropertiesTable;
+    @FXML private TableColumn<AirbnbListing, String> nameColumn;
+    @FXML private TableColumn<AirbnbListing, String> priceColumn;
+    @FXML private TableColumn<AirbnbListing, String> reviewsColumn;
+    @FXML private TableColumn<AirbnbListing, String> minNightsColumn;
+    @FXML private TableColumn<AirbnbListing, String> boroughColumn;
+
+    
     @FXML private Label propertyName;
     @FXML private Label hostName;
     @FXML private Label boroughName;
@@ -35,7 +53,7 @@ public class PropertyWindowController extends Controller
     @FXML
     public void initialize()
     {
-        root.setCenter(openLayersMap);
+        vbox.setCenter(openLayersMap);
 
         openLayersMap.addBehaviour(OpenLayersMap.Behaviour.MARKER);
     }
@@ -48,8 +66,19 @@ public class PropertyWindowController extends Controller
 
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
 
+        populateTable(FXCollections.observableArrayList(ListingManipulator.getOtherListingsWithHostId(listing)));
         addPropertieToJsFile();
         populateLabels();
+    }
+    
+    protected void populateTable(ObservableList<AirbnbListing> listings)
+    {
+        otherPropertiesTable.setItems(listings);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("host_name"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        reviewsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfReviews"));
+        minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
+        boroughColumn.setCellValueFactory(new PropertyValueFactory<>("neighbourhood"));
     }
 
     private void addPropertieToJsFile()

@@ -90,4 +90,18 @@ public class ListingManipulator
             return null;
         }
     }
+    
+    public static List<AirbnbListing> getOtherListingsWithHostId(AirbnbListing hostListing)
+    {
+        try
+        {
+            return AirbnbDataLoader.getListings().stream()
+                .filter(listing -> (listing.getHost_id().equals(hostListing.getHost_id())) && !(listing.getId().equals(hostListing.getId())))
+                .collect(Collectors.toList());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 }

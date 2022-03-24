@@ -29,7 +29,7 @@ public class PropertyWindowView extends Stage
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
-        setScene(new Scene(pane, 1000, 500));
+        setScene(new Scene(pane, 1500, 800));
         setTitle(listing.getName());
         show();
     }
