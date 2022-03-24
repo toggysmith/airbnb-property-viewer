@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.application.Platform;
 
 /**
  * Responsible for setting up the map that lets the user draw a search area for properties. This map is primarily implemented
@@ -23,7 +24,7 @@ public class DrawableSearchAreaMapController extends Controller
     @FXML private BorderPane borderPane;
     @FXML private Button refreshButton;
     
-    private OpenLayersMap openLayersMap = new OpenLayersMap("resources/open-layers-map/map.html", -0.115937, 51.511437);
+    private OpenLayersMap openLayersMap = new OpenLayersMap("resources/open-layers-map/map.html", 10, -0.115937, 51.511437);
     private enum MapMode { DRAWING_MODE, MARKER_MODE; }
     private MapMode mapMode = MapMode.DRAWING_MODE;
 
@@ -36,8 +37,12 @@ public class DrawableSearchAreaMapController extends Controller
     public void initialize()
     {
         borderPane.setCenter(openLayersMap);
+        
+        openLayersMap.addBehaviour(OpenLayersMap.Behaviour.DRAWING, OpenLayersMap.Behaviour.MARKER);
 
         addPropertiesToJsFile();
+        
+        openLayersMap.executeScript("enableMarkerClicking();", true);
     }
 
     /**

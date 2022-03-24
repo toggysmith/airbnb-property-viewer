@@ -17,30 +17,39 @@ public class PropertyWindowController extends Controller
 {
     @FXML private BorderPane borderPane;
     
-    private OpenLayersMap openLayersMap;
+    private OpenLayersMap openLayersMap = new OpenLayersMap("resources/open-layers-map/map.html", 16, -0.115937, 51.511437);
 
     private double longitude;
     private double latitude;
 
+    @FXML
+    public void initialize()
+    {
+        borderPane.setCenter(openLayersMap);
+        
+        openLayersMap.addBehaviour(OpenLayersMap.Behaviour.MARKER);
+    }
     
-    public void initialise(AirbnbListing listing)
-    {   
+    public void setup(AirbnbListing listing)
+    {
         longitude = listing.getLongitude();
         latitude = listing.getLatitude();
-        openLayersMap = new OpenLayersMap("resources/open-layers-map/property-map.html", longitude, latitude);
-        borderPane.setCenter(openLayersMap);
+        
+        openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
         
         addPropertiesToJsFile(listing);
     }
     
     private void addPropertiesToJsFile(AirbnbListing listing)
     {
-            String id = listing.getId();
-            int price = listing.getPrice();
+        String id = listing.getId();
+        double longitude = listing.getLongitude();
+        double latitude = listing.getLatitude();
+        int price = listing.getPrice();
 
-            String jsObject = String.format("{id: %s, longitude: %f, latitude: %f, price: %d}", id, longitude, latitude, price);
-            String jsScript = String.format("addProperty(%s)", jsObject);
+        String jsObject = String.format("{id: %s, longitude: %f, latitude: %f, price: %d}", id, longitude, latitude, price);
+        String jsScript = String.format("addMarker(%s);", jsObject);
 
-            openLayersMap.executeScript(jsScript, true);
+        openLayersMap.executeScript(jsScript, true);
     }
 }

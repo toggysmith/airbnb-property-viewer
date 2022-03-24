@@ -7,6 +7,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
 import java.util.List;
 import netscape.javascript.JSObject;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Responsible for the creation of a WebView containing an OpenLayersMap. Also acts as a bridge between the
@@ -17,25 +20,38 @@ import netscape.javascript.JSObject;
  */
 public class OpenLayersMap extends AnchorPane
 {
+    public enum Behaviour { DRAWING, MARKER };
+    
     private WebView webView;
     private WebEngine webEngine;
     private JavaMarker javaMarker;
 
-    public OpenLayersMap(String address, double longitude, double latitude)
+    public OpenLayersMap(String address, int zoom, double longitude, double latitude)
     {
         webView = new WebView();
         webEngine = webView.getEngine();
+        webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 Chrome/44.0.2403.155 Safari/537.36");
 
         URL url = getClass().getClassLoader().getResource(address);
         
         webEngine.load(url.toExternalForm());
+        
+        addScript("core-behaviour.js");
 
         webView.prefWidthProperty().bind(this.widthProperty());
         webView.prefHeightProperty().bind(this.heightProperty());
 
         this.getChildren().add(webView);
+        executeScript(String.format("setZoom(%d)", zoom), true);
         executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
-        setupCallFromJavaScript();
+    }
+    
+    private void addScript(String name) {
+        try {
+        String content = new String(Files.readAllBytes(Paths.get("resources/open-layers-map/" + name)));
+        executeScript(content, true);
+    }
+    catch (Exception e) { }
     }
     
     public void executeScript(String script, boolean executedBeforeLoad)
@@ -57,6 +73,24 @@ public class OpenLayersMap extends AnchorPane
         else
         {
             webEngine.executeScript(script);
+        }
+    }
+    
+    public void addBehaviour(Behaviour ... newBehaviours) {
+        for (Behaviour newBehaviour : newBehaviours) {
+            switch (newBehaviour) {
+                // NOTE: These script paths are relative to the HTML file, not this class file.
+                case DRAWING:
+                    addScript("drawing-behaviour.js");
+                    break;
+                case MARKER:
+                    addScript("marker-behaviour.js");
+                setupCallFromJavaScript();
+                    break;
+                default:
+                    // There should be a case for every behaviour.
+                    throw new RuntimeException("No case defined for given behaviour.");
+            }
         }
     }
     

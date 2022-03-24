@@ -3,6 +3,7 @@
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 /**
  * Write a description of class PropertyWindowView here.
@@ -20,16 +21,15 @@ public class PropertyWindowView extends Stage
     public PropertyWindowView(AirbnbListing listing, PropertyWindow propertyWindow) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
-
-        Scene scene = new Scene(loader.load());
-
+        
+        Pane pane = loader.load();
         PropertyWindowController propertyWindowController = loader.getController();
-        propertyWindowController.initialise(listing);
+        propertyWindowController.setup(listing);
         
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
-        setScene(scene);
+        setScene(new Scene(pane));
         setTitle(listing.getHost_name());
         show();
     }
