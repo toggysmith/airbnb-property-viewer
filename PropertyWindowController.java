@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.TableRow;
 
 /**
  * Write a description of class PropertyWindowController here.
@@ -69,10 +70,12 @@ public class PropertyWindowController extends Controller
         populateTable(FXCollections.observableArrayList(ListingManipulator.getOtherListingsWithHostId(listing)));
         addPropertieToJsFile();
         populateLabels();
+        setOnRowClicked();
     }
     
     protected void populateTable(ObservableList<AirbnbListing> listings)
     {
+        otherPropertiesTable.setPlaceholder(new Label("No other listings from this host found"));
         otherPropertiesTable.setItems(listings);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("host_name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -104,5 +107,25 @@ public class PropertyWindowController extends Controller
         minimumNights.setText(String.format(minimumNights.getText(), listing.getMinimumNights()));
         numberOfReviews.setText(String.format(numberOfReviews.getText(), listing.getNumberOfReviews()));
         availability.setText(String.format(availability.getText(), listing.getAvailability365()));
+    }
+    
+    protected void setOnRowClicked()
+    {
+        otherPropertiesTable.setRowFactory(e -> tableClicked());
+    }
+
+    private TableRow<AirbnbListing> tableClicked()
+    {
+        TableRow<AirbnbListing> row = new TableRow<>();
+        row.setOnMouseClicked(event -> rowClicked(row));
+        return row;
+    }
+
+    private void rowClicked(TableRow<AirbnbListing> row)
+    {
+        if (! row.isEmpty()) {
+            AirbnbListing otherListing = row.getItem();
+            PropertyWindowFactory.getPropertyWindowFactory().newPropertyWindow(otherListing);
+        }
     }
 }
