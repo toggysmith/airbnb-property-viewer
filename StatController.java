@@ -17,6 +17,9 @@ import java.lang.Math;
 import java.util.stream.Collectors;
 import javafx.fxml.FXMLLoader;
 
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
+
 /**
  * Write a description of class StatController here.
  *
@@ -67,7 +70,7 @@ public class StatController extends Controller
     private List<Label>  labelList = new ArrayList<Label>();
     
     //Declaring the double sided queue
-    Deque<Node> dq;
+    public static Deque<stat> dq;
     
     //Creating a hashmap that links a button to the specified labels within their gridpane
     HashMap<Button, HashMap<Label, Label>> connectObjects = new HashMap<>();
@@ -138,88 +141,7 @@ public class StatController extends Controller
         value5 = socialScore();
         value6 = highestCrime();
     }
-    
-    /**
-     * Called when the forward button is pressed
-     * Allows me to get the variable name of the button pressed which is used to access the
-     *     hashmap and change the relevant labels
-     */
-    @FXML
-    private void nextStat(ActionEvent event) {
-        nextOrPrev = true;
-        Button b =  (Button) event.getSource();
-        changeLabels(b, nextOrPrev);
-    }
-     
-    private void changeLabel()
-    {
-        
-    }
-    /**
-     * To change labels I iterate through the nested hashmap created, using the button parameter
-     * to find the child hashmap which links that button to the two labels.
-     * Depending on which button on the specific gridpane pressed, that end of the queue is taken off
-     * and then assigned to the labels
-     
-    private void changeLabels(Button clickedButton, boolean checkState) {
-        for(Map.Entry<Button, HashMap<Label, Label>> seeSet :  connectObjects.entrySet()) {
-            Button seeButton = seeSet.getKey();
-               for (Map.Entry<Label, Label>  seeLabels : seeSet.getValue().entrySet()) {
-                    if(seeButton.equals(clickedButton) && checkState == false) {
-                        //if the forward button is pressed
-                        dq.addFirst(seeLabels.getKey().getText());
-                        String nextString = dq.removeLast();
-                        seeLabels.getKey().setText(nextString);
-                        seeLabels.getValue().setText(statOutput.get(nextString));
-                    } else if (seeButton.equals(clickedButton) && checkState == true){
-                        //if the backward  button is pressed
-                        dq.addLast(seeLabels.getKey().getText());
-                        String prevString = dq.removeFirst();
-                        seeLabels.getKey().setText(prevString);
-                        seeLabels.getValue().setText(statOutput.get(prevString));
-                    }
-                }     
-            }
-    }*/
-    
-    private void changeLabels(Button clickedButton, boolean checkState) {
-        BorderPane clickedBorder = linkBorder.get(clickedButton);
-        if(checkState == false) {
-            dq.addFirst(clickedBorder.getCenter());
-            Node last = dq.removeLast();
-            clickedBorder.setCenter(last);
-        } else if (checkState == true) {
-             dq.addLast(clickedBorder.getCenter());
-            Node first = dq.removeFirst();
-            clickedBorder.setCenter(first);
-        }
-            
-        
-    }
-    
-    /**
-     * Called when the backward button is pressed
-     * Allows me to get the variable name of the button pressed which is used to access the
-     *     hashmap and change the relevant labels
-     */
-    @FXML
-    private void prevStat(ActionEvent event) {
-        nextOrPrev = false;
-        Button b =  (Button) event.getSource();
-        changeLabels(b, nextOrPrev);
-        
-    }
-    
-    /**
-     * Populating the label list so I wouldn't need to repeat code when initializing them when
-     * the panel is accessed
-     */
-    private void addLabelList() {
-        labelList.add(label1);
-        labelList.add(label2);
-        labelList.add(label3);
-        labelList.add(label4);
-    }
+
     
     /**
      * The starting statistics shown when accessing the panel
@@ -229,39 +151,24 @@ public class StatController extends Controller
      * child hashmap and then set the labels to the values in that  hashmap
      */
     private void startStats() {
-        /**
-        addLabelList();
-        for (int i = 0; i < 4; i++) {
-            String labelPop = dq.pollFirst();
-            String statPop = statOutput.get(labelPop);
-            
-            Label babel = labelList.get(i);
-            for(Map.Entry<Button, HashMap<Label, Label>> seeSet :  connectObjects.entrySet()) {
-                for (Map.Entry<Label, Label>  seeLabels : seeSet.getValue().entrySet()) {
-                    if(seeLabels.getKey().equals(babel)) {
-                    seeLabels.getKey().setText(labelPop);
-                    seeLabels.getValue().setText(statPop);
-                    }
-                    
-                }
-            }
-            
-            
-        }
-        */
+        
        
-        borderPane1.setCenter(avgProperties);
-        borderPane2.setCenter(totalProperties);
-        borderPane3.setCenter(noNonPrivate);
-        borderPane4.setCenter(mostExpensive);
+        //borderPane1.setCenter(avgProperties);
+        //borderPane2.setCenter(totalProperties);
+        //borderPane3.setCenter(noNonPrivate);
+        //borderPane4.setCenter(mostExpensive);
+        gridPane1.add(avgProperties, 0,0);
+        gridPane1.add(noNonPrivate,1,0);
+        gridPane1.add(totalProperties,0,1);
+        gridPane1.add(mostExpensive,1,1);
     }
     
     private void setupQueue() {
         //Setting up my queue, first 4 values will be removed when initializing the pane
-        dq = new ArrayDeque<Node>();
+        dq = new ArrayDeque<stat>();
         dq.addLast(highSocial);
         dq.addLast(lowCrime);
-        //dq.addLast(pubs);
+        //dq.addLast(pubs)
         //dq.addLast(attractions);
     }
     
@@ -282,12 +189,12 @@ public class StatController extends Controller
         
        
        
-       avgProperties = new stat(new Pane(),new Label(), new Label(), stat1, value1);
-       totalProperties = new stat(new Pane(),new Label(), new Label(), stat2, value2);
-       noNonPrivate = new stat(new Pane(),new Label(), new Label(), stat3, value3);
-       mostExpensive = new stat(new Pane(),new Label(), new Label(), stat4, value4);
-       highSocial = new stat(new Pane(),new Label(), new Label(), stat5, value5);
-       lowCrime = new stat(new Pane(),new Label(), new Label(), stat6, value6);
+       avgProperties = new stat(new BorderPane(),new Label(), new Label(), stat1, value1);
+       totalProperties = new stat(new BorderPane(),new Label(), new Label(), stat2, value2);
+       noNonPrivate = new stat(new BorderPane(),new Label(), new Label(), stat3, value3);
+       mostExpensive = new stat(new BorderPane(),new Label(), new Label(), stat4, value4);
+       highSocial = new stat(new BorderPane(),new Label(), new Label(), stat5, value5);
+       lowCrime = new stat(new BorderPane(),new Label(), new Label(), stat6, value6);
        //error prone
        //pubs = new stat(loadPane("Interactive-stat-pane"), new Label(), new Label(),stat7, "");
        //attractions = new stat(loadPane("Interactive-stat-pane"),new Label(), new Label(), stat8, "");
@@ -459,5 +366,93 @@ private void linkBorderPane() {
 
     }
     
-
+/**
+ * Write a description of class StatNode here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+private class stat extends BorderPane
+{
+    private BorderPane wrapPane;
+    private Label title;
+    private Label value;
+    private Button rightButton;
+    private Button leftButton;
+    public stat(BorderPane wrapPane, Label title, Label value, String titleText, String valueText)
+    {
+    rightButton = new Button();
+    leftButton = new Button();
+    
+    this.wrapPane = wrapPane;
+    
+    this.title = title;
+    title.setText(titleText);
+    
+    this.value = value;
+    value.setText(valueText);
+    
+    wrapPane.setLeft(leftButton);
+    wrapPane.setRight(rightButton);
+    
+    rightButton.setOnAction(this::clickRight);
+    leftButton.setOnAction(this::clickLeft);
+    
+    wrapPane.setCenter(value);
+    wrapPane.setTop(title);
+    wrapPane.setAlignment(title,Pos.CENTER);
+    wrapPane.setAlignment(rightButton, Pos.CENTER);
+    wrapPane.setAlignment(leftButton, Pos.CENTER);
+    
+    wrapPane.setMargin(rightButton, new Insets(0,0,0,50));
+    wrapPane.setMargin(leftButton, new Insets(0,50,0,0));
+    wrapPane.setMargin(title, new Insets(10,0,0,0));
+    leftButton.setPrefSize(52,130);
+    rightButton.setPrefSize(52,130);
+    
+    rightButton.setText(">");
+    leftButton.setText("<");
+    
+    //wrapPane.getChildren().setAll(value);
+    this.setCenter(wrapPane);
+    }
+    
+    private void clickRight(ActionEvent event)
+    {
+        int row = gridPane1.getRowIndex(this);
+        int column = gridPane1.getColumnIndex(this);
+        dq.addFirst(this);
+        gridPane1.getChildren().remove(this);
+        
+        
+        
+        stat last = dq.removeLast();
+        gridPane1.add(last,column,row);
+    }
+    
+    private void clickLeft(ActionEvent event)
+    {
+        int row = gridPane1.getRowIndex(this);
+        int column = gridPane1.getColumnIndex(this);
+        dq.addLast(this);
+        
+        gridPane1.getChildren().remove(this);
+        stat first = dq.removeFirst();
+        gridPane1.add(first,column,row);
+    }
+    
+    public String getTitle()
+    {
+    return title.getText();
+    }
+    
+    public String getValue() {
+        return value.getText();
+    }
+    
+    public BorderPane getWrapPane()
+    {
+        return wrapPane;
+    }
+}
 }
