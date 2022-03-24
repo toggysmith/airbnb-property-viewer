@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PropertyWindowController" />
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PropertyWindowController">
+   <left>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="propertyName" text="Property name: %s" />
+            <Label fx:id="hostName" text="Host name: %s" />
+            <Label fx:id="boroughName" text="Borough: %s" />
+            <Label fx:id="roomType" text="Room type: %s" />
+            <Label fx:id="price" text="Price: %s" />
+            <Label fx:id="minimumNights" text="Minimum number of nights: %s" />
+            <Label fx:id="numberOfReviews" text="Number of reviews: %s" />
+            <Label fx:id="availability" text="Number of days avalible in a year: %s" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
