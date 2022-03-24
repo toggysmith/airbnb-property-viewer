@@ -187,7 +187,7 @@ public class AirbnbListing {
     public int hashCode()
     {
         int result = 17;
-        result = 37 * 17 + id.hashCode();
+        result = 37 * result + id.hashCode();
         return result;
     }
 }
