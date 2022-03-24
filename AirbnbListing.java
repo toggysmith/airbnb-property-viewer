@@ -169,7 +169,8 @@ public class AirbnbListing {
                 '}';
     }
     
-    public boolean eqauls(Object object)
+    @Override
+    public boolean equals(Object object)
     {
         if (this == object)
         {
