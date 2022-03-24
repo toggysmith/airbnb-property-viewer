@@ -15,13 +15,8 @@ import java.util.ArrayList;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class InteractiveStatController
+public class InteractiveStatController extends Controller
 {
-    @FXML public Label Title;
-    @FXML public Label First;
-    @FXML public Label Second;
-    @FXML public Label Third;
-    
     @FXML public ComboBox<String> boroughs;
     @FXML public ComboBox<String> propertyName;
     @FXML public ComboBox<String> price;
@@ -33,11 +28,18 @@ public class InteractiveStatController
     private DestinationDistances desCalculator;
    
     
-    public void setUpBoxes(List<String> boroughsList, List<String> propertiesList, List<String> pricesList,ArrayList<DestinationListing> typesDestinations)
+    public void setUpBoxes(List<String> boroughsList, List<String> propertiesList, List<String> pricesList,ArrayList<DestinationListing> typesDestinations, DestinationType desType)
     {
         boroughs.getItems().addAll(boroughsList);
         propertyName.getItems().addAll(propertiesList);
         price.getItems().addAll(pricesList);
+        if(desType.equals(DestinationType.PUB)){
+            price.setPromptText("Pub Price Range");
+            
+        }else if(desType.equals(DestinationType.ATTRACTION)){
+            price.setPromptText("Ticket Price");
+        }
+       
         
         destinations = new ArrayList<>(typesDestinations);
     }

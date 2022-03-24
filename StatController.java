@@ -2,6 +2,7 @@
 
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+
 import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
@@ -81,17 +82,17 @@ public class StatController extends Controller
     //Creating a hashmap that links the title of the statistic to the statistic
     HashMap<String, String> statOutput;
     
-    private static List<AirbnbListing> airbnbListings;
-    private static final String roomNeeded = "Entire home/apt";
-    private static List<StatisticsListing> statListings;
+      private static List<AirbnbListing> airbnbListings;
+      private static final String roomNeeded = "Entire home/apt";
+      private static List<StatisticsListing> statListings;
 
     
     
     
     
-    private MainController mainController;
-    private int fromValue;
-    private int toValue;
+       private MainController mainController;
+       private int fromValue;
+       private int toValue;
     
        private HashMap<Button, BorderPane> linkBorder;
     
@@ -103,8 +104,8 @@ public class StatController extends Controller
        private stat highSocial;
        private stat lowCrime;
        //error prone
-       private stat pubs;
-       private stat attractions;
+       private interactiveStat pubs;
+       private interactiveStat attractions;
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
@@ -112,20 +113,21 @@ public class StatController extends Controller
     public void initialize(){
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
-
-        mainController = (MainController) ContentContainerManager.getController(MainController.class);
-        //assignObject();
-        linkBorderPane();
         setUpValues();
-        setupHash();  
+        linkBorderPane();
+        setUpStats();  
         setupQueue();
         startStats();
     }
     
-    private void updateValues()
+    public void updateValues()
     {
-        fromValue = mainController.getRangeValues().getFromValue();
-        toValue = mainController.getRangeValues().getToValue();
+        if(MainWindow.getMainWindow().getMainController().getRangeValues() == null )
+        {
+            return;
+        }
+        fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
+        toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
     }
     
     /**
@@ -133,6 +135,7 @@ public class StatController extends Controller
      */
     private void setUpValues()
     {
+        //updateValues();
         //set up values to corresponding function
         value1 = String.valueOf(averagePropertyView());
         value2 = String.valueOf(totalAvailableProperties());
@@ -150,20 +153,16 @@ public class StatController extends Controller
      * I then access the  nested  hashmap and use the (i) value in labellist to find  the key in the
      * child hashmap and then set the labels to the values in that  hashmap
      */
-    private void startStats() {
-        
-       
-        //borderPane1.setCenter(avgProperties);
-        //borderPane2.setCenter(totalProperties);
-        //borderPane3.setCenter(noNonPrivate);
-        //borderPane4.setCenter(mostExpensive);
+    private void startStats() 
+    {
         gridPane1.add(avgProperties, 0,0);
         gridPane1.add(noNonPrivate,1,0);
         gridPane1.add(totalProperties,0,1);
         gridPane1.add(mostExpensive,1,1);
     }
     
-    private void setupQueue() {
+    private void setupQueue()
+    {
         //Setting up my queue, first 4 values will be removed when initializing the pane
         dq = new ArrayDeque<stat>();
         dq.addLast(highSocial);
@@ -175,62 +174,20 @@ public class StatController extends Controller
     /**
      * Setting up the hashmap that contains the title of the statistic and the statistic itself
      */
-    private void setupHash() {
-        //statOutput = new HashMap<String, String>();
-        //statOutput.put(stat1, value1);
-        //statOutput.put(stat2, value2);
-        //statOutput.put(stat3, value3);
-        //statOutput.put(stat4, value4);
-        //statOutput.put(stat5, value5);
-        //statOutput.put(stat6, value6);
-       // statOutput.put(stat7, value7);
-        //statOutput.put(stat8, value8);
-    
-        
-       
-       
+    private void setUpStats()
+    {
        avgProperties = new stat(new BorderPane(),new Label(), new Label(), stat1, value1);
        totalProperties = new stat(new BorderPane(),new Label(), new Label(), stat2, value2);
        noNonPrivate = new stat(new BorderPane(),new Label(), new Label(), stat3, value3);
        mostExpensive = new stat(new BorderPane(),new Label(), new Label(), stat4, value4);
        highSocial = new stat(new BorderPane(),new Label(), new Label(), stat5, value5);
        lowCrime = new stat(new BorderPane(),new Label(), new Label(), stat6, value6);
-       //error prone
-       //pubs = new stat(loadPane("Interactive-stat-pane"), new Label(), new Label(),stat7, "");
-       //attractions = new stat(loadPane("Interactive-stat-pane"),new Label(), new Label(), stat8, "");
+       
+       //pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7, "","category" ,DestinationType.PUB);
+       //attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, "", "ticket", DestinationType.ATTRACTION);
     }
+       
     
-    private Pane loadPane(String path)
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        Pane contentPane = new Pane();
-        try
-        {
-            contentPane = loader.load();
-        }
-        catch (java.io.IOException ioe)
-        {
-            ioe.printStackTrace();
-            
-            AlertManager.showTerminatingError("Unable to load interactive pane correctly");        }
-        
-        return contentPane;
-    }
-    
-    /**
-     * Setting up the nested hashmap that links each button to the  two labels within the gridpane
-     
-    private void assignObject() {
-        nestedHash(lButton1, label1, statLabel1);
-        nestedHash(rButton1, label1, statLabel1);
-        nestedHash(lButton2, label2, statLabel2);
-        nestedHash(rButton2, label2, statLabel2);
-        nestedHash(lButton3, label3, statLabel3);
-        nestedHash(rButton3, label3, statLabel3);
-        nestedHash(lButton4, label4, statLabel4);
-        nestedHash(rButton4, label4, statLabel4);
-    }
-    */
     /**
      * Populates the nested hashmap
      */
@@ -247,9 +204,11 @@ public class StatController extends Controller
      * (statistic 1)
      */
     public int averagePropertyView() {
-         int average = airbnbListings.stream()
+        
+        List<AirbnbListing> filtered = filterPrice(airbnbListings);
+        
+         int average = filtered.stream()
                        .mapToInt(listing -> listing.getNumberOfReviews())
-                       
                        .sum();
          long count = airbnbListings.stream()
                      .count();
@@ -258,11 +217,20 @@ public class StatController extends Controller
                      
     }
     
+    private List<AirbnbListing> filterPrice(List<AirbnbListing> unfilteredList)
+    {
+        return unfilteredList.stream()
+                             .filter(listing -> listing.getPrice() >= fromValue && listing.getPrice() <= toValue)
+                             .collect(Collectors.toList());                            
+                      
+    }
+    
     /**
      * returns the total available properties
      * (statistic 2)
      */
     public int totalAvailableProperties() { //int lower, int upper
+        
         long available = airbnbListings.stream()
                     .filter(listing -> listing.getAvailability365() > 0) //&& listing.getPrice() >= lower && listing.getPrice() <= upper)
                     .count();
@@ -374,12 +342,12 @@ private void linkBorderPane() {
  */
 private class stat extends BorderPane
 {
-    private BorderPane wrapPane;
+    private BorderPane wrapPane;    
     private Label title;
     private Label value;
     private Button rightButton;
     private Button leftButton;
-    public stat(BorderPane wrapPane, Label title, Label value, String titleText, String valueText)
+    public stat(BorderPane wrapPane,Label title, Label value, String titleText, String valueText)
     {
     rightButton = new Button();
     leftButton = new Button();
@@ -397,8 +365,9 @@ private class stat extends BorderPane
     
     rightButton.setOnAction(this::clickRight);
     leftButton.setOnAction(this::clickLeft);
-    
+ 
     wrapPane.setCenter(value);
+    
     wrapPane.setTop(title);
     wrapPane.setAlignment(title,Pos.CENTER);
     wrapPane.setAlignment(rightButton, Pos.CENTER);
@@ -417,25 +386,21 @@ private class stat extends BorderPane
     this.setCenter(wrapPane);
     }
     
-    private void clickRight(ActionEvent event)
+    protected void clickRight(ActionEvent event)
     {
         int row = gridPane1.getRowIndex(this);
         int column = gridPane1.getColumnIndex(this);
         dq.addFirst(this);
         gridPane1.getChildren().remove(this);
-        
-        
-        
         stat last = dq.removeLast();
         gridPane1.add(last,column,row);
     }
     
-    private void clickLeft(ActionEvent event)
+    protected void clickLeft(ActionEvent event)
     {
         int row = gridPane1.getRowIndex(this);
         int column = gridPane1.getColumnIndex(this);
         dq.addLast(this);
-        
         gridPane1.getChildren().remove(this);
         stat first = dq.removeFirst();
         gridPane1.add(first,column,row);
@@ -454,5 +419,39 @@ private class stat extends BorderPane
     {
         return wrapPane;
     }
+    
+}
+public  class interactiveStat
+{
+    
+    public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText, String valueText, String priceType, DestinationType destinationType)
+    {
+        //super(wrapPane,title,value,titleText,valueText,priceType,destinationType);
+        
+        
+    }
+    
+    protected void clickLeft(ActionEvent event)
+    {
+        
+        
+        
+    }
+    
+    private void loadInteraction(FXMLLoader loader)
+    {
+        
+        try
+        {
+             BorderPane contentPane = loader.load();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            
+            AlertManager.showTerminatingError("Unable to load interactive pane correctly");
+        }
+    
+}
 }
 }

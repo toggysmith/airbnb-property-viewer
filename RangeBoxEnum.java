@@ -21,9 +21,4 @@ public enum RangeBoxEnum
  {
        return this.name;
  }
- 
- 
- 
- 
- 
 }
