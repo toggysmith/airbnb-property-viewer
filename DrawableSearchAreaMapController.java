@@ -53,7 +53,8 @@ public class DrawableSearchAreaMapController extends Controller
     @FXML
     public void boroughBoundariesCheckBoxOnAction()
     {
-        openLayersMap.executeScript(String.format("setBoroughBoundariesVisibility(%b)", boroughBoundariesCheckBox.isSelected()), false);
+        String jsScript = String.format("setBoroughBoundariesVisibility(%b);", boroughBoundariesCheckBox.isSelected());
+        openLayersMap.executeScript(jsScript, false);
     }
 
     /**
