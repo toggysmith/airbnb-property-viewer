@@ -169,7 +169,10 @@ public class AirbnbListing {
                 '}';
     }
     
+<<<<<<< Updated upstream
     @Override
+=======
+>>>>>>> Stashed changes
     public boolean equals(Object object)
     {
         if (this == object)

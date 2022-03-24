@@ -26,7 +26,7 @@ public class PropertyWindowController extends Controller
 {
     @FXML private BorderPane root;
     
-    @FXML private BorderPane vbox;
+    @FXML private BorderPane mapContainer;
 
     
     @FXML private TableView otherPropertiesTable;
@@ -54,7 +54,7 @@ public class PropertyWindowController extends Controller
     @FXML
     public void initialize()
     {
-        vbox.setCenter(openLayersMap);
+        mapContainer.setCenter(openLayersMap);
 
         openLayersMap.addBehaviour(OpenLayersMap.Behaviour.MARKER);
     }
@@ -66,9 +66,9 @@ public class PropertyWindowController extends Controller
         latitude = listing.getLatitude();
 
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
-
+        addPropertyToJsFile();
+        
         populateTable(FXCollections.observableArrayList(ListingManipulator.getOtherListingsWithHostId(listing)));
-        addPropertieToJsFile();
         populateLabels();
         setOnRowClicked();
     }
@@ -84,7 +84,7 @@ public class PropertyWindowController extends Controller
         boroughColumn.setCellValueFactory(new PropertyValueFactory<>("neighbourhood"));
     }
 
-    private void addPropertieToJsFile()
+    private void addPropertyToJsFile()
     {
         String id = listing.getId();
         double longitude = listing.getLongitude();
