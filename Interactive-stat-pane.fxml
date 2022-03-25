@@ -24,6 +24,6 @@
       </HBox>
    </center>
    <bottom>
-      <Label text="Label" BorderPane.alignment="CENTER_LEFT" />
+      <Label fx:id="locationsResult" text="Label" BorderPane.alignment="CENTER_LEFT" />
    </bottom>
 </BorderPane>
