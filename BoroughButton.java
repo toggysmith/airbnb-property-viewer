@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * @author Adam Murray (K21003575)
@@ -15,24 +17,18 @@ import java.util.List;
  */
 public class BoroughButton
 {
-    private final QuantityVisualiser quantityVisualiser;
-    private final List<AirbnbListing> boroughListings;
-    
-    /**
-     * The inner radius from the center of the hexagon to its edge.
-     */
     private final static double r = 60.0;
-    
-    /**
-     * The inner radius from the center of the hexagon to the middle of the axis.
-     */
     private final static double n = Math.sqrt(r * r * 0.75);
-    
-    
     private final static double TILE_WIDTH = 2 * n;
     private final static double TILE_HEIGHT = 2 * r;
     private final static double SEPARATION = 7.5;
     private final static double STARTING_OFFSET = 15;
+
+    private final QuantityVisualiser quantityVisualiser;
+    private final List<AirbnbListing> boroughListings;
+    private List<AirbnbListing> boroughListingsInPriceRange;
+    
+
     
     public BoroughButton(Borough borough, AnchorPane boroughMap)
     {
@@ -72,14 +68,32 @@ public class BoroughButton
         int fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         int toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
         
-        List<AirbnbListing> boroughListingsInPriceRange = ListingManipulator.filterByPriceRange(boroughListings, fromValue, toValue);
+        boroughListingsInPriceRange = ListingManipulator.filterByPriceRange(boroughListings, fromValue, toValue);
         
         quantityVisualiser.setCurrentQuantity(boroughListingsInPriceRange.size());
         quantityVisualiser.setRangeUpperBound(noOfPropertiesInBoroughWithMost);
     }
     
+    // Trys to create a new borough window with the listings in the borough in the price range.
     private void createBoroughWindow(Borough borough)
     {
-        BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindowWithListings(borough, boroughListings);
+        try
+        {
+            BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindowWithListings(borough, boroughListingsInPriceRange);
+        }
+        catch (EmptyListException ele)
+        {
+            emptyBoroughWarningAlert(borough.getName());
+        }
     }
+    
+    //Creates a warning alert when a borough with no properties in the price range is clicked.
+    private void emptyBoroughWarningAlert(String boroughName)
+    {
+        Alert invalidRange = new Alert(AlertType.WARNING);
+        invalidRange.setTitle("Warning");
+        invalidRange.setHeaderText("Empty Borough");
+        invalidRange.setContentText(String.format("There are no properties in %s in the selected price range.", boroughName));
+        invalidRange.showAndWait();
+    } 
 }

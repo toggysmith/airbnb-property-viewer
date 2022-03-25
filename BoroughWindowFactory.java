@@ -1,11 +1,11 @@
-// @TODO: Refactor class
-
 import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 /**
- * Write a description of class PropertyWindowFactory here.
+ * BoroughWindowFactory manages the creation of new windows for the boroughs,
+ * it ensures that only one window can exist for each borough for a specific 
+ * price range at a given time.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -19,12 +19,17 @@ public class BoroughWindowFactory
     private MainWindow mainWindow;
     private WindowHashSet<BoroughWindow> openBoroughWindows;
 
-    public BoroughWindowFactory()
+    // Constructor for BoroughWindowFactory
+    private BoroughWindowFactory()
     {
         openBoroughWindows = new WindowHashSet<>();
         mainWindow = MainWindow.getMainWindow();
     }
     
+    /**
+     * Ensures that only one BoroughWindowFactory is ever created.
+     * @return The only object of BoroughWindowFactory.
+     */
     public static BoroughWindowFactory getBoroughWindowFactory()
     {
         if (boroughWindowFactory == null)
@@ -34,19 +39,27 @@ public class BoroughWindowFactory
         return boroughWindowFactory;
     }
     
-    public BoroughWindow newBoroughWindowWithListings(Borough borough, List<AirbnbListing> listings)
+    /**
+     * This method checks if the param listings is empty and if not attempts
+     * to create a window for the borough.
+     * @param borough The borough that the window is being created for.
+     * @param listings The listings in the borough in the price range.
+     * @return The BoroughWindow that is created.
+     * @throws EmptyListException When the the param listings is empty.
+     */
+    public BoroughWindow newBoroughWindowWithListings(Borough borough, List<AirbnbListing> listings) throws EmptyListException
     {
+        if (listings.size() == 0)
+        {
+            throw new EmptyListException();
+        }
         BoroughWindow boroughWindow = checkWindow(borough, FXCollections.observableList(listings));
         return boroughWindow;
     }
     
-    public BoroughWindow newBoroughWindow(Borough borough)
-    {
-        ObservableList<AirbnbListing> listings = FXCollections.observableList(mainWindow.getListingsInBorough(borough.getName()));
-        BoroughWindow boroughWindow = checkWindow(borough, listings);
-        return boroughWindow;
-    }
-    
+    //This method checks if a boroughWindow for the given borough already exists,
+    // if so it finds that window and sets it to the front of the screen,
+    // if not it creates a new window for this borough
     private BoroughWindow checkWindow(Borough borough, ObservableList<AirbnbListing> listings)
     {
         PriceRange priceRange = mainWindow.getRangeValues().getPriceRange();
@@ -65,6 +78,10 @@ public class BoroughWindowFactory
         return boroughWindow;
     }
     
+    /**
+     * Removes the specified boroughWindow from the set of open boroughWindows.
+     * @param boroughWindow The BoroughWindow is be removed.
+     */
     public void boroughWindowClosed(BoroughWindow boroughWindow)
     {
         openBoroughWindows.remove(boroughWindow);

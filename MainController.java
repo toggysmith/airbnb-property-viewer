@@ -36,10 +36,8 @@ public class MainController extends Controller
         contentContainerManager = new ContentContainerManager(switchPane);
         
         comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
-     
         mapController = (MapController) contentContainerManager.getController(MapController.class);
         statController = (StatController) contentContainerManager.getController(StatController.class);
-        
         mapController.createMap();
     }
     

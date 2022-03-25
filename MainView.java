@@ -1,5 +1,6 @@
 // @TODO: Refactor class
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -55,6 +56,7 @@ public class MainView extends Stage
         setScene(scene);
         setTitle(WINDOW_TITLE);
         sizeToScene();
+        setOnHidden(e -> Platform.exit());
         show();
     }
     

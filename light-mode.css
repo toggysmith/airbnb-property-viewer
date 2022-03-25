@@ -52,6 +52,7 @@
 .button:disabled, .button:disabled > *
 {
     -fx-background-color: #CBCBCB;
+    -fx-text-fill: #303035;
 }
 
 .polygon

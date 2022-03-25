@@ -26,7 +26,7 @@ public class BoroughWindow
     public void createBoroughWindow(ObservableList<AirbnbListing> listingsInBorough)
     {
         PriceRange priceRange = boroughPriceRange.getPriceRange();
-        listings = FXCollections.observableList(ListingManipulator.filterByPriceRange(listingsInBorough, priceRange.getFromValue(), priceRange.getToValue()));
+        listings = FXCollections.observableList(listingsInBorough);
         try
         {
             boroughView = new BoroughWindowView(boroughPriceRange.getBorough().getName(), listings, this);

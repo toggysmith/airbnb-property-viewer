@@ -1,14 +1,16 @@
-// @TODO: Refactor class
-
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 /**
- * Write a description of class PropertyWindowView here.
+ * PropertyWindowView creates the window that can be seen on screen for a given property listing.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class PropertyWindowView extends Stage
 {
@@ -20,16 +22,16 @@ public class PropertyWindowView extends Stage
     public PropertyWindowView(AirbnbListing listing, PropertyWindow propertyWindow) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
-
-        Scene scene = new Scene(loader.load());
-
+        
+        Pane pane = loader.load();
         PropertyWindowController propertyWindowController = loader.getController();
-
+        propertyWindowController.setup(listing);
+        
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
-        setScene(scene);
-        setTitle(listing.getHost_name());
+        setScene(new Scene(pane, 1500, 800));
+        setTitle(listing.getName());
         show();
     }
 }

@@ -75,4 +75,54 @@ public class ListingManipulator
                 .max(Integer::compare)
                 .orElse(0);
     }
+    
+    public static AirbnbListing getListingWithId(String id)
+    {
+        try
+        {
+            return AirbnbDataLoader.getListings().stream()
+                .filter(listing -> listing.getId().equals(id))
+                .findFirst()
+                .get();
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+    
+    public static List<AirbnbListing> getOtherListingsWithHostId(AirbnbListing hostListing)
+    {
+        try
+        {
+            return AirbnbDataLoader.getListings().stream()
+                .filter(listing -> (listing.getHost_id().equals(hostListing.getHost_id())) && !(listing.getId().equals(hostListing.getId())))
+                .collect(Collectors.toList());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+    
+    public static Position getAveragePosition(List<AirbnbListing> listings)
+    {
+        try
+        {
+            return new Position(
+                 listings.stream()
+                .mapToDouble(listing -> listing.getLatitude())
+                .average()
+                .getAsDouble(),
+                
+                listings.stream()
+                .mapToDouble(listing -> listing.getLongitude())
+                .average()
+                .getAsDouble());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 }

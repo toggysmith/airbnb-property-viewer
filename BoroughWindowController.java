@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
 
 /**
  * BoroughWindowController hosts FXML GUI elements.
@@ -27,24 +28,36 @@ import javafx.scene.layout.HBox;
  */
 public class BoroughWindowController extends Controller
 {
-    @FXML public TableView<AirbnbListing> boroughTable;
-    @FXML public TableColumn<AirbnbListing, String> nameColumn;
-    @FXML public TableColumn<AirbnbListing, String> priceColumn;
-    @FXML public TableColumn<AirbnbListing, String> reviewsColumn;
-    @FXML public TableColumn<AirbnbListing, String> minNightsColumn;
+    @FXML private TableView<AirbnbListing> boroughTable;
+    @FXML private TableColumn<AirbnbListing, String> nameColumn;
+    @FXML private TableColumn<AirbnbListing, String> priceColumn;
+    @FXML private TableColumn<AirbnbListing, String> reviewsColumn;
+    @FXML private TableColumn<AirbnbListing, String> minNightsColumn;
 
-    @FXML public ComboBox<ComboBoxOrderEnum> orderBox;
+    @FXML private ComboBox<ComboBoxOrderEnum> orderBox;
     
-    @FXML public Label fromPrice;
-    @FXML public Label toPrice;
+    @FXML private Label fromPrice;
+    @FXML private Label toPrice;
     
     private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
 
-    @FXML public HBox pieChart;
-    @FXML public ComboBox attributeBox;
+    @FXML private HBox pieChart;
+    @FXML private ComboBox attributeBox;
+    
+    @FXML private BorderPane mapContainer;
+    private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 11, -0.115937, 51.511437);
 
-    public void Initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
+
+    @FXML
+    public void initialize()
+    {
+        mapContainer.setCenter(openLayersMap);
+
+        openLayersMap.addBehaviour(OpenLayersMap.Behaviour.MARKER);
+    }
+    
+    public void initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
         this.boroughWindow = boroughWindow;
         populateTable(listings);
@@ -52,6 +65,10 @@ public class BoroughWindowController extends Controller
         setOnRowClicked();
         assignSort();
         assignPriceLabels();
+        
+        setMapPosition(listings);
+        addPropertiesToJsFile(listings);
+        openLayersMap.executeScript("enableMarkerClicking();", true);
     
         setUpComboBox();
     }
@@ -131,8 +148,8 @@ public class BoroughWindowController extends Controller
     
     protected void assignPriceLabels()
     {
-        fromPrice.setText(boroughWindow.getFromPrice());
-        toPrice.setText(boroughWindow.getToPrice());
+        fromPrice.setText(String.format(fromPrice.getText(), boroughWindow.getFromPrice()));
+        toPrice.setText(String.format(toPrice.getText(), boroughWindow.getToPrice()));
     }
     
     private void setUpPieChart(String selectedAttribute)
@@ -180,5 +197,29 @@ public class BoroughWindowController extends Controller
     public void selectedBox()
     {
             setUpPieChart(attributeBox.getValue().toString());
+    }
+    
+    private void setMapPosition(List<AirbnbListing> listings)
+    {
+        Position position = ListingManipulator.getAveragePosition(listings);
+        double longitude = position.getLongitude();
+        double latitude = position.getLatitude();
+        openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
+    }
+    
+    private void addPropertiesToJsFile(ObservableList<AirbnbListing> listings)
+    {
+        for (AirbnbListing listing : listings)
+        {
+            String id = listing.getId();
+            double longitude = listing.getLongitude();
+            double latitude = listing.getLatitude();
+            int price = listing.getPrice();
+
+            String jsObject = String.format("{id: %s, longitude: %f, latitude: %f, price: %d}", id, longitude, latitude, price);
+            String jsScript = String.format("addMarker(%s)", jsObject);
+
+            openLayersMap.executeScript(jsScript, true);
+        }
     }
 }
