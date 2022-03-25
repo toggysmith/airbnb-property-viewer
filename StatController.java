@@ -113,10 +113,10 @@ public class StatController extends Controller
     public void initialize(){
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
-        //setUpValues();
+        
         //linkBorderPane();
         setUpStats();
-        
+        setUpValues();
         
         
         setupQueue();
@@ -149,6 +149,14 @@ public class StatController extends Controller
         value4 = expensiveNeighbourhood();
         value5 = socialScore();
         value6 = highestCrime();
+        
+        avgProperties.updateValue(value1);
+        totalProperties.updateValue(value2);
+        noNonPrivate.updateValue(value3);
+        mostExpensive.updateValue(value4);
+        highSocial.updateValue(value5);
+        lowCrime.updateValue(value6);
+        
     }
 
     private void setUpBoxes()
@@ -187,27 +195,17 @@ public class StatController extends Controller
      */
     private void setUpStats()
     {
-       avgProperties = new stat(new BorderPane(),new Label(), new Label(), stat1, value1);
-       totalProperties = new stat(new BorderPane(),new Label(), new Label(), stat2, value2);
-       noNonPrivate = new stat(new BorderPane(),new Label(), new Label(), stat3, value3);
-       mostExpensive = new stat(new BorderPane(),new Label(), new Label(), stat4, value4);
-       highSocial = new stat(new BorderPane(),new Label(), new Label(), stat5, value5);
-       lowCrime = new stat(new BorderPane(),new Label(), new Label(), stat6, value6);
-       pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7, "", DestinationType.PUB);
-       attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, "", DestinationType.ATTRACTION);
+       avgProperties = new stat(new BorderPane(),new Label(), new Label(), stat1);
+       totalProperties = new stat(new BorderPane(),new Label(), new Label(), stat2);
+       noNonPrivate = new stat(new BorderPane(),new Label(), new Label(), stat3);
+       mostExpensive = new stat(new BorderPane(),new Label(), new Label(), stat4);
+       highSocial = new stat(new BorderPane(),new Label(), new Label(), stat5 );
+       lowCrime = new stat(new BorderPane(),new Label(), new Label(), stat6);
+       pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7,  DestinationType.PUB);
+       attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, DestinationType.ATTRACTION);
     }
        
-    
-    /**
-     * Populates the nested hashmap
-     */
-    private void nestedHash(Button button, Label label, Label statLabel) {
-        HashMap<Label, Label> childMap = connectObjects.get(button);
-        if(childMap == null) {
-            connectObjects.put(button, childMap = new HashMap<>());
-        }
-        childMap.put(label, statLabel);
-    }
+
     
     /**
      * returns the average number of reviews per property
@@ -240,9 +238,10 @@ public class StatController extends Controller
      * (statistic 2)
      */
     public int totalAvailableProperties() { //int lower, int upper
-        
-        long available = airbnbListings.stream()
-                    .filter(listing -> listing.getAvailability365() > 0) //&& listing.getPrice() >= lower && listing.getPrice() <= upper)
+        List<AirbnbListing> filtered = filterPrice(airbnbListings);
+
+        long available = filtered.stream()
+                    .filter(listing -> listing.getAvailability365() > 0) 
                     .count();
         int total = (int)available;
         return total;
@@ -253,8 +252,10 @@ public class StatController extends Controller
      * (statistic 3)
      */
     public int nonPrivateRoom() { //int lower, int upper
-        long nonPrivate = airbnbListings.stream()
-                                        .filter(listing -> listing.getRoom_type().equals(roomNeeded)) //&& listing.getPrice() >= lower && listing.getPrice() <= upper)
+        List<AirbnbListing> filtered = filterPrice(airbnbListings);
+
+        long nonPrivate = filtered.stream()
+                                        .filter(listing -> listing.getRoom_type().equals(roomNeeded)) 
                                         .count();
                                         
         int privateCount = (int)nonPrivate;
@@ -271,37 +272,33 @@ public class StatController extends Controller
         int max = 0;
         int price= 0;
         int nights = 0;
-        for(AirbnbListing x: AirbnbDataLoader.getListings()) {
-            int calcPrice = x.getPrice() * x.getMinimumNights();
+        String correctNeighbourhood = "";
+        List<AirbnbListing> filtered = filterPrice(airbnbListings);
+        for(int i = 0; i < filtered.size(); i++) {
+            
+            int calcPrice = filtered.get(i).getPrice() * filtered.get(i).getMinimumNights();
             if(calcPrice > max){
                 max = calcPrice;
-                price = x.getPrice();
-                nights = x.getMinimumNights();
+                price = filtered.get(i).getPrice();
+                nights = filtered.get(i).getMinimumNights();
+                correctNeighbourhood = filtered.get(i).getNeighbourhood();
             }
             
         }
-        final int finalPrice = price;
+        /**final int finalPrice = price;
         final int finalNight = nights;
         
+
         ArrayList<AirbnbListing> abnb = new ArrayList<>();
-        abnb = airbnbListings.stream()
+        abnb = filtered.stream()
                              .filter(listing -> listing.getPrice() == finalPrice && listing.getMinimumNights() == finalNight)
                              .collect(Collectors.toCollection(ArrayList::new));
         
-                return abnb.get(0).getNeighbourhood();
+                return filtered.get(0).getNeighbourhood(); */
+                
+                return correctNeighbourhood;
     }
-    
-    public HashSet<String> sortAirbnbNeighbourhood() {
-        return airbnbListings.stream()
-                             .map(listings -> listings.getNeighbourhood())
-                             .collect(Collectors.toCollection(HashSet::new));
-    }
-    
-    public HashSet<String> sortLondonNeighbourhood() {
-        return statListings.stream()
-                             .map(statListings -> statListings.getBoroughName())
-                             .collect(Collectors.toCollection(HashSet::new));
-    }
+      
 
     public String socialScore() {
         double highestSocial = 0;
@@ -329,7 +326,7 @@ public class StatController extends Controller
             }
     }
     return boroughCrime;
-}
+    }
     
 /**
  * Write a description of class StatNode here.
@@ -344,7 +341,7 @@ private class stat extends BorderPane
     private Label value;
     private Button rightButton;
     private Button leftButton;
-    public stat(BorderPane wrapPane,Label title, Label value, String titleText, String valueText)
+    public stat(BorderPane wrapPane,Label title, Label value, String titleText)
     {
     rightButton = new Button();
     leftButton = new Button();
@@ -355,7 +352,6 @@ private class stat extends BorderPane
     title.setText(titleText);
     
     this.value = value;
-    value.setText(valueText);
     
     wrapPane.setLeft(leftButton);
     wrapPane.setRight(rightButton);
@@ -428,9 +424,9 @@ public  class interactiveStat extends stat
 {
     private InteractiveStatController interactiveStatController = new InteractiveStatController();
     private DestinationType destinationType;
-    public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText, String valueText,DestinationType destinationType)
+    public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText,DestinationType destinationType)
     {
-        super(wrapPane,title,value,titleText,valueText);
+        super(wrapPane,title,value,titleText);
         this.destinationType = destinationType;
         
         
