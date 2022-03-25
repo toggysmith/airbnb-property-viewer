@@ -13,8 +13,6 @@ public class PieChartView extends Stage
 {
     PieChartController controller;
     HashMap<String,Integer> pieValues;
-    
-    
     public PieChartView(int[] values)
     {
       int min = Arrays.stream(values)
@@ -30,40 +28,35 @@ public class PieChartView extends Stage
       pieValues = new HashMap<String,Integer>();                
       populatePieChart(min, max, values);                
     }
-    
+
     public AnchorPane setUpPieChart() throws java.io.IOException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("pieChart.fxml"));
         
         AnchorPane pane = loader.load();
         
-        
-        
         controller = loader.getController();
         
         //setUpComboBox();
         controller.setup(pieValues);
-        /**
-        Platform.runLater(new Runnable() {
-            public void run()
-            {
-                setUpComboBox();
-                controller.setup(values);
-            }
-        });
-        */
         return pane;
     }
     
     private void populatePieChart(int min, int max, int[] values)
     {
+        int stepAmount;
         
-        
-        int stepAmount = (max - min) / 5;
-        
-        for(int i = min; min < max; min += stepAmount){
-            pieValues.put("Â£ " + min  + " < " + "x" + " < " + (min+stepAmount), (int)retrieveSpeciedAmount(values,min, (min+stepAmount)));
+        if( values.length < 7){
+            pieValues.put("£ " + "0" + " - " + max, values.length);
+        }else{
+           stepAmount = (max - min) / 7;
+           for(int i = min; min <= max; min += stepAmount){
+            int toValue = (int)retrieveSpeciedAmount(values,min, (min+stepAmount));
+            pieValues.put("£ " + min  + " - " + (min+stepAmount),toValue);
         } 
+        }
+        
+        
     }
     
     private long retrieveSpeciedAmount(int[] values , int from, int to)

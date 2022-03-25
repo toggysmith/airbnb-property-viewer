@@ -37,7 +37,7 @@ public class ContentContainerManager
         {
             e.printStackTrace();
             
-            AlertManager.showTerminatingError("Unable to load content panes.");
+            AlertManager.showTerminatingError("Unable to load pane correctly");
         }
         
         Pane firstPane = circularList.getCurrent().getPane();
@@ -45,6 +45,7 @@ public class ContentContainerManager
     }
     
     /**
+
      * Retrieve an instance of a controller from its class.
      * @param controllerClass The class of the controller wanted.
      * @return The controller of a specific class.

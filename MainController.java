@@ -29,14 +29,15 @@ public class MainController extends Controller
     
     private ContentContainerManager contentContainerManager;
     private MapController mapController;
+    private StatController statController;
     
     public void setUpPanes() throws IOException
     {
         contentContainerManager = new ContentContainerManager(switchPane);
         
         comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
-     
-        mapController = (MapController) ContentContainerManager.getController(MapController.class);
+        mapController = (MapController) contentContainerManager.getController(MapController.class);
+        statController = (StatController) contentContainerManager.getController(StatController.class);
         mapController.createMap();
     }
     
@@ -93,6 +94,7 @@ public class MainController extends Controller
             }
             
             mapController.updateMap();
+            statController.updateValues();
         }
     }
     
