@@ -469,12 +469,7 @@ public  class interactiveStat extends stat
     this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
    }
 
-   @Override
-   protected void clickRight(ActionEvent event) 
-   {
-       super.clickRight(event);
-       //updateComboValues();
-   }
+   
 }
 
 
