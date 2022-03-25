@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InteractiveStatController">
-   <top>
+   <center>
       <HBox BorderPane.alignment="CENTER">
          <children>
             <BorderPane>
@@ -21,5 +21,5 @@
             </BorderPane>
          </children>
       </HBox>
-   </top>
+   </center>
 </BorderPane>

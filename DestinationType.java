@@ -9,7 +9,7 @@ public enum DestinationType
 {
     PUB,ATTRACTION;
     
-    public static List<DestinationListing>  checkPub(DestinationType type)
+    public static List<DestinationListing>  getDestinations(DestinationType type)
     {
         if(type.equals(DestinationType.PUB)){
             return DestinationLoader.getPubs();

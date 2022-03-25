@@ -90,11 +90,11 @@ public class StatController extends Controller
     
     
     
-       private MainController mainController;
+       
        private int fromValue;
        private int toValue;
     
-       private HashMap<Button, BorderPane> linkBorder;
+       
     
        private stat avgProperties;
     
@@ -113,9 +113,12 @@ public class StatController extends Controller
     public void initialize(){
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
-        setUpValues();
-        linkBorderPane();
-        setUpStats();  
+        //setUpValues();
+        //linkBorderPane();
+        setUpStats();
+        
+        
+        
         setupQueue();
         startStats();
     }
@@ -128,6 +131,9 @@ public class StatController extends Controller
         }
         fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
+        setUpValues();
+        setUpBoxes();
+        //RESETVALUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     /**
@@ -145,6 +151,11 @@ public class StatController extends Controller
         value6 = highestCrime();
     }
 
+    private void setUpBoxes()
+    {
+        pubs.updateComboValues();
+        attractions.updateComboValues();
+    }
     
     /**
      * The starting statistics shown when accessing the panel
@@ -167,8 +178,8 @@ public class StatController extends Controller
         dq = new ArrayDeque<stat>();
         dq.addLast(highSocial);
         dq.addLast(lowCrime);
-        //dq.addLast(pubs)
-        //dq.addLast(attractions);
+        dq.addLast(pubs);
+        dq.addLast(attractions);
     }
     
     /**
@@ -182,9 +193,8 @@ public class StatController extends Controller
        mostExpensive = new stat(new BorderPane(),new Label(), new Label(), stat4, value4);
        highSocial = new stat(new BorderPane(),new Label(), new Label(), stat5, value5);
        lowCrime = new stat(new BorderPane(),new Label(), new Label(), stat6, value6);
-       
-       //pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7, "","category" ,DestinationType.PUB);
-       //attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, "", "ticket", DestinationType.ATTRACTION);
+       pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7, "", DestinationType.PUB);
+       attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, "", DestinationType.ATTRACTION);
     }
        
     
@@ -320,19 +330,6 @@ public class StatController extends Controller
     }
     return boroughCrime;
 }
-
-private void linkBorderPane() {
-        linkBorder = new HashMap<Button, BorderPane>();
-        linkBorder.put(lButton1, borderPane1);
-        linkBorder.put(rButton1, borderPane1);
-        linkBorder.put(lButton2, borderPane2);
-        linkBorder.put(rButton2, borderPane2);
-        linkBorder.put(lButton3, borderPane3);
-        linkBorder.put(rButton3, borderPane3);
-        linkBorder.put(lButton4, borderPane4);
-        linkBorder.put(rButton4, borderPane4);
-
-    }
     
 /**
  * Write a description of class StatNode here.
@@ -342,7 +339,7 @@ private void linkBorderPane() {
  */
 private class stat extends BorderPane
 {
-    private BorderPane wrapPane;    
+    protected BorderPane wrapPane;    
     private Label title;
     private Label value;
     private Button rightButton;
@@ -386,6 +383,11 @@ private class stat extends BorderPane
     this.setCenter(wrapPane);
     }
     
+    public void updateValue(String text)
+    {
+        value.setText(text);
+    }
+    
     protected void clickRight(ActionEvent event)
     {
         int row = gridPane1.getRowIndex(this);
@@ -421,29 +423,24 @@ private class stat extends BorderPane
     }
     
 }
-public  class interactiveStat
+
+public  class interactiveStat extends stat 
 {
-    
-    public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText, String valueText, String priceType, DestinationType destinationType)
+    private InteractiveStatController interactiveStatController = new InteractiveStatController();
+    private DestinationType destinationType;
+    public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText, String valueText,DestinationType destinationType)
     {
-        //super(wrapPane,title,value,titleText,valueText,priceType,destinationType);
+        super(wrapPane,title,value,titleText,valueText);
+        this.destinationType = destinationType;
         
         
-    }
-    
-    protected void clickLeft(ActionEvent event)
-    {
-        
-        
-        
-    }
-    
-    private void loadInteraction(FXMLLoader loader)
-    {
-        
+            
         try
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Interactive-stat-pane.fxml"));
              BorderPane contentPane = loader.load();
+            interactiveStatController = loader.getController();
+            wrapPane.setCenter(contentPane);
         }
         catch (Exception e)
         {
@@ -451,7 +448,29 @@ public  class interactiveStat
             
             AlertManager.showTerminatingError("Unable to load interactive pane correctly");
         }
+        
+        
+    }
+    private DestinationType getDesType()
+    {
+    return destinationType;
+    }
+            
+    private InteractiveStatController getInteractiveController()
+    {
+        return interactiveStatController;
+    }
     
+    public void updateComboValues()
+   {
+    List<AirbnbListing> filteredListings = filterPrice(airbnbListings);
+    List<DestinationListing> destinations = DestinationType.getDestinations(this.getDesType());
+    
+    this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
+   }
+
 }
+
+
 }
-}
+

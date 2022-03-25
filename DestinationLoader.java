@@ -7,6 +7,9 @@ import java.util.List;
 import java.net.URI;
 import java.io.File;
 import java.net.URL;
+
+import java.io.IOException;
+
 /**
  * Write a description of class DestinationLoader here.
  *
@@ -51,7 +54,8 @@ public class DestinationLoader
                 double longitude = convertDouble(line[12]);
                 double latitude = convertDouble(line[13]);
                 
-                String ticketPrice = line[15];
+                String ticketPrice = processConversion(line[15]);
+
                 
                 destinationLists.add(new DestinationListing(destinationName,displayAddress,longitude,latitude,boroughName,ticketPrice));
             }
@@ -78,6 +82,23 @@ public class DestinationLoader
         return touristDestinations;
     }
     
+    private static String processConversion(String price)
+    {
+        char poundChar = 163;
+        String toReturnString = new String();
+        if(price.length() <= 3){
+            for(int x = 0; x < price.length(); x++ ){
+                toReturnString = toReturnString + poundChar;
+            }
+            return toReturnString;
+        }else if (!price.equals("free")){
+            price.trim();
+            toReturnString = price.replace(price.charAt(0), poundChar);
+            return toReturnString;
+            
+        }
+        return price;
+    }
     /**
      * @param doubleString The string to be converted to Double type.
      * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
@@ -104,5 +125,5 @@ public class DestinationLoader
         }
 
         return -1;
-    }
+    }   
 }
