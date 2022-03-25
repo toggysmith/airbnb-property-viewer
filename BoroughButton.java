@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * @author Adam Murray (K21003575)
@@ -24,6 +26,7 @@ public class BoroughButton
 
     private final QuantityVisualiser quantityVisualiser;
     private final List<AirbnbListing> boroughListings;
+    private List<AirbnbListing> boroughListingsInPriceRange;
     
 
     
@@ -65,14 +68,32 @@ public class BoroughButton
         int fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         int toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
         
-        List<AirbnbListing> boroughListingsInPriceRange = ListingManipulator.filterByPriceRange(boroughListings, fromValue, toValue);
+        boroughListingsInPriceRange = ListingManipulator.filterByPriceRange(boroughListings, fromValue, toValue);
         
         quantityVisualiser.setCurrentQuantity(boroughListingsInPriceRange.size());
         quantityVisualiser.setRangeUpperBound(noOfPropertiesInBoroughWithMost);
     }
     
+    // Trys to create a new borough window with the listings in the borough in the price range.
     private void createBoroughWindow(Borough borough)
     {
-        BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindowWithListings(borough, boroughListings);
+        try
+        {
+            BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindowWithListings(borough, boroughListingsInPriceRange);
+        }
+        catch (EmptyListException ele)
+        {
+            emptyBoroughWarningAlert(borough.getName());
+        }
     }
+    
+    //Creates a warning alert when a borough with no properties in the price range is clicked.
+    private void emptyBoroughWarningAlert(String boroughName)
+    {
+        Alert invalidRange = new Alert(AlertType.WARNING);
+        invalidRange.setTitle("Warning");
+        invalidRange.setHeaderText("Empty Borough");
+        invalidRange.setContentText(String.format("There are no properties in %s in the selected price range.", boroughName));
+        invalidRange.showAndWait();
+    } 
 }

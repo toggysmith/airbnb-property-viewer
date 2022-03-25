@@ -1,5 +1,3 @@
-// @TODO: Refactor class
-
 /**
  * A circular list that has no end and no beginning, only the current position.
  *
@@ -34,7 +32,6 @@ public class CircularLinkedList<E> implements CircularList<E>
         {
             return null;
         }
-        
         return currentNode.getElement();
     }
     
