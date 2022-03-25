@@ -428,9 +428,6 @@ public  class interactiveStat extends stat
     {
         super(wrapPane,title,value,titleText);
         this.destinationType = destinationType;
-        
-        
-            
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Interactive-stat-pane.fxml"));
@@ -447,6 +444,7 @@ public  class interactiveStat extends stat
         
         
     }
+    
     private DestinationType getDesType()
     {
     return destinationType;
@@ -465,6 +463,7 @@ public  class interactiveStat extends stat
     this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
    }
 
+   
 }
 
 

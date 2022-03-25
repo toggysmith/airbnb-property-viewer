@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
@@ -22,4 +23,7 @@
          </children>
       </HBox>
    </center>
+   <bottom>
+      <Label text="Label" BorderPane.alignment="CENTER_LEFT" />
+   </bottom>
 </BorderPane>

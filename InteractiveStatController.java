@@ -20,16 +20,20 @@ public class InteractiveStatController extends Controller
     @FXML public ComboBox<String> boroughs;
     @FXML public ComboBox<String> propertyName;
     @FXML public ComboBox<String> price;
+    @FXML public Label locationsResult;
     
     private ArrayList<DestinationListing> destinations;
     private ArrayList<DistanceDestinationPair> fiveClosestDestinations;
     private DestinationDistances desCalculator;
     private ArrayList<AirbnbListing> filteredListing;
+    
+    private StatController statController;
     public void updateBoxes(List<AirbnbListing> filteredListing,List<DestinationListing> typesDestinations, DestinationType desType)
     {
         boroughs.getItems().clear();
         price.getItems().clear();
         propertyName.getItems().clear();
+        //locationsResult.resetLabel()
         //reset boxes first to be sure
         this.filteredListing = new ArrayList<>(filteredListing);
         destinations = new ArrayList<>(typesDestinations);
@@ -83,7 +87,9 @@ public class InteractiveStatController extends Controller
     private void processPriceBox()
     {
         checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue()); 
+        displayResult();
     }
+    
     
     private void checkBoxes(String boroughSelected, String propertySelected,String priceSelected)
     {
@@ -97,16 +103,26 @@ public class InteractiveStatController extends Controller
            AirbnbListing selectedProperty = filteredListing.stream()
                                                            .filter(listing -> propertySelected.equals(listing.getName()) && boroughSelected.equals(listing.getNeighbourhood()))
                                                            .findFirst().orElse(null);
-                                          
-           if(selectedProperty == null){
-               System.out.println("Augusto can't code");
-           }
+        
            
            desCalculator = new DestinationDistances();
            desCalculator.addDestinations(filteredDestinations, selectedProperty);
            fiveClosestDestinations = new ArrayList<DistanceDestinationPair>();
            fiveClosestDestinations = desCalculator.getFiveSmallest();
         }
+    }
+    
+    private void displayResult()
+    {
+        String output = "The closest locations are : /n ";
+        String names = new String();
+        for(DistanceDestinationPair eachDestination: fiveClosestDestinations){
+           names = "/n" + eachDestination.getDestination().getDestinationName() + " " + eachDestination.getDestination().getAddress() + " which is " + eachDestination.getDistance(); 
+        } 
+        
+        String result = output + names;
+        
+        locationsResult.setText(result);
     }
 } 
 

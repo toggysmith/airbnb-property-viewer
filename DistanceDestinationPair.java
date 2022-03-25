@@ -12,7 +12,7 @@ public class DistanceDestinationPair
           this.distance = distance;
       }
       
-      public DestinationListing getDestiantion()
+      public DestinationListing getDestination()
       {
           return destination;
       }
