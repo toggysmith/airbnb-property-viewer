@@ -11,10 +11,10 @@
          <children>
             <BorderPane>
                <left>
-                  <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" promptText="Select Borough Name:" BorderPane.alignment="CENTER" />
+                  <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
                </left>
                <center>
-                  <ComboBox fx:id="propertyName" disable="true" onAction="#processPropertiesBox" prefWidth="150.0" promptText="Select Property:" BorderPane.alignment="CENTER" />
+                  <ComboBox fx:id="propertyName" disable="true" onAction="#processPropertiesBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
                </center>
                <right>
                   <ComboBox fx:id="price" disable="true" onAction="#processPriceBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
@@ -24,6 +24,6 @@
       </HBox>
    </center>
    <bottom>
-      <Label fx:id="locationsResult" text="Label" BorderPane.alignment="CENTER_LEFT" />
+      <Label fx:id="locationsResult" BorderPane.alignment="CENTER_LEFT" />
    </bottom>
 </BorderPane>

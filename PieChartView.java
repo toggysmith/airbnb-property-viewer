@@ -47,16 +47,16 @@ public class PieChartView extends Stage
         int stepAmount;
         
         if( values.length < 7){
-            //call special pie chart creation
-            stepAmount = values.length;
+            pieValues.put("£ " + "0" + " - " + max, values.length);
         }else{
            stepAmount = (max - min) / 7;
-        }
-        
-        for(int i = min; min <= max; min += stepAmount){
+           for(int i = min; min <= max; min += stepAmount){
             int toValue = (int)retrieveSpeciedAmount(values,min, (min+stepAmount));
             pieValues.put("£ " + min  + " - " + (min+stepAmount),toValue);
         } 
+        }
+        
+        
     }
     
     private long retrieveSpeciedAmount(int[] values , int from, int to)

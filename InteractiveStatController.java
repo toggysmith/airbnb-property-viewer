@@ -27,13 +27,15 @@ public class InteractiveStatController extends Controller
     private DestinationDistances desCalculator;
     private ArrayList<AirbnbListing> filteredListing;
     
-    private StatController statController;
     public void updateBoxes(List<AirbnbListing> filteredListing,List<DestinationListing> typesDestinations, DestinationType desType)
     {
         boroughs.getItems().clear();
         price.getItems().clear();
         propertyName.getItems().clear();
-        //locationsResult.resetLabel()
+        boroughs.valueProperty().set(null);
+         price.valueProperty().set(null);
+          propertyName.valueProperty().set(null);
+        locationsResult.setText("");
         //reset boxes first to be sure
         this.filteredListing = new ArrayList<>(filteredListing);
         destinations = new ArrayList<>(typesDestinations);
@@ -46,15 +48,22 @@ public class InteractiveStatController extends Controller
         //propertyName.getItems().addAll(propertiesList);
         //price.getItems().addAll(pricesList);
         if(desType.equals(DestinationType.PUB)){
+            boroughs.setPromptText("Select Borough Name:");
+            propertyName.setPromptText("Select Property:");
             price.setPromptText("Pub Price Range");
             ArrayList<String> categories = new ArrayList<>(Arrays.asList("£", "££", "£££"));
             price.getItems().addAll(categories);
 
         }else if(desType.equals(DestinationType.ATTRACTION)){
+            boroughs.setPromptText("Select Borough Name:");
+            propertyName.setPromptText("Select Property:");
             price.setPromptText("Ticket Price");
             ArrayList<String> tickets = new ArrayList<>(Arrays.asList("free", "£2.50 - £5.00","£5.00 - £7.00", "£7.00 - £9.00"));
             price.getItems().addAll(tickets);
         }
+        
+        propertyName.setDisable(true);
+        price.setDisable(true);
     }
     
     
@@ -68,10 +77,11 @@ public class InteractiveStatController extends Controller
                                                     .map(listing -> listing.getName())
                                                     .distinct()
                                                     .collect(Collectors.toList());
-                                            
+          propertyName.getItems().clear();
+          propertyName.setPromptText("Select Property");
           propertyName.getItems().addAll(properties);
           propertyName.setDisable(false);
-          
+          checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
        }
     }
     
@@ -80,6 +90,7 @@ public class InteractiveStatController extends Controller
     {
         if(propertyName.getValue() != null){
             price.setDisable(false);
+            checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
         }
     }
     
@@ -87,9 +98,7 @@ public class InteractiveStatController extends Controller
     private void processPriceBox()
     {
         checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue()); 
-        displayResult();
     }
-    
     
     private void checkBoxes(String boroughSelected, String propertySelected,String priceSelected)
     {
@@ -109,15 +118,16 @@ public class InteractiveStatController extends Controller
            desCalculator.addDestinations(filteredDestinations, selectedProperty);
            fiveClosestDestinations = new ArrayList<DistanceDestinationPair>();
            fiveClosestDestinations = desCalculator.getFiveSmallest();
+           displayResult();
         }
     }
     
     private void displayResult()
     {
-        String output = "The closest locations are : /n ";
+        String output = "The closest locations are : \n ";
         String names = new String();
         for(DistanceDestinationPair eachDestination: fiveClosestDestinations){
-           names = "/n" + eachDestination.getDestination().getDestinationName() + " " + eachDestination.getDestination().getAddress() + " which is " + eachDestination.getDistance(); 
+           names = names + "\n" + eachDestination.getDestination().getDestinationName() + " " + eachDestination.getDestination().getAddress() + " which is " + eachDestination.getDistance() + " km"; 
         } 
         
         String result = output + names;
