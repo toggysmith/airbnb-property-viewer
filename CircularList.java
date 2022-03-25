@@ -1,62 +1,42 @@
-import java.util.ArrayList;
-import javafx.scene.layout.Pane;
-import java.util.List;
-
 /**
  * A circular list that has no end and no beginning, only the current position.
  *
- * @author Adam Murray K21003575
- * @version 11/03/2022
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
-public class CircularList
+public interface CircularList<E>
 {
-    private List<Pane> list;
-    private int currentItem;
-
     /**
-     * Constructor for objects of class CircularList
+     * Gets the next element from the list.
+     * @return The next element in the list.
      */
-    public CircularList()
-    {
-        list = new ArrayList<>();
-        currentItem = 0;
-    }
+    public E getNext();
     
     /**
-     * Gets the next pane from the list.
-     * @return The next pane in the list.
+     * Gets the previous element from the list.
+     * @return The previous element in the list.
      */
-    public Pane getNext()
-    {
-        if (list.size() == 0)
-        {
-            return null;
-        }
-        currentItem = (currentItem + 1) % list.size();
-        return list.get(currentItem);
-    }
+    public E getPrev();
     
     /**
-     * Gets the previous pane from the list.
-     * @return The previous pane in the list.
+     * Gets the current element from the list.
+     * @return The current element in the list.
      */
-    public Pane getPrev()
-    {
-        if (list.size() == 0)
-        {
-            return null;
-        }
-        currentItem = list.size() - ((list.size() - currentItem) % list.size()) - 1;
-        return list.get(currentItem);
-    }
+    public E getCurrent();
     
     /**
-     * Adds a pane to the list.
-     * The pane is added so that it will appear after the previously added pane.
-     * @param pane The pane to be added.
+     * Adds an element to the list.
+     * The element is added so that it will appear after the previously added element.
+     * @param element The element to be added.
      */
-    public void add(Pane pane)
-    {
-        list.add(pane);
-    }
+    public void add(E element);
+    
+    /**
+     * Gets the number of elements in the list.
+     * @return The number of elements in the list.
+     */
+    public int size();
 }

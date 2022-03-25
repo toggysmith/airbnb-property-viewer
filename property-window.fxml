@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PropertyWindowController">
+   <right>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <Label fx:id="propertyName" text="Property name: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hostName" text="Host name: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="boroughName" text="Borough: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="roomType" text="Room type: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price" text="Price: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="minimumNights" text="Minimum number of nights: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberOfReviews" text="Number of reviews: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="availability" text="Number of days available in a year: %s">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" right="10.0" />
+               </padding>
+            </VBox>
+            <Label text="Other properties from this host:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TableView fx:id="otherPropertiesTable" prefHeight="800.0" prefWidth="765.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Name" />
+                <TableColumn fx:id="priceColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Price" />
+                  <TableColumn fx:id="reviewsColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Number of reviews" />
+                  <TableColumn fx:id="minNightsColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Min number of nights" />
+                  <TableColumn fx:id="boroughColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" sortable="false" text="Borough" />
+              </columns>
+            </TableView>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+   </right>
+   <center>
+      <BorderPane fx:id="mapContainer" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER" />
+   </center>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</BorderPane>

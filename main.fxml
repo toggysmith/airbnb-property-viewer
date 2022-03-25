@@ -4,86 +4,42 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
-   <top>
-      <BorderPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <right>
-            <HBox spacing="10.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="From:">
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="fromRangeBox" layoutX="51.0" layoutY="10.0" promptText="-">
-                     <padding>
-                        <Insets left="4.0" right="12.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ComboBox>
-                  <Label text="To:">
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <ComboBox fx:id="toRangeBox" layoutX="51.0" layoutY="10.0" promptText="-">
-                     <padding>
-                        <Insets left="4.0" right="12.0" />
-                     </padding>
-                  </ComboBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets right="10.0" />
-               </BorderPane.margin>
-            </HBox>
-         </right>
-      </BorderPane>
-   </top>
-   <padding>
-      <Insets top="10.0" />
-   </padding>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <bottom>
-      <BorderPane prefHeight="27.0" prefWidth="600.0" style="-fx-border-image-slice: black;" BorderPane.alignment="CENTER">
-         <left>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="&lt;" translateX="5.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin></Button>
-         </left>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <right>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="&gt;" translateX="-5.0" BorderPane.alignment="CENTER" />
-         </right>
-      </BorderPane>
+      <AnchorPane id="footer" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="left_navigation_button" fx:id="leftButton" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#prevPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Button id="right_navigation_button" fx:id="rightButton" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#nextPane" styleClass="navigation_button" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+         </children>
+      </AnchorPane>
    </bottom>
    <center>
-      <SplitPane dividerPositions="0.9908312958435208" orientation="VERTICAL" prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.0" prefHeight="100.0" prefWidth="160.0">
-               <padding>
-                  <Insets top="320.0" />
-               </padding>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-        </items>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      <Pane fx:id="switchPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
-      </SplitPane>
+      </Pane>
    </center>
+   <top>
+      <AnchorPane id="header" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label id="heading" alignment="CENTER_RIGHT" text="Price Range (£)" />
+                  <ComboBox fx:id="fromRangeBox" focusTraversable="false" onAction="#processFromBox" prefWidth="150.0" promptText="From:" />
+                  <ComboBox fx:id="toRangeBox" focusTraversable="false" onAction="#processToBox" prefWidth="150.0" promptText="To:" />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </HBox>
+            <Label id="title" text="Airbnb Property Viewer" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

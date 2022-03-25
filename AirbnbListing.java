@@ -1,11 +1,14 @@
- 
-
 /**
  * Represents one listing of a property for rental on Airbnb.
  * This is essentially one row in the data table. Each column
  * has a corresponding field.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */ 
-
 public class AirbnbListing {
     /**
      * The id and name of the individual property
@@ -164,5 +167,27 @@ public class AirbnbListing {
                 ", calculatedHostListingsCount=" + calculatedHostListingsCount +
                 ", availability365=" + availability365 +
                 '}';
+    }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+        if (!(object instanceof AirbnbListing))
+        {
+            return false;
+        }
+        AirbnbListing listing = (AirbnbListing) object;
+        return id.equals(listing.getId());
+    }
+    
+    public int hashCode()
+    {
+        int result = 17;
+        result = 37 * result + id.hashCode();
+        return result;
     }
 }

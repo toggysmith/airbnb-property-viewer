@@ -1,0 +1,117 @@
+
+@font-face
+{
+    fx-font-family: 'Inter';
+    src: ('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+}
+
+.root
+{
+    -fx-font-size: 12px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background: #16161a;
+}
+
+.label
+{
+    -fx-text-fill: #94a1b2;
+}
+
+#title, #special
+{
+    -fx-font-weight: 900;
+    -fx-font-size: 25px;
+    -fx-text-fill: linear-gradient(to top right, #8B37FF, #5DBCF4);
+}
+
+#special
+{
+    -fx-font-size: 100px;
+}
+
+#heading
+{
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.button
+{
+    -fx-background-color: #7f5af0;
+    -fx-text-fill: #fffffe;
+    -fx-transition: all .3 ease;
+}
+
+.button:hover
+{
+    -fx-background-color: #8865f3;
+}
+
+.button:disabled, .button:disabled > *
+{
+    -fx-background-color: #CBCBCB;
+    -fx-text-fill: #303035;
+}
+
+.polygon
+{
+    -fx-background-color: #000000;
+}
+
+#left_navigation_button
+{
+    -fx-graphic: url("white-left-arrow.png");
+}
+
+#left_navigation_button:disabled
+{
+    -fx-graphic: url("black-left-arrow.png");
+}
+
+#right_navigation_button
+{
+    -fx-graphic: url("white-right-arrow.png");
+}
+
+#right_navigation_button:disabled
+{
+    -fx-graphic: url("black-right-arrow.png");
+}
+
+#header, #footer
+{
+    -fx-background-color: #252529;
+}
+
+.combo-box{
+    -fx-background-color: #7f5af0;
+    -fx-text-fill: #FFFFFF;
+     border: 1px solid #999;
+    }
+    
+.combo-box-base {
+    -fx-border-radius: 5.0;
+    -fx-background-radius: 5.0;
+}
+
+.combo-box-base:showing {
+    -fx-border-radius: 5.0 5.0 0.0 0.0;
+    -fx-background-radius: 5.0 5.0 0.0 0.0;
+}
+
+.combo-box .list-cell {
+    -fx-background-insets: 2.0;
+    -fx-background-radius: 3.0;
+    -fx-background-color: #7f5af0;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #0096C9;
+}
+
+.combo-box .list-view {
+    -fx-padding: 5.0 0.0;
+    -fx-border-radius: 0.0 0.0 5.0 5.0;
+    -fx-background-radius: 0.0 0.0 5.0 5.0;
+}
