@@ -9,7 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
-
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import javafx.scene.control.*;
 import java.util.*;
 import java.util.HashMap;
@@ -86,7 +87,7 @@ public class StatController extends Controller
       private static final String roomNeeded = "Entire home/apt";
       private static List<StatisticsListing> statListings;
 
-    
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     
     
     
@@ -211,18 +212,23 @@ public class StatController extends Controller
      * returns the average number of reviews per property
      * (statistic 1)
      */
-    public int averagePropertyView() {
+    public String averagePropertyView() {
         
         List<AirbnbListing> filtered = filterPrice(airbnbListings);
         
          int average = filtered.stream()
                        .mapToInt(listing -> listing.getNumberOfReviews())
                        .sum();
-         long count = airbnbListings.stream()
+         long count = filtered.stream()
                      .count();
-        int l = (int)count;
-                     return average/l;
+        double l = (double)count;
+        //Need a try-catch as initially the program will try to divide zero by zerp
+        try {
+            return df.format(average/l);
                      
+            } catch (Exception e) {
+              return null;          
+            }
     }
     
     private List<AirbnbListing> filterPrice(List<AirbnbListing> unfilteredList)
@@ -309,7 +315,7 @@ public class StatController extends Controller
                                sScore.getAnxietyScore();
             if(maxSocial > highestSocial) {
                 highestSocial = maxSocial;
-                boroughSocial = sScore.getBoroughName() + ": " + Math.round(highestSocial) + "/30";
+                boroughSocial = sScore.getBoroughName() + ": " + df.format(highestSocial);
             }
         }
         return boroughSocial;
