@@ -3,25 +3,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InteractiveStatController">
    <children>
-      <HBox>
+      <HBox fx:id="comboBoxContainer">
          <children>
-            <BorderPane>
-               <left>
-                  <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
-               </left>
-               <center>
-                  <ComboBox fx:id="propertyName" disable="true" onAction="#processPropertiesBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
-               </center>
-               <right>
-                  <ComboBox fx:id="price" disable="true" onAction="#processPriceBox" prefWidth="150.0" BorderPane.alignment="CENTER" />
-               </right>
-            </BorderPane>
+            <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" />
+            <ComboBox fx:id="propertyName" disable="true" onAction="#processPropertiesBox" prefWidth="150.0" />
+            <ComboBox fx:id="price" disable="true" onAction="#processPriceBox" prefWidth="150.0" />
          </children>
       </HBox>
       <VBox prefHeight="146.0">

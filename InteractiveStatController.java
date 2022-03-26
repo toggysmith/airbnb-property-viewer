@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableRow;
+import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 
 import java.util.Arrays;
 /**
@@ -21,6 +23,8 @@ import java.util.Arrays;
  */
 public class InteractiveStatController extends Controller
 {
+    @FXML public HBox comboBoxContainer;
+    
     @FXML public ComboBox<String> boroughs;
     @FXML public ComboBox<String> propertyName;
     @FXML public ComboBox<String> price;
@@ -34,6 +38,8 @@ public class InteractiveStatController extends Controller
     private ArrayList<DistanceDestinationPair> fiveClosestDestinations;
     private DestinationDistances desCalculator;
     private ArrayList<AirbnbListing> filteredListing;
+    
+    private DestinationType desType;
     
     @FXML
     public void initialize()
@@ -71,9 +77,8 @@ public class InteractiveStatController extends Controller
     
     public void updateBoxes(List<AirbnbListing> filteredListing,List<DestinationListing> typesDestinations, DestinationType desType)
     {
-        boroughs.getItems().clear();
-        price.getItems().clear();
-        propertyName.getItems().clear();
+        this.desType = desType;
+        createNewComboBoxes();
         locationsResult.getItems().clear();
         //reset boxes first to be sure
         this.filteredListing = new ArrayList<>(filteredListing);
@@ -100,12 +105,45 @@ public class InteractiveStatController extends Controller
             ArrayList<String> tickets = new ArrayList<>(Arrays.asList("free", "£2.50 - £5.00","£5.00 - £7.00", "£7.00 - £9.00"));
             price.getItems().addAll(tickets);
         }
-        
+
         propertyName.setDisable(true);
         price.setDisable(true);
     }
     
+    private void createNewComboBoxes()
+    {
+        createNewBoroughComboBox();
+        createNewPropertyComboBox();
+        createNewPriceComboBox();
+    }
     
+    private void createNewBoroughComboBox()
+    {
+        comboBoxContainer.getChildren().remove(boroughs);
+        boroughs = new ComboBox<String>();
+        boroughs.setOnAction(e -> processBoroughsBox());
+        boroughs.setPrefWidth(150);
+        comboBoxContainer.getChildren().add(0, boroughs);
+    }
+    
+    private void createNewPropertyComboBox()
+    {
+        comboBoxContainer.getChildren().remove(propertyName);
+        propertyName = new ComboBox<String>();
+        propertyName.setOnAction(e -> processPropertiesBox());
+        propertyName.setPrefWidth(150);
+        comboBoxContainer.getChildren().add(1, propertyName);
+    }
+
+    private void createNewPriceComboBox()
+    {
+        comboBoxContainer.getChildren().remove(price);
+        price = new ComboBox<String>();
+        price.setOnAction(e -> processPriceBox());
+        price.setPrefWidth(150);
+        comboBoxContainer.getChildren().add(2, price);
+    }
+
     @FXML
     private void processBoroughsBox()
     {
@@ -116,10 +154,24 @@ public class InteractiveStatController extends Controller
                                                     .map(listing -> listing.getName())
                                                     .distinct()
                                                     .collect(Collectors.toList());
-          propertyName.getItems().clear();
+                                                                                          
+          createNewPropertyComboBox();
           propertyName.setPromptText("Select Property");
           propertyName.getItems().addAll(properties);
           propertyName.setDisable(false);
+          createNewPriceComboBox();
+          price.setDisable(true);
+          if(desType.equals(DestinationType.PUB)){
+            price.setPromptText("Pub Price Range");
+            ArrayList<String> categories = new ArrayList<>(Arrays.asList("£", "££", "£££"));
+            price.getItems().addAll(categories);
+
+        }else if(desType.equals(DestinationType.ATTRACTION)){
+            price.setPromptText("Ticket Price");
+            ArrayList<String> tickets = new ArrayList<>(Arrays.asList("free", "£2.50 - £5.00","£5.00 - £7.00", "£7.00 - £9.00"));
+            price.getItems().addAll(tickets);
+        }
+        locationsResult.getItems().clear();
           checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
        }
     }
