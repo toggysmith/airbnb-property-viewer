@@ -37,7 +37,7 @@
          <center>
             <BorderPane BorderPane.alignment="CENTER">
                <center>
-                  <Label fx:id="statLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="70.0" text="Label" textAlignment="CENTER">
+                  <Label fx:id="statLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="70.0" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
