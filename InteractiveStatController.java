@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableRow;
 import javafx.scene.layout.HBox;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 
 import java.util.Arrays;
 /**
@@ -41,6 +42,9 @@ public class InteractiveStatController extends Controller
     
     private DestinationType desType;
     
+    /**
+     * Creates the table.
+     */
     @FXML
     public void initialize()
     {
@@ -48,6 +52,9 @@ public class InteractiveStatController extends Controller
         setOnRowClicked();
     }
     
+    /**
+     * Assigns what fields will go in which row.
+     */
     private void createTable()
     {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -55,11 +62,17 @@ public class InteractiveStatController extends Controller
         distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
     }
     
+    /**
+     * Defines what happens when a row is clicked in the row factory
+     */
     protected void setOnRowClicked()
     {
         locationsResult.setRowFactory(e -> tableClicked());
     }
 
+    /**
+     * Defines what happens when a row is clicked.
+     */
     private TableRow<InteractiveStatsTableValues> tableClicked()
     {
         TableRow<InteractiveStatsTableValues> row = new TableRow<>();
@@ -67,6 +80,9 @@ public class InteractiveStatController extends Controller
         return row;
     }
 
+    /**
+     * Creates a diestination window for the destination in the row clicked.
+     */
     private void rowClicked(TableRow<InteractiveStatsTableValues> row)
     {
         if (! row.isEmpty()) {
@@ -75,7 +91,7 @@ public class InteractiveStatController extends Controller
         }
     }
     
-    public void updateBoxes(List<AirbnbListing> filteredListing,List<DestinationListing> typesDestinations, DestinationType desType)
+    public void updateBoxes(List<AirbnbListing> filteredListing, List<DestinationListing> typesDestinations, DestinationType desType)
     {
         this.desType = desType;
         createNewComboBoxes();
@@ -110,6 +126,9 @@ public class InteractiveStatController extends Controller
         price.setDisable(true);
     }
     
+    /**
+     * Creates the new combo boxes.
+     */
     private void createNewComboBoxes()
     {
         createNewBoroughComboBox();
@@ -117,6 +136,9 @@ public class InteractiveStatController extends Controller
         createNewPriceComboBox();
     }
     
+    /**
+     * Creates a new Combo box for the borough.
+     */
     private void createNewBoroughComboBox()
     {
         comboBoxContainer.getChildren().remove(boroughs);
@@ -126,6 +148,9 @@ public class InteractiveStatController extends Controller
         comboBoxContainer.getChildren().add(0, boroughs);
     }
     
+    /**
+     * Creates a new Combo box for the property.
+     */
     private void createNewPropertyComboBox()
     {
         comboBoxContainer.getChildren().remove(propertyName);
@@ -135,6 +160,9 @@ public class InteractiveStatController extends Controller
         comboBoxContainer.getChildren().add(1, propertyName);
     }
 
+    /**
+     * Creates a new Combo box for the price.
+     */
     private void createNewPriceComboBox()
     {
         comboBoxContainer.getChildren().remove(price);
@@ -213,6 +241,9 @@ public class InteractiveStatController extends Controller
         }
     }
     
+    /**
+     * Displays the 5 closest destinations in a table
+     */
     private void displayResult()
     {
         locationsResult.getItems().clear();
@@ -220,6 +251,15 @@ public class InteractiveStatController extends Controller
             InteractiveStatsTableValues value = new InteractiveStatsTableValues(eachDestination);
             locationsResult.getItems().add(value);
         } 
+    }
+    
+    /**
+     * Resets the comboxes and the table using the values already stored.
+     */
+    @FXML
+    public void updateBoxesButtonPressed()
+    {
+        updateBoxes(filteredListing, destinations, desType);
     }
 } 
 

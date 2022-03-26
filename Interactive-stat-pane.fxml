@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,11 +9,16 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InteractiveStatController">
    <children>
-      <HBox fx:id="comboBoxContainer">
+      <HBox>
          <children>
-            <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" />
-            <ComboBox fx:id="propertyName" disable="true" onAction="#processPropertiesBox" prefWidth="150.0" />
-            <ComboBox fx:id="price" disable="true" onAction="#processPriceBox" prefWidth="150.0" />
+            <HBox fx:id="comboBoxContainer">
+               <children>
+                  <ComboBox fx:id="boroughs" onAction="#processBoroughsBox" prefWidth="150.0" />
+                  <ComboBox fx:id="propertyName" disable="true" onAction="#processPropertiesBox" prefWidth="150.0" />
+                  <ComboBox fx:id="price" disable="true" onAction="#processPriceBox" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#updateBoxesButtonPressed" text="Reset Values" />
          </children>
       </HBox>
       <VBox prefHeight="146.0">
