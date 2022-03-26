@@ -103,9 +103,8 @@ public class PropertyWindowController extends Controller
     private void addPropertyToJsFile()
     {
         String id = listing.getId();
-        int price = listing.getPrice();
 
-        String jsObject = String.format("{id: %s, longitude: %f, latitude: %f, price: %d}", id, longitude, latitude, price);
+        String jsObject = String.format("{id: %s, longitude: %f, latitude: %f}", id, longitude, latitude);
         String jsScript = String.format("addMarker(%s);", jsObject);
 
         openLayersMap.executeScript(jsScript, true);

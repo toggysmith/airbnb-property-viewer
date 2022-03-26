@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InteractiveStatController">
-   <center>
-      <HBox BorderPane.alignment="CENTER">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InteractiveStatController">
+   <children>
+      <HBox>
          <children>
             <BorderPane>
                <left>
@@ -22,8 +24,20 @@
             </BorderPane>
          </children>
       </HBox>
-   </center>
-   <bottom>
-      <Label fx:id="locationsResult" BorderPane.alignment="CENTER_LEFT" />
-   </bottom>
-</BorderPane>
+      <VBox prefHeight="146.0">
+         <children>
+            <HBox>
+               <children>
+                  <TableView fx:id="locationsResult" prefWidth="465.0">
+                    <columns>
+                      <TableColumn fx:id="nameColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Name" />
+                      <TableColumn fx:id="addressColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Address" />
+                        <TableColumn fx:id="distanceColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" reorderable="false" sortable="false" text="Distance" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

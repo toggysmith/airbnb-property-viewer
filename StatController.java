@@ -2,6 +2,7 @@
 
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
@@ -437,7 +438,7 @@ public  class interactiveStat extends stat
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Interactive-stat-pane.fxml"));
-             BorderPane contentPane = loader.load();
+            VBox contentPane = loader.load();
             interactiveStatController = loader.getController();
             wrapPane.setCenter(contentPane);
         }

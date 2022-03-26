@@ -7,6 +7,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import java.util.List;
 import java.util.ArrayList;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableRow;
 
 import java.util.Arrays;
 /**
@@ -20,22 +24,57 @@ public class InteractiveStatController extends Controller
     @FXML public ComboBox<String> boroughs;
     @FXML public ComboBox<String> propertyName;
     @FXML public ComboBox<String> price;
-    @FXML public Label locationsResult;
+    
+    @FXML public TableView<InteractiveStatsTableValues> locationsResult;
+    @FXML private TableColumn<InteractiveStatsTableValues, String> nameColumn;
+    @FXML private TableColumn<InteractiveStatsTableValues, String> addressColumn;
+    @FXML private TableColumn<InteractiveStatsTableValues, String> distanceColumn;
     
     private ArrayList<DestinationListing> destinations;
     private ArrayList<DistanceDestinationPair> fiveClosestDestinations;
     private DestinationDistances desCalculator;
     private ArrayList<AirbnbListing> filteredListing;
     
+    @FXML
+    public void initialize()
+    {
+        createTable();
+        setOnRowClicked();
+    }
+    
+    private void createTable()
+    {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+    }
+    
+    protected void setOnRowClicked()
+    {
+        locationsResult.setRowFactory(e -> tableClicked());
+    }
+
+    private TableRow<InteractiveStatsTableValues> tableClicked()
+    {
+        TableRow<InteractiveStatsTableValues> row = new TableRow<>();
+        row.setOnMouseClicked(event -> rowClicked(row));
+        return row;
+    }
+
+    private void rowClicked(TableRow<InteractiveStatsTableValues> row)
+    {
+        if (! row.isEmpty()) {
+            InteractiveStatsTableValues listing = row.getItem();
+            DestinationWindowFactory.getDestinationWindowFactory().newDestinationWindow(listing.getDistanceDestinationPair().getDestination());
+        }
+    }
+    
     public void updateBoxes(List<AirbnbListing> filteredListing,List<DestinationListing> typesDestinations, DestinationType desType)
     {
         boroughs.getItems().clear();
         price.getItems().clear();
         propertyName.getItems().clear();
-        boroughs.valueProperty().set(null);
-         price.valueProperty().set(null);
-          propertyName.valueProperty().set(null);
-        locationsResult.setText("");
+        locationsResult.getItems().clear();
         //reset boxes first to be sure
         this.filteredListing = new ArrayList<>(filteredListing);
         destinations = new ArrayList<>(typesDestinations);
@@ -124,15 +163,11 @@ public class InteractiveStatController extends Controller
     
     private void displayResult()
     {
-        String output = "The closest locations are : \n ";
-        String names = new String();
+        locationsResult.getItems().clear();
         for(DistanceDestinationPair eachDestination: fiveClosestDestinations){
-           names = names + "\n" + eachDestination.getDestination().getDestinationName() + " " + eachDestination.getDestination().getAddress() + " which is " + eachDestination.getDistance() + " km"; 
+            InteractiveStatsTableValues value = new InteractiveStatsTableValues(eachDestination);
+            locationsResult.getItems().add(value);
         } 
-        
-        String result = output + names;
-        
-        locationsResult.setText(result);
     }
 } 
 
