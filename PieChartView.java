@@ -46,8 +46,8 @@ public class PieChartView extends Stage
     {
         int stepAmount;
         
-        if( values.length < 7){
-            pieValues.put("£ " + "0" + " - " + max, values.length);
+        if( (max - min) < 15){
+            pieValues.put("£ " + min + " - " + max, values.length);
         }else{
            stepAmount = (max - min) / 7;
            for(int i = min; min <= max; min += stepAmount){
