@@ -5,9 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="385.0" prefWidth="581.0">
          <left>
@@ -29,10 +29,24 @@
                <BorderPane.margin>
                   <Insets top="10.0" />
                </BorderPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Label>
          </top>
          <center>
-            <Label fx:id="statLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="70.0" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+            <BorderPane BorderPane.alignment="CENTER">
+               <center>
+                  <Label fx:id="statLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="70.0" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </center>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </BorderPane>
          </center>
       </BorderPane>
    </children>

@@ -438,7 +438,7 @@ public  class interactiveStat extends stat
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Interactive-stat-pane.fxml"));
-            VBox contentPane = loader.load();
+            BorderPane contentPane = loader.load();
             interactiveStatController = loader.getController();
             wrapPane.setCenter(contentPane);
         }
