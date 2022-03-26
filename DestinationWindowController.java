@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Label;
 
 /**
  * Write a description of class DestinationWindowController here.
@@ -10,6 +11,10 @@ import javafx.scene.layout.BorderPane;
 public class DestinationWindowController extends Controller
 {
     @FXML private BorderPane mapContainer;
+    
+    @FXML private Label destinationName;
+    @FXML private Label address;
+    @FXML private Label boroughName;
     
     private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 16, -0.115937, 51.511437);
     
@@ -41,6 +46,7 @@ public class DestinationWindowController extends Controller
 
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
         addDestinationToJsFile();
+        populateLabels();
     }
     
     // Gives the Js file this properties info so that a marker can be placed on the map at its location.
@@ -52,5 +58,13 @@ public class DestinationWindowController extends Controller
         String jsScript = String.format("addMarker(%s);", jsObject);
 
         openLayersMap.executeScript(jsScript, true);
+    }
+    
+    //Adds the property details to the labels provided.
+    private void populateLabels()
+    {
+        destinationName.setText(String.format(destinationName.getText(), listing.getDestinationName()));
+        address.setText(String.format(address.getText(), listing.getAddress()));
+        boroughName.setText(String.format(boroughName.getText(), listing.getBorough()));
     }
 }
