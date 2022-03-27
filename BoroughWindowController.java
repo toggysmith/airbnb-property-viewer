@@ -1,5 +1,3 @@
-// @TODO: Refactor class
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import java.util.List;
@@ -46,9 +44,13 @@ public class BoroughWindowController extends Controller
     @FXML private ComboBox attributeBox;
     
     @FXML private BorderPane mapContainer;
-    private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 11, -0.115937, 51.511437);
+    
+    private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 11, -0.115937, 51.511437); // Creates a map with the centre around the stand campus.
 
 
+    /**
+     * Adds the map to the pane that is shown and gives the map the ability to show markers.
+     */
     @FXML
     public void initialize()
     {
@@ -57,6 +59,12 @@ public class BoroughWindowController extends Controller
         openLayersMap.addBehaviour(OpenLayersMap.Behaviour.MARKER);
     }
     
+    /**
+     * Setsup the brorough window, populating the table and the combo box, and assigning the onClick methods.
+     * This also adds all the listings given to the map and sets the maps position as the average of those listings.
+     * @param listings The listings in the borough in the price range.
+     * @param boroughWindow The borough that the window is for.
+     */
     public void initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
     {
         this.boroughWindow = boroughWindow;
@@ -73,6 +81,10 @@ public class BoroughWindowController extends Controller
         setUpComboBox();
     }
     
+    /**
+     * Adds the listings to the table and assigns what attributes of those listings go in each column.
+     * @param listings The listings that will be displayed in the table.
+     */
     protected void populateTable(ObservableList<AirbnbListing> listings)
     {
         boroughTable.setItems(listings);
@@ -82,11 +94,17 @@ public class BoroughWindowController extends Controller
         minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
     }
     
+    /**
+     * Adds the different orders for th table to the combo box.
+     */
     protected void populateOrderBox()
     {
         orderBox.getItems().addAll(getSortBoxOptions());
     }
     
+    /**
+     * Maps the type of sort to the collumn that it will be sorting.
+     */
     private List<ComboBoxOrderEnum> getSortBoxOptions()
     {
         comboBoxOrder = new HashMap<>();
@@ -103,11 +121,17 @@ public class BoroughWindowController extends Controller
         return options;
     }
 
+    /**
+     * Sets the row factory for the table to make all rows call tableClicked().
+     */
     protected void setOnRowClicked()
     {
         boroughTable.setRowFactory(e -> tableClicked());
     }
 
+    /**
+     * Makes all the rows in the table call rowClicked() when they are clicked.
+     */
     private TableRow<AirbnbListing> tableClicked()
     {
         TableRow<AirbnbListing> row = new TableRow<>();
@@ -115,6 +139,9 @@ public class BoroughWindowController extends Controller
         return row;
     }
 
+    /**
+     * Makes the row that has been clicked create a property window for the listing that was being displayed in the row.
+     */
     private void rowClicked(TableRow<AirbnbListing> row)
     {
         if (! row.isEmpty()) {
@@ -123,11 +150,17 @@ public class BoroughWindowController extends Controller
         }
     }
     
+    /**
+     * Assigns the table to sort when the combo box is clicked.
+     */
     protected void assignSort()
     {
         orderBox.setOnAction(e -> sort(orderBox.getValue()));
     }
     
+    /**
+     * Sorts the table accoring to what is in the combo box.
+     */
     private void sort(ComboBoxOrderEnum comboBoxOrderEnum)
     {
         if (comboBoxOrderEnum == null)
@@ -146,6 +179,9 @@ public class BoroughWindowController extends Controller
         column.setSortable(false);
     }
     
+    /**
+     * Assigns the lables with the price range.
+     */
     protected void assignPriceLabels()
     {
         fromPrice.setText(String.format(fromPrice.getText(), boroughWindow.getFromPrice()));
@@ -207,6 +243,9 @@ public class BoroughWindowController extends Controller
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
     }
     
+    /**
+     * Adds the listings in the borough in the price range to the map.
+     */
     private void addPropertiesToJsFile(ObservableList<AirbnbListing> listings)
     {
         for (AirbnbListing listing : listings)

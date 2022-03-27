@@ -66,6 +66,24 @@ public class AirbnbListing {
      */
     private int availability365;
 
+    /**
+     * Constructor for AirbnbListing.
+     * @param id The id of the listing.
+     * @param name The name of the listing.
+     * @param host_id The id of the host.
+     * @param host_name The name of the host.
+     * @param neighbourhood The borough.
+     * @param latitude The latitude.
+     * @param longitude The longitude.
+     * @param room_type The room type.
+     * @param price The price per night.
+     * @param minimumNights The minimum number nights you can stay in a listing.
+     * @param numberOfReviews The number of reviews.
+     * @param lastReview The last review.
+     * @param reviewsPerMonth The number of reviews per month for the listing.
+     * @param calculatedHostListingsCount The number of listings by that host.
+     * @param availability365 The total number of days in the year that the property is available for.
+     */
     public AirbnbListing(String id, String name, String host_id,
                          String host_name, String neighbourhood, double latitude,
                          double longitude, String room_type, int price,
@@ -88,66 +106,117 @@ public class AirbnbListing {
         this.availability365 = availability365;
     }
 
+    /**
+     * @return The id of the listing.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @return The name of the listing.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return The id of the host.
+     */
     public String getHost_id() {
         return host_id;
     }
 
+    /**
+     * @return The name of the host.
+     */
     public String getHost_name() {
         return host_name;
     }
 
+    /**
+     * @return The borough.
+     */
     public String getNeighbourhood() {
         return neighbourhood;
     }
 
+    /**
+     * @return The latitude.
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * @return The longitude.
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * @return The room type.
+     */
     public String getRoom_type() {
         return room_type;
     }
 
+    /**
+     * @return The price per night.
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * @return The minimum number nights you can stay in a listing.
+     */
     public int getMinimumNights() {
         return minimumNights;
     }
 
+    /**
+     * @return The number of reviews.
+     */
     public int getNumberOfReviews() {
         return numberOfReviews;
     }
 
+    /**
+     * @return The last review.
+     */
     public String getLastReview() {
         return lastReview;
     }
 
+    /**
+     * @return The number of reviews per month for the listing.
+     */
     public double getReviewsPerMonth() {
         return reviewsPerMonth;
     }
 
+    /**
+     * @return The number of listings by that host.
+     */
     public int getCalculatedHostListingsCount() {
         return calculatedHostListingsCount;
     }
 
+    /**
+     * @return The availability.
+     */
     public int getAvailability365() {
         return availability365;
     }
 
+    /**
+     * Over rides the toString method to now output all the details of this listing.
+     * Returns "AirbnbListing{}" with all its details inside the {} 
+     * in the form: detail name + "='" + detail + "\'"
+     * @return The AirbnbLisings details.
+     */
     @Override
     public String toString() {
         return "AirbnbListing{" +
@@ -169,6 +238,10 @@ public class AirbnbListing {
                 '}';
     }
     
+    /**
+     * The equals of the Airbnb listing is now dependent on its id.
+     * @return True if the obeject has the same id, false if not.
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -184,6 +257,11 @@ public class AirbnbListing {
         return id.equals(listing.getId());
     }
     
+    /**
+     * The hashCode of the Airbnb listing is now dependent on its id.
+     * @return The hash code.
+     */
+    @Override
     public int hashCode()
     {
         int result = 17;

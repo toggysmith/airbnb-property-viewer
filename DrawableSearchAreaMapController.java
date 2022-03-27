@@ -107,6 +107,9 @@ public class DrawableSearchAreaMapController extends Controller
         openLayersMap.executeScript(jsScript, false);
     }
 
+    /**
+     * Gives the Js file all the listings that the propgram has.
+     */
     private void addPropertiesToJsFile()
     {
         for (AirbnbListing listing : AirbnbDataLoader.getListings())

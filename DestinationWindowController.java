@@ -3,10 +3,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
 
 /**
- * Write a description of class DestinationWindowController here.
+ * DestinationWindowController hosts FXML GUI elements.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class DestinationWindowController extends Controller
 {
@@ -16,7 +19,7 @@ public class DestinationWindowController extends Controller
     @FXML private Label address;
     @FXML private Label boroughName;
     
-    private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 16, -0.115937, 51.511437);
+    private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 16, -0.115937, 51.511437); // Creates a map with the centre around the stand campus.
     
     private double longitude;
     private double latitude;
@@ -35,8 +38,8 @@ public class DestinationWindowController extends Controller
     }
 
     /**
-     * This method sets up the window for the property listing that this window is for.
-     * @param listing The AirbnbListing for the property.
+     * This method sets up the window for the destination listing that this window is for.
+     * @param listing The DestinationListing for the destination.
      */
     public void setup(DestinationListing listing)
     {
@@ -49,7 +52,9 @@ public class DestinationWindowController extends Controller
         populateLabels();
     }
     
-    // Gives the Js file this properties info so that a marker can be placed on the map at its location.
+    /**
+     * Gives the Js file this destinations info so that a marker can be placed on the map at its location.
+     */ 
     private void addDestinationToJsFile()
     {
         String id = "111111";
@@ -60,7 +65,9 @@ public class DestinationWindowController extends Controller
         openLayersMap.executeScript(jsScript, true);
     }
     
-    //Adds the property details to the labels provided.
+    /**
+     * Adds the destination details to the labels provided.
+     */ 
     private void populateLabels()
     {
         destinationName.setText(String.format(destinationName.getText(), listing.getDestinationName()));

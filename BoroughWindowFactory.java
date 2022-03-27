@@ -19,7 +19,9 @@ public class BoroughWindowFactory
     private MainWindow mainWindow;
     private WindowHashSet<BoroughWindow> openBoroughWindows;
 
-    // Constructor for BoroughWindowFactory
+    /**
+     * Constructor for BoroughWindowFactory
+     */ 
     private BoroughWindowFactory()
     {
         openBoroughWindows = new WindowHashSet<>();
@@ -57,9 +59,11 @@ public class BoroughWindowFactory
         return boroughWindow;
     }
     
-    //This method checks if a boroughWindow for the given borough already exists,
-    // if so it finds that window and sets it to the front of the screen,
-    // if not it creates a new window for this borough
+    /**
+     * This method checks if a boroughWindow for the given borough already exists,
+     * if so it finds that window and sets it to the front of the screen,
+     * if not it creates a new window for this borough
+     */
     private BoroughWindow checkWindow(Borough borough, ObservableList<AirbnbListing> listings)
     {
         PriceRange priceRange = mainWindow.getRangeValues().getPriceRange();

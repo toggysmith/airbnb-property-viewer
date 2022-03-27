@@ -1,8 +1,8 @@
 /**
- * PropertyWindow acts as a port for creating 
- * a new visible window to show a property.
+ * DestinationWindow acts as a port for creating 
+ * a new visible window to show a destination.
  * This class mainly allows for the factory to
- * test if a window for a given property already exists.
+ * test if a window for a given destination already exists.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -16,7 +16,7 @@ public class DestinationWindow
     private DestinationWindowView destinationView;
     
     /**
-     * Constructor for objects of class PropertyWindow.
+     * Constructor for objects of class DestinationWindow.
      * @param listing The AirbnbListing that this window will be displaying.
      */
     public DestinationWindow(DestinationListing listing)
@@ -57,7 +57,7 @@ public class DestinationWindow
     }
     
     /**
-     * Alerts the PropertyWindowFactory that this window has been closed.
+     * Alerts the DestinationWindowFactory that this window has been closed.
      */
     public void windowClosed()
     {
@@ -67,8 +67,8 @@ public class DestinationWindow
     /**
      * Checks if a given object is equal to this one.
      * It determines if the objects are equals by testing
-     * if they are both of type PropertyWindow and if so
-     * if they contain the same AirbnbListing.
+     * if they are both of type DestinationWindow and if so
+     * if they contain the same DestinationListing.
      * @return True if the objects are the same, othewise false.
      */
     @Override

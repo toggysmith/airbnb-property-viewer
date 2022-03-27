@@ -105,8 +105,6 @@ public class InteractiveStatController extends Controller
                                                    .distinct()
                                                    .collect(Collectors.toList());
         boroughs.getItems().addAll(boroughsList);
-        //propertyName.getItems().addAll(propertiesList);
-        //price.getItems().addAll(pricesList);
         if(desType.equals(DestinationType.PUB)){
             boroughs.setPromptText("Select Borough Name:");
             propertyName.setPromptText("Select Property:");
@@ -175,7 +173,6 @@ public class InteractiveStatController extends Controller
     @FXML
     private void processBoroughsBox()
     {
-       //checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
        if(boroughs.getValue() != null){
            List<String> properties = filteredListing.stream()
                                                     .filter(listing -> boroughs.getValue().equals(listing.getNeighbourhood()))

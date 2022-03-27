@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 /**
- * PropertyWindowView creates the window that can be seen on screen for a given property listing.
+ * DestinationWindowView creates the window that can be seen on screen for a given destination listing.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)

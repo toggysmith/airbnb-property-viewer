@@ -14,8 +14,10 @@ public class Controller
 {
     protected List<Controller> controllers;
     
-
-    
+    /**
+     * Makes the list of controllers the one given.
+     * @param The new list of controllers.
+     */
     public void setControllers(List<Controller> controllers)
     {
         this.controllers = controllers;

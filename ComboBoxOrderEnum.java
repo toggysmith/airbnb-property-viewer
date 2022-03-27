@@ -1,5 +1,3 @@
-// @TODO: Refactor class
-
 import javafx.scene.control.TableColumn;
 
 /**

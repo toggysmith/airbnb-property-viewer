@@ -86,8 +86,10 @@ public class PropertyWindowController extends Controller
         setOnRowClicked();
     }
     
-    // This populates the table view with the given properties of the AirbnbListings given.
-    // This table is intended to display the other properties owned by the host that owns the property displayed in the window.
+    /**
+     * This populates the table view with the given properties of the AirbnbListings given.
+     * This table is intended to display the other properties owned by the host that owns the property displayed in the window.
+     */ 
     protected void populateTable(ObservableList<AirbnbListing> listings)
     {
         otherPropertiesTable.setPlaceholder(new Label("No other listings from this host found"));
@@ -99,7 +101,9 @@ public class PropertyWindowController extends Controller
         boroughColumn.setCellValueFactory(new PropertyValueFactory<>("neighbourhood"));
     }
 
-    // Gives the Js file this properties info so that a marker can be placed on the map at its location.
+    /**
+     * Gives the Js file this properties info so that a marker can be placed on the map at its location.
+     */ 
     private void addPropertyToJsFile()
     {
         String id = listing.getId();
@@ -110,7 +114,9 @@ public class PropertyWindowController extends Controller
         openLayersMap.executeScript(jsScript, true);
     }
 
-    //Adds the property details to the labels provided.
+    /**
+     * Adds the property details to the labels provided.
+     */ 
     private void populateLabels()
     {
         propertyName.setText(String.format(propertyName.getText(), listing.getName()));
@@ -123,13 +129,17 @@ public class PropertyWindowController extends Controller
         availability.setText(String.format(availability.getText(), listing.getAvailability365()));
     }
     
-    //Opens the row factory for the table view so that we can control what happens when the tabel is clicked.
+    /**
+     * Opens the row factory for the table view so that we can control what happens when the tabel is clicked.
+     */ 
     protected void setOnRowClicked()
     {
         otherPropertiesTable.setRowFactory(e -> tableClicked());
     }
 
-    // Sets a mouse clicked event for the in the table row.
+    /**
+     * Sets a mouse clicked event for the in the table row.
+     */ 
     private TableRow<AirbnbListing> tableClicked()
     {
         TableRow<AirbnbListing> row = new TableRow<>();
@@ -137,7 +147,9 @@ public class PropertyWindowController extends Controller
         return row;
     }
 
-    // Tells the table to try and create a new window for the listing in the table that was clicked.
+    /**
+     * Tells the table to try and create a new window for the listing in the table that was clicked.
+     */ 
     private void rowClicked(TableRow<AirbnbListing> row)
     {
         if (! row.isEmpty()) {

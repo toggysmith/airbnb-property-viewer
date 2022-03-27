@@ -109,6 +109,9 @@ public class MainView extends Stage
         return options;
     }
     
+    /**
+     * @return The main controller.
+     */
     public MainController getMainController()
     {
         return mainController;

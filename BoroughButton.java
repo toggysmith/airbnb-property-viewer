@@ -74,7 +74,9 @@ public class BoroughButton
         quantityVisualiser.setRangeUpperBound(noOfPropertiesInBoroughWithMost);
     }
     
-    // Trys to create a new borough window with the listings in the borough in the price range.
+    /**
+     * Trys to create a new borough window with the listings in the borough in the price range.
+     */ 
     private void createBoroughWindow(Borough borough)
     {
         try
@@ -87,7 +89,9 @@ public class BoroughButton
         }
     }
     
-    //Creates a warning alert when a borough with no properties in the price range is clicked.
+    /**
+     * Creates a warning alert when a borough with no properties in the price range is clicked.
+     */ 
     private void emptyBoroughWarningAlert(String boroughName)
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
