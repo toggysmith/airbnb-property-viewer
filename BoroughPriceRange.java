@@ -1,5 +1,3 @@
-// @TODO: Refactor class
-
 /**
  * Responsible for holding a selected borough and selected price range.
  *
@@ -24,16 +22,29 @@ public class BoroughPriceRange
         this.priceRange = priceRange;
     }
     
+    /**
+     * @return The borough.
+     */
     public Borough getBorough()
     {
         return borough;
     }
     
+    /**
+     * @return The priceRange.
+     */
     public PriceRange getPriceRange()
     {
         return priceRange;
     }
     
+    /**
+     * This checks if the given object is equal to this object
+     * based upton whether they store the same borough and
+     * the same price Range.
+     * @param object The object to test if its equal.
+     */
+    @Override
     public boolean equals(Object object)
     {
         if (this == object)
@@ -48,6 +59,12 @@ public class BoroughPriceRange
         return (getBorough().equals(boroughPriceRange.getBorough())) && (getPriceRange().equals(boroughPriceRange.getPriceRange()));
     }
     
+    /**
+     * The hash code for this object based upon the borough 
+     * and the price range.
+     * @return The hash code.
+     */
+    @Override
     public int hashCode()
     {
         int result = 17;

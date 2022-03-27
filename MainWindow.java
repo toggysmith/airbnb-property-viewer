@@ -1,15 +1,15 @@
-// @TODO: Refactor class
-
 import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 
 
 /**
- * Write a description of class MainWindow here.
+ * Responsible for holding the position of a listing.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class MainWindow
 {
@@ -37,48 +37,40 @@ public class MainWindow
         }
     }
     
+    /**
+     * @return The mainController.
+     */
     public MainController getMainController()
     {
         return mainController;
     }
     
+    /**
+     * @return The mainView.
+     */
     public MainView getMainView()
     {
         return mainView;
     }
     
+    /**
+     * This allows MainWindow to remain a singleton.
+     * @return The MainWindow.
+     */
     public static MainWindow getMainWindow()
     {
         if (mainWindow == null)
         {
             mainWindow = new MainWindow();
         }
-        
         return mainWindow;
     }
     
+    /**
+     * @return The rangeValues.
+     */
     public RangeValues getRangeValues()
     {
         return rangeValues;
     }
-    
-    /**
-     * Get the listings in a specific borough.
-     * @return The listings in a specific borough.
-     */
-    public ObservableList<AirbnbListing> getListingsInBorough(String targetBorough)
-    {
-        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
-        
-        listings = ListingManipulator.filterByBorough(listings, targetBorough);
-        
-        ObservableList<AirbnbListing> returnListings = FXCollections.observableArrayList();
-
-        for (AirbnbListing listing : listings)
-            returnListings.add(listing);
-        
-        return returnListings;
-    }
-    
-  
 }

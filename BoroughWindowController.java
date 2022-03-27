@@ -237,10 +237,35 @@ public class BoroughWindowController extends Controller
     
     private void setMapPosition(List<AirbnbListing> listings)
     {
-        Position position = ListingManipulator.getAveragePosition(listings);
+        Position position = getAveragePosition(listings);
         double longitude = position.getLongitude();
         double latitude = position.getLatitude();
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
+    }
+    
+    /**
+     * @param listings The listings to be sorted through.
+     * @return A Position object containing the average latitude and longitude of the listings.
+     */
+    public static Position getAveragePosition(List<AirbnbListing> listings)
+    {
+        try
+        {
+            return new Position(
+                 listings.stream()
+                .mapToDouble(listing -> listing.getLatitude())
+                .average()
+                .getAsDouble(),
+                
+                listings.stream()
+                .mapToDouble(listing -> listing.getLongitude())
+                .average()
+                .getAsDouble());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
     
     /**

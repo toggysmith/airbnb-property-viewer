@@ -1,5 +1,7 @@
 import java.util.stream.Collectors;
 import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 /**
  * Responsible for providing methods to usefully manipulate individual Airbnb listings and lists of listings.
@@ -12,6 +14,8 @@ import java.util.List;
  */
 public class ListingManipulator
 {
+    private static List<AirbnbListing> listings = AirbnbDataLoader.getListings();
+    
     /**
      * Filter listings to only include those in a specific borough.
      * @param listings The listings to filter.
@@ -70,17 +74,22 @@ public class ListingManipulator
      */
     public static int getMaxPropertyPrice()
     {
-        return AirbnbDataLoader.getListings().stream()
+        return listings.stream()
                 .map(AirbnbListing::getPrice)
                 .max(Integer::compare)
                 .orElse(0);
     }
     
+    /**
+     * This finds the AirbnbListing with the id given.
+     * @param id The id for the listing you you want to find.
+     * @return The AirbnbListing with the id given, null if non are found.
+     */
     public static AirbnbListing getListingWithId(String id)
     {
         try
         {
-            return AirbnbDataLoader.getListings().stream()
+            return listings.stream()
                 .filter(listing -> listing.getId().equals(id))
                 .findFirst()
                 .get();
@@ -91,34 +100,18 @@ public class ListingManipulator
         }
     }
     
+    /**
+     * This gets a list of all the AirbnbListing's by the host that also owns the paramater hostListing, not including the hostListing.
+     * @param hostListing The listing by the host you want to find other listings for.
+     * @return The other AirbnbListing's by the host given.
+     */
     public static List<AirbnbListing> getOtherListingsWithHostId(AirbnbListing hostListing)
     {
         try
         {
-            return AirbnbDataLoader.getListings().stream()
+            return listings.stream()
                 .filter(listing -> (listing.getHost_id().equals(hostListing.getHost_id())) && !(listing.getId().equals(hostListing.getId())))
                 .collect(Collectors.toList());
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
-    }
-    
-    public static Position getAveragePosition(List<AirbnbListing> listings)
-    {
-        try
-        {
-            return new Position(
-                 listings.stream()
-                .mapToDouble(listing -> listing.getLatitude())
-                .average()
-                .getAsDouble(),
-                
-                listings.stream()
-                .mapToDouble(listing -> listing.getLongitude())
-                .average()
-                .getAsDouble());
         }
         catch (Exception e)
         {

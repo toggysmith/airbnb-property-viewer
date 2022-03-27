@@ -1,18 +1,21 @@
-
 /**
- * Write a description of class Position here.
+ * Responsible for holding the position of a listing.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class Position
 {
-    // instance variables - replace the example below with your own
     private double latitude;
     private double longitude;
 
     /**
      * Constructor for objects of class Position
+     * @param latitude The latitude.
+     * @param longitude The longitude.
      */
     public Position(double latitude, double longitude)
     {
@@ -20,11 +23,17 @@ public class Position
         this.longitude = longitude;
     }
     
+    /**
+     * @return The latitude.
+     */
     public double getLatitude()
     {
         return latitude;
     }
     
+    /**
+     * @return The longitude.
+     */
     public double getLongitude()
     {
         return longitude;

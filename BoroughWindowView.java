@@ -1,16 +1,18 @@
-// @TODO: Refactor class
-
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
 /**
- * Write a description of class PropertyWindowView here.
+ * This creates a new window for displaying info about 
+ * the properties in a borough in the price range selected.
  *
- * @author (your name)
- * @version (a version number or a date)
- */
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */ 
 public class BoroughWindowView extends Stage
 {
     /**
