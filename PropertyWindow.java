@@ -62,6 +62,7 @@ public class PropertyWindow
     public void windowClosed()
     {
         PropertyWindowFactory.getPropertyWindowFactory().propertyWindowClosed(this);
+        MainView.removeFromOpenWindows(propertyView.getScene());
     }
     
     /**

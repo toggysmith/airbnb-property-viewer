@@ -62,6 +62,7 @@ public class DestinationWindow
     public void windowClosed()
     {
         DestinationWindowFactory.getDestinationWindowFactory().destinationWindowClosed(this);
+        MainView.removeFromOpenWindows(destinationView.getScene());
     }
     
     /**

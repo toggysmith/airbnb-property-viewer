@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
  */ 
 public class BoroughWindowView extends Stage
 {
+    private Scene scene;
+    
     /**
      * Create a window and load the FXML file.
      */
@@ -23,16 +25,25 @@ public class BoroughWindowView extends Stage
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("borough-window.fxml"));
 
-        Scene scene = new Scene(loader.load());
+        scene = new Scene(loader.load());
 
         BoroughWindowController boroughWindowController = loader.getController();
         boroughWindowController.initialise(listings, boroughWindow);
                         
         setOnCloseRequest(e -> boroughWindow.windowClosed());
         
+        MainView.addToOpenWindows(scene);
+        MainView.setColorMode(scene);
         setScene(scene);
         setTitle(boroughName);
         show();
     }
 
+    /**
+     * @return The scene.
+     */
+    public Scene getSceneWindow()
+    {
+        return scene;
+    }
 }

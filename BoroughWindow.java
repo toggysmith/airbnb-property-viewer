@@ -60,6 +60,7 @@ public class BoroughWindow
     public void windowClosed()
     {
         BoroughWindowFactory.getBoroughWindowFactory().boroughWindowClosed(this);
+        MainView.removeFromOpenWindows(boroughView.getScene());
     }
     
     /**

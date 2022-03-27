@@ -16,6 +16,8 @@ public class PropertyWindowView extends Stage
 {
     private PropertyWindow propertyWindow;
     
+    private Scene scene;
+    
     /**
      * Create a window and load the FXML file.
      */
@@ -30,8 +32,19 @@ public class PropertyWindowView extends Stage
         this.propertyWindow = propertyWindow;
         setOnCloseRequest(e -> propertyWindow.windowClosed());
         
-        setScene(new Scene(pane, 1500, 800));
+        scene = new Scene(pane, 1500, 800);
+        MainView.addToOpenWindows(scene);
+        MainView.setColorMode(scene);
+        setScene(scene);
         setTitle(listing.getName());
         show();
+    }
+    
+    /**
+     * @return The scene.
+     */
+    public Scene getSceneWindow()
+    {
+        return scene;
     }
 }

@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 public class DestinationWindowView extends Stage
 {
     private DestinationWindow destinationWindow;
+    private Scene scene;
     
     /**
      * Create a window and load the FXML file.
@@ -30,8 +31,19 @@ public class DestinationWindowView extends Stage
         this.destinationWindow = destinationWindow;
         setOnCloseRequest(e -> destinationWindow.windowClosed());
         
-        setScene(new Scene(pane, 1500, 800));
+        scene = new Scene(pane, 1500, 800);
+        MainView.addToOpenWindows(scene);
+        MainView.setColorMode(scene);
+        setScene(scene);
         setTitle(listing.getDestinationName());
         show();
+    }
+    
+    /**
+     * @return The scene.
+     */
+    public Scene getSceneWindow()
+    {
+        return scene;
     }
 }
