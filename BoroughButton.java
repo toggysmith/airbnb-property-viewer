@@ -1,5 +1,3 @@
-// @TODO: Refactor class
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -94,10 +92,6 @@ public class BoroughButton
      */ 
     private void emptyBoroughWarningAlert(String boroughName, EmptyListException ele)
     {
-        Alert invalidRange = new Alert(AlertType.WARNING);
-        invalidRange.setTitle("Warning");
-        invalidRange.setHeaderText("Empty Borough");
-        invalidRange.setContentText(String.format(ele.toString(), boroughName));
-        invalidRange.showAndWait();
+        AlertManager.showWarning(String.format(ele.toString(), boroughName));
     } 
 }
