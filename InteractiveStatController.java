@@ -108,7 +108,7 @@ public class InteractiveStatController extends Controller
         this.filteredListing = new ArrayList<>(filteredListing);
         destinations = new ArrayList<>(typesDestinations);
         
-        List<String> boroughsList = ListingManipulator.getBoroughs(filteredListing);
+        List<String> boroughsList = ListingProcessor.getBoroughs(filteredListing);
         
         boroughs.getItems().addAll(boroughsList);
         if(desType.equals(DestinationType.PUB)){
