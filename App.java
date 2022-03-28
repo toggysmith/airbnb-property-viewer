@@ -25,13 +25,4 @@ public class App extends Application
         mainWindow.getMainView().setAlwaysOnTop(false);
         mainWindow.getMainView().setMaximized(true);
     }
-
-    /**
-     * The normal Java entry point. (For IntelliJ)
-     * @parma args The arguments passed in to the program. There should be none.
-     */
-    public static void main(String[] args)
-    {
-        launch(args);
-    }
 }
