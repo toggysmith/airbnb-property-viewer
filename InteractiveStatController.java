@@ -192,6 +192,7 @@ public class InteractiveStatController extends Controller
           propertyName.setDisable(false);
           createNewPriceComboBox();
           price.setDisable(true);
+          
           if(desType.equals(DestinationType.PUB)){
             price.setPromptText("Pub Price Range");
             ArrayList<String> categories = new ArrayList<>(Arrays.asList("£", "££", "£££"));
@@ -203,7 +204,7 @@ public class InteractiveStatController extends Controller
             price.getItems().addAll(tickets);
         }
         locationsResult.getItems().clear();
-          checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
+        checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
        }
     }
     
