@@ -14,7 +14,7 @@ public class CircularLinkedList<E> implements CircularList<E>
     private int size;
     
     /**
-     * Constructor for objects of class CircularLinkedList
+     * Set the starting size of the list to zero.
      */
     public CircularLinkedList()
     {
@@ -22,21 +22,15 @@ public class CircularLinkedList<E> implements CircularList<E>
     }
     
     /**
-     * Gets the current element from the list.
      * @return The current element in the list.
      */
     @Override
     public E getCurrent()
     {
-        if (currentNode == null)
-        {
-            return null;
-        }
-        return currentNode.getElement();
+        return (currentNode == null) ? null : currentNode.getElement();
     }
     
     /**
-     * Gets the next element from the list.
      * @return The next element in the list.
      */
     @Override
@@ -46,8 +40,12 @@ public class CircularLinkedList<E> implements CircularList<E>
         {
             return null;
         }
-        currentNode = currentNode.getNext();
-        return currentNode.getElement();
+        else
+        {
+            currentNode = currentNode.getNext();
+            
+            return currentNode.getElement();
+        }
     }
     
     /**
