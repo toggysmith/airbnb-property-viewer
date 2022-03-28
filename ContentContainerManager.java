@@ -71,6 +71,9 @@ public class ContentContainerManager
         return circularList.getNext();
     }
 
+    /*
+     * Adds the given controller to the map.
+     */
     private void addControllerToMap(Controller controller)
     {
         classControllerMap.put(controller.getClass(), controller);

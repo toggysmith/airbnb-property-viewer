@@ -38,7 +38,7 @@ public class DestinationDistances
         addDestinations(filteredDestinations,selectedProperty);
     }
     
-    /**
+    /*
      * The filtered destinations are iterated over and their relative distance is calculated using the selected property as a reference point
      * @param List<DestinationListing> filteredDestinations, the list of filtered destinations that fit the user selected preferences
      * @param AirbnbListing selectedProperty, the property selected by the user
@@ -80,7 +80,7 @@ public class DestinationDistances
     }
     
     //reference : https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude (1st answer)
-    /**
+    /*
      * given the property and destination longitude and latitude calculateDistancew() calculates the distance between them
      * @return int, returns the distance between the two locations in KM as an int 
      */

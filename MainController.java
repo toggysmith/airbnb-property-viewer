@@ -45,7 +45,7 @@ public class MainController extends Controller
         mapController.createMap();
     }
     
-    /**
+    /*
      * On Action method linked to the next button in the main-pane FXML file, so that when that button is pressed the next pane will be displayed, relative to the currenlty displayed pane
      */
     @FXML
@@ -55,7 +55,7 @@ public class MainController extends Controller
         switchPane.getChildren().setAll(nextPane);
     }
     
-    /**
+    /*
      * On Action method linked to the previous button in the main-pane FXML file, so that when that button is pressed the previos pane will be displayed, relative to the currenlty displayed pane
      */
     @FXML
@@ -65,7 +65,7 @@ public class MainController extends Controller
         switchPane.getChildren().setAll(previousPane);
     }
     
-    /**
+    /*
      * enables the buttons when a valid price range is selected
      */
     private void enableButtons()
@@ -74,7 +74,7 @@ public class MainController extends Controller
         leftButton.setDisable(false);
     }
    
-    /**
+    /*
      * On action method linked to the from combobox in the main-pane FXML file, so that when a new price option is selected it checks whether the price range is valid.
      */
     @FXML
@@ -83,7 +83,7 @@ public class MainController extends Controller
         checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
     }
     
-    /**
+    /*
      * On action method linked to the to combobox in the main-pane FXML file, so that when a new price option is selected it checks whether the price range is valid
      */
     @FXML
@@ -92,7 +92,7 @@ public class MainController extends Controller
         checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
     }
     
-    /**
+    /*
      * Method use to check that the user selected price ranges are valid, this method is only executed if both combo boxes have a value selected. The from value needs to be smaller than the to value selected.
      * "No min" means that there is no minimum and "No max" means there is no maximum
      * @param String fromValue, the selected value from the "from combo box"
@@ -125,7 +125,7 @@ public class MainController extends Controller
         }
     }
     
-    /**
+    /*
      * A method called when an invalid range is selected and displays an alert to the user.
      */
     private void rangeWarningAlert()

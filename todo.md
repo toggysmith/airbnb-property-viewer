@@ -7,10 +7,10 @@
 # Refactor
 
 - [x] AirbnbDataLoader
-- [ ] AirbnbListing
-- [ ] AlertManager
-- [ ] App
-- [ ] Borough
+- [x] AirbnbListing
+- [x] AlertManager
+- [x] App
+- [x] Borough
 - [ ] BoroughButton
 - [ ] BoroughPriceRange
 - [ ] BoroughWindow

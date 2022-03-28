@@ -19,7 +19,7 @@ public class StatisticsLoader
      */
     private static ArrayList<StatisticsListing> statListings;
     
-    /** 
+    /*
      * Loads and saves stat listings from a CSV file. Each row in the CSV file corresponds to data
      * about a borough.
      */
@@ -74,7 +74,7 @@ public class StatisticsLoader
         return statListings;
     }
     
-    /**
+    /*
      * @param doubleString The string to be converted to Double type.
      * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
      */
@@ -88,7 +88,7 @@ public class StatisticsLoader
         return -1.0;
     }
 
-    /**
+    /*
      * @param intString The string to be converted to Integer type.
      * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
      */

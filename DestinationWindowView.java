@@ -37,6 +37,7 @@ public class DestinationWindowView extends Stage
         setScene(scene);
         setTitle(listing.getDestinationName());
         show();
+        getScene();
     }
     
     /**
