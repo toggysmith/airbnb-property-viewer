@@ -144,6 +144,17 @@ public class ListingProcessor
     }
     
     /**
+     * Augusto
+     */
+    public static List<DestinationListing> filterDestinations(List<DestinationListing> destinations, String borough, String price)
+    {
+        return destinations.stream()
+                           .filter(destination -> borough.equals(destination.getBorough()))
+                           .filter(destination -> price.equals(destination.getPrice()))
+                           .collect(Collectors.toList());
+        
+    }
+    /**
      * @param listings The listings to be sorted through.
      * @return A Position object containing the average latitude and longitude of the listings.
      */

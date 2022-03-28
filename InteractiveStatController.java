@@ -189,7 +189,7 @@ public class InteractiveStatController extends Controller
     private void processBoroughsBox()
     {
        if(boroughs.getValue() != null){
-        List<String> properties = ListingProcessor.getPropertiesNameInBorough(filteredListing, boroughs.getValue());
+           List<String> properties = ListingProcessor.getPropertiesNameInBorough(filteredListing, boroughs.getValue());
                                                                                           
         createNewPropertyComboBox();
         propertyName.setPromptText("Select Property");
@@ -222,10 +222,7 @@ public class InteractiveStatController extends Controller
     {
         if(boroughSelected != null && propertySelected != null && priceSelected != null){
             //check array list is empty, or if its smaller then 5 return those 5
-           ArrayList<DestinationListing> filteredDestinations = destinations.stream()
-                       .filter(destination -> boroughSelected.equals(destination.getBorough()))
-                       .filter(destination -> priceSelected.equals(destination.getPrice()))
-                       .collect(Collectors.toCollection(ArrayList::new));
+           List<DestinationListing> filteredDestinations = ListingProcessor.filterDestinations(destinations,boroughSelected,priceSelected);
                        
            AirbnbListing selectedProperty = filteredListing.stream()
                                                            .filter(listing -> propertySelected.equals(listing.getName()) && boroughSelected.equals(listing.getNeighbourhood()))
