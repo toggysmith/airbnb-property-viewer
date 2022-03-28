@@ -237,8 +237,7 @@ public class InteractiveStatController extends Controller
                                                            .findFirst().orElse(null);
         
            
-           desCalculator = new DestinationDistances();
-           desCalculator.addDestinations(filteredDestinations, selectedProperty);
+           desCalculator = new DestinationDistances(filteredDestinations, selectedProperty);
            fiveClosestDestinations = new ArrayList<DistanceDestinationPair>();
            fiveClosestDestinations = desCalculator.getFiveSmallest();
            displayResult();
