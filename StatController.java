@@ -91,6 +91,8 @@ public class StatController extends Controller
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
         
+     
+        
         setUpStats();
         setUpValues();
     
@@ -103,10 +105,10 @@ public class StatController extends Controller
      */
     public void updateValues()
     {
-        if(MainWindow.getMainWindow().getMainController().getRangeValues() == null )
-        {
-            return;
-        }
+       if(MainWindow.getMainWindow().getMainController().getRangeValues() == null )
+       {
+           return;
+       }
         fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
         setUpValues();
@@ -220,8 +222,6 @@ public class StatController extends Controller
               return null;          
             }
     }
-    
-   
     
     /**
      * returns the total available properties within the price range
@@ -347,7 +347,7 @@ public class StatController extends Controller
    
     }
      return boroughCrime;
-}
+    }
 /**
  * Provides the GUI for each statistic by creating a borderpane with labels that show the 
  * title and value of the statistic and buttons that allow the user to switch between each
@@ -403,7 +403,7 @@ private class stat extends BorderPane
     
     //wrapPane.getChildren().setAll(value);
     this.setCenter(wrapPane);
-}
+    }
     
     public void updateValue(String text)
     {
@@ -510,7 +510,5 @@ public  class interactiveStat extends stat
 
    
 }
-
-
 }
 
