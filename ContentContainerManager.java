@@ -15,9 +15,9 @@ import java.util.Map;
 public class ContentContainerManager
 {
     private static final Map<Class, Controller> classControllerMap = new HashMap<>();
-
+    
     private final Pane contentContainer;
-    private final CircularList<PaneControllerPair> circularList;
+    private final CircularList<Pane> circularList;
     
     /**
      * Initialise the instance variables; load all the content panes;
@@ -40,7 +40,7 @@ public class ContentContainerManager
             AlertManager.showTerminatingError("Unable to load pane correctly");
         }
         
-        Pane firstPane = circularList.getCurrent().getPane();
+        Pane firstPane = circularList.getCurrent();
         contentContainer.getChildren().setAll(firstPane);
     }
     
@@ -60,7 +60,7 @@ public class ContentContainerManager
      */
     public Pane getPrevious()
     {
-        return circularList.getPrev().getPane();
+        return circularList.getPrev();
     }
     
     /**
@@ -68,7 +68,7 @@ public class ContentContainerManager
      */
     public Pane getNext()
     {
-        return circularList.getNext().getPane();
+        return circularList.getNext();
     }
 
     private void addControllerToMap(Controller controller)
@@ -84,34 +84,12 @@ public class ContentContainerManager
             
             Pane contentPane = loader.load();
             Controller controller = loader.getController();
-            circularList.add(new PaneControllerPair(contentPane, controller));
+            circularList.add(contentPane);
             
             contentPane.prefWidthProperty().bind(contentContainer.widthProperty());
             contentPane.prefHeightProperty().bind(contentContainer.heightProperty());
             
             addControllerToMap(controller);
-        }
-    }
-
-    private static class PaneControllerPair
-    {
-        private final Pane pane;
-        private final Controller controller;
-        
-        public PaneControllerPair(Pane pane, Controller controller)
-        {
-            this.pane = pane;
-            this.controller = controller;
-        }
-        
-        public Pane getPane()
-        {
-            return pane;
-        }
-        
-        public Controller getController()
-        {
-            return controller;
         }
     }
 }

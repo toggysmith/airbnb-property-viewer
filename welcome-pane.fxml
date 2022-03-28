@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WelcomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WelcomeController">
    <center>
       <VBox alignment="CENTER" fillWidth="false" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,13 +27,16 @@
                   <VBox>
                      <children>
                         <Label id="heading" alignment="TOP_RIGHT" contentDisplay="RIGHT" text="Instructions" />
-                        <Label alignment="BOTTOM_RIGHT" text="Something PG before I commit to GitHub" />
+                        <Label alignment="BOTTOM_RIGHT" text="Select a price range before moving onto the other panels:" />
+                        <Label alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="29.0" text="• Select a borough using the hexagonal map and view properties within it." />
+                        <Label alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="44.0" text="• Display various statistics based on price range and external datasets." />
+                        <Label alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="59.0" text="• Draw a search area and show properties within it in the price range." />
                      </children>
                   </VBox>
                   <VBox>
                      <children>
                         <Label id="heading" alignment="BOTTOM_RIGHT" text="Credits" />
-                        <Label alignment="BOTTOM_RIGHT" text="Developed and designed by Adam Murray, Augusto Favero, Mathew Tran and Tony Smith" />
+                        <Label alignment="BOTTOM_RIGHT" text="Developed and designed by Adam Murray, Augusto Favero, Mathew Tran and Tony Smith." />
                      </children>
                   </VBox>
                   <HBox spacing="10.0">

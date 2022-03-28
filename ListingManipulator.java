@@ -120,6 +120,7 @@ public class ListingManipulator
     }
     
     /**
+
      * Augusto
      */
     public static List<String> getBoroughs(List<AirbnbListing> listing)
@@ -128,5 +129,30 @@ public class ListingManipulator
                       .map(l -> l.getNeighbourhood())
                       .distinct()
                       .collect(Collectors.toList());
+    }
+    
+    /**
+     * @param listings The listings to be sorted through.
+     * @return A Position object containing the average latitude and longitude of the listings.
+     */
+    public static Position getAveragePosition(List<AirbnbListing> listings)
+    {
+        try
+        {
+            return new Position(
+                 listings.stream()
+                .mapToDouble(listing -> listing.getLatitude())
+                .average()
+                .getAsDouble(),
+                
+                listings.stream()
+                .mapToDouble(listing -> listing.getLongitude())
+                .average()
+                .getAsDouble());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }

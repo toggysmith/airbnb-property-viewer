@@ -10,4 +10,22 @@
  */
 public class EmptyListException extends Exception
 {
+    private String error;
+    
+    /**
+     * Constructor for EmptyListException.
+     */
+    public EmptyListException(String error)
+    {
+        this.error = error;
+    }
+    
+    /**
+     * @return The error.
+     */
+    @Override
+    public String toString()
+    {
+        return error;
+    }
 }
