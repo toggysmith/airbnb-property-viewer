@@ -17,10 +17,17 @@ import javafx.scene.control.Button;
 
 import java.util.Arrays;
 /**
- * Write a description of class InteractiveStatController here.
+ * InteractiveStatController controls the interactive statistics where the user can find the closest destinations depending on the selected borough and property name as a reference point
+ * 
+ * It populates the comboboxes with the boroughs and properties from the price range selected in the main pane combo boxes, allowing the user to find the five closest pubs or tourist
+ * attractions to the selected porperty. 
+ * 
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version (v1)
  */
 public class InteractiveStatController extends Controller
 {
@@ -81,7 +88,7 @@ public class InteractiveStatController extends Controller
     }
 
     /**
-     * Creates a diestination window for the destination in the row clicked.
+     * Creates a destination window for the destination in the row clicked.
      */
     private void rowClicked(TableRow<InteractiveStatsTableValues> row)
     {
