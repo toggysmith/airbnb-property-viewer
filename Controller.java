@@ -1,8 +1,7 @@
 import java.util.List;
 
 /**
- * Controller provides a setup method common to all controllers
- * that allows for the passing of references to other controllers.
+ * Responsible for holding instances of the controllers of the content panes loaded.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -12,11 +11,32 @@ import java.util.List;
  */
 public class Controller
 {
+    /**
+     * A list of controller instances. An instance is stored automatically for the controller of
+     * each new content pane loaded.
+     */
     protected List<Controller> controllers;
     
     /**
-     * Makes the list of controllers the one given.
-     * @param The new list of controllers.
+     * Retrieve the instance of a controller based on its class.
+     * @return The controller instance.
+     */
+    public Controller getController(Class controllerClass)
+    {
+        for (Controller controller : controllers)
+        {
+            if (controller.getClass() == controllerClass)
+            {
+                return controller;
+            }
+        }
+        
+        return null; // No controller instance found.
+    }
+    
+    /**
+     * Set the list of controller instances.
+     * @param The new list of controller instances.
      */
     public void setControllers(List<Controller> controllers)
     {
