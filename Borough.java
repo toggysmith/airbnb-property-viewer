@@ -55,8 +55,6 @@ public enum Borough
     private final int Y;
     private final String NAME; // E.g. "Kingston upon Thames" instead of "KING"
     
-
-    
     /**
      * Initialises the enum fields.
      * @param x The relative x-position of the borough on the map.
