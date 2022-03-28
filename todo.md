@@ -5,7 +5,7 @@
 
 # Refactor
 
-- [ ] AirbnbDataLoader
+- [x] AirbnbDataLoader
 - [ ] AirbnbListing
 - [ ] AlertManager
 - [ ] App
