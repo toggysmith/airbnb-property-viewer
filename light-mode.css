@@ -1,14 +1,9 @@
-
-@font-face
-{
-    fx-font-family: 'Inter';
-    src: ('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 
 .root
 {
     -fx-font-size: 12px;
-    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-family: 'Noto Sans', sans-serif;
     -fx-background: #FFFFFF;
 }
 
@@ -19,7 +14,7 @@
 
 #title, #special
 {
-    -fx-font-weight: 900;
+    -fx-font-weight: 700;
     -fx-font-size: 25px;
     -fx-text-fill: linear-gradient(to top right, #8B37FF, #5DBCF4);
 }
@@ -87,11 +82,10 @@
 
 
 
-.combo-box{
+.combo-box {
     -fx-background-color: #3668FF;
     -fx-text-fill: #FFFFFF;
-     border: 1px solid #999;
-    }
+}
     
 .combo-box-base {
     -fx-border-radius: 5.0;

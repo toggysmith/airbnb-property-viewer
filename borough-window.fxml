@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoroughWindowController">
    <children>
       <BorderPane fx:id="mapContainer" prefHeight="500.0" prefWidth="500.0" />
       <TableView fx:id="boroughTable" prefWidth="615.0">
