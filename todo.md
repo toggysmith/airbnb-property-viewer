@@ -2,14 +2,15 @@
 - Documentation comments for public methods and fields
 - Logical method and fields
 - Check all imports are used
+- Correct indendation
 
 # Refactor
 
-- [ ] AirbnbDataLoader
-- [ ] AirbnbListing
-- [ ] AlertManager
-- [ ] App
-- [ ] Borough
+- [x] AirbnbDataLoader
+- [x] AirbnbListing
+- [x] AlertManager
+- [x] App
+- [x] Borough
 - [ ] BoroughButton
 - [ ] BoroughPriceRange
 - [ ] BoroughWindow

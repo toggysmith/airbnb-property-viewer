@@ -1,16 +1,16 @@
-import com.opencsv.CSVReader;
 import java.util.ArrayList;
-import java.io.FileReader;
 import java.util.Objects;
 import java.util.List;
 import java.net.URI;
-import java.io.File;
 import java.net.URL;
+import java.io.FileReader;
+import java.io.File;
+
+import com.opencsv.CSVReader;
 
 /**
- * Responsible for loading Airbnb listings from secondary memory once and holding them in main memory so that they can
- * be used by other parts of the program.
- *
+ * Responsible for loading the Airbnb listings and storing a copy of them in main memory.
+ * 
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
@@ -19,12 +19,22 @@ import java.net.URL;
  */
 public class AirbnbDataLoader
 {
-    /*
-     * Holds the Airbnb listings once they have been loaded from secondary memory.
-     */
     private static ArrayList<AirbnbListing> listings;
     
-    /*
+    /**
+     * Retrieve Airbnb listings. If this method has already been called, the listings will have been
+     * saved and those will be returned. Otherwise, load them from memory.
+     * 
+     * @return Airbnb listings.
+     */
+    public static List<AirbnbListing> getListings()
+    {
+        if (listings == null) load();
+        
+        return listings;
+    }
+    
+    /** 
      * Loads and saves Airbnb listings from a CSV file. Each row in the CSV file corresponds to a single listing.
      */
     private static void load()
@@ -70,18 +80,6 @@ public class AirbnbDataLoader
     }
     
     /**
-     * These listings should only be loaded once during the program's lifetime so this method will load them if and
-     * only if they haven't already been loaded and saved.
-     * @return The Airbnb listings saved in main memory.
-     */
-    public static List<AirbnbListing> getListings()
-    {
-        if (listings == null) load();
-        
-        return listings;
-    }
-    
-    /*
      * @param doubleString The string to be converted to Double type.
      * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
      */
@@ -95,7 +93,7 @@ public class AirbnbDataLoader
         return -1.0;
     }
 
-    /*
+    /**
      * @param intString The string to be converted to Integer type.
      * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
      */
