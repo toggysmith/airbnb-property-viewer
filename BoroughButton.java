@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /**
+ * 
+ * 
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
@@ -21,12 +23,11 @@ public class BoroughButton
     private final static double TILE_HEIGHT = 2 * r;
     private final static double SEPARATION = 7.5;
     private final static double STARTING_OFFSET = 15;
-
+    
     private final QuantityVisualiser quantityVisualiser;
     private final List<AirbnbListing> boroughListings;
-    private List<AirbnbListing> boroughListingsInPriceRange;
     
-
+    private List<AirbnbListing> boroughListingsInPriceRange;
     
     public BoroughButton(Borough borough, AnchorPane boroughMap)
     {
