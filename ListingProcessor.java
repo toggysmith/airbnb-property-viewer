@@ -132,6 +132,18 @@ public class ListingProcessor
     }
     
     /**
+     * Augusto
+     */
+    public static List<String> getPropertiesNameInBorough(List<AirbnbListing> listings, String boroughName)
+    {
+        return listings.stream()
+                       .filter(listing -> boroughName.equals(listing.getNeighbourhood()))
+                       .map(listing -> listing.getName())
+                       .distinct()
+                       .collect(Collectors.toList());
+    }
+    
+    /**
      * @param listings The listings to be sorted through.
      * @return A Position object containing the average latitude and longitude of the listings.
      */

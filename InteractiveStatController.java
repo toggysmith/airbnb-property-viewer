@@ -98,6 +98,9 @@ public class InteractiveStatController extends Controller
         }
     }
     
+    /*
+     * Update of the combo boxes' contents when a user interaction occurs that requires the values for the combo boxes to be altered
+     */
     public void updateBoxes(List<AirbnbListing> filteredListing, List<DestinationListing> typesDestinations, DestinationType desType)
     {
         this.desType = desType;
@@ -111,23 +114,29 @@ public class InteractiveStatController extends Controller
         List<String> boroughsList = ListingProcessor.getBoroughs(filteredListing);
         
         boroughs.getItems().addAll(boroughsList);
-        if(desType.equals(DestinationType.PUB)){
-            boroughs.setPromptText("Select Borough Name:");
-            propertyName.setPromptText("Select Property:");
+        boroughs.setPromptText("Select Borough Name:");
+        propertyName.setPromptText("Select Property:");
+        setUpPriceBox(desType);    
+        propertyName.setDisable(true);
+        price.setDisable(true);
+    }
+    
+    /*
+     * Sets up the price combo box values, this depends on the DestinationType, for pubs the price is evaluated using the £ metric whilst for the tourist attractions the ticket prices are used
+     * @param DestinationType , either .PUB or .ATTRACTION
+     */
+    private void setUpPriceBox(DestinationType desType)
+    {
+         if(desType.equals(DestinationType.PUB)){
             price.setPromptText("Pub Price Range");
             ArrayList<String> categories = new ArrayList<>(Arrays.asList("£", "££", "£££"));
             price.getItems().addAll(categories);
 
         }else if(desType.equals(DestinationType.ATTRACTION)){
-            boroughs.setPromptText("Select Borough Name:");
-            propertyName.setPromptText("Select Property:");
             price.setPromptText("Ticket Price");
             ArrayList<String> tickets = new ArrayList<>(Arrays.asList("free", "£2.50 - £5.00","£5.00 - £7.00", "£7.00 - £9.00"));
             price.getItems().addAll(tickets);
         }
-
-        propertyName.setDisable(true);
-        price.setDisable(true);
     }
     
     /*
@@ -180,29 +189,15 @@ public class InteractiveStatController extends Controller
     private void processBoroughsBox()
     {
        if(boroughs.getValue() != null){
-           List<String> properties = filteredListing.stream()
-                                                    .filter(listing -> boroughs.getValue().equals(listing.getNeighbourhood()))
-                                                    .map(listing -> listing.getName())
-                                                    .distinct()
-                                                    .collect(Collectors.toList());
+        List<String> properties = ListingProcessor.getPropertiesNameInBorough(filteredListing, boroughs.getValue());
                                                                                           
-          createNewPropertyComboBox();
-          propertyName.setPromptText("Select Property");
-          propertyName.getItems().addAll(properties);
-          propertyName.setDisable(false);
-          createNewPriceComboBox();
-          price.setDisable(true);
-          
-          if(desType.equals(DestinationType.PUB)){
-            price.setPromptText("Pub Price Range");
-            ArrayList<String> categories = new ArrayList<>(Arrays.asList("£", "££", "£££"));
-            price.getItems().addAll(categories);
-
-        }else if(desType.equals(DestinationType.ATTRACTION)){
-            price.setPromptText("Ticket Price");
-            ArrayList<String> tickets = new ArrayList<>(Arrays.asList("free", "£2.50 - £5.00","£5.00 - £7.00", "£7.00 - £9.00"));
-            price.getItems().addAll(tickets);
-        }
+        createNewPropertyComboBox();
+        propertyName.setPromptText("Select Property");
+        propertyName.getItems().addAll(properties);
+        propertyName.setDisable(false);
+        createNewPriceComboBox();
+        price.setDisable(true);
+        setUpPriceBox(desType);
         locationsResult.getItems().clear();
         checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
        }
