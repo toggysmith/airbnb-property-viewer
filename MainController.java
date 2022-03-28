@@ -116,6 +116,7 @@ public class MainController extends Controller
             {
                 rangeWarningAlert();
                 //when the invalid range is displayed then the combo boxes are reverted back to a valid range
+                //this is done by 
                 fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
                 toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
             }
@@ -137,7 +138,7 @@ public class MainController extends Controller
         invalidRange.showAndWait();
     } 
     
-    /**
+    /*
      * returns the object storing the combo box range values
      * @return RangeValues, containing the from value and to value
      */
@@ -146,11 +147,19 @@ public class MainController extends Controller
         return comboBoxRangeValues;
     }
     
+    /*
+     * returns the combo box object storing the "from values"
+     * @return ComboBox<String>, returns a combo box storing strings
+     */
     public ComboBox<String> getFromBox()
     {
         return fromRangeBox;
     }
     
+    /*
+     * returns the combo box object storing the "to values"
+     * @return ComboBox<String>, returns a combo box storing strings
+     */
     public ComboBox<String> getToBox()
     {
         return toRangeBox;
