@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * PropertyWindowFactory controls the creation of property windows.
  * Tts main responsibility is to ensure that only one property window exists
@@ -9,18 +12,18 @@
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class PropertyWindowFactory
+public class PropertyDetailsStageFactory
 {
-    private static PropertyWindowFactory propertyWindowFactory;
+    private static PropertyDetailsStageFactory propertyDetailsStageFactory;
     
     //The set of all open property windows
-    private WindowHashSet<PropertyWindow> openPropertyWindows;
+    private Map<AirbnbListing, PropertyDetailsStage> openPropertyWindows;
 
     // Constructor for PropertyWindowFactory,
     //Its private as this is a singleton.
-    private PropertyWindowFactory()
+    private PropertyDetailsStageFactory()
     {
-        openPropertyWindows = new WindowHashSet<>();
+        openPropertyWindows = new HashMap<>();
     }
     
     /**
@@ -29,13 +32,13 @@ public class PropertyWindowFactory
      * class is ever created.
      * @return The only object of PropertyWindowFactory.
      */
-    public static PropertyWindowFactory getPropertyWindowFactory()
+    public static PropertyDetailsStageFactory getPropertyDetailsStageFactory()
     {
-        if (propertyWindowFactory == null)
+        if (propertyDetailsStageFactory == null)
         {
-            propertyWindowFactory = new PropertyWindowFactory();
+            propertyDetailsStageFactory = new PropertyDetailsStageFactory();
         }
-        return propertyWindowFactory;
+        return propertyDetailsStageFactory;
     }
     
     /**
@@ -43,7 +46,7 @@ public class PropertyWindowFactory
      * and then attempts to create a property window for that listing.
      * @param listingId The id for the property you want a window for.
      */
-    public PropertyWindow newPropertyWindow(String listingId)
+    public PropertyDetailsStage newPropertyWindow(String listingId)
     {
         AirbnbListing listing = ListingProcessor.getListingWithId(listingId);
         return newPropertyWindow(listing);
@@ -53,31 +56,43 @@ public class PropertyWindowFactory
      * This method attempts to create a property window for the listing given.
      * @param listing The listing for the property you want a window for.
      */
-    public PropertyWindow newPropertyWindow(AirbnbListing listing)
+    public PropertyDetailsStage newPropertyWindow(AirbnbListing listing)
     {
         if (listing == null)
         {
             return null;
         }
         
-        PropertyWindow propertyWindow = new PropertyWindow(listing); //This creates an object of PropertyWindow, not PropertyWindowView and so does not create the actual window.
-        if (!(openPropertyWindows.add(propertyWindow)))
+        PropertyDetailsStage propertyDetailsStage = openPropertyWindows.get(listing);
+        
+        if (propertyDetailsStage != null)
         {
-            propertyWindow = openPropertyWindows.getElementInSet(propertyWindow); //Gets the PropertyWindow from the set that is equivalent to the PropertyWindow just created.
+            propertyDetailsStage.toFront();
+            
+            return propertyDetailsStage;
         }
-        else
+        
+        try
         {
-            propertyWindow.createPropertyWindow(); // This line creates the actual property window once it has been determined that no such window already exists.
+            propertyDetailsStage = new PropertyDetailsStage(listing);
+            
+            openPropertyWindows.put(listing, propertyDetailsStage);
         }
-        propertyWindow.setFront(); // Sets the window to the front of the screen.
-        return propertyWindow;
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            
+            AlertManager.showTerminatingError("Could not create stage.");
+        }
+        
+        return propertyDetailsStage;
     }
     
     /**
      * This method removes a property window from the set of open windows.
      * @param propertyWindow The property window closed.
      */
-    public void propertyWindowClosed(PropertyWindow propertyWindow)
+    public void propertyWindowClosed(PropertyDetailsStage propertyWindow)
     {
         openPropertyWindows.remove(propertyWindow);
     }
