@@ -1,4 +1,4 @@
-// @TODO: Refactor class
+
 
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
@@ -24,38 +24,20 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
 /**
- * Write a description of class StatController here.
+ * StatController extends Controller and provides the GUI and calculation of 
+ * the statistics pane
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class StatController extends Controller
 {
-    @FXML public Button lButton1;
-    @FXML public Button rButton1;
-    @FXML public Button lButton2;
-    @FXML public Button rButton2;
-    @FXML public Button lButton3;
-    @FXML public Button rButton3;
-    @FXML public Button lButton4;
-    @FXML public Button rButton4;
     
-    @FXML public Label label1;
-    @FXML public Label label2;
-    @FXML public Label label3;
-    @FXML public Label label4;
-   
-    //XML public Label statLabel1;
-   // @FXML public Label statLabel2;
-   // @FXML public Label statLabel3;
-    //@FXML public Label statLabel4;
-   
-    @FXML public BorderPane borderPane1;
-    @FXML public BorderPane borderPane2;
-    @FXML public BorderPane borderPane3;
-    @FXML public BorderPane borderPane4;
-
     @FXML public GridPane gridPane1;
+    
     //These will be the title of the statistics shown
     private final String stat1 = "Average Number of reviews per property:"; 
     private final String stat2 = "Total number of available properties:";
@@ -66,48 +48,41 @@ public class StatController extends Controller
     private final String stat7 = "Closest 5 Pubs";
     private final String stat8 = "Closest 5 Attractions";
     
-    //Labels that contain the actual statistic
+    //Strings that contain the actual statistic to be shown
     String value1, value2, value3, value4, value5, value6, value7, value8;
     
-    //Creating a list so that I could iterate through them
-    private List<Label>  labelList = new ArrayList<Label>();
+    
     
     //Declaring the double sided queue
     public static Deque<stat> dq;
     
-    //Creating a hashmap that links a button to the specified labels within their gridpane
-    HashMap<Button, HashMap<Label, Label>> connectObjects = new HashMap<>();
-    
-    //To check if the button pressed is forward or backwards
-    boolean nextOrPrev;
-    
-    //Creating a hashmap that links the title of the statistic to the statistic
-    HashMap<String, String> statOutput;
-    
-      private static List<AirbnbListing> airbnbListings;
-      private static final String roomNeeded = "Entire home/apt";
-      private static List<StatisticsListing> statListings;
 
+    
+    private static List<AirbnbListing> airbnbListings;
+    private static final String roomNeeded = "Entire home/apt";
+    private static List<StatisticsListing> statListings;
+
+    //To be able to round statistics to  2 decimal places
     private static final DecimalFormat df = new DecimalFormat("0.00");
     
     
     
-       
-       private int fromValue;
-       private int toValue;
+    //These two values will store the combobox prices when the user selects a price range
+    private int fromValue;
+    private int toValue;
     
        
+    //Declared as a class type that houses the components and values to be shown on the gridpane
+    private stat avgProperties;
+    private stat totalProperties;
+    private stat noNonPrivate;
+    private stat mostExpensive;
+    private stat highSocial;
+    private stat lowCrime;
+    private interactiveStat pubs;
+    private interactiveStat attractions;
     
-       private stat avgProperties;
     
-       private stat totalProperties;
-       private stat noNonPrivate;
-       private stat mostExpensive;
-       private stat highSocial;
-       private stat lowCrime;
-       //error prone
-       private interactiveStat pubs;
-       private interactiveStat attractions;
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
@@ -116,15 +91,16 @@ public class StatController extends Controller
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
         
-        //linkBorderPane();
         setUpStats();
         setUpValues();
-        
-        
+    
         setupQueue();
         startStats();
     }
     
+    /**
+     * This method is called to update the statistics to reflect the change in price range.
+     */
     public void updateValues()
     {
         if(MainWindow.getMainWindow().getMainController().getRangeValues() == null )
@@ -139,11 +115,12 @@ public class StatController extends Controller
     }
     
     /**
-     * Assigning the value of the statistic to the specific string
+     * Assigning the value of the statistic to the specific function it correlates to
+     * and updating them
      */
     private void setUpValues()
     {
-        //updateValues();
+        
         //set up values to corresponding function
         value1 = String.valueOf(averagePropertyView());
         value2 = String.valueOf(totalAvailableProperties());
@@ -161,6 +138,9 @@ public class StatController extends Controller
         
     }
 
+    /**
+     * Updates the comboboxes for the two statistics that require user interaction
+     */
     private void setUpBoxes()
     {
         pubs.updateComboValues();
@@ -168,11 +148,7 @@ public class StatController extends Controller
     }
     
     /**
-     * The starting statistics shown when accessing the panel
-     * The first 4 values in the queue is popped, each time I do this I get the strings associated
-     * with the popped values
-     * I then access the  nested  hashmap and use the (i) value in labellist to find  the key in the
-     * child hashmap and then set the labels to the values in that  hashmap
+     * The first four statistics are added to the gridpane in the specific cell labelled
      */
     private void startStats() 
     {
@@ -182,9 +158,14 @@ public class StatController extends Controller
         gridPane1.add(mostExpensive,1,1);
     }
     
+    /**
+     * A double-sided queue is used to reflect the order of the buttons that the user presses.
+     * If the right button (>) is clicked twice and the left button (<) is clicked twice  
+     * then you will return to the original statistic that was shown
+     */
     private void setupQueue()
     {
-        //Setting up my queue, first 4 values will be removed when initializing the pane
+        
         dq = new ArrayDeque<stat>();
         dq.addLast(highSocial);
         dq.addLast(lowCrime);
@@ -193,7 +174,7 @@ public class StatController extends Controller
     }
     
     /**
-     * Setting up the hashmap that contains the title of the statistic and the statistic itself
+     * Setting up the stat class with the needed components and corresponding statistic
      */
     private void setUpStats()
     {
@@ -207,10 +188,19 @@ public class StatController extends Controller
        attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, DestinationType.ATTRACTION);
     }
        
-
+    /**
+     * Filters the list to only include properties from that price range
+     */
+    private List<AirbnbListing> filterPrice(List<AirbnbListing> unfilteredList)
+    {
+        return unfilteredList.stream()
+                             .filter(listing -> listing.getPrice() >= fromValue && listing.getPrice() <= toValue)
+                             .collect(Collectors.toList());                            
+                      
+    }
     
     /**
-     * returns the average number of reviews per property
+     * Returns the average number of reviews per property within the price range
      * (statistic 1)
      */
     public String averagePropertyView() {
@@ -223,7 +213,7 @@ public class StatController extends Controller
          long count = filtered.stream()
                      .count();
         double l = (double)count;
-        //Need a try-catch as initially the program will try to divide zero by zerp
+        //Need a try-catch as initially the program will try to divide zero by zero
         try {
             return df.format(average/l);
                      
@@ -232,19 +222,13 @@ public class StatController extends Controller
             }
     }
     
-    private List<AirbnbListing> filterPrice(List<AirbnbListing> unfilteredList)
-    {
-        return unfilteredList.stream()
-                             .filter(listing -> listing.getPrice() >= fromValue && listing.getPrice() <= toValue)
-                             .collect(Collectors.toList());                            
-                      
-    }
+   
     
     /**
-     * returns the total available properties
+     * returns the total available properties within the price range
      * (statistic 2)
      */
-    public int totalAvailableProperties() { //int lower, int upper
+    public int totalAvailableProperties() { 
         List<AirbnbListing> filtered = filterPrice(airbnbListings);
 
         long available = filtered.stream()
@@ -255,10 +239,10 @@ public class StatController extends Controller
     }
     
     /**
-     * returns the number of non-private rooms
+     * returns the number of non-private rooms  within the price range
      * (statistic 3)
      */
-    public int nonPrivateRoom() { //int lower, int upper
+    public int nonPrivateRoom() {
         List<AirbnbListing> filtered = filterPrice(airbnbListings);
 
         long nonPrivate = filtered.stream()
@@ -271,14 +255,13 @@ public class StatController extends Controller
     
 
     /**
-     * returns the most expensive neighbourhood
-     * (statistic 3)
+     * returns the most expensive neighbourhood within that price range
+     * (statistic 4)
      */
     public String expensiveNeighbourhood() {
         
         int max = 0;
-        int price= 0;
-        int nights = 0;
+        
         String correctNeighbourhood = "";
         List<AirbnbListing> filtered = filterPrice(airbnbListings);
         for(int i = 0; i < filtered.size(); i++) {
@@ -286,63 +269,100 @@ public class StatController extends Controller
             int calcPrice = filtered.get(i).getPrice() * filtered.get(i).getMinimumNights();
             if(calcPrice > max){
                 max = calcPrice;
-                price = filtered.get(i).getPrice();
-                nights = filtered.get(i).getMinimumNights();
                 correctNeighbourhood = filtered.get(i).getNeighbourhood();
             }
             
         }
-        /**final int finalPrice = price;
-        final int finalNight = nights;
-        
 
-        ArrayList<AirbnbListing> abnb = new ArrayList<>();
-        abnb = filtered.stream()
-                             .filter(listing -> listing.getPrice() == finalPrice && listing.getMinimumNights() == finalNight)
-                             .collect(Collectors.toCollection(ArrayList::new));
-        
-                return filtered.get(0).getNeighbourhood(); */
                 
-                return correctNeighbourhood;
+        return correctNeighbourhood;
     }
       
 
+     /**
+     * returns the highest social score with the borough name
+     * social score is calculated using a csv file taken from the government website
+     * (statistic 8)
+     */
     public String socialScore() {
         double highestSocial = 0;
         String boroughSocial = "";
-        for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
-            double maxSocial = sScore.getAvgTransportAccess() + sScore.getLifeSatisfaction() +
+        List<AirbnbListing> filtered = filterPrice(airbnbListings);
+        ArrayList<String> boroughListing = new ArrayList<>();
+        ArrayList<StatisticListing> top3Scores = new ArrayList<>();
+        double first;
+        double second;
+        double third;
+        HashMap<String, Integer> top3Borough = new HashMap<>();
+        for(int i = 0; i< filtered.size(); i++) {
+            boroughListing.add(filtered.get(i).getNeighbourhood());
+        }
+            
+        for(int x = 0; x < boroughListing.size(); x++ ) {
+            for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+            if(boroughListing.get(x).equals(sScore.getBoroughName())) {
+                double maxSocial = sScore.getAvgTransportAccess() + sScore.getLifeSatisfaction() +
                                sScore.getWorthwileScore() + sScore.getHappinessScore() -
                                sScore.getAnxietyScore();
-            if(maxSocial > highestSocial) {
+            /**if(maxSocial > highestSocial) {
                 highestSocial = maxSocial;
                 boroughSocial = sScore.getBoroughName() + ": " + df.format(highestSocial);
+            }*/
+            
+            
             }
+               
+           
+        
+            } 
         }
+        
+        
         return boroughSocial;
     }
-    
+    /**
+     * returns the borough with the lowest crime per 100,000 people within 
+     * the price range
+     * (statistic 7)
+     */
     public String highestCrime() {
         double lowCrime = 1000;
         String boroughCrime = "";
-        for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+         List<AirbnbListing> filtered = filterPrice(airbnbListings);
+         ArrayList<String> boroughListing = new ArrayList<>();
+        
+    for(int i = 0; i< filtered.size(); i++) {
+            boroughListing.add(filtered.get(i).getNeighbourhood());
+    }
+        
+    for(int x = 0; x < boroughListing.size(); x++ ) {
+    for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+            if(boroughListing.get(x).equals(sScore.getBoroughName())) {
             double checkCrime = sScore.getCrimeRate() ;
             if(checkCrime < lowCrime) {
                 lowCrime = checkCrime;
                 boroughCrime = sScore.getBoroughName();
             }
+     }
     }
-    return boroughCrime;
+   
     }
-    
+     return boroughCrime;
+}
 /**
- * Write a description of class StatNode here.
+ * Provides the GUI for each statistic by creating a borderpane with labels that show the 
+ * title and value of the statistic and buttons that allow the user to switch between each
+ * one
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 private class stat extends BorderPane
 {
+    //Creating the components for the user interface to be put in the gridpane
     protected BorderPane wrapPane;    
     private Label title;
     private Label value;
@@ -373,9 +393,9 @@ private class stat extends BorderPane
     wrapPane.setAlignment(rightButton, Pos.CENTER);
     wrapPane.setAlignment(leftButton, Pos.CENTER);
     
-    wrapPane.setMargin(rightButton, new Insets(0,0,0,50));
-    wrapPane.setMargin(leftButton, new Insets(0,50,0,0));
-    wrapPane.setMargin(title, new Insets(10,0,0,0));
+    wrapPane.setMargin(rightButton, new Insets(0,15,0,0));
+    wrapPane.setMargin(leftButton, new Insets(0,0,0,15));
+    wrapPane.setMargin(title, new Insets(50,50,50,50));
     leftButton.setPrefSize(52,130);
     rightButton.setPrefSize(52,130);
     
@@ -384,13 +404,18 @@ private class stat extends BorderPane
     
     //wrapPane.getChildren().setAll(value);
     this.setCenter(wrapPane);
-    }
+}
     
     public void updateValue(String text)
     {
         value.setText(text);
     }
     
+    /**
+     * When user clicks the right button, the cell of the borderpane to be changed is added 
+     * to the queue and removed, and the next stat shown is removed from the queue and added to
+     * that cell of the gridpane
+     */
     protected void clickRight(ActionEvent event)
     {
         int row = gridPane1.getRowIndex(this);
@@ -401,6 +426,11 @@ private class stat extends BorderPane
         gridPane1.add(last,column,row);
     }
     
+    /**
+     * When user clicks the left button, the cell of the borderpane to be changed is added 
+     * to the queue and removed, and the next stat shown is removed from the queue and added to
+     * that cell of the gridpane
+     */
     protected void clickLeft(ActionEvent event)
     {
         int row = gridPane1.getRowIndex(this);
@@ -427,6 +457,15 @@ private class stat extends BorderPane
     
 }
 
+/**
+ * 
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */
 public  class interactiveStat extends stat 
 {
     private InteractiveStatController interactiveStatController = new InteractiveStatController();

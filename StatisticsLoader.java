@@ -15,12 +15,13 @@ import java.net.URL;
 public class StatisticsLoader
 {
     /**
-     * Holds the Airbnb listings once they have been loaded from secondary memory.
+     * Holds the added statistics listings once they have been loaded from secondary memory.
      */
     private static ArrayList<StatisticsListing> statListings;
     
     /** 
-     * Loads and saves stat listings from a CSV file. Each row in the CSV file corresponds to a single listing.
+     * Loads and saves stat listings from a CSV file. Each row in the CSV file corresponds to data
+     * about a borough.
      */
     private static void load()
     {
@@ -64,7 +65,7 @@ public class StatisticsLoader
     /**
      * These listings should only be loaded once during the program's lifetime so this method will load them if and
      * only if they haven't already been loaded and saved.
-     * @return The Airbnb listings saved in main memory.
+     * @return The statistic listings saved in main memory.
      */
     public static List<StatisticsListing> getStatListings()
     {
