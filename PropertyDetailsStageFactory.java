@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * PropertyWindowFactory controls the creation of property windows.
  * Tts main responsibility is to ensure that only one property window exists
@@ -14,13 +17,13 @@ public class PropertyDetailsStageFactory
     private static PropertyDetailsStageFactory propertyDetailsStageFactory;
     
     //The set of all open property windows
-    private WindowHashSet<PropertyDetailsStage> openPropertyWindows;
+    private Map<AirbnbListing, PropertyDetailsStage> openPropertyWindows;
 
     // Constructor for PropertyWindowFactory,
     //Its private as this is a singleton.
     private PropertyDetailsStageFactory()
     {
-        openPropertyWindows = new WindowHashSet<>();
+        openPropertyWindows = new HashMap<>();
     }
     
     /**
@@ -60,23 +63,20 @@ public class PropertyDetailsStageFactory
             return null;
         }
         
-        for (PropertyDetailsStage propertyDetailsStage : openPropertyWindows)
+        PropertyDetailsStage propertyDetailsStage = openPropertyWindows.get(listing);
+        
+        if (propertyDetailsStage != null)
         {
-            if (listing.equals(propertyDetailsStage.getListing()))
-            {
-                propertyDetailsStage.toFront();
-                return propertyDetailsStage;
-            }
+            propertyDetailsStage.toFront();
+            
+            return propertyDetailsStage;
         }
-        
-        
-        PropertyDetailsStage propertyDetailsStage = null;
         
         try
         {
             propertyDetailsStage = new PropertyDetailsStage(listing);
             
-            openPropertyWindows.add(propertyDetailsStage);
+            openPropertyWindows.put(listing, propertyDetailsStage);
         }
         catch (Exception e)
         {
