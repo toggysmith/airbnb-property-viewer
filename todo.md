@@ -34,7 +34,6 @@
 - [ ] DrawableSearchAreaMapController
 - [ ] EmptyListException
 - [ ] Hexagon
-- [ ] StageFactory
 - [ ] InteractiveStatController
 - [ ] InteractiveStatsTableValues
 - [ ] JsToJavaBridge
