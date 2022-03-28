@@ -111,7 +111,6 @@ public class StatController extends Controller
         toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
         setUpValues();
         setUpBoxes();
-        //RESETVALUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     /**

@@ -9,7 +9,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 /**
- * MainController hosts FXML GUI elements and onAction methods.
+ * MainController hosts FXML GUI elements and onAction methods for the main pane
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -25,12 +25,16 @@ public class MainController extends Controller
     @FXML private Button leftButton;
     @FXML private Button rightButton;
     
+    //RangeValues object that stores the constantly updating combo box values so that the combo boxes themselves do not need to be passed around 
     private RangeValues comboBoxRangeValues;
     
     private ContentContainerManager contentContainerManager;
     private MapController mapController;
     private StatController statController;
     
+    /**
+     * 
+     */
     public void setUpPanes() throws IOException
     {
         contentContainerManager = new ContentContainerManager(switchPane);
@@ -41,6 +45,9 @@ public class MainController extends Controller
         mapController.createMap();
     }
     
+    /**
+     * On Action method linked to the next button in the main-pane FXML file, so that when that button is pressed the next pane will be displayed, relative to the currenlty displayed pane
+     */
     @FXML
     private void nextPane()
     {
@@ -48,6 +55,9 @@ public class MainController extends Controller
         switchPane.getChildren().setAll(nextPane);
     }
     
+    /**
+     * On Action method linked to the previous button in the main-pane FXML file, so that when that button is pressed the previos pane will be displayed, relative to the currenlty displayed pane
+     */
     @FXML
     private void prevPane()
     {
@@ -55,24 +65,40 @@ public class MainController extends Controller
         switchPane.getChildren().setAll(previousPane);
     }
     
+    /**
+     * enables the buttons when a valid price range is selected
+     */
     private void enableButtons()
     {
         rightButton.setDisable(false);
         leftButton.setDisable(false);
     }
    
+    /**
+     * On action method linked to the from combobox in the main-pane FXML file, so that when a new price option is selected it checks whether the price range is valid.
+     */
     @FXML
     private void processFromBox()
     {
         checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
     }
     
+    /**
+     * On action method linked to the to combobox in the main-pane FXML file, so that when a new price option is selected it checks whether the price range is valid
+     */
     @FXML
     private void processToBox()
     {
         checkBoxes(fromRangeBox.getValue(), toRangeBox.getValue());
     }
     
+    /**
+     * Method use to check that the user selected price ranges are valid, this method is only executed if both combo boxes have a value selected. The from value needs to be smaller than the to value selected.
+     * "No min" means that there is no minimum and "No max" means there is no maximum
+     * @param String fromValue, the selected value from the "from combo box"
+     * @param String toValue, the selected value from the "to combo box"
+     * 
+     */
     private void checkBoxes(String fromValue, String toValue)
     {
         if (toValue != null && fromValue != null)
@@ -89,15 +115,19 @@ public class MainController extends Controller
             else
             {
                 rangeWarningAlert();
+                //when the invalid range is displayed then the combo boxes are reverted back to a valid range
                 fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
                 toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
             }
-            
+            //everytime the comboboxes are changed so are the values storing the combo box values in the mapController and statController
             mapController.updateMap();
             statController.updateValues();
         }
     }
     
+    /**
+     * A method called when an invalid range is selected and displays an alert to the user.
+     */
     private void rangeWarningAlert()
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
@@ -107,6 +137,10 @@ public class MainController extends Controller
         invalidRange.showAndWait();
     } 
     
+    /**
+     * returns the object storing the combo box range values
+     * @return RangeValues, containing the from value and to value
+     */
     public RangeValues getRangeValues()
     {
         return comboBoxRangeValues;

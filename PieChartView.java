@@ -53,7 +53,7 @@ public class PieChartView extends Stage
              //String key = String.format("%s £",min, "%s  < x < £ ",max);
         //    pieValues.put("£ " + min + "< x <= £ " + max,values.length);
       //  }else{
-     for(int i = min; min < max; min += stepAmount){
+     for(int i = min; min <= max; min += stepAmount){
          int toValue = min + stepAmount;
          
             int totalValue = (int)retrieveSpeciedAmount(values,min, toValue);
