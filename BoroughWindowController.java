@@ -82,11 +82,11 @@ public class BoroughWindowController extends Controller
         setUpComboBox();
     }
     
-    /**
+    /*
      * Adds the listings to the table and assigns what attributes of those listings go in each column.
      * @param listings The listings that will be displayed in the table.
      */
-    protected void populateTable(ObservableList<AirbnbListing> listings)
+    private void populateTable(ObservableList<AirbnbListing> listings)
     {
         boroughTable.setItems(listings);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("host_name"));
@@ -95,15 +95,15 @@ public class BoroughWindowController extends Controller
         minNightsColumn.setCellValueFactory(new PropertyValueFactory<>("minimumNights"));
     }
     
-    /**
+    /*
      * Adds the different orders for th table to the combo box.
      */
-    protected void populateOrderBox()
+    private void populateOrderBox()
     {
         orderBox.getItems().addAll(getSortBoxOptions());
     }
     
-    /**
+    /*
      * Maps the type of sort to the collumn that it will be sorting.
      */
     private List<ComboBoxOrderEnum> getSortBoxOptions()
@@ -122,15 +122,15 @@ public class BoroughWindowController extends Controller
         return options;
     }
 
-    /**
+    /*
      * Sets the row factory for the table to make all rows call tableClicked().
      */
-    protected void setOnRowClicked()
+    private void setOnRowClicked()
     {
         boroughTable.setRowFactory(e -> tableClicked());
     }
 
-    /**
+    /*
      * Makes all the rows in the table call rowClicked() when they are clicked.
      */
     private TableRow<AirbnbListing> tableClicked()
@@ -140,7 +140,7 @@ public class BoroughWindowController extends Controller
         return row;
     }
 
-    /**
+    /*
      * Makes the row that has been clicked create a property window for the listing that was being displayed in the row.
      */
     private void rowClicked(TableRow<AirbnbListing> row)
@@ -151,15 +151,15 @@ public class BoroughWindowController extends Controller
         }
     }
     
-    /**
+    /*
      * Assigns the table to sort when the combo box is clicked.
      */
-    protected void assignSort()
+    private void assignSort()
     {
         orderBox.setOnAction(e -> sort(orderBox.getValue()));
     }
     
-    /**
+    /*
      * Sorts the table accoring to what is in the combo box.
      */
     private void sort(ComboBoxOrderEnum comboBoxOrderEnum)
@@ -180,10 +180,10 @@ public class BoroughWindowController extends Controller
         column.setSortable(false);
     }
     
-    /**
+    /*
      * Assigns the lables with the price range.
      */
-    protected void assignPriceLabels()
+    private void assignPriceLabels()
     {
         fromPrice.setText(String.format(fromPrice.getText(), boroughWindow.getFromPrice()));
         toPrice.setText(String.format(toPrice.getText(), boroughWindow.getToPrice()));
@@ -254,7 +254,7 @@ public class BoroughWindowController extends Controller
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
     }
     
-    /**
+    /*
      * Adds the listings in the borough in the price range to the map.
      */
     private void addPropertiesToJsFile(ObservableList<AirbnbListing> listings)

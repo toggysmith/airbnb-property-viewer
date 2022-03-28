@@ -52,7 +52,7 @@ public class DestinationWindowController extends Controller
         populateLabels();
     }
     
-    /**
+    /*
      * Gives the Js file this destinations info so that a marker can be placed on the map at its location.
      */ 
     private void addDestinationToJsFile()
@@ -65,7 +65,7 @@ public class DestinationWindowController extends Controller
         openLayersMap.executeScript(jsScript, true);
     }
     
-    /**
+    /*
      * Adds the destination details to the labels provided.
      */ 
     private void populateLabels()

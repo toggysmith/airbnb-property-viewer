@@ -59,7 +59,7 @@ public class InteractiveStatController extends Controller
         setOnRowClicked();
     }
     
-    /**
+    /*
      * Assigns what fields will go in which row.
      */
     private void createTable()
@@ -69,15 +69,15 @@ public class InteractiveStatController extends Controller
         distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
     }
     
-    /**
+    /*
      * Defines what happens when a row is clicked in the row factory
      */
-    protected void setOnRowClicked()
+    private void setOnRowClicked()
     {
         locationsResult.setRowFactory(e -> tableClicked());
     }
 
-    /**
+    /*
      * Defines what happens when a row is clicked.
      */
     private TableRow<InteractiveStatsTableValues> tableClicked()
@@ -87,7 +87,7 @@ public class InteractiveStatController extends Controller
         return row;
     }
 
-    /**
+    /*
      * Creates a destination window for the destination in the row clicked.
      */
     private void rowClicked(TableRow<InteractiveStatsTableValues> row)
@@ -130,7 +130,7 @@ public class InteractiveStatController extends Controller
         price.setDisable(true);
     }
     
-    /**
+    /*
      * Creates the new combo boxes.
      */
     private void createNewComboBoxes()
@@ -140,7 +140,7 @@ public class InteractiveStatController extends Controller
         createNewPriceComboBox();
     }
     
-    /**
+    /*
      * Creates a new Combo box for the borough.
      */
     private void createNewBoroughComboBox()
@@ -152,7 +152,7 @@ public class InteractiveStatController extends Controller
         comboBoxContainer.getChildren().add(0, boroughs);
     }
     
-    /**
+    /*
      * Creates a new Combo box for the property.
      */
     private void createNewPropertyComboBox()
@@ -164,7 +164,7 @@ public class InteractiveStatController extends Controller
         comboBoxContainer.getChildren().add(1, propertyName);
     }
 
-    /**
+    /*
      * Creates a new Combo box for the price.
      */
     private void createNewPriceComboBox()
@@ -244,7 +244,7 @@ public class InteractiveStatController extends Controller
         }
     }
     
-    /**
+    /*
      * Displays the 5 closest destinations in a table
      */
     private void displayResult()

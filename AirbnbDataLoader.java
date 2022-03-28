@@ -19,12 +19,12 @@ import java.net.URL;
  */
 public class AirbnbDataLoader
 {
-    /**
+    /*
      * Holds the Airbnb listings once they have been loaded from secondary memory.
      */
     private static ArrayList<AirbnbListing> listings;
     
-    /** 
+    /*
      * Loads and saves Airbnb listings from a CSV file. Each row in the CSV file corresponds to a single listing.
      */
     private static void load()
@@ -81,7 +81,7 @@ public class AirbnbDataLoader
         return listings;
     }
     
-    /**
+    /*
      * @param doubleString The string to be converted to Double type.
      * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
      */
@@ -95,7 +95,7 @@ public class AirbnbDataLoader
         return -1.0;
     }
 
-    /**
+    /*
      * @param intString The string to be converted to Integer type.
      * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
      */

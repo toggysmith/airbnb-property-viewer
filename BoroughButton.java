@@ -74,7 +74,7 @@ public class BoroughButton
         quantityVisualiser.setRangeUpperBound(noOfPropertiesInBoroughWithMost);
     }
     
-    /**
+    /*
      * Trys to create a new borough window with the listings in the borough in the price range.
      */ 
     private void createBoroughWindow(Borough borough)
@@ -89,7 +89,7 @@ public class BoroughButton
         }
     }
     
-    /**
+    /*
      * Creates a warning alert when a borough with no properties in the price range is clicked.
      */ 
     private void emptyBoroughWarningAlert(String boroughName, EmptyListException ele)

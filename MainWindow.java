@@ -19,7 +19,8 @@ public class MainWindow
     private MainController mainController;
     private MainView mainView;
     private RangeValues rangeValues;
-    /**
+    
+    /*
      * Constructor for objects of class MainWindow
      */
     private MainWindow()

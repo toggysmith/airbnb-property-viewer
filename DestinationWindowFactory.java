@@ -16,7 +16,7 @@ public class DestinationWindowFactory
     //The set of all open destination windows
     private WindowHashSet<DestinationWindow> openDestinationWindows;
     
-    /**
+    /*
      * Constructor for DestinationWindowFactory,
      * Its private as this is a singleton.
      */
