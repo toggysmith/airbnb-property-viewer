@@ -13,9 +13,19 @@ public class PieChartView extends Stage
 {
     PieChartController controller;
     HashMap<String,Integer> pieValues;
-    public PieChartView(int[] values)
+
+    public AnchorPane setUpPieChart() throws java.io.IOException
     {
-      int min = Arrays.stream(values)
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pieChart.fxml"));
+        AnchorPane pane = loader.load();
+        controller = loader.getController();    
+        return pane;
+    }
+    
+    public void populatePieChart(int[] values)
+    {
+     pieValues = new HashMap<String,Integer>(); 
+     int min = Arrays.stream(values)
                       .boxed()
                       .min(Integer::compare)
                       .get();
@@ -23,47 +33,47 @@ public class PieChartView extends Stage
       int max = Arrays.stream(values)
                       .boxed()
                       .max(Integer::compare)
-                      .get();
-                      
-      pieValues = new HashMap<String,Integer>();                
-      populatePieChart(min, max, values);                
+                      .get();              
+       
+     int stepAmount;
+     
+     if(values.length < 10){
+         pieValues.put("£ " + min + "< x <= £ " + max, values.length);
+         controller.setup(pieValues);
+         return;
+     }
+     
+     if((max - min) < 10){
+         stepAmount = 1;
+     }else{
+     stepAmount = (max - min) / 10;
     }
-
-    public AnchorPane setUpPieChart() throws java.io.IOException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("pieChart.fxml"));
+     
         
-        AnchorPane pane = loader.load();
-        
-        controller = loader.getController();
-        
-        //setUpComboBox();
-        controller.setup(pieValues);
-        return pane;
-    }
-    
-    private void populatePieChart(int min, int max, int[] values)
-    {
-        int stepAmount;
-        
-        if( (max - min) < 15){
-            pieValues.put("£ " + min + " - " + max, values.length);
-        }else{
-           stepAmount = (max - min) / 7;
-           for(int i = min; min <= max; min += stepAmount){
-            int toValue = (int)retrieveSpeciedAmount(values,min, (min+stepAmount));
-            pieValues.put("£ " + min  + " - " + (min+stepAmount),toValue);
-        } 
-        }
-        
-        
+             //String key = String.format("%s £",min, "%s  < x < £ ",max);
+        //    pieValues.put("£ " + min + "< x <= £ " + max,values.length);
+      //  }else{
+     for(int i = min; min < max; min += stepAmount){
+         int toValue = min + stepAmount;
+         
+            int totalValue = (int)retrieveSpeciedAmount(values,min, toValue);
+            pieValues.put("£ " + min + "=< x < £ " + toValue,totalValue);
+     }  
+    //}
+    controller.setup(pieValues);
     }
     
     private long retrieveSpeciedAmount(int[] values , int from, int to)
     {
         return Arrays.stream(values)
-                      .boxed()
-                      .filter(i -> i > from && i < to)
+                      .filter(i -> (i >= from) && (i < to))
                       .count();
     }
+    
+    /**
+    private boolean checkEquality(int fromValue, int currentValue)
+    {
+        return fromValue == currentValue;
+    }
+    */
 }

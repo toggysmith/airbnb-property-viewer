@@ -47,6 +47,7 @@ public class BoroughWindowController extends Controller
     
     private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 11, -0.115937, 51.511437); // Creates a map with the centre around the stand campus.
 
+    private PieChartView pieView;
 
     /**
      * Adds the map to the pane that is shown and gives the map the ability to show markers.
@@ -188,6 +189,20 @@ public class BoroughWindowController extends Controller
         toPrice.setText(String.format(toPrice.getText(), boroughWindow.getToPrice()));
     }
     
+    private void makePieChart()
+    {
+         try
+        {
+            pieView = new PieChartView();
+            AnchorPane chartPane = pieView.setUpPieChart();
+            pieChart.getChildren().setAll(chartPane);
+            }
+        catch (java.io.IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+    }
+    
     private void setUpPieChart(String selectedAttribute)
     {
         int[] attributeValues = new int[boroughTable.getItems().size()];   
@@ -200,24 +215,10 @@ public class BoroughWindowController extends Controller
             attributeValues = boroughTable.getItems().stream()
                                                      .mapToInt(listing -> listing.getNumberOfReviews())
                                                      .toArray();
-        }else if(selectedAttribute.equals("Min number of nights")){
-            attributeValues = boroughTable.getItems().stream()
-                                                     .mapToInt(listing -> listing.getNumberOfReviews())
-                                                     .toArray();
         }
                                                     
+        pieView.populatePieChart(attributeValues);
         
-        try
-        {
-            PieChartView view = new PieChartView(attributeValues);
-            AnchorPane chartPane = view.setUpPieChart();
-            pieChart.getChildren().setAll(chartPane);
-        }
-        catch (java.io.IOException ioe)
-        {
-            ioe.printStackTrace();
-        }
-         
     }
     
     private void setUpComboBox()
@@ -225,8 +226,10 @@ public class BoroughWindowController extends Controller
         List<String> comboBoxStrings = new ArrayList<String>();
         comboBoxStrings.add("Price");
         comboBoxStrings.add("Number of reviews");
-        comboBoxStrings.add("Min number of nights");
+        //comboBoxStrings.add("Min number of nights");
         attributeBox.getItems().addAll(comboBoxStrings);
+        
+        makePieChart();
     }
     
     @FXML
