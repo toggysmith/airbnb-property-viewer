@@ -2,7 +2,7 @@ import java.util.stream.Collectors;
 import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
+import java.util.Arrays;
 /**
  * Responsible for providing methods to usefully manipulate individual Airbnb listings and lists of listings.
  *
@@ -165,6 +165,69 @@ public class ListingProcessor
                                                 .findFirst().orElse(null); 
        //perform try catch to possibly simulate better behaviour in case of null thrown                                         
        return selectedProperty;
+    }
+    
+    //The below streams are used in the pie chart functionalities
+    /**
+     * Augusto
+     */
+    public static int[] getListingPrices(List<AirbnbListing> listings)
+    {
+        return listings.stream()
+                .mapToInt(listing -> listing.getPrice())
+                .toArray();
+    }
+    
+    /**
+     * Augusto
+     */
+    public static int[] getListingReviews(List<AirbnbListing> listings)
+    {
+        return listings.stream()
+                .mapToInt(listing -> listing.getNumberOfReviews())
+                .toArray();
+    }
+    
+    /**
+     * Augusto
+     */
+    public static int[] getListingMinNights(List<AirbnbListing> listings)
+    {
+        return listings.stream()
+                       .mapToInt(listing -> listing.getMinimumNights())
+                       .toArray();
+    }
+    
+    /**
+     * Augusto
+     */
+    public static int getMin(int[] values)
+    {
+        return Arrays.stream(values)
+                         .boxed()
+                         .min(Integer::compare)
+                         .get();
+    }
+    
+    /**
+     * Augusto
+     */
+    public static int getMax(int[] values)
+    {
+        return Arrays.stream(values)
+                     .boxed()
+                     .max(Integer::compare)
+                     .get();  
+    }
+    
+    /**
+     * Augusto
+     */
+    public static long retrieveSpeciedAmount(int[] values , int from, int to)
+    {
+        return Arrays.stream(values)
+                      .filter(i -> (i >= from) && (i < to))
+                      .count();
     }
     
     /**
