@@ -45,38 +45,48 @@ public class DestinationDistances
      */
     private void addDestinations(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
     {
-       for(DestinationListing destination: filteredDestinations){
-            int calculatedDistance = calculateDistance(selectedProperty.getLongitude(), destination.getLongitude(), selectedProperty.getLatitude(), destination.getLatitude());
-            destinations.add(new DistanceDestinationPair(destination, calculatedDistance)); 
+        for(DestinationListing destination: filteredDestinations){
+             int calculatedDistance = calculateDistance(selectedProperty.getLongitude(), destination.getLongitude(), selectedProperty.getLatitude(), destination.getLatitude());
+             destinations.add(new DistanceDestinationPair(destination, calculatedDistance)); 
         }
-       
     }
    
+    /**
+     *Converts the destinations ArrayList<DestinationPair> to an array which is sorted using a merge sort and the first five elements in the list are retrieved. If there are less then five locations, all of them are displayed,
+     *otherwise the first five are chosen which represent the five closest destinations
+     *@return ArrayList<DistanceDestinationPair>, containing the up to five closest destinations relative to the selected property
+     */
     public ArrayList<DistanceDestinationPair> getFiveSmallest()
     {
-    ArrayList<DistanceDestinationPair> smallestFive = new ArrayList<DistanceDestinationPair>();
+        ArrayList<DistanceDestinationPair> smallestFive = new ArrayList<DistanceDestinationPair>();
         
-    DistanceDestinationPair[] pairs = new DistanceDestinationPair[destinations.size()];
+        DistanceDestinationPair[] pairs = new DistanceDestinationPair[destinations.size()];
         
-    for(int i = 0; i <= pairs.length - 1; i++){
-        pairs[i] = destinations.get(i);
-    }
+        for(int i = 0; i <= pairs.length - 1; i++){
+              pairs[i] = destinations.get(i);
+        }
         
-    mergeSort(pairs,pairs.length);
-         if(pairs.length > 5){
+        mergeSort(pairs,pairs.length);
+        if(pairs.length > 5){
             for(int i = 0; i < 5; i++){
             smallestFive.add(pairs[i]);
-        }
+            }
         }else{
             for(int i = 0; i <= pairs.length - 1; i++){
             smallestFive.add(pairs[i]);
+            }
         }
-        }
-    return smallestFive;
+        return smallestFive;
     }
     
+    //reference : https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude (1st answer)
+    /**
+     * given the property and destination longitude and latitude calculateDistancew() calculates the distance between them
+     * @return int, returns the distance between the two locations in KM as an int 
+     */
     private int calculateDistance(double propertyLong, double venueLong, double propertyLat, double venueLat)
     {
+        
         double latDistance = Math.toRadians(propertyLat - venueLat);
         double lngDistance = Math.toRadians(propertyLong - venueLong);
 
@@ -89,42 +99,48 @@ public class DestinationDistances
         return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
     }
     
-    public void mergeSort(DistanceDestinationPair[] a, int n) {
-    if (n < 2) {
-        return;
-    }
-    int mid = n / 2;
-    DistanceDestinationPair[] l = new DistanceDestinationPair[mid];
-    DistanceDestinationPair[] r = new DistanceDestinationPair[n - mid];
+    //reference: https://www.baeldung.com/java-merge-sort
+    /**
+     *Merge sort algorithm that sorts the inputed array in ascending order, sorting the DistanceDestinationPair object from shortest distance to longest distance 
+     */
+    public void mergeSort(DistanceDestinationPair[] a, int n)
+    {
+        if (n < 2) {
+            return;
+        }
+        int mid = n / 2;
+        DistanceDestinationPair[] l = new DistanceDestinationPair[mid];
+        DistanceDestinationPair[] r = new DistanceDestinationPair[n - mid];
 
-    for (int i = 0; i < mid; i++) {
-        l[i] = a[i];
-    }
-    for (int i = mid; i < n; i++) {
-        r[i - mid] = a[i];
-    }
-    mergeSort(l, mid);
-    mergeSort(r, n - mid);
+        for (int i = 0; i < mid; i++) {
+            l[i] = a[i];
+        }
+        for (int i = mid; i < n; i++) {
+            r[i - mid] = a[i];
+        }
+        mergeSort(l, mid);
+        mergeSort(r, n - mid);
 
-    merge(a, l, r, mid, n - mid);
+        merge(a, l, r, mid, n - mid);
     }
 
-    private void merge(DistanceDestinationPair[] a, DistanceDestinationPair[] l, DistanceDestinationPair[] r, int left, int right) {
+    private void merge(DistanceDestinationPair[] a, DistanceDestinationPair[] l, DistanceDestinationPair[] r, int left, int right)
+    {
  
-    int i = 0, j = 0, k = 0;
-    while (i < left && j < right) {
-        if (l[i].getDistance() <= r[j].getDistance()) {
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (l[i].getDistance() <= r[j].getDistance()) {
+                a[k++] = l[i++];
+            }
+            else{
+                a[k++] = r[j++];
+            }
+        }
+        while (i < left) {
             a[k++] = l[i++];
         }
-        else {
+        while (j < right) {
             a[k++] = r[j++];
         }
-    }
-    while (i < left) {
-        a[k++] = l[i++];
-    }
-    while (j < right) {
-        a[k++] = r[j++];
-    }
     }
 }

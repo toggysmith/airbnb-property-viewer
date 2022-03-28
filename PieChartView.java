@@ -22,7 +22,7 @@ public class PieChartView extends Stage
         return pane;
     }
     
-    public void populatePieChart(int[] values)
+    public void populatePieChart(int[] values, String symbol)
     {
      pieValues = new HashMap<String,Integer>(); 
      int min = Arrays.stream(values)
@@ -38,7 +38,7 @@ public class PieChartView extends Stage
      int stepAmount;
      
      if(values.length < 10){
-         pieValues.put("£ " + min + "< x <= £ " + max, values.length);
+         pieValues.put(symbol + " " + min + " =< x < " + symbol  + " " + max, values.length);
          controller.setup(pieValues);
          return;
      }
@@ -57,7 +57,7 @@ public class PieChartView extends Stage
          int toValue = min + stepAmount;
          
             int totalValue = (int)retrieveSpeciedAmount(values,min, toValue);
-            pieValues.put("£ " + min + "=< x < £ " + toValue,totalValue);
+            pieValues.put(symbol + " " + min + " =< x < " + symbol + " " + toValue,totalValue);
      }  
     //}
     controller.setup(pieValues);
@@ -69,11 +69,4 @@ public class PieChartView extends Stage
                       .filter(i -> (i >= from) && (i < to))
                       .count();
     }
-    
-    /**
-    private boolean checkEquality(int fromValue, int currentValue)
-    {
-        return fromValue == currentValue;
-    }
-    */
 }

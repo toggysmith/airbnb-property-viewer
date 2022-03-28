@@ -211,13 +211,21 @@ public class BoroughWindowController extends Controller
             attributeValues = boroughTable.getItems().stream()
                                                      .mapToInt(listing -> listing.getPrice())
                                                      .toArray();
+                                                     
+            pieView.populatePieChart(attributeValues,"£");                                         
         }else if(selectedAttribute.equals("Number of reviews")){
             attributeValues = boroughTable.getItems().stream()
                                                      .mapToInt(listing -> listing.getNumberOfReviews())
                                                      .toArray();
+        pieView.populatePieChart(attributeValues,"");
+        }else if(selectedAttribute.equals("Min number of nights")){
+            attributeValues = boroughTable.getItems().stream()
+                                                     .mapToInt(listing -> listing.getMinimumNights())
+                                                     .toArray();
+        pieView.populatePieChart(attributeValues,"");
         }
                                                     
-        pieView.populatePieChart(attributeValues);
+        
         
     }
     
@@ -226,7 +234,7 @@ public class BoroughWindowController extends Controller
         List<String> comboBoxStrings = new ArrayList<String>();
         comboBoxStrings.add("Price");
         comboBoxStrings.add("Number of reviews");
-        //comboBoxStrings.add("Min number of nights");
+        comboBoxStrings.add("Min number of nights");
         attributeBox.getItems().addAll(comboBoxStrings);
         
         makePieChart();

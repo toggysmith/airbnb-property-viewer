@@ -11,19 +11,24 @@ import java.net.URL;
 import java.io.IOException;
 
 /**
- * Write a description of class DestinationLoader here.
+ * DestinationLoader loads the data from the two destination csv files, tourist attractions and pub destinations. A dynamic private method loadDestinations() loads the data from the passed csv file path, since the structure of both
+ * files is very similar the loading for both is done by the same method.
  *
- * @author (your name)
- * @version (a version number or a date)
+ *@author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class DestinationLoader
 {
-    // instance variables - replace the example below with your own
     public static ArrayList<DestinationListing> pubDestinations;
     public static ArrayList<DestinationListing> touristDestinations;
-
     
-    
+    /**
+     * loadDestinations laods and processes the relevant csv file whose path is passed to this method. Each row in the csv file represents a unique DestinationListing obejct and an ArrayList of these is returned
+     * @return ArrayList<DestinationListing>, an array list containing all the destiantions, for pubs there are 4098 and for attractions 163
+     */
     private static ArrayList<DestinationListing> loadDestinations(String fileName)
     {
         ArrayList<DestinationListing> destinationLists = new ArrayList<DestinationListing>();
@@ -46,7 +51,7 @@ public class DestinationLoader
                 
                 String displayAddress;
                 if(address2.equals("NA")){
-                    displayAddress = address2;
+                    displayAddress = address1;
                 }else{
                     displayAddress = address1 + ", " +  address2;
                 }
@@ -54,7 +59,8 @@ public class DestinationLoader
                 double longitude = convertDouble(line[12]);
                 double latitude = convertDouble(line[13]);
                 
-                String ticketPrice = processConversion(line[15]);
+                //issue with csv loader which does not recognise £ symbols, the following conversion is used to re-structure the string to the same format as that from the csv files
+                String ticketPrice = processPoundSymbolConversion(line[15]);
 
                 
                 destinationLists.add(new DestinationListing(destinationName,displayAddress,longitude,latitude,boroughName,ticketPrice));
@@ -68,6 +74,11 @@ public class DestinationLoader
         return destinationLists;
     }
     
+    /**
+     * These Pub listings should only be loaded once during the program's lifetime so this method will load them if and
+     * only if they haven't already been loaded and saved.
+     * @return The DestinationListing listings saved in main memory.
+     */
     public static List<DestinationListing> getPubs()
     {
         if (pubDestinations == null) pubDestinations = loadDestinations("Pubs-london.csv");
@@ -75,6 +86,11 @@ public class DestinationLoader
         return pubDestinations;
     }
     
+    /**
+     * These Attractions listings should only be loaded once during the program's lifetime so this method will load them if and
+     * only if they haven't already been loaded and saved.
+     * @return The DestinationListing listings saved in main memory.
+     */
     public static List<DestinationListing> getTouristDestinations()
     {
         if(touristDestinations == null) touristDestinations = loadDestinations("TouristAttractions.csv");
@@ -82,7 +98,11 @@ public class DestinationLoader
         return touristDestinations;
     }
     
-    private static String processConversion(String price)
+    /**
+     * Special character conversion , the pound symbol is not correctly recognised during data loading therefore this method re-structures the format of the passed string to the correct format as the one in the csv file
+     * @return String, re-formatted price string
+     */
+    private static String processPoundSymbolConversion(String price)
     {
         char poundChar = 163;
         String toReturnString = new String();
@@ -99,6 +119,7 @@ public class DestinationLoader
         }
         return price;
     }
+    
     /**
      * @param doubleString The string to be converted to Double type.
      * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.

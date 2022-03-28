@@ -289,7 +289,7 @@ public class StatController extends Controller
         String boroughSocial = "";
         List<AirbnbListing> filtered = filterPrice(airbnbListings);
         ArrayList<String> boroughListing = new ArrayList<>();
-        ArrayList<StatisticListing> top3Scores = new ArrayList<>();
+        ArrayList<StatisticsListing> top3Scores = new ArrayList<>();
         double first;
         double second;
         double third;
@@ -304,10 +304,10 @@ public class StatController extends Controller
                 double maxSocial = sScore.getAvgTransportAccess() + sScore.getLifeSatisfaction() +
                                sScore.getWorthwileScore() + sScore.getHappinessScore() -
                                sScore.getAnxietyScore();
-            /**if(maxSocial > highestSocial) {
+            if(maxSocial > highestSocial) {
                 highestSocial = maxSocial;
                 boroughSocial = sScore.getBoroughName() + ": " + df.format(highestSocial);
-            }*/
+            }
             
             
             }
