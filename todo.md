@@ -17,7 +17,7 @@
 - [ ] BoroughWindowController
 - [ ] BoroughWindowFactory
 - [ ] BoroughWindowView
-- [ ] CircularLinkedList
+- [x] CircularLinkedList
 - [ ] CircularList
 - [ ] ComboBoxOrderEnum
 - [ ] ContentContainerManager
