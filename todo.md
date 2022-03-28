@@ -13,10 +13,9 @@
 - [x] Borough
 - [ ] BoroughButton
 - [ ] BoroughPriceRange
-- [ ] BoroughWindow
-- [ ] BoroughWindowController
-- [ ] BoroughWindowFactory
-- [ ] BoroughWindowView
+- [ ] BoroughDetailsController
+- [ ] BoroughDetailsFactory
+- [ ] BoroughDetailsView
 - [x] CircularLinkedList
 - [x] CircularList
 - [ ] ComboBoxOrderEnum
@@ -26,10 +25,9 @@
 - [ ] DestinationListing
 - [ ] DestinationLoader
 - [ ] DestinationType
-- [ ] DestinationWindow
-- [ ] DestinationWindowController
-- [ ] DestinationWindowFactory
-- [ ] DestinationWindowView
+- [ ] DestinationDetailsController
+- [ ] DestinationDetailsFactory
+- [ ] DestinationDetailsView
 - [ ] DistanceDestinationPair
 - [ ] DrawableSearchAreaMapController
 - [ ] EmptyListException
@@ -58,4 +56,3 @@
 - [ ] StatisticsListing
 - [ ] StatisticsLoader
 - [ ] WelcomeController
-- [ ] WindowHashSet
