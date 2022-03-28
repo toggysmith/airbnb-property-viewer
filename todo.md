@@ -10,7 +10,7 @@
 - [x] AirbnbListing
 - [x] AlertManager
 - [x] App
-- [ ] Borough
+- [x] Borough
 - [ ] BoroughButton
 - [ ] BoroughPriceRange
 - [ ] BoroughWindow
