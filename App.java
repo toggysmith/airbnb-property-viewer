@@ -2,7 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Responsible for launching the main view.
+ * Responsible for launching the main window.
  * 
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 public class App extends Application
 {
     /**
-     * Create the MainView which starts the application window.
+     * Create the main window and maximise it.
+     * 
      * @param stage The JavaFX stage.
      */
     @Override

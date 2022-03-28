@@ -1,9 +1,11 @@
 import javafx.fxml.FXML;
 import java.awt.Desktop;
 import java.net.URL;
+import java.net.MalformedURLException;
+import java.io.IOException;
 
 /**
- * Responsible accepting input from the welcome view and converting it into commands for the model or view.
+ * 
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -13,26 +15,36 @@ import java.net.URL;
  */
 public class WelcomeController extends Controller
 {
+    private final String GITHUB_REPO_URL = "https://github.kcl.ac.uk/k21064940/airbnb";
+    
     /**
-     * Open up the GitHub repo for the project in the browser.
+     * Called when the user presses the 'Visit our GitHub' button. It opens the project repository on
+     * GitHub in the user's default browser.
      */
     @FXML
     public void visitOurGitHubButtonOnClick()
     {
         try
         {
-            Desktop.getDesktop().browse(new URL("https://github.kcl.ac.uk/k21064940/airbnb").toURI());
+            Desktop.getDesktop().browse(new URL(GITHUB_REPO_URL).toURI());
         }
         catch (Exception e)
         {
             e.printStackTrace();
             
-            AlertManager.showNonTerminatingError("Unable to open website.");
+            final String ERROR_MESSAGE = String.format("Unable to open the GitHub repo at '%s'. " + 
+                                                       "There may be no browser on this device " +
+                                                       "or the URL may be broken.",
+                                                       GITHUB_REPO_URL);
+            
+            AlertManager.showNonTerminatingError(ERROR_MESSAGE);
         }
     }
     
     /**
-     * Swap the color mode from dark to light or light to dark.
+     * Called when the user presses the 'Swap color mode' button. It switches the color mode to dark theme
+     * if it's already light theme and light theme if it's already dark theme. This simply involves
+     * swapping out CSS stylesheets.
      */
     @FXML
     public void swapColorModeOnClick()
