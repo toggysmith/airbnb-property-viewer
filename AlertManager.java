@@ -48,4 +48,22 @@ public class AlertManager
                         // value to indicate an error occurred during execution, and it is immediate which prevents
                         // code running after this that relies on the failed code.
     }
+    
+    /**
+     * Displays a warning alert on the screen with a description of what caused the warning.
+     * @param warningDescription A description of what caused the warning.
+     */
+    public static void showWarning(String warningDescription)
+    {
+        if (warningDescription == null)
+        {
+            showTerminatingError("No warning description provided.");
+        }
+        
+        Alert alert = new Alert(AlertType.WARNING);
+
+        alert.setTitle("Warning");
+        alert.setContentText(warningDescription);
+        alert.showAndWait();
+    }
 }
