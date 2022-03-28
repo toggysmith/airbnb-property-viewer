@@ -8,7 +8,7 @@
 
 - [x] AirbnbDataLoader
 - [x] AirbnbListing
-- [ ] AlertManager
+- [x] AlertManager
 - [ ] App
 - [ ] Borough
 - [ ] BoroughButton
