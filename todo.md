@@ -7,32 +7,32 @@
 - [ ] Borough
 - [ ] BoroughButton
 - [ ] BoroughPriceRange
-- [x] BoroughWindow
-- [x] BoroughWindowController
-- [x] BoroughWindowFactory
-- [x] BoroughWindowView
-- [x] CircularLinkedList
-- [x] CircularList
-- [x] ComboBoxOrderEnum
+- [ ] BoroughWindow
+- [ ] BoroughWindowController
+- [ ] BoroughWindowFactory
+- [ ] BoroughWindowView
+- [ ] CircularLinkedList
+- [ ] CircularList
+- [ ] ComboBoxOrderEnum
 - [ ] ContentContainerManager
 - [ ] Controller
 - [ ] DestinationDistances
 - [ ] DestinationListing
 - [ ] DestinationLoader
 - [ ] DestinationType
-- [x] DestinationWindow
-- [x] DestinationWindowController
-- [x] DestinationWindowFactory
-- [x] DestinationWindowView
+- [ ] DestinationWindow
+- [ ] DestinationWindowController
+- [ ] DestinationWindowFactory
+- [ ] DestinationWindowView
 - [ ] DistanceDestinationPair
 - [ ] DrawableSearchAreaMapController
-- [x] EmptyListException
+- [ ] EmptyListException
 - [ ] Hexagon
 - [ ] InteractiveStatController
 - [ ] InteractiveStatsTableValues
-- [x] JsToJavaBridge
+- [ ] JsToJavaBridge
 - [ ] ListingManipulator
-- [x] ListNode
+- [ ] ListNode
 - [ ] MainController
 - [ ] MainView
 - [ ] MainWindow
@@ -40,12 +40,12 @@
 - [ ] OpenLayersMap
 - [ ] PieChartController
 - [ ] PieChartView
-- [x] Position
+- [ ] Position
 - [ ] PriceRange
-- [x] PropertyWindow
-- [x] PropertyWindowController
-- [x] PropertyWindowFactory
-- [x] PropertyWindowView
+- [ ] PropertyWindow
+- [ ] PropertyWindowController
+- [ ] PropertyWindowFactory
+- [ ] PropertyWindowView
 - [ ] QuantityVisualiser
 - [ ] RangeBoxEnum
 - [ ] RangeValues
@@ -53,4 +53,4 @@
 - [ ] StatisticsListing
 - [ ] StatisticsLoader
 - [ ] WelcomeController
-- [x] WindowHashSet
+- [ ] WindowHashSet
