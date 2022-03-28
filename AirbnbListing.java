@@ -15,6 +15,7 @@ public class AirbnbListing {
      */
     private String id;
     private String name;
+    
     /**
      * The id and name of the host for this listing.
      * Each listing has only one host, but one host may
@@ -240,7 +241,8 @@ public class AirbnbListing {
     
     /**
      * The equals of the Airbnb listing is now dependent on its id.
-     * @return True if the obeject has the same id, false if not.
+     * 
+     * @return True if the object has the same id, false if not.
      */
     @Override
     public boolean equals(Object object)
@@ -249,11 +251,14 @@ public class AirbnbListing {
         {
             return true;
         }
+        
         if (!(object instanceof AirbnbListing))
         {
             return false;
         }
+        
         AirbnbListing listing = (AirbnbListing) object;
+        
         return id.equals(listing.getId());
     }
     
