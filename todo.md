@@ -1,6 +1,7 @@
 - @author names and @version
 - Documentation comments for public methods and fields
 - Logical method and fields
+- Check all imports are used
 
 # Refactor
 
