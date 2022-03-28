@@ -1,3 +1,7 @@
+- @author names and @version
+- Comments for public methods and fields
+- Logical method and field names
+
 # Refactor
 
 - [ ] AirbnbDataLoader
