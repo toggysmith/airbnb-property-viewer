@@ -5,26 +5,45 @@ import java.util.Set;
 import java.util.Comparator;
 import java.util.Collections;
 /**
- * Write a description of class SmallestDistance here.
+ * DestinationDistances class controls the main mathematical functionality of the calculation for the five closest locations (pubs or tourist attraction relevant to a propety selected by
+ * the user)
+ * 
+ * This class creates an array list of DistanceDestinationPair , adding all the destinations from the passed DestinationListing List and their corresponding calculated distance
+ * from the selectedProperty by the user.
+ * 
+ * This class is then sorted an only the first five elements are returned which represent the five closest destinations to the selected property
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ * 
  */
 public class DestinationDistances
 {
     public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
     
-    //private HashMap<Integer, List<DestinationListing>> closestFive;
     private ArrayList<DistanceDestinationPair> destinations;
     //every time one of the two interactivity stats is displayed
     
-    public DestinationDistances()
+    /**
+     * DestinationDistances constructor creates a new array list for all the destination and distance pairs for all relevant destinations
+     * @param List<DestinationListing> filteredDestinations, the list of filtered destinations that fit the user selected preferences
+     * @param AirbnbListing selectedProperty, the property selected by the user
+     */
+    public DestinationDistances(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
     {
         destinations = new ArrayList<>();
+        addDestinations(filteredDestinations,selectedProperty);
     }
     
-    
-    public void addDestinations(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
+    /**
+     * The filtered destinations are iterated over and their relative distance is calculated using the selected property as a reference point
+     * @param List<DestinationListing> filteredDestinations, the list of filtered destinations that fit the user selected preferences
+     * @param AirbnbListing selectedProperty, the property selected by the user
+     */
+    private void addDestinations(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
     {
        for(DestinationListing destination: filteredDestinations){
             int calculatedDistance = calculateDistance(selectedProperty.getLongitude(), destination.getLongitude(), selectedProperty.getLatitude(), destination.getLatitude());
