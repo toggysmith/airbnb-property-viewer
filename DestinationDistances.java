@@ -63,6 +63,7 @@ public class DestinationDistances
             return smallestFive;
         }
         
+        //discuus merging
         if(destinations.size() <= 5){
             for(int i = 0; i <= destinations.size() - 1; i++){
                 smallestFive.add(destinations.get(i));

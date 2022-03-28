@@ -221,12 +221,9 @@ public class InteractiveStatController extends Controller
     private void checkBoxes(String boroughSelected, String propertySelected,String priceSelected)
     {
         if(boroughSelected != null && propertySelected != null && priceSelected != null){
-            //check array list is empty, or if its smaller then 5 return those 5
            List<DestinationListing> filteredDestinations = ListingProcessor.filterDestinations(destinations,boroughSelected,priceSelected);
                        
-           AirbnbListing selectedProperty = filteredListing.stream()
-                                                           .filter(listing -> propertySelected.equals(listing.getName()) && boroughSelected.equals(listing.getNeighbourhood()))
-                                                           .findFirst().orElse(null);
+           AirbnbListing selectedProperty = ListingProcessor.getPropertyListingByNames(filteredListing, propertySelected, boroughSelected);
         
            
            desCalculator = new DestinationDistances(filteredDestinations, selectedProperty);
