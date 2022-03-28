@@ -104,13 +104,12 @@ public class InteractiveStatController extends Controller
         createNewComboBoxes();
         locationsResult.getItems().clear();
         //reset boxes first to be sure
+        
         this.filteredListing = new ArrayList<>(filteredListing);
         destinations = new ArrayList<>(typesDestinations);
         
-        List<String> boroughsList = filteredListing.stream()
-                                                   .map(listing -> listing.getNeighbourhood())
-                                                   .distinct()
-                                                   .collect(Collectors.toList());
+        List<String> boroughsList = ListingManipulator.getBoroughs(filteredListing);
+        
         boroughs.getItems().addAll(boroughsList);
         if(desType.equals(DestinationType.PUB)){
             boroughs.setPromptText("Select Borough Name:");

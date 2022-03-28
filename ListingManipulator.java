@@ -118,4 +118,15 @@ public class ListingManipulator
             return null;
         }
     }
+    
+    /**
+     * Augusto
+     */
+    public static List<String> getBoroughs(List<AirbnbListing> listing)
+    {
+        return listing.stream()
+                      .map(l -> l.getNeighbourhood())
+                      .distinct()
+                      .collect(Collectors.toList());
+    }
 }
