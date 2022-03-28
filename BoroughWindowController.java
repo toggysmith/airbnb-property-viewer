@@ -191,7 +191,7 @@ public class BoroughWindowController extends Controller
     
     private void makePieChart()
     {
-         try
+        try
         {
             pieView = new PieChartView();
             AnchorPane chartPane = pieView.setUpPieChart();
@@ -208,25 +208,19 @@ public class BoroughWindowController extends Controller
         int[] attributeValues = new int[boroughTable.getItems().size()];   
         
         if(selectedAttribute.equals("Price")){
-            attributeValues = boroughTable.getItems().stream()
-                                                     .mapToInt(listing -> listing.getPrice())
-                                                     .toArray();
-                                                     
-            pieView.populatePieChart(attributeValues,"£");                                         
+            attributeValues = ListingProcessor.getListingPrices(boroughTable.getItems());                                          
+            pieView.populatePieChart(attributeValues,"£");
+            return;
+            
         }else if(selectedAttribute.equals("Number of reviews")){
-            attributeValues = boroughTable.getItems().stream()
-                                                     .mapToInt(listing -> listing.getNumberOfReviews())
-                                                     .toArray();
-        pieView.populatePieChart(attributeValues,"");
+            attributeValues = ListingProcessor.getListingReviews(boroughTable.getItems());
+            pieView.populatePieChart(attributeValues,"");
+            return;
         }else if(selectedAttribute.equals("Min number of nights")){
-            attributeValues = boroughTable.getItems().stream()
-                                                     .mapToInt(listing -> listing.getMinimumNights())
-                                                     .toArray();
-        pieView.populatePieChart(attributeValues,"");
+            attributeValues = ListingProcessor.getListingMinNights(boroughTable.getItems());
+            pieView.populatePieChart(attributeValues,"");
+            return;
         }
-                                                    
-        
-        
     }
     
     private void setUpComboBox()

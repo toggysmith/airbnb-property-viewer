@@ -24,49 +24,31 @@ public class PieChartView extends Stage
     
     public void populatePieChart(int[] values, String symbol)
     {
-     pieValues = new HashMap<String,Integer>(); 
-     int min = Arrays.stream(values)
-                      .boxed()
-                      .min(Integer::compare)
-                      .get();
-                      
-      int max = Arrays.stream(values)
-                      .boxed()
-                      .max(Integer::compare)
-                      .get();              
+        pieValues = new HashMap<String,Integer>(); 
+        int min = ListingProcessor.getMin(values);              
+        int max = ListingProcessor.getMax(values);            
        
-     int stepAmount;
+        int stepAmount;
      
-     if(values.length < 10){
-         pieValues.put(symbol + " " + min + " =< x < " + symbol  + " " + max, values.length);
-         controller.setup(pieValues);
-         return;
-     }
+        if(values.length < 10){
+            pieValues.put(symbol + " " + min + " =< x < " + symbol  + " " + max, values.length);
+            controller.setup(pieValues);
+            return;
+        }
      
-     if((max - min) < 10){
-         stepAmount = 1;
-     }else{
-     stepAmount = (max - min) / 10;
-    }
-     
-        
-             //String key = String.format("%s £",min, "%s  < x < £ ",max);
-        //    pieValues.put("£ " + min + "< x <= £ " + max,values.length);
-      //  }else{
-     for(int i = min; min <= max; min += stepAmount){
-         int toValue = min + stepAmount;
-         
-            int totalValue = (int)retrieveSpeciedAmount(values,min, toValue);
-            pieValues.put(symbol + " " + min + " =< x < " + symbol + " " + toValue,totalValue);
-     }  
-    //}
-    controller.setup(pieValues);
-    }
+        if((max - min) < 10){
+            stepAmount = 1;
+        }else{
+        stepAmount = (max - min) / 10;
+        }
     
-    private long retrieveSpeciedAmount(int[] values , int from, int to)
-    {
-        return Arrays.stream(values)
-                      .filter(i -> (i >= from) && (i < to))
-                      .count();
+        for(int i = min; min <= max; min += stepAmount){
+            int toValue = min + stepAmount;
+         
+            int totalValue = (int) ListingProcessor.retrieveSpeciedAmount(values,min, toValue);
+            pieValues.put(symbol + " " + min + " =< x < " + symbol + " " + toValue,totalValue);
+        }  
+
+        controller.setup(pieValues);
     }
 }
