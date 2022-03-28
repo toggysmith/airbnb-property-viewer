@@ -1,5 +1,5 @@
 /**
- * The non calculated values that can be selected in the price range combo boxes.
+ * Enum Class to represent the string "no min" and "no max" in the main pane combo boxes to facilitate equailty checks when converting the string from the combo box into an Integer
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -22,7 +22,7 @@ public enum RangeBoxEnum
  }
  
  /**
-  * @return The name of the Enum.
+  * @return String The name of the Enum.
   */
  @Override
  public String toString()
