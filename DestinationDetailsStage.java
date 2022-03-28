@@ -12,26 +12,22 @@ import javafx.scene.layout.Pane;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class DestinationWindowView extends Stage
+public class DestinationDetailsStage extends Stage
 {
-    private DestinationWindow destinationWindow;
-    private Scene scene;
-    
     /**
      * Create a window and load the FXML file.
      */
-    public DestinationWindowView(DestinationListing listing, DestinationWindow destinationWindow) throws Exception
+    public DestinationDetailsStage(DestinationListing listing) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("destination-window.fxml"));
         
         Pane pane = loader.load();
-        DestinationWindowController destinationWindowController = loader.getController();
+        DestinationDetailsController destinationWindowController = loader.getController();
         destinationWindowController.setup(listing);
         
-        this.destinationWindow = destinationWindow;
-        setOnCloseRequest(e -> destinationWindow.windowClosed());
+        setOnCloseRequest(e -> windowClosed());
         
-        scene = new Scene(pane, 1500, 800);
+        Scene scene = new Scene(pane, 1500, 800);
         MainView.addToOpenWindows(scene);
         MainView.setColorMode(scene);
         setScene(scene);
@@ -41,10 +37,11 @@ public class DestinationWindowView extends Stage
     }
     
     /**
-     * @return The scene.
+     * Alerts the DestinationWindowFactory that this window has been closed.
      */
-    public Scene getSceneWindow()
+    public void windowClosed()
     {
-        return scene;
+        DestinationDetailsFactory.getDestinationWindowFactory().destinationWindowClosed(this);
+        MainView.removeFromOpenWindows(getScene());
     }
 }

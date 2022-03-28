@@ -1,3 +1,6 @@
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * DestinationWindowFactory controls the creation of destination windows.
  * Tts main responsibility is to ensure that only one destination window exists
@@ -9,20 +12,20 @@
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class DestinationWindowFactory
+public class DestinationDetailsFactory
 {
-    private static DestinationWindowFactory destinationWindowFactory;
+    private static DestinationDetailsFactory destinationWindowFactory;
     
     //The set of all open destination windows
-    private WindowHashSet<DestinationWindow> openDestinationWindows;
+    private Map<DestinationListing, DestinationDetailsStage> openDestinationWindows;
     
     /*
      * Constructor for DestinationWindowFactory,
      * Its private as this is a singleton.
      */
-    private DestinationWindowFactory()
+    private DestinationDetailsFactory()
     {
-        openDestinationWindows = new WindowHashSet<>();
+        openDestinationWindows = new HashMap<>();
     }
     
     /**
@@ -31,11 +34,11 @@ public class DestinationWindowFactory
      * class is ever created.
      * @return The only object of DestinationWindowFactory.
      */
-    public static DestinationWindowFactory getDestinationWindowFactory()
+    public static DestinationDetailsFactory getDestinationWindowFactory()
     {
         if (destinationWindowFactory == null)
         {
-            destinationWindowFactory = new DestinationWindowFactory();
+            destinationWindowFactory = new DestinationDetailsFactory();
         }
         return destinationWindowFactory;
     }
@@ -44,31 +47,43 @@ public class DestinationWindowFactory
      * This method attempts to create a destination window for the listing given.
      * @param listing The listing for the destination you want a window for.
      */
-    public DestinationWindow newDestinationWindow(DestinationListing listing)
+    public DestinationDetailsStage newDestinationWindow(DestinationListing listing)
     {
         if (listing == null)
         {
             return null;
         }
         
-        DestinationWindow destinationWindow = new DestinationWindow(listing); //This creates an object of DestinationWindow, not DestinationWindowView and so does not create the actual window.
-        if (!(openDestinationWindows.add(destinationWindow)))
+        DestinationDetailsStage boroughDetailsStage = openDestinationWindows.get(listing);
+
+        if (boroughDetailsStage != null)
         {
-            destinationWindow = openDestinationWindows.getElementInSet(destinationWindow); //Gets the DestinationWindow from the set that is equivalent to the DestinationWindow just created.
+            boroughDetailsStage.toFront();
+
+            return boroughDetailsStage;
         }
-        else
+
+        try
         {
-            destinationWindow.createDestinationWindow(); // This line creates the actual destination window once it has been determined that no such window already exists.
+            boroughDetailsStage = new DestinationDetailsStage(listing);
+
+            openDestinationWindows.put(listing, boroughDetailsStage);
         }
-        destinationWindow.setFront(); // Sets the window to the front of the screen.
-        return destinationWindow;
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+            AlertManager.showTerminatingError("Could not create stage.");
+        }
+
+        return boroughDetailsStage;
     }
     
     /**
      * This method removes a destination window from the set of open windows.
      * @param destinationWindow The destination window closed.
      */
-    public void destinationWindowClosed(DestinationWindow destinationWindow)
+    public void destinationWindowClosed(DestinationDetailsStage destinationWindow)
     {
         openDestinationWindows.remove(destinationWindow);
     }

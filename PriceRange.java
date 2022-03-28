@@ -90,8 +90,8 @@ public class PriceRange
     public int hashCode()
     {
         int result = 17;
-        result = 37 * 17 + getFromValue();
-        result = 37 * 17 + getToValue();
+        result = 37 * result + getFromValue();
+        result = 37 * result + getToValue();
         return result;
     }
 }

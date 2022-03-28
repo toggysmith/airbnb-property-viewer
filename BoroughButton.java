@@ -80,7 +80,7 @@ public class BoroughButton
     {
         try
         {
-            BoroughWindowFactory.getBoroughWindowFactory().newBoroughWindowWithListings(borough, boroughListingsInPriceRange);
+            BoroughDetailsStageFactory.getBoroughDetailsStageFactory().newBoroughWindowWithListings(borough, boroughListingsInPriceRange);
         }
         catch (EmptyListException ele)
         {

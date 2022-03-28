@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class DestinationWindowController extends Controller
+public class DestinationDetailsController extends Controller
 {
     @FXML private BorderPane mapContainer;
     

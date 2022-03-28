@@ -94,6 +94,6 @@ public class PropertyDetailsStageFactory
      */
     public void propertyWindowClosed(PropertyDetailsStage propertyWindow)
     {
-        openPropertyWindows.remove(propertyWindow);
+        openPropertyWindows.remove(propertyWindow.getListing());
     }
 }

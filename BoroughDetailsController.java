@@ -24,7 +24,7 @@ import javafx.scene.layout.BorderPane;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class BoroughWindowController extends Controller
+public class BoroughDetailsController extends Controller
 {
     @FXML private TableView<AirbnbListing> boroughTable;
     @FXML private TableColumn<AirbnbListing, String> nameColumn;
@@ -37,7 +37,6 @@ public class BoroughWindowController extends Controller
     @FXML private Label fromPrice;
     @FXML private Label toPrice;
     
-    private BoroughWindow boroughWindow;
     private Map<ComboBoxOrderEnum, TableColumn<AirbnbListing, String>> comboBoxOrder;
 
     @FXML private HBox pieChart;
@@ -48,6 +47,8 @@ public class BoroughWindowController extends Controller
     private OpenLayersMap openLayersMap  = new OpenLayersMap("resources/open-layers-map/map.html", 11, -0.115937, 51.511437); // Creates a map with the centre around the stand campus.
 
     private PieChartView pieView;
+    
+    private PriceRange priceRange;
 
     /**
      * Adds the map to the pane that is shown and gives the map the ability to show markers.
@@ -66,9 +67,9 @@ public class BoroughWindowController extends Controller
      * @param listings The listings in the borough in the price range.
      * @param boroughWindow The borough that the window is for.
      */
-    public void initialise(ObservableList<AirbnbListing> listings, BoroughWindow boroughWindow)
+    public void initialise(ObservableList<AirbnbListing> listings, PriceRange priceRange)
     {
-        this.boroughWindow = boroughWindow;
+        this.priceRange = priceRange; 
         populateTable(listings);
         populateOrderBox();
         setOnRowClicked();
@@ -147,7 +148,8 @@ public class BoroughWindowController extends Controller
     {
         if (! row.isEmpty()) {
             AirbnbListing listing = row.getItem();
-            boroughWindow.createPropertyWindow(listing);
+            
+            PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyWindow(listing);
         }
     }
     
@@ -185,8 +187,8 @@ public class BoroughWindowController extends Controller
      */
     private void assignPriceLabels()
     {
-        fromPrice.setText(String.format(fromPrice.getText(), boroughWindow.getFromPrice()));
-        toPrice.setText(String.format(toPrice.getText(), boroughWindow.getToPrice()));
+        fromPrice.setText(String.format(fromPrice.getText(), priceRange.getFromValueStr()));
+        toPrice.setText(String.format(toPrice.getText(), priceRange.getToValueStr()));
     }
     
     private void makePieChart()
