@@ -26,7 +26,7 @@ import javafx.scene.control.TableRow;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class PropertyWindowController extends Controller
+public class PropertyDetailsController extends Controller
 {
     @FXML private BorderPane root;
     
@@ -154,7 +154,7 @@ public class PropertyWindowController extends Controller
     {
         if (! row.isEmpty()) {
             AirbnbListing otherListing = row.getItem();
-            PropertyWindowFactory.getPropertyWindowFactory().newPropertyWindow(otherListing);
+            PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyWindow(otherListing);
         }
     }
 }

@@ -51,7 +51,7 @@ public class BoroughWindow
      */
     public void createPropertyWindow(AirbnbListing listing)
     {
-        PropertyWindowFactory.getPropertyWindowFactory().newPropertyWindow(listing);
+        PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyWindow(listing);
     }
     
     /**

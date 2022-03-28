@@ -11,14 +11,15 @@
  */ 
 public class JsToJavaBridge
 {
-    private static PropertyWindowFactory propertyWindowFactory = PropertyWindowFactory.getPropertyWindowFactory();
+    private static PropertyDetailsStageFactory propertyDetailsStageFactory = PropertyDetailsStageFactory.getPropertyDetailsStageFactory();
+    
     /**
      * This creates a new property window for the listing given.
      * @param listingId The id for the AirbnbListing.
      */
     public void openPropertyWindow(String listingId)
     {
-        propertyWindowFactory.newPropertyWindow(listingId);
+        propertyDetailsStageFactory.newPropertyWindow(listingId);
     }
     
 }

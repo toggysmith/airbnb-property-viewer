@@ -12,27 +12,26 @@ import javafx.scene.layout.Pane;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class PropertyWindowView extends Stage
+public class PropertyDetailsStage extends Stage
 {
-    private PropertyWindow propertyWindow;
-    
-    private Scene scene;
+    private AirbnbListing listing;
     
     /**
      * Create a window and load the FXML file.
      */
-    public PropertyWindowView(AirbnbListing listing, PropertyWindow propertyWindow) throws Exception
+    public PropertyDetailsStage(AirbnbListing listing) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property-window.fxml"));
         
+        this.listing = listing;
+        
         Pane pane = loader.load();
-        PropertyWindowController propertyWindowController = loader.getController();
-        propertyWindowController.setup(listing);
+        PropertyDetailsController propertyDetailsController = loader.getController();
+        propertyDetailsController.setup(listing);
         
-        this.propertyWindow = propertyWindow;
-        setOnCloseRequest(e -> propertyWindow.windowClosed());
+        setOnCloseRequest(e -> windowClosed());
         
-        scene = new Scene(pane, 1500, 800);
+        Scene scene = new Scene(pane, 1500, 800);
         MainView.addToOpenWindows(scene);
         MainView.setColorMode(scene);
         setScene(scene);
@@ -40,11 +39,14 @@ public class PropertyWindowView extends Stage
         show();
     }
     
+    public AirbnbListing getListing() { return listing; }
+    
     /**
-     * @return The scene.
+     * Alerts the PropertyWindowFactory that this window has been closed.
      */
-    public Scene getSceneWindow()
+    public void windowClosed()
     {
-        return scene;
+        PropertyDetailsStageFactory.getPropertyDetailsStageFactory().propertyWindowClosed(this);
+        MainView.removeFromOpenWindows(getScene());
     }
 }
