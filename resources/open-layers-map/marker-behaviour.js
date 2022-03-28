@@ -68,7 +68,7 @@ function addMarkersForPropertiesInPriceRange(fromPrice, toPrice) {
 }
 
 function openPropertyWindow(property){ 
-        window.javaMarker.openPropertyWindow(property);
+        window.jsToJavaBridge.openPropertyWindow(property);
 }
 
 function clearMarkers() {

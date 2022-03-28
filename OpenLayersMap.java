@@ -25,7 +25,7 @@ public class OpenLayersMap extends AnchorPane
     
     private WebView webView;
     private WebEngine webEngine;
-    private JavaMarker javaMarker;
+    private JsToJavaBridge jsToJavaBridge;
 
     public OpenLayersMap(String address, int zoom, double longitude, double latitude)
     {
@@ -106,9 +106,9 @@ public class OpenLayersMap extends AnchorPane
         @Override
         public void changed(ObservableValue observable, Object oldValue, Object newValue) {
             if (newValue != State.SUCCEEDED) { return; }
-            javaMarker = new JavaMarker();
+            jsToJavaBridge = new JsToJavaBridge();
             JSObject window = (JSObject) webEngine.executeScript("window");
-            window.setMember("javaMarker", javaMarker);
+            window.setMember("jsToJavaBridge", jsToJavaBridge);
         }
     }
     );

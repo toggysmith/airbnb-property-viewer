@@ -9,7 +9,7 @@
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */ 
-public class JavaMarker
+public class JsToJavaBridge
 {
     private static PropertyWindowFactory propertyWindowFactory = PropertyWindowFactory.getPropertyWindowFactory();
     /**
