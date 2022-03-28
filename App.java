@@ -21,8 +21,6 @@ public class App extends Application
     {
         MainWindow mainWindow = MainWindow.getMainWindow();
         
-        mainWindow.getMainView().setAlwaysOnTop(true);
-        mainWindow.getMainView().setAlwaysOnTop(false);
         mainWindow.getMainView().setMaximized(true);
     }
 }
