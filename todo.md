@@ -20,7 +20,7 @@
 - [x] CircularLinkedList
 - [x] CircularList
 - [ ] ComboBoxOrderEnum
-- [ ] ContentContainerManager
+- [x] ContentContainerManager
 - [ ] Controller
 - [ ] DestinationDistances
 - [ ] DestinationListing
