@@ -10,19 +10,16 @@
 public interface CircularList<E>
 {
     /**
-     * Gets the next element from the list.
      * @return The next element in the list.
      */
     public E getNext();
     
     /**
-     * Gets the previous element from the list.
      * @return The previous element in the list.
      */
     public E getPrev();
     
     /**
-     * Gets the current element from the list.
      * @return The current element in the list.
      */
     public E getCurrent();
@@ -35,7 +32,6 @@ public interface CircularList<E>
     public void add(E element);
     
     /**
-     * Gets the number of elements in the list.
      * @return The number of elements in the list.
      */
     public int size();
