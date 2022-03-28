@@ -32,7 +32,7 @@ public class BoroughButton
     
     public BoroughButton(Borough borough, AnchorPane boroughMap)
     {
-        boroughListings = ListingManipulator.filterByBorough(AirbnbDataLoader.getListings(), borough.getName());
+        boroughListings = ListingProcessor.filterByBorough(AirbnbDataLoader.getListings(), borough.getName());
         
         double xCoord = borough.getX() * (TILE_WIDTH + SEPARATION) + ((borough.getY() + 1) % 2) * n;
         double yCoord = borough.getY() * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
@@ -68,7 +68,7 @@ public class BoroughButton
         int fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         int toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
         
-        boroughListingsInPriceRange = ListingManipulator.filterByPriceRange(boroughListings, fromValue, toValue);
+        boroughListingsInPriceRange = ListingProcessor.filterByPriceRange(boroughListings, fromValue, toValue);
         
         quantityVisualiser.setCurrentQuantity(boroughListingsInPriceRange.size());
         quantityVisualiser.setRangeUpperBound(noOfPropertiesInBoroughWithMost);

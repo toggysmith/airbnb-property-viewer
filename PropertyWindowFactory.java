@@ -45,7 +45,7 @@ public class PropertyWindowFactory
      */
     public PropertyWindow newPropertyWindow(String listingId)
     {
-        AirbnbListing listing = ListingManipulator.getListingWithId(listingId);
+        AirbnbListing listing = ListingProcessor.getListingWithId(listingId);
         return newPropertyWindow(listing);
     }
     

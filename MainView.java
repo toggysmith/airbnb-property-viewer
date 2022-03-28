@@ -133,7 +133,7 @@ public class MainView extends Stage
 
         int stepAmount = 10;
 
-        for (int currentPrice = 0; currentPrice <= ListingManipulator.getMaxPropertyPrice(); currentPrice += stepAmount)
+        for (int currentPrice = 0; currentPrice <= ListingProcessor.getMaxPropertyPrice(); currentPrice += stepAmount)
         {
             if (currentPrice == stepAmount * 10) stepAmount = stepAmount * 10;
 

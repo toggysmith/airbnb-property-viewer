@@ -12,7 +12,7 @@ import javafx.collections.FXCollections;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class ListingManipulator
+public class ListingProcessor
 {
     private static List<AirbnbListing> listings = AirbnbDataLoader.getListings();
     

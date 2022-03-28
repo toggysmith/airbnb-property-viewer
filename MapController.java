@@ -37,7 +37,7 @@ public class MapController extends Controller
     {
         int fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         int toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
-        long noOfPropertiesInBoroughWithMost = ListingManipulator.getNoOfPropertiesInBoroughWithMost(ListingManipulator.filterByPriceRange(AirbnbDataLoader.getListings(), fromValue, toValue));
+        long noOfPropertiesInBoroughWithMost = ListingProcessor.getNoOfPropertiesInBoroughWithMost(ListingProcessor.filterByPriceRange(AirbnbDataLoader.getListings(), fromValue, toValue));
         
         for (BoroughButton button : buttons)
         {

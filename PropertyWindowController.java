@@ -81,7 +81,7 @@ public class PropertyWindowController extends Controller
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
         addPropertyToJsFile();
         
-        populateTable(FXCollections.observableArrayList(ListingManipulator.getOtherListingsWithHostId(listing)));
+        populateTable(FXCollections.observableArrayList(ListingProcessor.getOtherListingsWithHostId(listing)));
         populateLabels();
         setOnRowClicked();
     }

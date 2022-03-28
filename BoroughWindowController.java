@@ -248,7 +248,7 @@ public class BoroughWindowController extends Controller
     
     private void setMapPosition(List<AirbnbListing> listings)
     {
-        Position position = ListingManipulator.getAveragePosition(listings);
+        Position position = ListingProcessor.getAveragePosition(listings);
         double longitude = position.getLongitude();
         double latitude = position.getLatitude();
         openLayersMap.executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
