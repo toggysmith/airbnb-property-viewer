@@ -1,7 +1,3 @@
-- @author names and @version
-- Comments for public methods and fields
-- Logical method and field names
-
 # Refactor
 
 - [ ] AirbnbDataLoader
@@ -11,32 +7,32 @@
 - [ ] Borough
 - [ ] BoroughButton
 - [ ] BoroughPriceRange
-- [ ] BoroughWindow
-- [ ] BoroughWindowController
-- [ ] BoroughWindowFactory
-- [ ] BoroughWindowView
-- [ ] CircularLinkedList
-- [ ] CircularList
-- [ ] ComboBoxOrderEnum
+- [x] BoroughWindow
+- [x] BoroughWindowController
+- [x] BoroughWindowFactory
+- [x] BoroughWindowView
+- [x] CircularLinkedList
+- [x] CircularList
+- [x] ComboBoxOrderEnum
 - [ ] ContentContainerManager
 - [ ] Controller
 - [ ] DestinationDistances
 - [ ] DestinationListing
 - [ ] DestinationLoader
 - [ ] DestinationType
-- [ ] DestinationWindow
-- [ ] DestinationWindowController
-- [ ] DestinationWindowFactory
-- [ ] DestinationWindowView
+- [x] DestinationWindow
+- [x] DestinationWindowController
+- [x] DestinationWindowFactory
+- [x] DestinationWindowView
 - [ ] DistanceDestinationPair
 - [ ] DrawableSearchAreaMapController
-- [ ] EmptyListException
+- [x] EmptyListException
 - [ ] Hexagon
 - [ ] InteractiveStatController
 - [ ] InteractiveStatsTableValues
-- [ ] JsToJavaBridge
+- [x] JsToJavaBridge
 - [ ] ListingManipulator
-- [ ] ListNode
+- [x] ListNode
 - [ ] MainController
 - [ ] MainView
 - [ ] MainWindow
@@ -44,12 +40,12 @@
 - [ ] OpenLayersMap
 - [ ] PieChartController
 - [ ] PieChartView
-- [ ] Position
+- [x] Position
 - [ ] PriceRange
-- [ ] PropertyWindow
-- [ ] PropertyWindowController
-- [ ] PropertyWindowFactory
-- [ ] PropertyWindowView
+- [x] PropertyWindow
+- [x] PropertyWindowController
+- [x] PropertyWindowFactory
+- [x] PropertyWindowView
 - [ ] QuantityVisualiser
 - [ ] RangeBoxEnum
 - [ ] RangeValues
@@ -57,4 +53,4 @@
 - [ ] StatisticsListing
 - [ ] StatisticsLoader
 - [ ] WelcomeController
-- [ ] WindowHashSet
+- [x] WindowHashSet
