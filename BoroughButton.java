@@ -85,19 +85,19 @@ public class BoroughButton
         }
         catch (EmptyListException ele)
         {
-            emptyBoroughWarningAlert(borough.getName());
+            emptyBoroughWarningAlert(borough.getName(), ele);
         }
     }
     
     /**
      * Creates a warning alert when a borough with no properties in the price range is clicked.
      */ 
-    private void emptyBoroughWarningAlert(String boroughName)
+    private void emptyBoroughWarningAlert(String boroughName, EmptyListException ele)
     {
         Alert invalidRange = new Alert(AlertType.WARNING);
         invalidRange.setTitle("Warning");
         invalidRange.setHeaderText("Empty Borough");
-        invalidRange.setContentText(String.format("There are no properties in %s in the selected price range.", boroughName));
+        invalidRange.setContentText(String.format(ele.toString(), boroughName));
         invalidRange.showAndWait();
     } 
 }

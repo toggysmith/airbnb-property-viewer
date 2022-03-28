@@ -53,7 +53,7 @@ public class BoroughWindowFactory
     {
         if (listings.size() == 0)
         {
-            throw new EmptyListException();
+            throw new EmptyListException("There are no properties in %s in the selected price range.");
         }
         BoroughWindow boroughWindow = checkWindow(borough, FXCollections.observableList(listings));
         return boroughWindow;
