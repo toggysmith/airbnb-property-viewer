@@ -125,6 +125,13 @@ public class ListingProcessorTest
         assertNull(position1);
     }
     
+    @Test
+    public void testGetAveragePositionEmptyListInput()
+    {
+        Position position1 = ListingProcessor.getAveragePosition(new ArrayList<AirbnbListing>());
+        assertNull(position1);
+    }
+    
     private static List<AirbnbListing> createListings()
     {
         List<AirbnbListing> customList = new ArrayList<>();
@@ -187,6 +194,53 @@ public class ListingProcessorTest
        // DestinationListing destination2 = new DestinationListing();
         
     }
+
+    
+    @Test
+    public void testGetListingPricesValidInput()
+    {
+        int[] empty = {37, 35, 195, 45, 30, 30, 30};
+        int[] test = ListingProcessor.getListingPrices(customisedListings);
+        if (empty.length != test.length)
+        {
+            assertEquals(1,2);
+        }
+        for (int i = 0; i < empty.length && i < test.length; i++)
+        {
+            assertEquals(empty[i], test[i]);
+        }
+    }
+    
+    @Test
+    public void testGetListingPricesEmptyInput()
+    {
+        int[] empty = {};
+        int[] test = ListingProcessor.getListingPrices(new ArrayList<AirbnbListing>());
+        if (empty.length != test.length)
+        {
+            assertEquals(1,2);
+        }
+        for (int i = 0; i < empty.length && i < test.length; i++)
+        {
+            assertEquals(empty[i], test[i]);
+        }
+    }
+    
+    @Test
+    public void testGetListingPricesNullInput()
+    {
+        int[] empty = {};
+        int[] test = ListingProcessor.getListingPrices(nullList);
+        if (empty.length != test.length)
+        {
+            assertEquals(1,2);
+        }
+        for (int i = 0; i < empty.length && i < test.length; i++)
+        {
+            assertEquals(empty[i], test[i]);
+        }
+    }
 }
+
 
 

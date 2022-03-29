@@ -176,7 +176,7 @@ public class ListingProcessor
     
     //The below streams are used in the pie chart functionalities
     /**
-     * Adam
+     * The turns all the AirbnbListings to an array of their prices.
      */
     public static int[] getListingPrices(List<AirbnbListing> listings)
     {
