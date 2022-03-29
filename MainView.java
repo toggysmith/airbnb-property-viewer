@@ -132,10 +132,8 @@ public class MainView extends Stage
         List<String> options = new ArrayList<>();
 
         int stepAmount = 10;
-        
-        List<AirbnbListing> listings = AirbnbDataLoader.getListings();
 
-        for (int currentPrice = 0; currentPrice <= ListingProcessor.getMaxPropertyPrice(listings); currentPrice += stepAmount)
+        for (int currentPrice = 0; currentPrice <= ListingProcessor.getMaxPropertyPrice(); currentPrice += stepAmount)
         {
             if (currentPrice == stepAmount * 10) stepAmount = stepAmount * 10;
 

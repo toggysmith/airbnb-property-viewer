@@ -3,7 +3,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.Arrays;
-import java.util.ArrayList;
 
 import java.lang.NullPointerException;
 
@@ -27,13 +26,8 @@ public class ListingProcessor
      * @return The listings in a specific borough.
      */
     public static List<AirbnbListing> filterByBorough
-    (List<AirbnbListing> listings, String boroughName) throws IllegalArgumentException
+    (List<AirbnbListing> listings, String boroughName)
     {
-        if (!isValidAirbnbListings(listings) || !validBorough(boroughName))
-        {
-            throw new IllegalArgumentException();
-        }
-        
         return listings.stream()
                        .filter(listing -> boroughName.equals(listing.getNeighbourhood()))
                        .collect(Collectors.toList());
@@ -47,13 +41,8 @@ public class ListingProcessor
      * @return The filtered listings.
      */
     public static List<AirbnbListing> filterByPriceRange
-    (List<AirbnbListing> listings, int fromPrice, int toPrice) throws IllegalArgumentException
+    (List<AirbnbListing> listings, int fromPrice, int toPrice)
     {
-        if (!isValidAirbnbListings(listings) || fromPrice > toPrice)
-        {
-            throw new IllegalArgumentException();
-        }
-        
         return listings.stream()
                        .filter(listing -> listing.getPrice() >= fromPrice
                                           && listing.getPrice() <= toPrice)
@@ -66,13 +55,8 @@ public class ListingProcessor
      * @return The number of properties.
      */
     public static int getNoOfPropertiesInBoroughWithMost
-    (List<AirbnbListing> listings) throws IllegalArgumentException
+    (List<AirbnbListing> listings)
     {
-        if (!isValidAirbnbListings(listings))
-        {
-            throw new IllegalArgumentException();
-        }
-        
         int most = 0;
         
         for (Borough borough : Borough.values())
@@ -91,13 +75,8 @@ public class ListingProcessor
     /**
      * @return The maximum property price or zero if there is none.
      */
-    public static int getMaxPropertyPrice(List<AirbnbListing> listings)
+    public static int getMaxPropertyPrice()
     {
-        if (!isValidAirbnbListings(listings))
-        {
-            throw new IllegalArgumentException();
-        }
-        
         return listings.stream()
                 .map(AirbnbListing::getPrice)
                 .max(Integer::compare)
@@ -322,11 +301,6 @@ public class ListingProcessor
         return listings.stream()
             .filter(listing -> listing.getRoom_type().equals(roomNeeded)) 
             .count();
-    }
-    
-    private static boolean isValidAirbnbListings(List<AirbnbListing> listings)
-    {
-        return listings == null || listings.isEmpty();
     }
     
     /*
