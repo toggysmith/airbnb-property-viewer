@@ -191,8 +191,8 @@ public class ListingProcessorTest
     {
         customDestinations = new ArrayList<>();
         DestinationListing destination1 = new DestinationListing("Tower of London", "Tower of London", 51.42236388,-0.299202059,"Tower Hamlet", "free");
-       // DestinationListing destination2 = new DestinationListing();
-        
+        DestinationListing destination2 = new DestinationListing("London Eye", "Riverside Building, County Hall,", 51.38442425,-0.263391118,"Westminster", "£2.50 - £5.00");
+        DestinationListing destination3 = new DestinationListing("Big Ben", "London SW1A 0AA",51.40190763,-0.278253045,"Kingston upon Thames", "free");
     }
 
     
