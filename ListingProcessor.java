@@ -47,6 +47,9 @@ public class ListingProcessor
     public static List<AirbnbListing> filterByPriceRange
     (List<AirbnbListing> listings, int fromPrice, int toPrice)
     {
+        checkValidAirbnbListings(listings);
+        checkValidPriceRange(fromPrice, toPrice);
+        
         return listings.stream()
                        .filter(listing -> listing.getPrice() >= fromPrice
                                           && listing.getPrice() <= toPrice)
@@ -326,6 +329,14 @@ public class ListingProcessor
         }
         
         throw new IllegalArgumentException("The provided borough name argument is invalid.");
+    }
+    
+    private static void checkValidPriceRange(int fromPrice, int toPrice)
+    {
+        if (fromPrice > toPrice)
+        {
+            throw new IllegalArgumentException("The from-price argument cannot be greater than the to-price argument.");
+        }
     }
     
     /*
