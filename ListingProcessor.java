@@ -186,7 +186,7 @@ public class ListingProcessor
     }
     
     /**
-     * Adam
+     * The turns all the AirbnbListings to an array of their number of reviews.
      */
     public static int[] getListingReviews(List<AirbnbListing> listings)
     {

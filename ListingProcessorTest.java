@@ -199,15 +199,12 @@ public class ListingProcessorTest
     @Test
     public void testGetListingPricesValidInput()
     {
-        int[] empty = {37, 35, 195, 45, 30, 30, 30};
+        int[] array1 = {37, 35, 195, 45, 30, 30, 30};
         int[] test = ListingProcessor.getListingPrices(customisedListings);
-        if (empty.length != test.length)
+        assertEquals(array1.length, test.length);
+        for (int i = 0; i < array1.length && i < test.length; i++)
         {
-            assertEquals(1,2);
-        }
-        for (int i = 0; i < empty.length && i < test.length; i++)
-        {
-            assertEquals(empty[i], test[i]);
+            assertEquals(array1[i], test[i]);
         }
     }
     
@@ -216,10 +213,7 @@ public class ListingProcessorTest
     {
         int[] empty = {};
         int[] test = ListingProcessor.getListingPrices(new ArrayList<AirbnbListing>());
-        if (empty.length != test.length)
-        {
-            assertEquals(1,2);
-        }
+        assertEquals(empty.length, test.length);
         for (int i = 0; i < empty.length && i < test.length; i++)
         {
             assertEquals(empty[i], test[i]);
@@ -231,10 +225,43 @@ public class ListingProcessorTest
     {
         int[] empty = {};
         int[] test = ListingProcessor.getListingPrices(nullList);
-        if (empty.length != test.length)
+        assertEquals(empty.length, test.length);
+        for (int i = 0; i < empty.length && i < test.length; i++)
         {
-            assertEquals(1,2);
+            assertEquals(empty[i], test[i]);
         }
+    }
+    
+    @Test
+    public void testGetListingReviewsValidInput()
+    {
+        int[] array1 = {28, 18, 0, 7, 1, 1, 1};
+        int[] test = ListingProcessor.getListingReviews(customisedListings);
+        assertEquals(array1.length, test.length);
+        for (int i = 0; i < array1.length && i < test.length; i++)
+        {
+            assertEquals(array1[i], test[i]);
+        }
+    }
+    
+    @Test
+    public void testGetListingReviewsEmptyInput()
+    {
+        int[] empty = {};
+        int[] test = ListingProcessor.getListingReviews(new ArrayList<AirbnbListing>());
+        assertEquals(empty.length, test.length);
+        for (int i = 0; i < empty.length && i < test.length; i++)
+        {
+            assertEquals(empty[i], test[i]);
+        }
+    }
+    
+    @Test
+    public void testGetListingReviewsNullInput()
+    {
+        int[] empty = {};
+        int[] test = ListingProcessor.getListingReviews(nullList);
+        assertEquals(empty.length, test.length);
         for (int i = 0; i < empty.length && i < test.length; i++)
         {
             assertEquals(empty[i], test[i]);
