@@ -51,7 +51,7 @@ public class DestinationDistances
         }
     }
    
-    /*
+    /**
      *Converts the destinations ArrayList<DestinationPair> to an array which is sorted using a merge sort and the first five elements in the list are retrieved. If there are less then five locations, all of them are displayed,
      *otherwise the first five are chosen which represent the five closest destinations
      *@return ArrayList<DistanceDestinationPair>, containing the up to five closest destinations relative to the selected property
@@ -63,25 +63,23 @@ public class DestinationDistances
             return smallestFive;
         }
         
-        //discuus merging
-        if(destinations.size() <= 5){
-            for(int i = 0; i <= destinations.size() - 1; i++){
-                smallestFive.add(destinations.get(i));
-            }
-            return smallestFive;
-        }
-        
         DistanceDestinationPair[] pairs = new DistanceDestinationPair[destinations.size()];
+        
         for(int i = 0; i <= pairs.length - 1; i++){
               pairs[i] = destinations.get(i);
         }
         
         mergeSort(pairs,pairs.length);
         
+        if(pairs.length <= 5){
+            for(int i = 0; i <= pairs.length - 1; i++){
+                smallestFive.add(pairs[i]);
+            }
+        }else{
         for(int i = 0; i < 5; i++){
             smallestFive.add(pairs[i]);
         }
-        
+        }
         return smallestFive;
     }
     
