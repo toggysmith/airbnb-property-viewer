@@ -53,9 +53,12 @@ public class StatController extends Controller
     //Declaring the double sided queue
     public static Deque<stat> dq;
 
+    //Lists that hold the data to be used
     private static List<AirbnbListing> airbnbListings;
-    private static final String roomNeeded = "Entire home/apt";
     private static List<StatisticsListing> statListings;
+    
+    //Used to check string equality
+    private static final String roomNeeded = "Entire home/apt";
 
     //To be able to round statistics to  2 decimal places
     private static final DecimalFormat df = new DecimalFormat("0.00");
@@ -75,16 +78,17 @@ public class StatController extends Controller
     private interactiveStat pubs;
     private interactiveStat attractions;
 
+    //The class houses methods that stream the data in the csv file to be used in the statistics
     private ListingProcessor sortList;
     /**
-     * Initializing the view of the pane  when you first click  onto it
+     * Initializing the view of the pane when it is called
      */
     @FXML
     public void initialize(){
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
 
-        
+        //Setting up the statistics pane
         setUpStats();
         setUpValues();
 
@@ -107,7 +111,7 @@ public class StatController extends Controller
         setUpBoxes();
     }
 
-    /*
+    /**
      * Assigning the value of the statistic to the specific function it correlates to
      * and updating them
      */
@@ -131,7 +135,7 @@ public class StatController extends Controller
 
     }
 
-    /*
+    /**
      * Updates the comboboxes for the two statistics that require user interaction
      */
     private void setUpBoxes()
@@ -140,7 +144,7 @@ public class StatController extends Controller
         attractions.updateComboValues();
     }
 
-    /*
+    /**
      * The first four statistics are added to the gridpane in the specific cell labelled
      */
     private void startStats() 
@@ -151,7 +155,7 @@ public class StatController extends Controller
         gridPane1.add(mostExpensive,1,1);
     }
 
-    /*
+    /**
      * A double-sided queue is used to reflect the order of the buttons that the user presses.
      * If the right button (>) is clicked twice and the left button (<) is clicked twice  
      * then you will return to the original statistic that was shown
@@ -166,7 +170,7 @@ public class StatController extends Controller
         dq.addLast(attractions);
     }
 
-    /*
+    /**
      * Setting up the stat class with the needed components and corresponding statistic
      */
     private void setUpStats()
@@ -181,7 +185,7 @@ public class StatController extends Controller
         attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, DestinationType.ATTRACTION);
     }
 
-    /*
+    /**
      * Filters the list to only include properties from that price range
      */
     private List<AirbnbListing> filterPrice(List<AirbnbListing> unfilteredList)
@@ -217,6 +221,7 @@ public class StatController extends Controller
      * (statistic 2)
      */
     public int nonPrivateRoom() {
+        //Method returns a value which  is then casted
         long nonPrivate = sortList.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
 
         int privateCount = (int)nonPrivate;
@@ -228,6 +233,7 @@ public class StatController extends Controller
      * (statistic 3)
      */
     public int totalAvailableProperties() { 
+        //Returns a number  that is then casted to an integer
         long available = sortList.getTotalAvailability(airbnbListings,fromValue, toValue);
         int total = (int)available;
         return total;
@@ -240,11 +246,13 @@ public class StatController extends Controller
      * (statistic 4)
      */
     public String expensiveNeighbourhood() {
-
+        //Variables need to be initialized
         int max = 0;
 
         String correctNeighbourhood = "";
+        //Getting all the properties within the price range
         List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+        //Calculating the total price for each property within the price range. If it is higher than the current highest price, then that becomes the new max
         for(int i = 0; i < filtered.size(); i++) {
 
             int calcPrice = filtered.get(i).getPrice() * filtered.get(i).getMinimumNights();
@@ -269,8 +277,9 @@ public class StatController extends Controller
         List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
         
         List<String> boroughListing = new ArrayList<>();
-        
+        //Getting all boroughs within the price range
         boroughListing = sortList.getBoroughs(filtered);
+        //This nested for loop goes through each borough within the price range, calculating the social score for each and then the borough with the highest social score is returned
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
                 if(boroughListing.get(x).equals(sScore.getBoroughName())) {
@@ -291,19 +300,22 @@ public class StatController extends Controller
     }
 
     /**
-     * returns the borough with the lowest crime per 100,000 people within 
+     * returns the borough with the lowest crime per 1000 people within 
      * the price range
      * (statistic 7)
      */
     public String lowestCrime() {
+        //Looking for the borough with the lowest crime so starting with a high number
         double lowCrime = 1000;
         String boroughCrime = "";
         List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
         
         List<String> boroughListing = new ArrayList<>();
 
+        //Getting all boroughs within the price range
         boroughListing = sortList.getBoroughs(filtered);
 
+        //This nested for loop goes through each borough within the price range, checking if the crime rate is lower than the current lowest, and returning the borough with the lowest crime
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
                 if(boroughListing.get(x).equals(sScore.getBoroughName())) {
