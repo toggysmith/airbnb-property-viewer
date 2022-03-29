@@ -1,5 +1,5 @@
 /**
- * Responsible for holding instances of the controllers of the content panes loaded.
+ * Serves as a marker class to mark what is a controller.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
