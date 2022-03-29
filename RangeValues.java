@@ -94,7 +94,9 @@ public class RangeValues
         }
     }
     
-
+    /**
+     * @return A new PriceRange with the values of the this rangeValues.
+     */
     public PriceRange getPriceRange()
     {
         return new PriceRange(fromValue, toValue);
