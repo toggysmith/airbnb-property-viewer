@@ -183,7 +183,8 @@ public class ListingProcessorTest
     private static void setUpDestinations()
     {
         customDestinations = new ArrayList<>();
-        
+        DestinationListing destination1 = new DestinationListing("Tower of London", "Tower of London", 51.42236388,-0.299202059,"Tower Hamlet", "free");
+       // DestinationListing destination2 = new DestinationListing();
         
     }
 }

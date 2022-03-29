@@ -176,7 +176,7 @@ public class ListingProcessor
     
     //The below streams are used in the pie chart functionalities
     /**
-     * Augusto
+     * Adam
      */
     public static int[] getListingPrices(List<AirbnbListing> listings)
     {
@@ -186,7 +186,7 @@ public class ListingProcessor
     }
     
     /**
-     * Augusto
+     * Adam
      */
     public static int[] getListingReviews(List<AirbnbListing> listings)
     {
@@ -196,7 +196,7 @@ public class ListingProcessor
     }
     
     /**
-     * Augusto
+     * Adam
      */
     public static int[] getListingMinNights(List<AirbnbListing> listings)
     {
