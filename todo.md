@@ -22,7 +22,7 @@
 - [x] ContentContainerManager
 - [x] Controller
 - [x] DestinationDistances
-- [ ] DestinationListing
+- [x] DestinationListing
 - [ ] DestinationLoader
 - [ ] DestinationType
 - [x] DestinationDetailsController
