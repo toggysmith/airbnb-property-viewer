@@ -3,7 +3,7 @@
 
 # BlueJ
 *.ctxt
-package.bluej
+*.bluej
 
 # OS X
 .DS_STORE
