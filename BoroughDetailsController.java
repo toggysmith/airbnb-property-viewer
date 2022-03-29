@@ -67,7 +67,7 @@ public class BoroughDetailsController extends Controller
      * @param listings The listings in the borough in the price range.
      * @param priceRange The price range that the window is for.
      */
-    public void initialise(ObservableList<AirbnbListing> listings, PriceRange priceRange)
+    public void setUp(ObservableList<AirbnbListing> listings, PriceRange priceRange)
     {
         this.priceRange = priceRange; 
         populateTable(listings);

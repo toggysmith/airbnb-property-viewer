@@ -32,7 +32,7 @@ public class BoroughDetailsStage extends Stage
 
         BoroughDetailsController boroughWindowController = loader.getController();
         ObservableList<AirbnbListing> listings = FXCollections.observableArrayList(boroughListingsPriceRangeTuple.getListings());
-        boroughWindowController.initialise(listings, boroughListingsPriceRangeTuple.getPriceRange());
+        boroughWindowController.setUp(listings, boroughListingsPriceRangeTuple.getPriceRange());
 
         setOnCloseRequest(e -> windowClosed());
 

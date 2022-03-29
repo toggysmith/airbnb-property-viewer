@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=OpenLayersMap
-comment0.text=\n\ Responsible\ for\ the\ creation\ of\ a\ WebView\ containing\ an\ OpenLayersMap.\ Also\ acts\ as\ a\ bridge\ between\ the\n\ Java\ and\ HTML/CSS/JavaScript\ side\ of\ the\ project.\n\ \n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment0.text=\r\n\ Responsible\ for\ the\ creation\ of\ a\ WebView\ containing\ an\ OpenLayersMap.\ Also\ acts\ as\ a\ bridge\ between\ the\r\n\ Java\ and\ HTML/CSS/JavaScript\ side\ of\ the\ project.\r\n\ \r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 1.0.0\r\n
 comment1.params=address\ zoom\ longitude\ latitude
 comment1.target=OpenLayersMap(java.lang.String,\ int,\ double,\ double)
 comment2.params=name
@@ -13,7 +13,7 @@ comment5.params=newBehaviours
 comment5.target=void\ addBehaviour(OpenLayersMap.Behaviour[])
 comment6.params=
 comment6.target=void\ setupCallFromJavaScript()
-comment6.text=\n\ Sets\ up\ an\ object\ and\ gives\ it\ to\ javascript\ so\ \n\ javascript\ can\ call\ java\ methods\ in\ that\ object.\n
+comment6.text=\r\n\ Sets\ up\ an\ object\ and\ gives\ it\ to\ javascript\ so\ \r\n\ javascript\ can\ call\ java\ methods\ in\ that\ object.\r\n
 comment7.params=observable\ oldValue\ newValue
 comment7.target=void\ changed(javafx.beans.value.ObservableValue,\ java.lang.Object,\ java.lang.Object)
 numComments=8

@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=WelcomeController
-comment0.text=\n\ \n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment0.text=\r\n\ \r\n\r\n\ @author\ Adam\ Murray\ (K21003575)\r\n\ @author\ Augusto\ Favero\ (K21059800)\r\n\ @author\ Mathew\ Tran\ (K21074020)\r\n\ @author\ Tony\ Smith\ (K21064940)\r\n\ @version\ 1.0.0\r\n
 comment1.params=
 comment1.target=void\ visitOurGitHubButtonOnClick()
-comment1.text=\n\ Called\ when\ the\ user\ presses\ the\ 'Visit\ our\ GitHub'\ button.\ It\ opens\ the\ project\ repository\ on\n\ GitHub\ in\ the\ user's\ default\ browser.\n
+comment1.text=\r\n\ Called\ when\ the\ user\ presses\ the\ 'Visit\ our\ GitHub'\ button.\ It\ opens\ the\ project\ repository\ on\r\n\ GitHub\ in\ the\ user's\ default\ browser.\r\n
 comment2.params=
 comment2.target=void\ swapColorModeOnClick()
-comment2.text=\n\ Called\ when\ the\ user\ presses\ the\ 'Swap\ color\ mode'\ button.\ It\ switches\ the\ color\ mode\ to\ dark\ theme\n\ if\ it's\ already\ light\ theme\ and\ light\ theme\ if\ it's\ already\ dark\ theme.\ This\ simply\ involves\n\ swapping\ out\ CSS\ stylesheets.\n
+comment2.text=\r\n\ Called\ when\ the\ user\ presses\ the\ 'Swap\ color\ mode'\ button.\ It\ switches\ the\ color\ mode\ to\ dark\ theme\r\n\ if\ it's\ already\ light\ theme\ and\ light\ theme\ if\ it's\ already\ dark\ theme.\ This\ simply\ involves\r\n\ swapping\ out\ CSS\ stylesheets.\r\n
 numComments=3
