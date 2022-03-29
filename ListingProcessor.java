@@ -44,8 +44,7 @@ public class ListingProcessor
      * @param toPrice The price to filter up to.
      * @return The filtered listings.
      */
-    public static List<AirbnbListing> filterByPriceRange
-    (List<AirbnbListing> listings, int fromPrice, int toPrice)
+    public static List<AirbnbListing> filterByPriceRange(List<AirbnbListing> listings, int fromPrice, int toPrice)
     {
         checkValidAirbnbListings(listings);
         checkValidPriceRange(fromPrice, toPrice);
@@ -61,9 +60,10 @@ public class ListingProcessor
      * @param listings The listings to be used to check.
      * @return The number of properties.
      */
-    public static int getNoOfPropertiesInBoroughWithMost
-    (List<AirbnbListing> listings)
+    public static int getNoOfPropertiesInBoroughWithMost(List<AirbnbListing> listings)
     {
+        checkValidAirbnbListings(listings);
+        
         int most = 0;
         
         for (Borough borough : Borough.values())
