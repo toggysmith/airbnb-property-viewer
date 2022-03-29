@@ -102,6 +102,7 @@ public class ListingProcessorTest
     /**
      * Test that `filterByBorough()` throws an IllegalArgumentException with the right message when given an empty listings argument.
      */
+    @Test
     public void testFilterByBoroughWithEmptyListings()
     {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -116,6 +117,7 @@ public class ListingProcessorTest
     /**
      * Test that `filterByBorough()` throws an IllegalArgumentException with the right message when given a null borough name argument.
      */
+    @Test
     public void testFilterByBoroughWithNullBoroughName()
     {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -132,6 +134,7 @@ public class ListingProcessorTest
     /**
      * Test that `filterByBorough()` throws an IllegalArgumentException with the right message when given an illegal (not in the list of known boroughs) borough name argument.
      */
+    @Test
     public void testFilterByBoroughWithIllegalBoroughName()
     {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -143,6 +146,83 @@ public class ListingProcessorTest
         });
         
         assertEquals("The provided borough name argument is invalid.", exception.getMessage());
+    }
+    
+    /**
+     * Test that `filterByPriceRange()` returns the correct list when given valid arguments.
+     */
+    @Test
+    public void testFilterByPriceRangeWithValidArguments()
+    {
+        List<AirbnbListing> listings = new ArrayList<>();
+        
+        AirbnbListing listing1 = new AirbnbListing("7483279", "Double beedroom in Southwark", "78372", "Adam", "Hammersmith and Fulham", 51.46977981, -0.189799402, "Entire home/apt", 160, 1, 0, "12/8/2015", 1.00, 1, 0);
+        AirbnbListing listing2 = new AirbnbListing("2584302", "Epic room in LONDON!", "23426", "Jeff", "Hammersmith and Fulham", 51.21937781, -0.133779402, "Private room", 200, 1, 0, "12/8/2015", 1.00, 1, 0);
+
+        listings.add(new AirbnbListing("14403483", "Large room, sleeps 3, Brixton", "88550548", "Allison", "Lambeth", 51.47125306, -0.11250696, "Private room", 37, 2, 28, "03/03/2017", 4.12, 1, 254));
+        listings.add(new AirbnbListing("9957622", "Double bed in Notting Hill", "51168635", "Serge", "Westminster", 51.51782111, -0.192291889, "Private room", 35, 2, 18, "30/12/2016", 1.67, 1, 0));
+        listings.add(listing1);
+        listings.add(listing2);
+        listings.add(new AirbnbListing("7833588", "Bright DOUBLE ROOM, central LONDON", "34472628", "Tommaso", "Tower Hamlets", 51.52066587, -0.056124665, "Private room", 231, 1, 7, "07/12/2015", 0.37, 1, 0));
+        listings.add(new AirbnbListing("9020269", "Spacious Room next to Richmond Par", "47094767", "Marcus", "Kingston upon Thames", 51.41945318, -0.286341833, "Private room", 30, 1, 1, "09/10/2016", 0.65, 2, 35));
+        
+        final List<AirbnbListing> filteredListings = ListingProcessor.filterByPriceRange(listings, 160, 200);
+        
+        Assertions.assertAll(
+            () -> assertEquals(filteredListings.size(), 2),
+            () -> assertEquals(filteredListings.get(0), listing1),
+            () -> assertEquals(filteredListings.get(1), listing2)
+        );
+    }
+    
+    /**
+     * Test that `filterByPriceRange()` throws an IllegalArgumentException with the right message when given a null listings argument.
+     */
+    @Test
+    public void testFilterByPriceRangeWithNullListings()
+    {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    List<AirbnbListing> listings = null;
+
+                    ListingProcessor.filterByPriceRange(listings, 20, 40);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
+    }
+
+    /**
+     * Test that `filterByPriceRange()` throws an IllegalArgumentException with the right message when given an empty listings argument.
+     */
+    @Test
+    public void testFilterByPriceRangeWithEmptyListings()
+    {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    List<AirbnbListing> listings = new ArrayList<>();
+
+                    ListingProcessor.filterByPriceRange(listings, 20, 40);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
+    }
+    
+    /**
+     * Test that `filterByPriceRange()` throws an IllegalArgumentException with the right message when given illegal (the from-price is greater than the to-price) price range arguments.
+     */
+    @Test
+    public void testFilterByPriceRangeWithIllegalPriceRange()
+    {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            List<AirbnbListing> listings = new ArrayList<>();
+            
+            listings.add(new AirbnbListing("14403483", "Large room, sleeps 3, Brixton", "88550548", "Allison", "Lambeth", 51.47125306, -0.11250696, "Private room", 37, 2, 28, "03/03/2017", 4.12, 1, 254));
+            listings.add(new AirbnbListing("9957622", "Double bed in Notting Hill", "51168635", "Serge", "Westminster", 51.51782111, -0.192291889, "Private room", 35, 2, 18, "30/12/2016", 1.67, 1, 0));
+            listings.add(new AirbnbListing("7833588", "Bright DOUBLE ROOM, central LONDON", "34472628", "Tommaso", "Tower Hamlets", 51.52066587, -0.056124665, "Private room", 45, 1, 7, "07/12/2015", 0.37, 1, 0));
+            listings.add(new AirbnbListing("9020269", "Spacious Room next to Richmond Par", "47094767", "Marcus", "Kingston upon Thames", 51.41945318, -0.286341833, "Private room", 30, 1, 1, "09/10/2016", 0.65, 2, 35));
+            
+            ListingProcessor.filterByPriceRange(listings, 40, 20);
+        });
+        
+        assertEquals("The from-price argument cannot be greater than the to-price argument.", exception.getMessage());
     }
 
     @Test
