@@ -21,7 +21,7 @@ import javafx.application.Platform;
  */
 public class OpenLayersMap extends AnchorPane
 {
-    public enum Behaviour { DRAWING, MARKER };
+    public enum Behaviour { DRAWING, MARKER, BOUNDARIES };
     
     private WebView webView;
     private WebEngine webEngine;
@@ -38,7 +38,6 @@ public class OpenLayersMap extends AnchorPane
         webEngine.load(url.toExternalForm());
         
         addScript("core-behaviour.js");
-        addScript("boundaries-behaviour.js");
 
         webView.prefWidthProperty().bind(this.widthProperty());
         webView.prefHeightProperty().bind(this.heightProperty());
@@ -86,7 +85,10 @@ public class OpenLayersMap extends AnchorPane
                     break;
                 case MARKER:
                     addScript("marker-behaviour.js");
-                setupCallFromJavaScript();
+                    setupCallFromJavaScript();
+                    break;
+                case BOUNDARIES:            
+                    addScript("boundaries-behaviour.js");
                     break;
                 default:
                     // There should be a case for every behaviour.

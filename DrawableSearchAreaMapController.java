@@ -40,7 +40,8 @@ public class DrawableSearchAreaMapController extends Controller
     {
         borderPane.setCenter(openLayersMap);
         
-        openLayersMap.addBehaviour(OpenLayersMap.Behaviour.DRAWING, OpenLayersMap.Behaviour.MARKER);
+        openLayersMap.addBehaviour(OpenLayersMap.Behaviour.DRAWING, OpenLayersMap.Behaviour.MARKER,
+                                   OpenLayersMap.Behaviour.BOUNDARIES);
 
         addPropertiesToJsFile();
         

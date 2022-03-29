@@ -19,7 +19,7 @@ public class JsToJavaBridge
      */
     public void openPropertyWindow(String listingId)
     {
-        propertyDetailsStageFactory.newPropertyWindow(listingId);
+        propertyDetailsStageFactory.newPropertyStage(listingId);
     }
     
 }

@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
 
 /**
- * BoroughWindowController hosts FXML GUI elements.
+ * BoroughDetailsController hosts FXML GUI elements.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -62,10 +62,10 @@ public class BoroughDetailsController extends Controller
     }
     
     /**
-     * Setsup the brorough window, populating the table and the combo box, and assigning the onClick methods.
+     * Sets up the brorough stage, populating the table and the combo box, and assigning the onClick methods.
      * This also adds all the listings given to the map and sets the maps position as the average of those listings.
      * @param listings The listings in the borough in the price range.
-     * @param boroughWindow The borough that the window is for.
+     * @param priceRange The price range that the window is for.
      */
     public void initialise(ObservableList<AirbnbListing> listings, PriceRange priceRange)
     {
@@ -149,7 +149,7 @@ public class BoroughDetailsController extends Controller
         if (! row.isEmpty()) {
             AirbnbListing listing = row.getItem();
             
-            PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyWindow(listing);
+            PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyStage(listing);
         }
     }
     

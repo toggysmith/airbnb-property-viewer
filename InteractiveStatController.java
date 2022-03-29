@@ -94,7 +94,7 @@ public class InteractiveStatController extends Controller
     {
         if (! row.isEmpty()) {
             InteractiveStatsTableValues listing = row.getItem();
-            DestinationDetailsFactory.getDestinationWindowFactory().newDestinationWindow(listing.getDistanceDestinationPair().getDestination());
+            DestinationDetailsFactory.getDestinationDetailFactory().newDestinationDetail(listing.getDistanceDestinationPair().getDestination());
         }
     }
     

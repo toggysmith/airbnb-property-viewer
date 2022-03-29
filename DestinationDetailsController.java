@@ -3,7 +3,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
 
 /**
- * DestinationWindowController hosts FXML GUI elements.
+ * DestinationDetailsController hosts FXML GUI elements.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)

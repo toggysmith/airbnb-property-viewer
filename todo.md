@@ -12,31 +12,31 @@
 - [x] App
 - [x] Borough
 - [ ] BoroughButton
-- [ ] BoroughPriceRange
+- [x] BoroughListingsPriceRangeTuple
 - [ ] BoroughDetailsController
-- [ ] BoroughDetailsFactory
-- [ ] BoroughDetailsView
+- [x] BoroughDetailsFactory
+- [x] BoroughDetailsStage
 - [x] CircularLinkedList
 - [x] CircularList
-- [ ] ComboBoxOrderEnum
+- [x] ComboBoxOrderEnum
 - [x] ContentContainerManager
 - [ ] Controller
 - [ ] DestinationDistances
 - [ ] DestinationListing
 - [ ] DestinationLoader
 - [ ] DestinationType
-- [ ] DestinationDetailsController
-- [ ] DestinationDetailsFactory
-- [ ] DestinationDetailsView
-- [ ] DistanceDestinationPair
+- [x] DestinationDetailsController
+- [x] DestinationDetailsFactory
+- [x] DestinationDetailsStage
+- [x] DistanceDestinationPair
 - [ ] DrawableSearchAreaMapController
-- [ ] EmptyListException
+- [x] EmptyListException
 - [ ] Hexagon
 - [ ] InteractiveStatController
-- [ ] InteractiveStatsTableValues
-- [ ] JsToJavaBridge
+- [x] InteractiveStatsTableValues
+- [x] JsToJavaBridge
 - [ ] ListingManipulator
-- [ ] ListNode
+- [x] ListNode
 - [ ] MainController
 - [ ] MainView
 - [ ] MainWindow
@@ -44,14 +44,14 @@
 - [ ] OpenLayersMap
 - [ ] PieChartController
 - [ ] PieChartView
-- [ ] Position
-- [ ] PriceRange
-- [ ] PropertyDetailsController
-- [ ] PropertyDetailsStageFactory
-- [ ] PropertyDetailsStage
+- [x] Position
+- [x] PriceRange
+- [x] PropertyDetailsController
+- [x] PropertyDetailsStageFactory
+- [x] PropertyDetailsStage
 - [ ] QuantityVisualiser
 - [ ] RangeBoxEnum
-- [ ] RangeValues
+- [x] RangeValues
 - [ ] StatController
 - [ ] StatisticsListing
 - [ ] StatisticsLoader

@@ -16,9 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TableRow;
 
 /**
- * PropertyWindowController controls the window created for a given property.
- * This class populates the elements of the window and controls the users interaction
- * with the window.
+ * PropertyDetailsController controls the stage created for a given property.
+ * This class populates the elements of the stage and controls the users interaction
+ * with the stage.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -58,7 +58,7 @@ public class PropertyDetailsController extends Controller
     
     /**
      * The method is called automatically when the fxml file is loaded.
-     * It adds the OpenLayersMap to the window and gives it the ability to display markers.
+     * It adds the OpenLayersMap to the stage and gives it the ability to display markers.
      */
     @FXML
     public void initialize()
@@ -69,7 +69,7 @@ public class PropertyDetailsController extends Controller
     }
 
     /**
-     * This method sets up the window for the property listing that this window is for.
+     * This method sets up the stage for the property listing that this window is for.
      * @param listing The AirbnbListing for the property.
      */
     public void setup(AirbnbListing listing)
@@ -154,7 +154,7 @@ public class PropertyDetailsController extends Controller
     {
         if (! row.isEmpty()) {
             AirbnbListing otherListing = row.getItem();
-            PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyWindow(otherListing);
+            PropertyDetailsStageFactory.getPropertyDetailsStageFactory().newPropertyStage(otherListing);
         }
     }
 }

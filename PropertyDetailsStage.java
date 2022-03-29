@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 /**
- * PropertyWindowView creates the window that can be seen on screen for a given property listing.
+ * PropertyDetailsStage creates the window that can be seen on screen for a given property listing.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -18,6 +18,7 @@ public class PropertyDetailsStage extends Stage
     
     /**
      * Create a window and load the FXML file.
+     * @param listing The AirbnbListing that this Stage is for.
      */
     public PropertyDetailsStage(AirbnbListing listing) throws Exception
     {
@@ -29,7 +30,7 @@ public class PropertyDetailsStage extends Stage
         PropertyDetailsController propertyDetailsController = loader.getController();
         propertyDetailsController.setup(listing);
         
-        setOnCloseRequest(e -> windowClosed());
+        setOnCloseRequest(e -> stageClosed());
         
         Scene scene = new Scene(pane, 1500, 800);
         MainView.addToOpenWindows(scene);
@@ -39,14 +40,17 @@ public class PropertyDetailsStage extends Stage
         show();
     }
     
+    /**
+     * @return The AirbnbListing.
+     */
     public AirbnbListing getListing() { return listing; }
     
     /**
-     * Alerts the PropertyWindowFactory that this window has been closed.
+     * Alerts the PropertyDetailsStageFactory that this window has been closed.
      */
-    public void windowClosed()
+    public void stageClosed()
     {
-        PropertyDetailsStageFactory.getPropertyDetailsStageFactory().propertyWindowClosed(this);
+        PropertyDetailsStageFactory.getPropertyDetailsStageFactory().propertyStageClosed(this);
         MainView.removeFromOpenWindows(getScene());
     }
 }
