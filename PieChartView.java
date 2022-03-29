@@ -32,7 +32,7 @@ public class PieChartView extends Stage
      
         
         if(values.length < 10){
-            pieValues.put(symbol + " " + min + " =< x < " + symbol  + " " + max, values.length + 1);
+            pieValues.put(symbol + " " + min + " =< x < " + symbol  + " " + max + 1, values.length + 1);
             controller.setup(pieValues);
             return;
         }
