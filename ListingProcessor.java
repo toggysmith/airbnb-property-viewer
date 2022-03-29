@@ -196,7 +196,7 @@ public class ListingProcessor
     }
     
     /**
-     * Adam
+     * The turns all the AirbnbListings to an array of their min nights.
      */
     public static int[] getListingMinNights(List<AirbnbListing> listings)
     {

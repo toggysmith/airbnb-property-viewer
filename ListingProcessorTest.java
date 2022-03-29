@@ -267,6 +267,42 @@ public class ListingProcessorTest
             assertEquals(empty[i], test[i]);
         }
     }
+    
+    @Test
+    public void testGgetListingMinNightsValidInput()
+    {
+        int[] array1 = {2, 2, 1, 1, 1, 1, 1};
+        int[] test = ListingProcessor.getListingMinNights(customisedListings);
+        assertEquals(array1.length, test.length);
+        for (int i = 0; i < array1.length && i < test.length; i++)
+        {
+            assertEquals(array1[i], test[i]);
+        }
+    }
+    
+    @Test
+    public void testGetListingMinNightsEmptyInput()
+    {
+        int[] empty = {};
+        int[] test = ListingProcessor.getListingMinNights(new ArrayList<AirbnbListing>());
+        assertEquals(empty.length, test.length);
+        for (int i = 0; i < empty.length && i < test.length; i++)
+        {
+            assertEquals(empty[i], test[i]);
+        }
+    }
+    
+    @Test
+    public void testGetListingMinNightsNullInput()
+    {
+        int[] empty = {};
+        int[] test = ListingProcessor.getListingMinNights(nullList);
+        assertEquals(empty.length, test.length);
+        for (int i = 0; i < empty.length && i < test.length; i++)
+        {
+            assertEquals(empty[i], test[i]);
+        }
+    }
 }
 
 
