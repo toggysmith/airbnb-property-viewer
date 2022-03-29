@@ -128,6 +128,7 @@ public class ListingProcessor
     {
         return listing.stream()
                       .map(l -> l.getNeighbourhood())
+                      .filter(borough -> validBorough(borough))
                       .distinct()
                       .collect(Collectors.toList());
     }
@@ -297,4 +298,18 @@ public class ListingProcessor
             .count();
     }
     
+    /*
+     * method to check that the borough passed is valid in relation to the borough enum
+     */
+    private static boolean validBorough(String boroughName) throws IllegalArgumentException
+    {
+        Borough[] validBoroughs = Borough.values();
+        
+        for(int i = 0; i <= validBoroughs.length - 1; i++){
+            if(validBoroughs[i].getName().equals(boroughName)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

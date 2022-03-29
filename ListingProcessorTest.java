@@ -5,9 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.*;
-
-import java.lang.IllegalArgumentException;
-
 import java.util.List;
 import java.util.ArrayList;
 /**
@@ -61,20 +58,12 @@ public class ListingProcessorTest
         
         assertNotEquals(boroughs.get(3), "Bromley");
         assertNotEquals(boroughs.get(4), "Yorkshire");
+        
+        assertNotEquals(customListings.size(),boroughs.size());
+        
     }
     
-    private void validBorough(String boroughName) throws IllegalArgumentException
-    {
-        Borough[] validBoroughs = Borough.values();
-        
-        for(int i = 0; i <= validBoroughs.length - 1; i++){
-            if(validBoroughs[i].equals(boroughName)){
-                return;
-            }else{
-                throw new IllegalArgumentException("Invalid borough name passed");
-            }
-        }
-    }
+    
     
     private static List<AirbnbListing> createListings()
     {
@@ -85,12 +74,16 @@ public class ListingProcessorTest
         AirbnbListing property3 = new AirbnbListing("7483279","Double beedroom in Southwark", "78372", "Adam", "Hammersmith and Fulham", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
         AirbnbListing property4 = new AirbnbListing("7833588","Bright DOUBLE ROOM, central LONDON","34472628","Tommaso","Tower Hamlets",51.52066587,-0.056124665,"Private room",45,1,7,"07/12/2015",0.37,1,0);
         AirbnbListing property5 = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Kingston upon Thames",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2018",0.65,2,35);
+        AirbnbListing invalidProperty = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Milan",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2018",0.65,2,35);
+        AirbnbListing invalidProperty2 = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Coppenhagen",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2018",0.65,2,35);
         
         customList.add(property1);
         customList.add(property2);
         customList.add(property3);
         customList.add(property4);
         customList.add(property5);
+        customList.add(invalidProperty);
+        customList.add(invalidProperty2);
         
         return customList;
     }
