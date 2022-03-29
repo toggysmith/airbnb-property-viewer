@@ -18,7 +18,7 @@ public class RangeValues
     private String fromValue;
     private String toValue;
 
-    /*
+    /**
      * Constructor for objects of class RangeValues, storing the toValue and fromValue
      * @param String fromValue, the fromValue that represents the lowest possible value for the price attribute that an AirbnbListing can take in the valid range
      * @param String toValue, the toValue that represents the highest possible value for the price attribute that an AirbnbListing can take in the valid range
@@ -29,7 +29,7 @@ public class RangeValues
         this.toValue = toValue;
     }
     
-    /*
+    /**
      * Method to set the fromValue String
      * @param String fromValue, the value that represents the lowest possible price that an AirbnbListing can take in the valid range
      */
@@ -115,7 +115,7 @@ public class RangeValues
     }
     
     /*
-     *  method that handles the conversion logic for the toValue integer returned by the .getToValue() into its corresponding string. Mainly used in the revert stage when an invalid range is selected and the to combobox needs the
+     * method that handles the conversion logic for the toValue integer returned by the .getToValue() into its corresponding string. Mainly used in the revert stage when an invalid range is selected and the to combobox needs the
      * corresponding toValue string to revert the state
      * @return String
      */

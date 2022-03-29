@@ -120,8 +120,9 @@ public class ListingProcessor
     }
     
     /**
-
-     * Augusto
+     *This method returns all the distinct borough names as a list of strings relative to a list of AirbnbListings, by mapping to a new stream, the listings' neighbourhood attribute (in which borough the property exists)
+     *@param List<AirbnbListing> listing, the list of Airbnb properties to parse
+     *@return List<String>, a string containing all the unique borough names present in the list of AirbnbListing properties
      */
     public static List<String> getBoroughs(List<AirbnbListing> listing)
     {

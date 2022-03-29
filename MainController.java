@@ -116,7 +116,6 @@ public class MainController extends Controller
             {
                 rangeWarningAlert();
                 //when the invalid range is displayed then the combo boxes are reverted back to a valid range
-                //this is done by 
                 fromRangeBox.setValue(comboBoxRangeValues.convertFromIntToStr(comboBoxRangeValues.getFromValue()));
                 toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
             }

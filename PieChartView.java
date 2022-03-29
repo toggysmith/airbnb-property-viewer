@@ -27,7 +27,7 @@ public class PieChartView extends Stage
         pieValues = new HashMap<String,Integer>(); 
         int min = ListingProcessor.getMin(values);              
         int max = ListingProcessor.getMax(values);            
-       
+        
         int stepAmount;
      
         if(values.length < 10){
