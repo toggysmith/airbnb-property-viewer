@@ -23,8 +23,8 @@
 - [x] Controller
 - [x] DestinationDistances
 - [x] DestinationListing
-- [ ] DestinationLoader
-- [ ] DestinationType
+- [x] DestinationLoader
+- [x] DestinationType
 - [x] DestinationDetailsController
 - [x] DestinationDetailsFactory
 - [x] DestinationDetailsStage
@@ -50,7 +50,7 @@
 - [x] PropertyDetailsStageFactory
 - [x] PropertyDetailsStage
 - [ ] QuantityVisualiser
-- [ ] RangeBoxEnum
+- [x] RangeBoxEnum
 - [x] RangeValues
 - [ ] StatController
 - [ ] StatisticsListing
