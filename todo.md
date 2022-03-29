@@ -20,7 +20,7 @@
 - [x] CircularList
 - [x] ComboBoxOrderEnum
 - [x] ContentContainerManager
-- [ ] Controller
+- [x] Controller
 - [ ] DestinationDistances
 - [ ] DestinationListing
 - [ ] DestinationLoader
@@ -35,7 +35,7 @@
 - [ ] InteractiveStatController
 - [x] InteractiveStatsTableValues
 - [x] JsToJavaBridge
-- [ ] ListingManipulator
+- [ ] ListingProcessor
 - [x] ListNode
 - [ ] MainController
 - [ ] MainView
