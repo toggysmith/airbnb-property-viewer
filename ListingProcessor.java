@@ -195,14 +195,14 @@ public class ListingProcessor
     }
     
     /**
-     * Augusto
+     * Returns a single property whose name and borough match the attributes passed by the method header
+     * 
      */
     public static AirbnbListing getPropertyListingByNames(List<AirbnbListing> listings, String listingName, String boroughName)
     {
        AirbnbListing selectedProperty = listings.stream()
                                                 .filter(listing -> listingName.equals(listing.getName()) && boroughName.equals(listing.getNeighbourhood()))
                                                 .findFirst().orElse(null); 
-       //perform try catch to possibly simulate better behaviour in case of null thrown                                         
        return selectedProperty;
     }
     
@@ -238,35 +238,51 @@ public class ListingProcessor
     }
     
     /**
-     * Augusto
+     * Gets the minimum value from the integer array passed to this method
+     * @param, int[] values, integer array
+     * @return int, the minimum integer from the array passed
      */
     public static int getMin(int[] values)
     {
+        if(values.length == 0){
+            return 0;
+        }else{
         return Arrays.stream(values)
                          .boxed()
                          .min(Integer::compare)
                          .get();
+        }
     }
     
     /**
-     * Augusto
+     * Gets the maximum value from the integer array passed to this method
+     * @param, int[] values, integer array
+     * @return int, the maximum integer from the array passed
      */
     public static int getMax(int[] values)
     {
+        if(values.length == 0){
+            return 0;
+        }else{
         return Arrays.stream(values)
                      .boxed()
                      .max(Integer::compare)
                      .get();  
+        }
     }
     
     /**
-     * Augusto
+     * Returns a specific amount of elements within the specified range
      */
-    public static long retrieveSpeciedAmount(int[] values , int from, int to)
+    public static long retrieveSpecifiedAmount(int[] values , int from, int to)
     {
+        if(values.length == 0){
+            return 0;
+        }else{
         return Arrays.stream(values)
                       .filter(i -> (i >= from) && (i < to))
                       .count();
+        }              
     }
     
     /**

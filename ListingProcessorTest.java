@@ -424,7 +424,7 @@ public class ListingProcessorTest
         List<String> westminster = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Westminster");
         assertEquals(3, westminster.size());
         assertEquals("Double bed in Notting Hill", westminster.get(0));
-        assertEquals("Double beedroom in Southwark",westminster.get(1));
+        assertEquals("Double bedroom in Southwark",westminster.get(1));
         assertEquals("Spacious Room next to Richmond Par",westminster.get(2));
 
         List<String> milan = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Milan");
@@ -513,6 +513,80 @@ public class ListingProcessorTest
         List<DestinationListing> pubsTower = ListingProcessor.filterDestinations(pubs, "Tower Hamlets", "££");
         assertEquals(2,pubsTower.size());
     }
+
+    @Test
+    public void testGetPropertyListingByNames()
+    {
+     AirbnbListing property = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark","Westminster");
+     assertEquals("Double bedroom in Southwark",property.getName());
+     assertNotEquals("IncorrectName","Double bedroom in Southwark");
+       
+       
+     AirbnbListing propertyNull = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect Name For Property","Westminster");
+    
+       
+     assertEquals(null, propertyNull);
+       
+    }
+    
+    @Test
+    public void testGetMin()
+    {
+        int[] array1 = {37, 35, 195, 45, 30, 30, 30};
+        int[] emptyArray = {};
+        int[] array2 = {-1,20,45,23,12};
+        
+        int actualMin = ListingProcessor.getMin(array1);
+        assertEquals(30, actualMin);
+        
+        int negativeMin = ListingProcessor.getMin(array2);
+        assertEquals(-1,negativeMin);
+        
+        int empty = ListingProcessor.getMin(emptyArray);
+        assertEquals(0,empty);
+    }
+    
+    @Test
+    public void testGetMax()
+    {
+        int[] array1 = {37, 35, 195, 45, 30, 30, 30};
+        int[] emptyArray = {};
+        int[] array2 = {-1,-3,-4,0};
+        
+        int actualMax = ListingProcessor.getMax(array1);
+        assertEquals(195, actualMax);
+        
+        int max = ListingProcessor.getMax(array2);
+        assertEquals(0,max);
+        
+        int empty = ListingProcessor.getMax(emptyArray);
+        assertEquals(0,empty);
+    }
+    
+    @Test
+    public void testRetrieveSpeciedAmount()
+    {
+        int[] array1 = {10,11,12,13,14,15};
+        int from = 10;
+        int to = 13;
+        
+        long total = ListingProcessor.retrieveSpecifiedAmount(array1, from,to);
+        assertEquals(3,total);
+        
+        int[] array2 = {10,20,30,40,50,60};
+        int from2 = 10;
+        int to2 = 55;
+        
+        long total2 = ListingProcessor.retrieveSpecifiedAmount(array2,from2,to2);
+        assertEquals(5, total2);
+        
+        int[] array3 = {};
+        int from3 = 10;
+        int to3 = 13;
+        
+        long total3 = ListingProcessor.retrieveSpecifiedAmount(array3,from3,to3);
+        assertEquals(0,total3);
+    }
     
     private static List<AirbnbListing> createListings()
     {
@@ -520,7 +594,7 @@ public class ListingProcessorTest
 
         AirbnbListing property1 = new AirbnbListing("14403483","Large room, sleeps 3, Brixton","88550548" ,"Allison", "Lambeth",51.47125306,-0.11250696,"Private room",37,2,28,"03/03/2017",4.12,1,254);
         AirbnbListing property2 = new AirbnbListing("9957622","Double bed in Notting Hill","51168635","Serge","Westminster",51.51782111,-0.192291889,"Private room",35,2,18, "30/12/2016",1.67,1,0);
-        AirbnbListing property3 = new AirbnbListing("7483279","Double beedroom in Southwark", "78372", "Adam", "Hammersmith and Fulham", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
+        AirbnbListing property3 = new AirbnbListing("7483279","Double bedroom in Southwark", "78372", "Adam", "Hammersmith and Fulham", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
         AirbnbListing property4 = new AirbnbListing("7833588","Bright DOUBLE ROOM, central LONDON","34472628","Tommaso","Tower Hamlets",51.52066587,-0.056124665,"Private room",45,1,7,"07/12/2015",0.37,1,0);
         AirbnbListing property5 = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Kingston upon Thames",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35);
         AirbnbListing invalidProperty = new AirbnbListing("447382","Spacious Room next to Richmond Par","47094767", "Marcus", "Milan",51.41944544,-0.286346933,"Private room",30,1,1,"09/10/2016",0.65,2,31);
@@ -554,7 +628,7 @@ public class ListingProcessorTest
 
         AirbnbListing property1 = new AirbnbListing("14403483","Large room, sleeps 3, Brixton","88550548" ,"Allison", "Lambeth",51.47125306,-0.11250696,"Private room",37,2,28,"03/03/2017",4.12,1,254);
         AirbnbListing property2 = new AirbnbListing("9957622","Double bed in Notting Hill","51168635","Serge","Westminster",51.51782111,-0.192291889,"Private room",35,2,18, "30/12/2016",1.67,1,0);
-        AirbnbListing property3 = new AirbnbListing("7483279","Double beedroom in Southwark", "78372", "Adam", "Westminster", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
+        AirbnbListing property3 = new AirbnbListing("7483279","Double bedroom in Southwark", "78372", "Adam", "Westminster", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
         AirbnbListing property4 = new AirbnbListing("7833588","Bright DOUBLE ROOM, central LONDON","34472628","Tommaso","Tower Hamlets",51.52066587,-0.056124665,"Private room",45,1,7,"07/12/2015",0.37,1,0);
         AirbnbListing property5 = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Westminster",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35);
         AirbnbListing invalidProperty = new AirbnbListing("447382","Spacious Room next to Richmond Par","47094767", "Marcus", "Milan",51.41944544,-0.286346933,"Private room",30,1,1,"09/10/2016",0.65,2,31);

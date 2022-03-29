@@ -47,7 +47,7 @@ public class PieChartView extends Stage
         for(int i = min; min <= max; min += stepAmount){
             int toValue = min + stepAmount;
          
-            int totalValue = (int) ListingProcessor.retrieveSpeciedAmount(values,min, toValue);
+            int totalValue = (int) ListingProcessor.retrieveSpecifiedAmount(values,min, toValue);
             pieValues.put(symbol + " " + min + " =< x < " + symbol + " " + toValue,totalValue);
         }  
 
