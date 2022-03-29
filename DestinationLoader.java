@@ -29,7 +29,7 @@ public class DestinationLoader
      * loadDestinations laods and processes the relevant csv file whose path is passed to this method. Each row in the csv file represents a unique DestinationListing obejct and an ArrayList of these is returned
      * @return ArrayList<DestinationListing>, an array list containing all the destiantions, for pubs there are 4098 and for attractions 163
      */
-    private static ArrayList<DestinationListing> loadDestinations(String fileName)
+    private static ArrayList<DestinationListing> loadDestinations(String fileName, PriceType priceType)
     {
         ArrayList<DestinationListing> destinationLists = new ArrayList<DestinationListing>();
         try
@@ -61,7 +61,10 @@ public class DestinationLoader
                 
                 //issue with csv loader which does not recognise £ symbols, the following conversion is used to re-structure the string to the same format as that from the csv files
                 String ticketPrice = processPoundSymbolConversion(line[15]);
-
+                 
+                if(!priceType.checkPriceValid(ticketPrice)){
+                    ticketPrice = priceType.getValidPrice();
+                }
                 
                 destinationLists.add(new DestinationListing(destinationName,displayAddress,longitude,latitude,boroughName,ticketPrice));
             }
@@ -81,7 +84,10 @@ public class DestinationLoader
      */
     public static List<DestinationListing> getPubs()
     {
-        if (pubDestinations == null) pubDestinations = loadDestinations("Pubs-london.csv");
+        if (pubDestinations == null){
+            PubPrice pubPriceType = new PubPrice();
+            pubDestinations = loadDestinations("Pubs-london.csv",pubPriceType);
+        }
         
         return pubDestinations;
     }
@@ -93,7 +99,10 @@ public class DestinationLoader
      */
     public static List<DestinationListing> getTouristDestinations()
     {
-        if(touristDestinations == null) touristDestinations = loadDestinations("TouristAttractions.csv");
+        if(touristDestinations == null){
+            AttractionPrice attractionPriceType = new AttractionPrice();
+            touristDestinations = loadDestinations("TouristAttractions.csv",attractionPriceType);
+        }
             
         return touristDestinations;
     }
