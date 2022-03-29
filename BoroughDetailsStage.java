@@ -20,6 +20,7 @@ public class BoroughDetailsStage extends Stage
 
     /**
      * Create a window and load the FXML file.
+     * @param boroughListingsPriceRangeTuple The borough, the price range and the listings in one tuple.
      */
     public BoroughDetailsStage(BoroughListingsPriceRangeTuple boroughListingsPriceRangeTuple) throws Exception
     {
@@ -42,17 +43,20 @@ public class BoroughDetailsStage extends Stage
         show();
     }
     
+    /**
+     * @return The boroughListingsPriceRangeTuple.
+     */
     public BoroughListingsPriceRangeTuple getBoroughListingsPriceRangeTuple()
     {
         return boroughListingsPriceRangeTuple;
     }
 
     /**
-     * This tells the borough window factory that this window has been closed.
+     * This tells the boroughDetailsStageFactory that this window has been closed.
      */
     public void windowClosed()
     {
-        BoroughDetailsStageFactory.getBoroughDetailsStageFactory().boroughWindowClosed(this);
+        BoroughDetailsStageFactory.getBoroughDetailsStageFactory().boroughStageClosed(this);
         MainView.removeFromOpenWindows(getScene());
     }
 }

@@ -1,12 +1,28 @@
 import java.util.Objects;
 import java.util.List;
 
+/**
+ * This stores the Borough, List of AirbnbListings, and PriceRange for a BoroughDetailsStage.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+ */ 
+
 public class BoroughListingsPriceRangeTuple
 {
     private Borough borough;
     private List<AirbnbListing> listings;
     private PriceRange priceRange;
 
+    /**
+     * Constructor for BoroughListingsPriceRangeTuple.
+     * @param borough The Borough that the stage  is for.
+     * @param listings The listings that the stage is for.
+     * @param priceRange The PriceRange that the stage is for.
+     */
     public BoroughListingsPriceRangeTuple(Borough borough, List<AirbnbListing> listings, PriceRange priceRange)
     {
         this.borough = borough;
@@ -14,21 +30,34 @@ public class BoroughListingsPriceRangeTuple
         this.priceRange = priceRange;
     }
 
+    /**
+     * @return The borough.
+     */
     public Borough getBorough()
     {
         return borough;
     }
 
+    /**
+     * @return The listings.
+     */
     public List<AirbnbListing> getListings()
     {
         return listings;
     }
 
+    /**
+     * @return The price range.
+     */
     public PriceRange getPriceRange()
     {
         return priceRange;
     }
 
+    /**
+     * The equals method now determines equality based off the Borough, List of AirbnbListing's and the PriceRange.
+     * @param object The object to test if its equal to this instance.
+     */
     @Override
     public boolean equals(Object object)
     {

@@ -2,8 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * PropertyWindowFactory controls the creation of property windows.
- * Tts main responsibility is to ensure that only one property window exists
+ * PropertyDetailsStageFactory controls the creation of property stages.
+ * Tts main responsibility is to ensure that only one property stage exists
  * for each property at any given time.
  *
  * @author Adam Murray (K21003575)
@@ -19,7 +19,7 @@ public class PropertyDetailsStageFactory
     //The set of all open property windows
     private Map<AirbnbListing, PropertyDetailsStage> openPropertyWindows;
 
-    // Constructor for PropertyWindowFactory,
+    // Constructor for PropertyWindowFPropertyDetailsStageFactoryactory,
     //Its private as this is a singleton.
     private PropertyDetailsStageFactory()
     {
@@ -28,9 +28,9 @@ public class PropertyDetailsStageFactory
     
     /**
      * The method allows other classes to retrive the only object of
-     * PropertyWindowFactory and ensures that only one object of this
+     * PropertyDetailsStageFactory and ensures that only one object of this
      * class is ever created.
-     * @return The only object of PropertyWindowFactory.
+     * @return The only object of PropertyDetailsStageFactory.
      */
     public static PropertyDetailsStageFactory getPropertyDetailsStageFactory()
     {
@@ -44,19 +44,19 @@ public class PropertyDetailsStageFactory
     /**
      * This method takes the listingId given, finds the listing with that id,
      * and then attempts to create a property window for that listing.
-     * @param listingId The id for the property you want a window for.
+     * @param listingId The id for the property you want a stage for.
      */
-    public PropertyDetailsStage newPropertyWindow(String listingId)
+    public PropertyDetailsStage newPropertyStage(String listingId)
     {
         AirbnbListing listing = ListingProcessor.getListingWithId(listingId);
-        return newPropertyWindow(listing);
+        return newPropertyStage(listing);
     }
     
     /**
-     * This method attempts to create a property window for the listing given.
+     * This method attempts to create a property stage for the listing given.
      * @param listing The listing for the property you want a window for.
      */
-    public PropertyDetailsStage newPropertyWindow(AirbnbListing listing)
+    public PropertyDetailsStage newPropertyStage(AirbnbListing listing)
     {
         if (listing == null)
         {
@@ -89,11 +89,11 @@ public class PropertyDetailsStageFactory
     }
     
     /**
-     * This method removes a property window from the set of open windows.
-     * @param propertyWindow The property window closed.
+     * This method removes a property stage from the set of open windows.
+     * @param propertyStage The property stage closed.
      */
-    public void propertyWindowClosed(PropertyDetailsStage propertyWindow)
+    public void propertyStageClosed(PropertyDetailsStage propertyStage)
     {
-        openPropertyWindows.remove(propertyWindow.getListing());
+        openPropertyWindows.remove(propertyStage.getListing());
     }
 }

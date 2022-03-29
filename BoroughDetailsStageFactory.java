@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * BoroughWindowFactory manages the creation of new windows for the boroughs,
+ * BoroughDetailsStageFactory manages the creation of new stages for the boroughs,
  * it ensures that only one window can exist for each borough for a specific 
  * price range at a given time.
  *
@@ -18,12 +18,12 @@ import java.util.Objects;
  */
 public class BoroughDetailsStageFactory
 {
-    private static BoroughDetailsStageFactory boroughWindowFactory;
+    private static BoroughDetailsStageFactory boroughDetailsStageFactory;
     private MainWindow mainWindow;
     private Map<BoroughListingsPriceRangeTuple, BoroughDetailsStage> openBoroughWindows;
 
     /*
-     * Constructor for BoroughWindowFactory
+     * Constructor for BoroughDetailsStageFactory
      */ 
     private BoroughDetailsStageFactory()
     {
@@ -32,16 +32,16 @@ public class BoroughDetailsStageFactory
     }
 
     /**
-     * Ensures that only one BoroughWindowFactory is ever created.
-     * @return The only object of BoroughWindowFactory.
+     * Ensures that only one BoroughDetailsStageFactory is ever created.
+     * @return The only object of BoroughDetailsStageFactory.
      */
     public static BoroughDetailsStageFactory getBoroughDetailsStageFactory()
     {
-        if (boroughWindowFactory == null)
+        if (boroughDetailsStageFactory == null)
         {
-            boroughWindowFactory = new BoroughDetailsStageFactory();
+            boroughDetailsStageFactory = new BoroughDetailsStageFactory();
         }
-        return boroughWindowFactory;
+        return boroughDetailsStageFactory;
     }
 
     /**
@@ -63,7 +63,7 @@ public class BoroughDetailsStageFactory
     }
 
     /*
-     * This method checks if a boroughWindow for the given borough already exists,
+     * This method checks if a boroughDetailsStage for the given borough already exists,
      * if so it finds that window and sets it to the front of the screen,
      * if not it creates a new window for this borough
      */
@@ -99,11 +99,11 @@ public class BoroughDetailsStageFactory
     }
 
     /**
-     * Removes the specified boroughWindow from the set of open boroughWindows.
-     * @param boroughWindow The BoroughWindow is be removed.
+     * Removes the specified boroughDetailsStage from the set of open boroughWindows.
+     * @param boroughDetailsStage The boroughDetailsStage is be removed.
      */
-    public void boroughWindowClosed(BoroughDetailsStage boroughWindow)
+    public void boroughStageClosed(BoroughDetailsStage boroughDetailsStage)
     {
-        openBoroughWindows.remove(boroughWindow.getBoroughListingsPriceRangeTuple());
+        openBoroughWindows.remove(boroughDetailsStage.getBoroughListingsPriceRangeTuple());
     }
 }

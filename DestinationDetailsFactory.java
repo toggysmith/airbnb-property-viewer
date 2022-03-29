@@ -2,8 +2,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * DestinationWindowFactory controls the creation of destination windows.
- * Tts main responsibility is to ensure that only one destination window exists
+ * DestinationDetailFactory controls the creation of destination details.
+ * Tts main responsibility is to ensure that only one destination detail stage exists
  * for each destination at any given time.
  *
  * @author Adam Murray (K21003575)
@@ -14,60 +14,60 @@ import java.util.HashMap;
  */
 public class DestinationDetailsFactory
 {
-    private static DestinationDetailsFactory destinationWindowFactory;
+    private static DestinationDetailsFactory destinationDetailFactory;
     
-    //The set of all open destination windows
-    private Map<DestinationListing, DestinationDetailsStage> openDestinationWindows;
+    //The set of all open destination detail stages
+    private Map<DestinationListing, DestinationDetailsStage> openDestinationDetails;
     
     /*
-     * Constructor for DestinationWindowFactory,
+     * Constructor for DestinationDetailFactory,
      * Its private as this is a singleton.
      */
     private DestinationDetailsFactory()
     {
-        openDestinationWindows = new HashMap<>();
+        openDestinationDetails = new HashMap<>();
     }
     
     /**
      * The method allows other classes to retrive the only object of
-     * DestinationWindowFactory and ensures that only one object of this
+     * DestinationDetailFactory and ensures that only one object of this
      * class is ever created.
-     * @return The only object of DestinationWindowFactory.
+     * @return The only object of DestinationDetailFactory.
      */
-    public static DestinationDetailsFactory getDestinationWindowFactory()
+    public static DestinationDetailsFactory getDestinationDetailFactory()
     {
-        if (destinationWindowFactory == null)
+        if (destinationDetailFactory == null)
         {
-            destinationWindowFactory = new DestinationDetailsFactory();
+            destinationDetailFactory = new DestinationDetailsFactory();
         }
-        return destinationWindowFactory;
+        return destinationDetailFactory;
     }
     
     /**
-     * This method attempts to create a destination window for the listing given.
-     * @param listing The listing for the destination you want a window for.
+     * This method attempts to create a destination detail for the listing given.
+     * @param listing The listing for the destination you want a detail for.
      */
-    public DestinationDetailsStage newDestinationWindow(DestinationListing listing)
+    public DestinationDetailsStage newDestinationDetail(DestinationListing listing)
     {
         if (listing == null)
         {
             return null;
         }
         
-        DestinationDetailsStage boroughDetailsStage = openDestinationWindows.get(listing);
+        DestinationDetailsStage DestintionDetailsStage = openDestinationDetails.get(listing);
 
-        if (boroughDetailsStage != null)
+        if (DestintionDetailsStage != null)
         {
-            boroughDetailsStage.toFront();
+            DestintionDetailsStage.toFront();
 
-            return boroughDetailsStage;
+            return DestintionDetailsStage;
         }
 
         try
         {
-            boroughDetailsStage = new DestinationDetailsStage(listing);
+            DestintionDetailsStage = new DestinationDetailsStage(listing);
 
-            openDestinationWindows.put(listing, boroughDetailsStage);
+            openDestinationDetails.put(listing, DestintionDetailsStage);
         }
         catch (Exception e)
         {
@@ -76,15 +76,15 @@ public class DestinationDetailsFactory
             AlertManager.showTerminatingError("Could not create stage.");
         }
 
-        return boroughDetailsStage;
+        return DestintionDetailsStage;
     }
     
     /**
-     * This method removes a destination window from the set of open windows.
-     * @param destinationWindow The destination window closed.
+     * This method removes a destination detail from the set of open details.
+     * @param destinationDetail The destination detail closed.
      */
-    public void destinationWindowClosed(DestinationDetailsStage destinationWindow)
+    public void destinationDetailClosed(DestinationDetailsStage destinationDetail)
     {
-        openDestinationWindows.remove(destinationWindow);
+        openDestinationDetails.remove(destinationDetail);
     }
 }

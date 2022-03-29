@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 /**
- * DestinationWindowView creates the window that can be seen on screen for a given destination listing.
+ * DestinationDetailsStage creates the window that can be seen on screen for a given destination listing.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -16,6 +16,7 @@ public class DestinationDetailsStage extends Stage
 {
     /**
      * Create a window and load the FXML file.
+     * @param listing The listing that this Stage shows.
      */
     public DestinationDetailsStage(DestinationListing listing) throws Exception
     {
@@ -37,11 +38,11 @@ public class DestinationDetailsStage extends Stage
     }
     
     /**
-     * Alerts the DestinationWindowFactory that this window has been closed.
+     * Alerts the DestinationDetailsFactory that this window has been closed.
      */
     public void windowClosed()
     {
-        DestinationDetailsFactory.getDestinationWindowFactory().destinationWindowClosed(this);
+        DestinationDetailsFactory.getDestinationDetailFactory().destinationDetailClosed(this);
         MainView.removeFromOpenWindows(getScene());
     }
 }
