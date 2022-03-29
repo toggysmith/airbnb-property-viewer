@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.*;
 
+import java.lang.IllegalArgumentException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -62,12 +63,16 @@ public class ListingProcessorTest
         assertNotEquals(boroughs.get(4), "Yorkshire");
     }
     
-    private void validBorough(String boroughName) throws InvalidArgumentException
+    private void validBorough(String boroughName) throws IllegalArgumentException
     {
         Borough[] validBoroughs = Borough.values();
         
         for(int i = 0; i <= validBoroughs.length - 1; i++){
-            
+            if(validBoroughs[i].equals(boroughName)){
+                return;
+            }else{
+                throw new IllegalArgumentException("Invalid borough name passed");
+            }
         }
     }
     
