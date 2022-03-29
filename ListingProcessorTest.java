@@ -91,8 +91,9 @@ public class ListingProcessorTest
     @Test
     public void testGetAveragePositionValidInput()
     {
-        Position position1 = new Position(51.462554198571425, -0.2013926307142857);
+        Position position1 = new Position(51.46255309285714, -0.1999653592857143);
         Position position2 = ListingProcessor.getAveragePosition(customListings);
+        System.out.println(position2.getLatitude() + "    " + position2.getLongitude());
         assertEquals(position1.getLatitude(), position2.getLatitude());
         assertEquals(position1.getLongitude(), position2.getLongitude());
     }
@@ -104,4 +105,5 @@ public class ListingProcessorTest
         assertNull(position1);
     }
 }
+
 
