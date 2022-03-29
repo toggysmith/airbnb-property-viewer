@@ -3,6 +3,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.Arrays;
+
+import java.lang.NullPointerException;
+
 /**
  * Responsible for providing methods to usefully manipulate individual Airbnb listings and lists of listings.
  *
@@ -124,22 +127,22 @@ public class ListingProcessor
      *@param List<AirbnbListing> listing, the list of Airbnb properties to parse
      *@return List<String>, a string containing all the unique borough names present in the list of AirbnbListing properties
      */
-    public static List<String> getBoroughs(List<AirbnbListing> listing)
+    public static List<String> getBoroughs(List<AirbnbListing> listing) 
     {
         return listing.stream()
                       .map(l -> l.getNeighbourhood())
-                      .filter(borough -> validBorough(borough))
+                      .filter(borough -> borough != null && validBorough(borough))
                       .distinct()
                       .collect(Collectors.toList());
     }
     
     /**
-     * Augusto
+     * 
      */
     public static List<String> getPropertiesNameInBorough(List<AirbnbListing> listings, String boroughName)
     {
         return listings.stream()
-                       .filter(listing -> boroughName.equals(listing.getNeighbourhood()))
+                       .filter(listing -> boroughName != null && validBorough(boroughName) && boroughName.equals(listing.getNeighbourhood()))
                        .map(listing -> listing.getName())
                        .distinct()
                        .collect(Collectors.toList());
@@ -301,7 +304,7 @@ public class ListingProcessor
     /*
      * method to check that the borough passed is valid in relation to the borough enum
      */
-    private static boolean validBorough(String boroughName) throws IllegalArgumentException
+    private static boolean validBorough(String boroughName)
     {
         Borough[] validBoroughs = Borough.values();
         
