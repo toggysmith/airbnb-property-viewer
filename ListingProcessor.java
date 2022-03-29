@@ -3,7 +3,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.Arrays;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import java.lang.NullPointerException;
 
 /**
@@ -25,9 +27,11 @@ public class ListingProcessor
      * @param boroughName The name of the borough (neighbourhood) to check.
      * @return The listings in a specific borough.
      */
-    public static List<AirbnbListing> filterByBorough
-    (List<AirbnbListing> listings, String boroughName)
+    public static List<AirbnbListing> filterByBorough(List<AirbnbListing> listings, String boroughName)
     {
+        checkValidAirbnbListings(listings);
+        checkValidBoroughName(boroughName);
+        
         return listings.stream()
                        .filter(listing -> boroughName.equals(listing.getNeighbourhood()))
                        .collect(Collectors.toList());
@@ -301,6 +305,27 @@ public class ListingProcessor
         return listings.stream()
             .filter(listing -> listing.getRoom_type().equals(roomNeeded)) 
             .count();
+    }
+    
+    private static void checkValidAirbnbListings(List<AirbnbListing> listings)
+    {
+        if (listings == null || listings.isEmpty())
+        {
+            throw new IllegalArgumentException("The provided listings argument is invalid.");
+        }
+    }
+    
+    private static void checkValidBoroughName(String boroughName)
+    {
+        Borough[] validBoroughs = Borough.values();
+        
+        for(int i = 0; i <= validBoroughs.length - 1; i++){
+            if(validBoroughs[i].getName().equals(boroughName)){
+                return;
+            }
+        }
+        
+        throw new IllegalArgumentException("The provided borough name argument is invalid.");
     }
     
     /*
