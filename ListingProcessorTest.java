@@ -93,7 +93,6 @@ public class ListingProcessorTest
     {
         Position position1 = new Position(51.46255309285714, -0.1999653592857143);
         Position position2 = ListingProcessor.getAveragePosition(customListings);
-        System.out.println(position2.getLatitude() + "    " + position2.getLongitude());
         assertEquals(position1.getLatitude(), position2.getLatitude());
         assertEquals(position1.getLongitude(), position2.getLongitude());
     }
