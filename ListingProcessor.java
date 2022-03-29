@@ -82,12 +82,14 @@ public class ListingProcessor
     /**
      * @return The maximum property price or zero if there is none.
      */
-    public static int getMaxPropertyPrice()
+    public static int getMaxPropertyPrice(List<AirbnbListing> listings)
     {
+        checkValidAirbnbListings(listings);
+        
         return listings.stream()
                 .map(AirbnbListing::getPrice)
                 .max(Integer::compare)
-                .orElse(0);
+                .get();
     }
     
     /**
