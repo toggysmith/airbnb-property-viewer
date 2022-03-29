@@ -30,8 +30,13 @@ public abstract class PriceType
         }
     }
     
-    public String getValidPrice()
+    protected String getValidPrice()
     {
         return destinationPrices.get(0);
+    }
+    
+    protected List<String> getPrices()
+    {
+        return destinationPrices;
     }
 }
