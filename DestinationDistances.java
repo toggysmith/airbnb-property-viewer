@@ -8,8 +8,8 @@ import java.util.Collections;
  * DestinationDistances class controls the main mathematical functionality of the calculation for the five closest locations (pubs or tourist attraction relevant to a propety selected by
  * the user)
  * 
- * This class creates an array list of DistanceDestinationPair , adding all the destinations from the passed DestinationListing List and their corresponding calculated distance
- * from the selectedProperty by the user.
+ * This class creates an array list of DistanceDestinationPair , adding all the destinations from the passed DestinationListing List and their corresponding calculated distances
+ * from the selectedProperty by the user as a reference point
  * 
  * This class is then sorted an only the first five elements are returned which represent the five closest destinations to the selected property
  *
@@ -70,12 +70,13 @@ public class DestinationDistances
         }
         
         mergeSort(pairs,pairs.length);
-        
+        //less then five destinations were returned
         if(pairs.length <= 5){
             for(int i = 0; i <= pairs.length - 1; i++){
                 smallestFive.add(pairs[i]);
             }
         }else{
+        //more then five destinations were returned, only first 5 are chosen (five closest)
         for(int i = 0; i < 5; i++){
             smallestFive.add(pairs[i]);
         }
@@ -86,6 +87,7 @@ public class DestinationDistances
     //reference : https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude (1st answer)
     /*
      * given the property and destination longitude and latitude calculateDistancew() calculates the distance between them
+     * @param, property longitude and latitude and venue/destination longitude and latitude
      * @return int, returns the distance between the two locations in KM as an int 
      */
     private int calculateDistance(double propertyLong, double venueLong, double propertyLat, double venueLat)

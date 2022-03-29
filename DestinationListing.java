@@ -1,6 +1,7 @@
 
 /**
- * Class to store all the tourist attraction destinations and pubs from the various csv files. The csv files have a similar structure therefore this class is used to dynamically represent both the attractions and pubs
+ * Class to store all the tourist attraction destinations and pub destinations from the various csv files. The csv files have a similar structure therefore this class is used to dynamically represent both the attractions and pubs
+ * since the data is in the same cells. These destinations are mainly represented in the interactive statistics.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
