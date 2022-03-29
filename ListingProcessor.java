@@ -156,8 +156,8 @@ public class ListingProcessor
     public static List<DestinationListing> filterDestinations(List<DestinationListing> destinations, String borough, String price)
     {
         return destinations.stream()
-                           .filter(destination -> borough.equals(destination.getBorough()))
-                           .filter(destination -> price.equals(destination.getPrice()))
+                           .filter(destination -> validBorough(borough) && borough != null && borough.equals(destination.getBorough()))
+                           .filter(destination -> price != null && price.equals(destination.getPrice()))
                            .collect(Collectors.toList());
         
     }

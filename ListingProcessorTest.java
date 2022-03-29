@@ -23,6 +23,8 @@ public class ListingProcessorTest
     
     private static List<AirbnbListing> customisedListings;
     
+    private static List<DestinationListing> customDestinations;
+    
     /**
      * Default constructor for test class ListingProcessorTest
      */
@@ -176,6 +178,13 @@ public class ListingProcessorTest
         customisedListings.add(property5);
         customisedListings.add(invalidProperty);
         customisedListings.add(invalidProperty2);
+    }
+    
+    private static void setUpDestinations()
+    {
+        customDestinations = new ArrayList<>();
+        
+        
     }
 }
 

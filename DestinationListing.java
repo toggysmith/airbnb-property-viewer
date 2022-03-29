@@ -37,13 +37,6 @@ public class DestinationListing
         this.latitude = latitude;
         this.boroughName = boroughName;
         this.price = price;
-        
-        /**
-        if(destinationName == null || address == null || longitude == 0 || latitude == 0 || boroughName == null || price == null){
-            throw new IllegalStateException("empty value entered");
-            
-        }
-        */
     }
     
     /**
