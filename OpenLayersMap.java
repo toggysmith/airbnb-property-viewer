@@ -1,7 +1,7 @@
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import java.net.URL;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
@@ -19,7 +19,7 @@ import javafx.application.Platform;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class OpenLayersMap extends AnchorPane
+public class OpenLayersMap extends StackPane
 {
     public enum Behaviour { DRAWING, MARKER, BOUNDARIES };
     
