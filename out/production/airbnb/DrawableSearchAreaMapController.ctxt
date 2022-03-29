@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=DrawableSearchAreaMapController
+comment0.text=\n\ Responsible\ for\ setting\ up\ the\ map\ that\ lets\ the\ user\ draw\ a\ search\ area\ for\ properties.\ This\ map\ is\ primarily\ implemented\n\ in\ HTML/CSS/JS\ with\ the\ help\ of\ the\ OpenLayers\ library.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=
+comment1.target=void\ initialize()
+comment1.text=\n\ Add\ the\ OpenLayers\ map\ to\ the\ scene\ and\ load\ data\ about\ the\ properties\ into\ the\ JS\ file.\n
+comment2.params=
+comment2.target=void\ boroughBoundariesCheckBoxOnAction()
+comment2.text=\n\ Toggle\ whether\ or\ not\ the\ borough\ boundaries\ are\ shown.\n
+comment3.params=
+comment3.target=void\ drawingModeButtonOnAction()
+comment3.text=\n\ Switch\ to\ drawing\ mode\ and\ make\ sure\ the\ refresh\ button\ is\ disabled.\n
+comment4.params=
+comment4.target=void\ markerModeButtonOnAction()
+comment4.text=\n\ Switch\ to\ marker\ mode\ and\ make\ sure\ the\ refresh\ button\ is\ enabled.\n
+comment5.params=
+comment5.target=void\ refreshButtonOnAction()
+comment5.text=\n\ Refresh\ the\ markers\ by\ clearing\ them\ and\ replacing\ them\ with\ up-to-date\ ones\ that\ match\ the\n\ current\ price\ range\ and\ area.\n
+comment6.params=
+comment6.target=void\ addPropertiesToJsFile()
+comment6.text=\n\ Gives\ the\ Js\ file\ all\ the\ listings\ that\ the\ propgram\ has.\n
+numComments=7

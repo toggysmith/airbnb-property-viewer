@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=WindowHashSet
+comment0.text=\n\ This\ is\ a\ HashSet\ with\ the\ added\ ability\ that\ if\ you\ give\n\ it\ an\ object\ it\ will\ return\ to\ you\ the\ object\ in\ the\ set\n\ that\ is\ is\ the\ same\ according\ to\ the\ equals\ method\n\ of\ the\ object.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=elementTest
+comment1.target=java.lang.Object\ getElementInSet(java.lang.Object)
+comment1.text=\n\ This\ method\ takes\ in\ an\ object\ and\ returns\ the\ equivalent\ object\ in\ the\n\ set\ according\ to\ the\ equals\ method\ of\ the\ objects.\ Returns\ null\ if\n\ no\ such\ object\ is\ found.\n\ @param\ elementTest\ The\ object\ that\ you\ want\ to\ find\ the\ equivalent\ of.\n\ @return\ The\ object\ in\ the\ set\ that\ is\ the\ same\ as\ elementTest.\ \n\ Returns\ null\ if\ no\ such\ object\ is\ found.\n
+numComments=2

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=AlertManager
+comment0.text=\n\ Responsible\ for\ terminating\ the\ program\ sensibly\ when\ a\ fatal\ error\ is\ encountered\ and\ informing\ the\ user\ of\ the\n\ nature\ of\ the\ error.\ This\ provides\ a\ better\ user\ experience\ than\ terminating\ the\ program\ without\ warning\ or\n\ worse\ not\ handling\ the\ error\ at\ all.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=errorDescription
+comment1.target=void\ showNonTerminatingError(java.lang.String)
+comment1.text=\n\ Displays\ an\ error\ alert\ on\ the\ screen\ with\ a\ description\ of\ the\ error\ that\ occurred.\ The\ error\ alert\ will\ not\n\ cause\ the\ program\ to\ terminate.\n\ @param\ errorDescription\ A\ description\ of\ the\ error\ that\ occurred\ possibly\ explaining\ why\ it\ happened.\ If\ this\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ is\ null,\ the\ default\ error\ message\ is\ shown\ instead.\n
+comment2.params=errorDescription
+comment2.target=void\ showTerminatingError(java.lang.String)
+comment2.text=\n\ Displays\ an\ error\ alert\ on\ the\ screen\ with\ a\ description\ of\ the\ error\ that\ occurred.\ The\ program\ terminates\n\ once\ the\ user\ clicks\ 'Ok'.\n\ @param\ errorDescription\ A\ description\ of\ the\ error\ that\ occurred\ possibly\ explaining\ why\ it\ happened.\ If\ this\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ is\ null,\ the\ default\ error\ message\ is\ shown\ instead.\n
+comment3.params=warningDescription
+comment3.target=void\ showWarning(java.lang.String)
+comment3.text=\n\ Displays\ a\ warning\ alert\ on\ the\ screen\ with\ a\ description\ of\ what\ caused\ the\ warning.\n\ @param\ warningDescription\ A\ description\ of\ what\ caused\ the\ warning.\n
+numComments=4

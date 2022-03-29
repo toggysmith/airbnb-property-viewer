@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=ContentContainerManager
+comment0.text=\n\ Responsible\ for\ controlling\ the\ content\ pane\ currently\ shown\ in\ the\ content\ pane\ container.\ Also\n\ provides\ a\ way\ to\ get\ a\ content\ pane's\ controller\ by\ specifying\ the\ controller's\ class.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=controllerClass
+comment1.target=Controller\ getController(java.lang.Class)
+comment1.text=\n\ Retrieve\ an\ instance\ of\ a\ controller\ from\ its\ class.\n\ @param\ controllerClass\ The\ class\ of\ the\ controller\ wanted.\n\ @return\ The\ controller\ of\ a\ specific\ class.\n
+comment2.params=contentContainer
+comment2.target=ContentContainerManager(javafx.scene.layout.Pane)
+comment2.text=\n\ Initialise\ the\ instance\ variables,\ load\ all\ the\ content\ panes,\n\ and\ set\ the\ first\ pane.\n
+comment3.params=
+comment3.target=javafx.scene.layout.Pane\ getPrevious()
+comment3.text=\n\ @return\ The\ previous\ pane.\n
+comment4.params=
+comment4.target=javafx.scene.layout.Pane\ getNext()
+comment4.text=\n\ @return\ The\ next\ pane.\n
+comment5.params=controller
+comment5.target=void\ addControllerToMap(Controller)
+comment5.text=\n\ Adds\ the\ given\ controller\ to\ the\ map.\n\ @param\ controller\ The\ controller\ to\ be\ added\ to\ the\ map.\n
+comment6.params=paths
+comment6.target=void\ loadContentPane(java.lang.String[])
+comment6.text=\n\ Takes\ a\ list\ of\ content\ panes\ and\ for\ each\ one\:\n\ ->\ Load\ the\ content\ pane\ using\ the\ path\ to\ its\ FXML\ file.\n\ ->\ Make\ the\ content\ pane's\ size\ always\ be\ the\ same\ size\ as\ the\ container\ it's\ in.\n\ ->\ Add\ the\ content\ pane\ to\ the\ circular\ list.\n\ ->\ Add\ the\ content\ pane's\ controller\ to\ the\ controller-class-to-controller\ map.\n\ @param\ paths\ A\ list\ of\ paths\ to\ each\ content\ pane's\ FXML\ file.\n\ @throws\ Exception\ Thrown\ if\ the\ FXML\ file\ cannot\ be\ loaded\ properly.\n
+numComments=7

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=AirbnbDataLoader
+comment0.text=\n\ Responsible\ for\ loading\ the\ Airbnb\ listings\ and\ storing\ a\ copy\ of\ them\ in\ main\ memory.\n\ \n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=
+comment1.target=java.util.List\ getListings()
+comment1.text=\n\ Retrieve\ Airbnb\ listings.\ If\ this\ method\ has\ already\ been\ called,\ the\ listings\ will\ have\ been\n\ saved\ and\ those\ will\ be\ returned.\ Otherwise,\ load\ them\ from\ memory.\n\ \n\ @return\ Airbnb\ listings.\n
+comment2.params=
+comment2.target=void\ load()
+comment2.text=\n\ Loads\ and\ saves\ Airbnb\ listings\ from\ a\ CSV\ file.\ Each\ row\ in\ the\ CSV\ file\ corresponds\ to\ a\ single\ listing.\n
+comment3.params=doubleString
+comment3.target=java.lang.Double\ convertDouble(java.lang.String)
+comment3.text=\n\ @param\ doubleString\ The\ string\ to\ be\ converted\ to\ Double\ type.\n\ @return\ The\ Double\ value\ of\ the\ string,\ or\ -1.0\ if\ the\ string\ is\ either\ empty\ or\ just\ whitespace.\n
+comment4.params=intString
+comment4.target=java.lang.Integer\ convertInt(java.lang.String)
+comment4.text=\n\ @param\ intString\ The\ string\ to\ be\ converted\ to\ Integer\ type.\n\ @return\ The\ Integer\ value\ of\ the\ string,\ or\ -1\ if\ the\ string\ is\ either\ empty\ or\ just\ whitespace.\n
+numComments=5

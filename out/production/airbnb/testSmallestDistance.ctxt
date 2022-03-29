@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=testSmallestDistance
+comment0.text=\n\ Write\ a\ description\ of\ class\ testSmallestDistance\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=testSmallestDistance()
+comment2.params=
+comment2.target=java.util.HashMap\ getClosestFive()
+comment3.params=distance\ place
+comment3.target=void\ addSmallest(int,\ java.lang.String)
+comment4.params=
+comment4.target=int\ getBiggest()
+comment5.params=
+comment5.target=boolean\ checkMapSize()
+numComments=6

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Position
+comment0.text=\n\ Responsible\ for\ holding\ the\ position\ of\ a\ listing.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=latitude\ longitude
+comment1.target=Position(double,\ double)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Position\n\ @param\ latitude\ The\ latitude.\n\ @param\ longitude\ The\ longitude.\n
+comment2.params=
+comment2.target=double\ getLatitude()
+comment2.text=\n\ @return\ The\ latitude.\n
+comment3.params=
+comment3.target=double\ getLongitude()
+comment3.text=\n\ @return\ The\ longitude.\n
+numComments=4

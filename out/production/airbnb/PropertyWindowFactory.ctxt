@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=PropertyWindowFactory
+comment0.text=\n\ PropertyWindowFactory\ controls\ the\ creation\ of\ property\ windows.\n\ Tts\ main\ responsibility\ is\ to\ ensure\ that\ only\ one\ property\ window\ exists\n\ for\ each\ property\ at\ any\ given\ time.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=
+comment1.target=PropertyWindowFactory()
+comment2.params=
+comment2.target=PropertyWindowFactory\ getPropertyWindowFactory()
+comment2.text=\n\ The\ method\ allows\ other\ classes\ to\ retrive\ the\ only\ object\ of\n\ PropertyWindowFactory\ and\ ensures\ that\ only\ one\ object\ of\ this\n\ class\ is\ ever\ created.\n\ @return\ The\ only\ object\ of\ PropertyWindowFactory.\n
+comment3.params=listingId
+comment3.target=PropertyWindow\ newPropertyWindow(java.lang.String)
+comment3.text=\n\ This\ method\ takes\ the\ listingId\ given,\ finds\ the\ listing\ with\ that\ id,\n\ and\ then\ attempts\ to\ create\ a\ property\ window\ for\ that\ listing.\n\ @param\ listingId\ The\ id\ for\ the\ property\ you\ want\ a\ window\ for.\n
+comment4.params=listing
+comment4.target=PropertyWindow\ newPropertyWindow(AirbnbListing)
+comment4.text=\n\ This\ method\ attempts\ to\ create\ a\ property\ window\ for\ the\ listing\ given.\n\ @param\ listing\ The\ listing\ for\ the\ property\ you\ want\ a\ window\ for.\n
+comment5.params=propertyWindow
+comment5.target=void\ propertyWindowClosed(PropertyWindow)
+comment5.text=\n\ This\ method\ removes\ a\ property\ window\ from\ the\ set\ of\ open\ windows.\n\ @param\ propertyWindow\ The\ property\ window\ closed.\n
+numComments=6

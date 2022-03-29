@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=MapController
+comment1.params=
+comment1.target=void\ initialize()
+comment2.params=
+comment2.target=void\ createMap()
+comment3.params=
+comment3.target=void\ updateMap()
+comment4.params=
+comment4.target=javafx.scene.layout.Pane\ getMapPane()
+numComments=5

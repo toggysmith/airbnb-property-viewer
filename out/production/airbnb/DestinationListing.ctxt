@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=DestinationListing
+comment0.text=\n\ Class\ to\ store\ all\ the\ famous\ destinations\n\n\ @author\ (Augusto\ Favero\ k21059800)\n\ @version\ (v1)\n
+comment1.params=destinationName\ address\ longitude\ latitude\ boroughName\ price
+comment1.target=DestinationListing(java.lang.String,\ java.lang.String,\ double,\ double,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getDestinationName()
+comment3.params=
+comment3.target=double\ getLongitude()
+comment4.params=
+comment4.target=double\ getLatitude()
+comment5.params=
+comment5.target=java.lang.String\ getAddress()
+comment6.params=
+comment6.target=java.lang.String\ getBorough()
+comment7.params=
+comment7.target=java.lang.String\ getPrice()
+numComments=8

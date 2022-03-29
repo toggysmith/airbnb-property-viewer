@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=PropertyDetailsStageFactory
+comment0.text=\n\ PropertyDetailsStageFactory\ controls\ the\ creation\ of\ property\ stages.\n\ Tts\ main\ responsibility\ is\ to\ ensure\ that\ only\ one\ property\ stage\ exists\n\ for\ each\ property\ at\ any\ given\ time.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=
+comment1.target=PropertyDetailsStageFactory()
+comment2.params=
+comment2.target=PropertyDetailsStageFactory\ getPropertyDetailsStageFactory()
+comment2.text=\n\ The\ method\ allows\ other\ classes\ to\ retrive\ the\ only\ object\ of\n\ PropertyDetailsStageFactory\ and\ ensures\ that\ only\ one\ object\ of\ this\n\ class\ is\ ever\ created.\n\ @return\ The\ only\ object\ of\ PropertyDetailsStageFactory.\n
+comment3.params=listingId
+comment3.target=PropertyDetailsStage\ newPropertyStage(java.lang.String)
+comment3.text=\n\ This\ method\ takes\ the\ listingId\ given,\ finds\ the\ listing\ with\ that\ id,\n\ and\ then\ attempts\ to\ create\ a\ property\ window\ for\ that\ listing.\n\ @param\ listingId\ The\ id\ for\ the\ property\ you\ want\ a\ stage\ for.\n
+comment4.params=listing
+comment4.target=PropertyDetailsStage\ newPropertyStage(AirbnbListing)
+comment4.text=\n\ This\ method\ attempts\ to\ create\ a\ property\ stage\ for\ the\ listing\ given.\n\ @param\ listing\ The\ listing\ for\ the\ property\ you\ want\ a\ window\ for.\n
+comment5.params=propertyStage
+comment5.target=void\ propertyStageClosed(PropertyDetailsStage)
+comment5.text=\n\ This\ method\ removes\ a\ property\ stage\ from\ the\ set\ of\ open\ windows.\n\ @param\ propertyStage\ The\ property\ stage\ closed.\n
+numComments=6

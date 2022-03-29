@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=DestinationLoader
+comment0.text=\n\ DestinationLoader\ loads\ the\ data\ from\ the\ two\ destination\ csv\ files,\ tourist\ attractions\ and\ pub\ destinations.\ A\ dynamic\ private\ method\ loadDestinations()\ loads\ the\ data\ from\ the\ passed\ csv\ file\ path,\ since\ the\ structure\ of\ both\n\ files\ is\ very\ similar\ the\ loading\ for\ both\ is\ done\ by\ the\ same\ method.\n\n@author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=fileName
+comment1.target=java.util.ArrayList\ loadDestinations(java.lang.String)
+comment1.text=\n\ loadDestinations\ laods\ and\ processes\ the\ relevant\ csv\ file\ whose\ path\ is\ passed\ to\ this\ method.\ Each\ row\ in\ the\ csv\ file\ represents\ a\ unique\ DestinationListing\ obejct\ and\ an\ ArrayList\ of\ these\ is\ returned\n\ @return\ ArrayList<DestinationListing>,\ an\ array\ list\ containing\ all\ the\ destiantions,\ for\ pubs\ there\ are\ 4098\ and\ for\ attractions\ 163\n
+comment2.params=
+comment2.target=java.util.List\ getPubs()
+comment2.text=\n\ These\ Pub\ listings\ should\ only\ be\ loaded\ once\ during\ the\ program's\ lifetime\ so\ this\ method\ will\ load\ them\ if\ and\n\ only\ if\ they\ haven't\ already\ been\ loaded\ and\ saved.\n\ @return\ The\ DestinationListing\ listings\ saved\ in\ main\ memory.\n
+comment3.params=
+comment3.target=java.util.List\ getTouristDestinations()
+comment3.text=\n\ These\ Attractions\ listings\ should\ only\ be\ loaded\ once\ during\ the\ program's\ lifetime\ so\ this\ method\ will\ load\ them\ if\ and\n\ only\ if\ they\ haven't\ already\ been\ loaded\ and\ saved.\n\ @return\ The\ DestinationListing\ listings\ saved\ in\ main\ memory.\n
+comment4.params=price
+comment4.target=java.lang.String\ processPoundSymbolConversion(java.lang.String)
+comment4.text=\n\ Special\ character\ conversion\ ,\ the\ pound\ symbol\ is\ not\ correctly\ recognised\ during\ data\ loading\ therefore\ this\ method\ re-structures\ the\ format\ of\ the\ passed\ string\ to\ the\ correct\ format\ as\ the\ one\ in\ the\ csv\ file\n\ @return\ String,\ re-formatted\ price\ string\n
+comment5.params=doubleString
+comment5.target=java.lang.Double\ convertDouble(java.lang.String)
+comment5.text=\n\ @param\ doubleString\ The\ string\ to\ be\ converted\ to\ Double\ type.\n\ @return\ The\ Double\ value\ of\ the\ string,\ or\ -1.0\ if\ the\ string\ is\ either\ empty\ or\ just\ whitespace.\n
+comment6.params=intString
+comment6.target=java.lang.Integer\ convertInt(java.lang.String)
+comment6.text=\n\ @param\ intString\ The\ string\ to\ be\ converted\ to\ Integer\ type.\n\ @return\ The\ Integer\ value\ of\ the\ string,\ or\ -1\ if\ the\ string\ is\ either\ empty\ or\ just\ whitespace.\n
+numComments=7

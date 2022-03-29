@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=BoroughButton
+comment0.text=\n\ \n\ \n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=borough\ boroughMap
+comment1.target=BoroughButton(Borough,\ javafx.scene.layout.AnchorPane)
+comment2.params=noOfPropertiesInBoroughWithMost
+comment2.target=void\ update(long)
+comment3.params=borough
+comment3.target=void\ createBoroughWindow(Borough)
+comment3.text=\n\ Trys\ to\ create\ a\ new\ borough\ window\ with\ the\ listings\ in\ the\ borough\ in\ the\ price\ range.\n
+comment4.params=boroughName\ ele
+comment4.target=void\ emptyBoroughWarningAlert(java.lang.String,\ EmptyListException)
+comment4.text=\n\ Creates\ a\ warning\ alert\ when\ a\ borough\ with\ no\ properties\ in\ the\ price\ range\ is\ clicked.\n
+numComments=5

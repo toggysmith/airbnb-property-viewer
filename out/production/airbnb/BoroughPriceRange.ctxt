@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=BoroughPriceRange
+comment0.text=\n\ Responsible\ for\ holding\ a\ selected\ borough\ and\ selected\ price\ range.\n\n\ @author\ Adam\ Murray\ (K21003575)\n\ @author\ Augusto\ Favero\ (K21059800)\n\ @author\ Mathew\ Tran\ (K21074020)\n\ @author\ Tony\ Smith\ (K21064940)\n\ @version\ 1.0.0\n
+comment1.params=borough\ priceRange
+comment1.target=BoroughPriceRange(Borough,\ PriceRange)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ BoroughPriceRange\n
+comment2.params=
+comment2.target=Borough\ getBorough()
+comment2.text=\n\ @return\ The\ borough.\n
+comment3.params=
+comment3.target=PriceRange\ getPriceRange()
+comment3.text=\n\ @return\ The\ priceRange.\n
+comment4.params=object
+comment4.target=boolean\ equals(java.lang.Object)
+comment4.text=\n\ This\ checks\ if\ the\ given\ object\ is\ equal\ to\ this\ object\n\ based\ upton\ whether\ they\ store\ the\ same\ borough\ and\n\ the\ same\ price\ Range.\n\ @param\ object\ The\ object\ to\ test\ if\ its\ equal.\n
+comment5.params=
+comment5.target=int\ hashCode()
+comment5.text=\n\ The\ hash\ code\ for\ this\ object\ based\ upon\ the\ borough\ \n\ and\ the\ price\ range.\n\ @return\ The\ hash\ code.\n
+numComments=6
