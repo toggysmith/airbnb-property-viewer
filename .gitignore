@@ -4,6 +4,7 @@
 # BlueJ
 *.ctxt
 *.bluej
+doc/
 
 # OS X
 .DS_STORE
