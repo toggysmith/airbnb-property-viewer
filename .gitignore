@@ -1,9 +1,5 @@
 # Java
 *.class
 
-# BlueJ
-*.ctxt
-package.bluej
-
 # OS X
 .DS_STORE
