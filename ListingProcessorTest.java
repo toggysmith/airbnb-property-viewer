@@ -3,8 +3,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.*;
 import org.junit.jupiter.api.Test;
+import org.junit.*;
+
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,18 +18,57 @@ import java.util.ArrayList;
 public class ListingProcessorTest
 {
     private static List<AirbnbListing> customListings;
-    
     /**
      * Default constructor for test class ListingProcessorTest
      */
     public ListingProcessorTest()
     {
+        customListings = createListings();
     }
     
-    @BeforeClass
-    public static void setUp()
+    /**
+     * Sets up the test fixture.
+     *
+     * Called before every test case method.
+     */
+    @BeforeEach
+    public void setUp()
     {
-        customListings = createListings();
+    }
+
+    /**
+     * Tears down the test fixture.
+     *
+     * Called after every test case method.
+     */
+    @AfterEach
+    public void tearDown()
+    {
+    }
+    
+    @Test
+    public void testGetBoroughs()
+    {
+        List<String> boroughs = ListingProcessor.getBoroughs(customListings);
+        
+        assertEquals(boroughs.get(0), "Lambeth");
+        assertEquals(boroughs.get(1),"Westminster");
+        assertEquals(boroughs.get(2),"Hammersmith and Fulham" );
+        assertEquals(boroughs.get(3),"Tower Hamlets");
+        assertEquals(boroughs.get(4),"Kingston upon Thames");
+        
+        
+        assertNotEquals(boroughs.get(3), "Bromley");
+        assertNotEquals(boroughs.get(4), "Yorkshire");
+    }
+    
+    private void validBorough(String boroughName) throws InvalidArgumentException
+    {
+        Borough[] validBoroughs = Borough.values();
+        
+        for(int i = 0; i <= validBoroughs.length - 1; i++){
+            
+        }
     }
     
     private static List<AirbnbListing> createListings()
