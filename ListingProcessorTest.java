@@ -87,4 +87,21 @@ public class ListingProcessorTest
         
         return customList;
     }
+    
+    @Test
+    public void testGetAveragePositionValidInput()
+    {
+        Position position1 = new Position(51.479794606, -0.16741294980000002);
+        Position position2 = ListingProcessor.getAveragePosition(customListings);
+        assertEquals(position1.getLatitude(), position2.getLatitude());
+        assertEquals(position1.getLongitude(), position2.getLongitude());
+    }
+    
+    @Test
+    public void testGetAveragePositionNullInput()
+    {
+        Position position1 = ListingProcessor.getAveragePosition(null);
+        assertNull(position1);
+    }
 }
+
