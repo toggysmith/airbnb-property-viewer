@@ -137,7 +137,9 @@ public class ListingProcessor
     }
     
     /**
-     * 
+     * This method returns a list of strings containing the names of the AirbnbListing listings that have the same borough name as the boroughName passed in the method. 
+     * @param (List<AirbnbListing> listings, list of properties
+     * @param boroughName, borough name on which the properties will be filtered on
      */
     public static List<String> getPropertiesNameInBorough(List<AirbnbListing> listings, String boroughName)
     {
@@ -302,7 +304,7 @@ public class ListingProcessor
     }
     
     /*
-     * method to check that the borough passed is valid in relation to the borough enum
+     * method to check that the borough passed is valid in relation to the Borough enumeration class
      */
     private static boolean validBorough(String boroughName)
     {

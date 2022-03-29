@@ -30,6 +30,7 @@ public class ListingProcessorTest
     {
         customListings = createListings();
         setUpNullLists();
+        setUpCustomisedListing();
     }
     
     /**
@@ -93,11 +94,17 @@ public class ListingProcessorTest
     @Test
     public void testGetPropertiesNameInBorough()
     {
-        List<String> propertyNames = ListingProcessor.getPropertiesNameInBorough(customListings, "Lambeth");
+        List<String> lambeth = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Lambeth");
+        assertEquals("Large room, sleeps 3, Brixton", lambeth.get(0));
         
-        assertEquals("Large room, sleeps 3, Brixton", propertyNames.get(0));
+        List<String> westminster = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Westminster");
+        assertEquals(3, westminster.size());
+        assertEquals("Double bed in Notting Hill", westminster.get(0));
+        assertEquals("Double beedroom in Southwark",westminster.get(1));
+        assertEquals("Spacious Room next to Richmond Par",westminster.get(2));
         
-        
+        List<String> milan = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Milan");
+        assertEquals(0,milan.size());
     }
     
     @Test
@@ -156,11 +163,19 @@ public class ListingProcessorTest
         
         AirbnbListing property1 = new AirbnbListing("14403483","Large room, sleeps 3, Brixton","88550548" ,"Allison", "Lambeth",51.47125306,-0.11250696,"Private room",37,2,28,"03/03/2017",4.12,1,254);
         AirbnbListing property2 = new AirbnbListing("9957622","Double bed in Notting Hill","51168635","Serge","Westminster",51.51782111,-0.192291889,"Private room",35,2,18, "30/12/2016",1.67,1,0);
-        AirbnbListing property3 = new AirbnbListing("7483279","Double beedroom in Southwark", "78372", "Adam", "Hammersmith and Fulham", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
+        AirbnbListing property3 = new AirbnbListing("7483279","Double beedroom in Southwark", "78372", "Adam", "Westminster", 51.46977981,-0.189799402,"Entire home/apt",195,1,0,"12/8/2015",1.00,1,0);
         AirbnbListing property4 = new AirbnbListing("7833588","Bright DOUBLE ROOM, central LONDON","34472628","Tommaso","Tower Hamlets",51.52066587,-0.056124665,"Private room",45,1,7,"07/12/2015",0.37,1,0);
-        AirbnbListing property5 = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Kingston upon Thames",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35);
+        AirbnbListing property5 = new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Westminster",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35);
         AirbnbListing invalidProperty = new AirbnbListing("447382","Spacious Room next to Richmond Par","47094767", "Marcus", "Milan",51.41944544,-0.286346933,"Private room",30,1,1,"09/10/2016",0.65,2,31);
-        AirbnbListing invalidProperty2 = new AirbnbListing("382400","Spacious Room next to Richmond Par","47094767", "Marcus", "Coppenhagen",51.41945318,-0.276345833,"Private room",30,1,1,"09/10/2017",0.90,2,35);
+        AirbnbListing invalidProperty2 = new AirbnbListing("382400","Spacious Room next to Richmond Par","47094767", "Marcus", "Milan",51.41945318,-0.276345833,"Private room",30,1,1,"09/10/2017",0.90,2,35);
+        
+        customisedListings.add(property1);
+        customisedListings.add(property2);
+        customisedListings.add(property3);
+        customisedListings.add(property4);
+        customisedListings.add(property5);
+        customisedListings.add(invalidProperty);
+        customisedListings.add(invalidProperty2);
     }
 }
 
