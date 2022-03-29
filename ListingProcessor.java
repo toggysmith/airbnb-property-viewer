@@ -156,6 +156,7 @@ public class ListingProcessor
      * This method returns a list of strings containing the names of the AirbnbListing listings that have the same borough name as the boroughName passed in the method. 
      * @param (List<AirbnbListing> listings, list of properties
      * @param boroughName, borough name on which the properties will be filtered on
+     * @return List<String>, all properties from the passed listings that have the same "boroughName" attribute
      */
     public static List<String> getPropertiesNameInBorough(List<AirbnbListing> listings, String boroughName)
     {
@@ -167,15 +168,30 @@ public class ListingProcessor
     }
     
     /**
-     * Augusto
+     * This method filters the destinations either pubs or attractions by the borough entered and the price entered, the borough must be a valid one (from enumerated Borough class) and the prices must be valid for either the 
+     * DestinationListing PUB (£,££,£££) or DestinationListing attraction(free,£2.50 - £5.00, £5.00 - £7.00 ,£7.00 - £9.00)
+     * 
+     * Providing an invalid price in method args will throw IllegalArgumentException
+     * 
+     * @param List<DestinationListing> destinations, list of destinations either pubs or attractions
+     * @param String borough, the name of the borough
+     * @param price, a valid price for either the pubs or attractions to filter on
+     * @return List<Destination>, list of destinations that satisfy the filtered requirements
      */
     public static List<DestinationListing> filterDestinations(List<DestinationListing> destinations, String borough, String price)
     {
+        //The list of destinations could either be a list of pubs or attractions thus the double check for prices
+        PubPrice pubPricings = new PubPrice();
+        AttractionPrice attractionPricings = new AttractionPrice();        
+        if(!pubPricings.checkPriceValid(price) && !attractionPricings.checkPriceValid(price)){
+            throw new IllegalArgumentException("Invalid Price Passed");
+        }else{
         return destinations.stream()
                            .filter(destination -> validBorough(borough) && borough != null && borough.equals(destination.getBorough()))
-                           .filter(destination -> price != null && price.equals(destination.getPrice()))
+                           .filter(destination -> (pubPricings.checkPriceValid(destination.getPrice()) || attractionPricings.checkPriceValid(destination.getPrice())))
+                           .filter(destination -> price.equals(destination.getPrice()))
                            .collect(Collectors.toList());
-        
+        }
     }
     
     /**

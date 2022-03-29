@@ -461,6 +461,7 @@ public class StatController extends Controller
             }
 
         }
+        
         private DestinationType getDesType()
         {
             return destinationType;

@@ -35,6 +35,7 @@ public class ListingProcessorTest
         customListings = createListings();
         setUpNullLists();
         setUpCustomisedListing();
+        setUpDestinations();
     }
 
     /**
@@ -452,7 +453,67 @@ public class ListingProcessorTest
         Position position1 = ListingProcessor.getAveragePosition(new ArrayList<AirbnbListing>());
         assertNull(position1);
     }
-
+    
+    /**
+     * Test that if an invalid price string is entered into the .filterDestinations method then and IllegalArgumentException is thrown
+     */
+    @Test
+    public void testFilterDestinationByWrongPricePassedAttraction()
+    {
+        DestinationListing invalidPriceDestination = new DestinationListing("Buckingham Palace", "London SW1A 1AA",  51.46977981,-0.189799402,"Tower Hamlet", "50");
+        
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                List<DestinationListing> invalidList = new ArrayList<>();
+                invalidList.add(invalidPriceDestination);
+                
+                ListingProcessor.filterDestinations(invalidList, "Tower Hamlet", "50");
+        });
+        assertEquals("Invalid Price Passed", exception.getMessage());
+    }
+    
+    /**
+     * Test that if an invalid price string is entered into the .filterDestinations method then and IllegalArgumentException is thrown
+     */
+    @Test
+    public void testFilterDestinationByWrongPricePassedPub()
+    {
+        DestinationListing invalidPriceDestination = new DestinationListing("Great Dover Pub", "London SW1A 1AA",  51.46977981,-0.189799402,"Tower Hamlet", "££££");
+        
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                List<DestinationListing> invalidList = new ArrayList<>();
+                invalidList.add(invalidPriceDestination);
+                
+                ListingProcessor.filterDestinations(invalidList, "Tower Hamlet", "££££");
+        });
+        assertEquals("Invalid Price Passed", exception.getMessage());
+    }
+    
+    @Test
+    public void testFilterDestinations()
+    {
+        List<DestinationListing> filteredDestinationsFree = ListingProcessor.filterDestinations(customDestinations, "Tower Hamlets", "free");
+        
+        assertEquals(2, filteredDestinationsFree.size());
+        
+        List<DestinationListing> filteredDestinationsWrongBorough = ListingProcessor.filterDestinations(customDestinations, "Lewisham",  "£2.50 - £5.00");
+        assertEquals(0,filteredDestinationsWrongBorough.size());
+        
+        
+        List<DestinationListing> filteredDestinationsNonExistingPrice = ListingProcessor.filterDestinations(customDestinations, "Westminster",  "£5.00 - £7.00");
+        assertEquals(0, filteredDestinationsNonExistingPrice.size());
+        
+        
+        DestinationListing destination1 = new DestinationListing("Pub1", "Pub1", 51.42236388,-0.299202059,"Tower Hamlets", "££");
+        DestinationListing destination2 = new DestinationListing("Pub2", "Pub2,", 51.38442425,-0.263391118,"Tower Hamlets", "££");
+        
+        List<DestinationListing> pubs = new ArrayList<>();
+        pubs.add(destination1);
+        pubs.add(destination2);
+        
+        List<DestinationListing> pubsTower = ListingProcessor.filterDestinations(pubs, "Tower Hamlets", "££");
+        assertEquals(2,pubsTower.size());
+    }
+    
     private static List<AirbnbListing> createListings()
     {
         List<AirbnbListing> customList = new ArrayList<>();
@@ -510,10 +571,17 @@ public class ListingProcessorTest
 
     private static void setUpDestinations()
     {
+        //below are the attraction type destinations
         customDestinations = new ArrayList<>();
-        DestinationListing destination1 = new DestinationListing("Tower of London", "Tower of London", 51.42236388,-0.299202059,"Tower Hamlet", "free");
-        DestinationListing destination2 = new DestinationListing("London Eye", "Riverside Building, County Hall,", 51.38442425,-0.263391118,"Westminster", "ï¿½2.50 - ï¿½5.00");
-        DestinationListing destination3 = new DestinationListing("Big Ben", "London SW1A 0AA",51.40190763,-0.278253045,"Kingston upon Thames", "free");
+        DestinationListing destination1 = new DestinationListing("Tower of London", "Tower of London", 51.42236388,-0.299202059,"Tower Hamlets", "free");
+        DestinationListing destination2 = new DestinationListing("London Eye", "Riverside Building, County Hall,", 51.38442425,-0.263391118,"Westminster", "£2.50 - £5.00");
+        DestinationListing destination3 = new DestinationListing("Big Ben", "London SW1A 0AA",51.40190763,-0.278253045,"Tower Hamlets", "free");
+        //invalid because of ending price range
+        
+        
+        customDestinations.add(destination1);
+        customDestinations.add(destination2);
+        customDestinations.add(destination3);
     }
 
     @Test
