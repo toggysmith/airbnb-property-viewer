@@ -1,21 +1,23 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.net.URL;
+
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
-import java.net.URL;
-import javafx.scene.layout.StackPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
-import java.util.List;
+import javafx.scene.layout.StackPane;
+
 import netscape.javascript.JSObject;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import javafx.application.Platform;
 
 /**
- * Responsible for the creation of a WebView containing an OpenLayersMap. Also acts as a bridge between the
- * Java and HTML/CSS/JavaScript side of the project.
- * 
+ * Responsible for the creation of a WebView containing a local website which itself contains an interactive
+ * geographical map based which uses the OpenLayers 3 library.
+ *
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
@@ -26,14 +28,22 @@ public class OpenLayersMap extends StackPane
     private WebView webView;
     private WebEngine webEngine;
     private JsToJavaBridge jsToJavaBridge;
-
-    public OpenLayersMap(String address, int zoom, double longitude, double latitude)
+    
+    /**
+     * 
+     * 
+     * @param pathToHtmlFile The path to the HTML file containing the local website.
+     * @param initialZoom The zoom level the map should start with.
+     * @param longitude 
+     * @param latitude 
+     */
+    public OpenLayersMap(String pathToHtmlFile, int initialZoom, double longitude, double latitude)
     {
         webView = new WebView();
         webEngine = webView.getEngine();
         webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 Chrome/44.0.2403.155 Safari/537.36");
 
-        URL url = getClass().getClassLoader().getResource(address);
+        URL url = getClass().getClassLoader().getResource(pathToHtmlFile);
         
         webEngine.load(url.toExternalForm());
         
@@ -43,15 +53,8 @@ public class OpenLayersMap extends StackPane
         webView.prefHeightProperty().bind(this.heightProperty());
 
         this.getChildren().add(webView);
-        executeScript(String.format("setZoom(%d)", zoom), true);
+        executeScript(String.format("setZoom(%d)", initialZoom), true);
         executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
-    }
-    
-    private void addScript(String name) {
-        try {
-            String content = new String(Files.readAllBytes(Paths.get("resources/open-layers-map/" + name)));
-            executeScript(content, true);
-        } catch (Exception e) { }
     }
     
     public void executeScript(String script, boolean executedBeforeLoad)
@@ -85,7 +88,7 @@ public class OpenLayersMap extends StackPane
                     break;
                 case MARKER:
                     addScript("marker-behaviour.js");
-                    setupCallFromJavaScript();
+                    linkJsToJavaBridge();
                     break;
                 case BOUNDARIES:            
                     addScript("boundaries-behaviour.js");
@@ -101,7 +104,7 @@ public class OpenLayersMap extends StackPane
      * Sets up an object and gives it to javascript so 
      * javascript can call java methods in that object.
      */
-    public void setupCallFromJavaScript()
+    public void linkJsToJavaBridge()
     {
         webEngine.getLoadWorker().stateProperty().addListener(
         new ChangeListener() {
@@ -114,5 +117,12 @@ public class OpenLayersMap extends StackPane
         }
     }
     );
+    }
+    
+    private void addScript(String name) {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get("resources/open-layers-map/" + name)));
+            executeScript(content, true);
+        } catch (Exception e) { }
     }
 }
