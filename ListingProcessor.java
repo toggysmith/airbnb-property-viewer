@@ -254,4 +254,46 @@ public class ListingProcessor
             return null;
         }
     }
+    
+    
+    /**
+     * Get the total number of reviews for all properties within the price range
+     */
+    public static int getNumberOfReviews(List<AirbnbListing> listings, int fromPrice, int toPrice) {
+        listings = filterByPriceRange(listings,fromPrice,toPrice);
+        return listings.stream()
+            .mapToInt(listing -> listing.getNumberOfReviews())
+            .sum();
+    }
+    
+    /**
+     * Get the total number of listings for all properties within the price range
+     */
+    public static long getNumberofListings(List<AirbnbListing> listings, int fromPrice, int toPrice) {
+        listings = filterByPriceRange(listings, fromPrice, toPrice);
+        return listings.stream()
+            .count();
+    }
+    
+    
+    /**
+     * Get the total number of availability for all properties within the price range
+     */
+    public static long getTotalAvailability(List<AirbnbListing> listings, int fromPrice, int toPrice) {
+        listings = filterByPriceRange(listings, fromPrice, toPrice);
+        return listings.stream()
+            .filter(listing -> listing.getAvailability365() > 0) 
+            .count();
+    }    
+    
+    /**
+     *  Get the total number of non private rooms for all properties within the price range
+     */
+    public static long getNonPrivate(List<AirbnbListing> listings, String roomNeeded, int fromPrice, int toPrice) {
+        listings = filterByPriceRange(listings, fromPrice, toPrice);
+        return listings.stream()
+            .filter(listing -> listing.getRoom_type().equals(roomNeeded)) 
+            .count();
+    }
+    
 }

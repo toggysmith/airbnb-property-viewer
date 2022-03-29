@@ -50,11 +50,9 @@ public class StatController extends Controller
     //Strings that contain the actual statistic to be shown
     String value1, value2, value3, value4, value5, value6, value7, value8;
 
-    
     //Declaring the double sided queue
     public static Deque<stat> dq;
 
-    
     private static List<AirbnbListing> airbnbListings;
     private static final String roomNeeded = "Entire home/apt";
     private static List<StatisticsListing> statListings;
@@ -77,6 +75,7 @@ public class StatController extends Controller
     private interactiveStat pubs;
     private interactiveStat attractions;
 
+    private ListingProcessor sortList;
     /**
      * Initializing the view of the pane  when you first click  onto it
      */
@@ -121,7 +120,7 @@ public class StatController extends Controller
         value3 = String.valueOf(nonPrivateRoom());
         value4 = expensiveNeighbourhood();
         value5 = socialScore();
-        value6 = highestCrime();
+        value6 = lowestCrime();
 
         avgProperties.updateValue(value1);
         totalProperties.updateValue(value2);
@@ -199,13 +198,10 @@ public class StatController extends Controller
      */
     public String averagePropertyView() {
 
-        List<AirbnbListing> filtered = filterPrice(airbnbListings);
-
-        int average = filtered.stream()
-            .mapToInt(listing -> listing.getNumberOfReviews())
-            .sum();
-        long count = filtered.stream()
-            .count();
+        
+        
+        int average = sortList.getNumberOfReviews(airbnbListings,fromValue, toValue);
+        long count = sortList.getNumberofListings(airbnbListings,fromValue, toValue);
         double l = (double)count;
         //Need a try-catch as initially the program will try to divide zero by zero
         try {
@@ -217,33 +213,27 @@ public class StatController extends Controller
     }
 
     /**
-     * returns the total available properties within the price range
+     * returns the number of non-private rooms  within the price range
      * (statistic 2)
      */
-    public int totalAvailableProperties() { 
-        List<AirbnbListing> filtered = filterPrice(airbnbListings);
-
-        long available = filtered.stream()
-            .filter(listing -> listing.getAvailability365() > 0) 
-            .count();
-        int total = (int)available;
-        return total;
-    }
-
-    /**
-     * returns the number of non-private rooms  within the price range
-     * (statistic 3)
-     */
     public int nonPrivateRoom() {
-        List<AirbnbListing> filtered = filterPrice(airbnbListings);
-
-        long nonPrivate = filtered.stream()
-            .filter(listing -> listing.getRoom_type().equals(roomNeeded)) 
-            .count();
+        long nonPrivate = sortList.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
 
         int privateCount = (int)nonPrivate;
         return privateCount;
     }
+    
+    /**
+     * returns the total available properties within the price range
+     * (statistic 3)
+     */
+    public int totalAvailableProperties() { 
+        long available = sortList.getTotalAvailability(airbnbListings,fromValue, toValue);
+        int total = (int)available;
+        return total;
+    }
+
+    
 
     /**
      * returns the most expensive neighbourhood within that price range
@@ -254,7 +244,7 @@ public class StatController extends Controller
         int max = 0;
 
         String correctNeighbourhood = "";
-        List<AirbnbListing> filtered = filterPrice(airbnbListings);
+        List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
         for(int i = 0; i < filtered.size(); i++) {
 
             int calcPrice = filtered.get(i).getPrice() * filtered.get(i).getMinimumNights();
@@ -276,17 +266,11 @@ public class StatController extends Controller
     public String socialScore() {
         double highestSocial = 0;
         String boroughSocial = "";
-        List<AirbnbListing> filtered = filterPrice(airbnbListings);
-        ArrayList<String> boroughListing = new ArrayList<>();
-        ArrayList<StatisticsListing> top3Scores = new ArrayList<>();
-        double first;
-        double second;
-        double third;
-        HashMap<String, Integer> top3Borough = new HashMap<>();
-        for(int i = 0; i< filtered.size(); i++) {
-            boroughListing.add(filtered.get(i).getNeighbourhood());
-        }
-
+        List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+        
+        List<String> boroughListing = new ArrayList<>();
+        
+        boroughListing = sortList.getBoroughs(filtered);
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
                 if(boroughListing.get(x).equals(sScore.getBoroughName())) {
@@ -311,15 +295,14 @@ public class StatController extends Controller
      * the price range
      * (statistic 7)
      */
-    public String highestCrime() {
+    public String lowestCrime() {
         double lowCrime = 1000;
         String boroughCrime = "";
-        List<AirbnbListing> filtered = filterPrice(airbnbListings);
-        ArrayList<String> boroughListing = new ArrayList<>();
+        List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+        
+        List<String> boroughListing = new ArrayList<>();
 
-        for(int i = 0; i< filtered.size(); i++) {
-            boroughListing.add(filtered.get(i).getNeighbourhood());
-        }
+        boroughListing = sortList.getBoroughs(filtered);
 
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
