@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=PieChartView
-comment1.params=
-comment1.target=javafx.scene.layout.AnchorPane\ setUpPieChart()
-comment2.params=values\ symbol
-comment2.target=void\ populatePieChart(int[],\ java.lang.String)
-numComments=3
