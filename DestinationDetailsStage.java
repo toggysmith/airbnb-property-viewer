@@ -34,7 +34,6 @@ public class DestinationDetailsStage extends Stage
         setScene(scene);
         setTitle(listing.getDestinationName());
         show();
-        getScene();
     }
     
     /**
