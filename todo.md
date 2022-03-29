@@ -21,7 +21,7 @@
 - [x] ComboBoxOrderEnum
 - [x] ContentContainerManager
 - [x] Controller
-- [ ] DestinationDistances
+- [x] DestinationDistances
 - [ ] DestinationListing
 - [ ] DestinationLoader
 - [ ] DestinationType
