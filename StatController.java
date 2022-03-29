@@ -185,16 +185,7 @@ public class StatController extends Controller
         attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, DestinationType.ATTRACTION);
     }
 
-    /**
-     * Filters the list to only include properties from that price range
-     */
-    private List<AirbnbListing> filterPrice(List<AirbnbListing> unfilteredList)
-    {
-        return unfilteredList.stream()
-        .filter(listing -> listing.getPrice() >= fromValue && listing.getPrice() <= toValue)
-        .collect(Collectors.toList());                            
-
-    }
+    
 
     /**
      * Returns the average number of reviews per property within the price range
@@ -482,7 +473,7 @@ public class StatController extends Controller
 
         public void updateComboValues()
         {
-            List<AirbnbListing> filteredListings = filterPrice(airbnbListings);
+            List<AirbnbListing> filteredListings = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
             List<DestinationListing> destinations = DestinationType.getDestinations(this.getDesType());
 
             this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
