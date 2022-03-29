@@ -94,11 +94,18 @@ public class ListingProcessor
     
     /**
      * This finds the AirbnbListing with the id given.
-     * @param id The id for the listing you you want to find.
-     * @return The AirbnbListing with the id given, null if non are found.
+     * @param id The id for the listing you you want to find. Cannot be null.
+     * @return The AirbnbListing with the id given, null if none are found.
      */
-    public static AirbnbListing getListingWithId(String id)
+    public static AirbnbListing getListingWithId(List<AirbnbListing> listings, String id)
     {
+        checkValidAirbnbListings(listings);
+        
+        if (id == null)
+        {
+            throw new IllegalArgumentException("The id argument cannot be null.");
+        }
+        
         try
         {
             return listings.stream()

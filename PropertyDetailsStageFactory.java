@@ -48,7 +48,7 @@ public class PropertyDetailsStageFactory
      */
     public PropertyDetailsStage newPropertyStage(String listingId)
     {
-        AirbnbListing listing = ListingProcessor.getListingWithId(listingId);
+        AirbnbListing listing = ListingProcessor.getListingWithId(AirbnbDataLoader.getListings(), listingId);
         return newPropertyStage(listing);
     }
     
