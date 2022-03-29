@@ -25,4 +25,6 @@ public class PubPrice extends PriceType
     {
         return super.checkPriceValid(priceString);
     }
+    
+    
 }

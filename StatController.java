@@ -79,7 +79,7 @@ public class StatController extends Controller
     private interactiveStat attractions;
 
     //The class houses methods that stream the data in the csv file to be used in the statistics
-    private ListingProcessor sortList;
+    //private ListingProcessor sortList;
     /**
      * Initializing the view of the pane when it is called
      */
@@ -195,8 +195,8 @@ public class StatController extends Controller
 
         
         
-        int average = sortList.getNumberOfReviews(airbnbListings,fromValue, toValue);
-        long count = sortList.getNumberofListings(airbnbListings,fromValue, toValue);
+        int average = ListingProcessor.getNumberOfReviews(airbnbListings,fromValue, toValue);
+        long count = ListingProcessor.getNumberofListings(airbnbListings,fromValue, toValue);
         double l = (double)count;
         //Need a try-catch as initially the program will try to divide zero by zero
         try {
@@ -213,7 +213,7 @@ public class StatController extends Controller
      */
     public int nonPrivateRoom() {
         //Method returns a value which  is then casted
-        long nonPrivate = sortList.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
+        long nonPrivate = ListingProcessor.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
 
         int privateCount = (int)nonPrivate;
         return privateCount;
@@ -225,7 +225,7 @@ public class StatController extends Controller
      */
     public int totalAvailableProperties() { 
         //Returns a number  that is then casted to an integer
-        long available = sortList.getTotalAvailability(airbnbListings,fromValue, toValue);
+        long available = ListingProcessor.getTotalAvailability(airbnbListings,fromValue, toValue);
         int total = (int)available;
         return total;
     }
@@ -242,7 +242,7 @@ public class StatController extends Controller
 
         String correctNeighbourhood = "";
         //Getting all the properties within the price range
-        List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
         //Calculating the total price for each property within the price range. If it is higher than the current highest price, then that becomes the new max
         for(int i = 0; i < filtered.size(); i++) {
 
@@ -265,11 +265,11 @@ public class StatController extends Controller
     public String socialScore() {
         double highestSocial = 0;
         String boroughSocial = "";
-        List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
         
         List<String> boroughListing = new ArrayList<>();
         //Getting all boroughs within the price range
-        boroughListing = sortList.getBoroughs(filtered);
+        boroughListing = ListingProcessor.getBoroughs(filtered);
         //This nested for loop goes through each borough within the price range, calculating the social score for each and then the borough with the highest social score is returned
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
@@ -299,12 +299,12 @@ public class StatController extends Controller
         //Looking for the borough with the lowest crime so starting with a high number
         double lowCrime = 1000;
         String boroughCrime = "";
-        List<AirbnbListing> filtered = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
         
         List<String> boroughListing = new ArrayList<>();
 
         //Getting all boroughs within the price range
-        boroughListing = sortList.getBoroughs(filtered);
+        boroughListing = ListingProcessor.getBoroughs(filtered);
 
         //This nested for loop goes through each borough within the price range, checking if the crime rate is lower than the current lowest, and returning the borough with the lowest crime
         for(int x = 0; x < boroughListing.size(); x++ ) {
@@ -473,7 +473,7 @@ public class StatController extends Controller
 
         public void updateComboValues()
         {
-            List<AirbnbListing> filteredListings = sortList.filterByPriceRange(airbnbListings, fromValue, toValue);
+            List<AirbnbListing> filteredListings = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
             List<DestinationListing> destinations = DestinationType.getDestinations(this.getDesType());
 
             this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
