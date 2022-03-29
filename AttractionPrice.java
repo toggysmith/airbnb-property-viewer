@@ -1,19 +1,31 @@
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Enumeration class AttractionPriceEnum - write a description of the enum class here
+
+
+ /**
+ * Concrete implemenation of the PriceType used for representing the prices that can be given to the DestinationListing tourist attractions
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
+
  */
 public class AttractionPrice extends PriceType
 {
+    /**
+     * Constructor to set up valid attraction destinations prices strings
+     */
     public AttractionPrice()
     {
         super();
         setUpAttractionsPrices();
     }
     
+    /*
+     * Sets up the tourist attraction prices list of strings with the valid values
+     */
     private void setUpAttractionsPrices()
     {
         destinationPrices.add("free");
@@ -22,6 +34,11 @@ public class AttractionPrice extends PriceType
         destinationPrices.add("£7.00 - £9.00");
     }
     
+    /**
+     * checks whether the entered string is of valid price type, specifically for the tourist attractions
+     * @param String priceString, a string whose validity in relation to the concrete price type needs to be checked
+     * @return boolean, whether the entered string is of valid price type
+     */
     protected boolean checkPriceValid(String priceString)
     {
         return super.checkPriceValid(priceString);

@@ -430,7 +430,8 @@ public class StatController extends Controller
     }
 
     /**
-     * 
+     * The interactiveStat represents an interactive statistic to show the five closest Destinations (PUBs or Tourist ATTRACTIONS) relative to the data selected from the combo boxes which is provided depending on the price range
+     * selected in the main pane
      *
      * @author Adam Murray (K21003575)
      * @author Augusto Favero (K21059800)
@@ -440,8 +441,15 @@ public class StatController extends Controller
      */
     public  class interactiveStat extends stat 
     {
+        //interactive stat controller which handles all the interactive stat main functionality
         private InteractiveStatController interactiveStatController = new InteractiveStatController();
+        //what type of destination this interactive stat shows, either PUBs or Tourist ATTRACTIONs
         private DestinationType destinationType;
+        
+        /**
+         * Method to construct the interactive stat which is a set of labels and buttons wrapped into a border pane, extending the same structure from the stat object. A DestinationType is also passed to differentiate
+         * what kind of DestinationListings this stat will show (PUB or ATTRACTION)
+         */
         public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText,DestinationType destinationType)
         {
             super(wrapPane,title,value,titleText);
@@ -462,6 +470,9 @@ public class StatController extends Controller
 
         }
         
+        /*
+         * returns the DestinationType for this stat
+         */
         private DestinationType getDesType()
         {
             return destinationType;

@@ -8,11 +8,11 @@ import java.net.URI;
 import java.io.File;
 import java.net.URL;
 
-import java.io.IOException;
-
 /**
  * DestinationLoader loads the data from the two destination csv files, tourist attractions and pub destinations. A dynamic private method loadDestinations() loads the data from the passed csv file path, since the structure of both
  * files is very similar the loading for both is done by the same method.
+ * 
+ * This loader is used to load the csv files only once
  *
  *@author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -26,7 +26,7 @@ public class DestinationLoader
     public static ArrayList<DestinationListing> touristDestinations;
     
     /**
-     * loadDestinations laods and processes the relevant csv file whose path is passed to this method. Each row in the csv file represents a unique DestinationListing obejct and an ArrayList of these is returned
+     * loadDestinations loads and processes the relevant csv file whose path is passed to this method. Each row in the csv file represents a unique DestinationListing obejct and an ArrayList of these is returned
      * @return ArrayList<DestinationListing>, an array list containing all the destiantions, for pubs there are 4098 and for attractions 163
      */
     private static ArrayList<DestinationListing> loadDestinations(String fileName, PriceType priceType)
@@ -72,7 +72,7 @@ public class DestinationLoader
         }
         catch (Exception e)
         {
-            AlertManager.showTerminatingError("Unable to open Pubs CSV file.");
+            AlertManager.showTerminatingError("Unable to open " +  fileName + " CSV file correctly.");
         }
         return destinationLists;
     }
