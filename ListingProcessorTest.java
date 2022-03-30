@@ -841,7 +841,7 @@ public class ListingProcessorTest
     }
     
     /**
-     * Test 'getOtherListingsWithHostId()' returns an empty list.
+     * Test 'getOtherListingsWithHostId()' returns an empty list when a valid input is given that expects an empty return.
      */
     @Test
     public void testGetOtherListingsWithHostIdValidInputButNoReturn()
@@ -857,7 +857,7 @@ public class ListingProcessorTest
     }
     
     /**
-     * Test 'getOtherListingsWithHostId()' returns an empty list.
+     * Test 'getOtherListingsWithHostId()' returns a non empty list when a valid input is given that expects a list with a value in it.
      */
     @Test
     public void testGetOtherListingsWithHostIdValidInputWithReturn()
@@ -881,6 +881,19 @@ public class ListingProcessorTest
     {   
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
                     ListingProcessor.getOtherListingsWithHostId(null);
+        });
+
+        assertEquals("The provided listing argument is invalid.", exception.getMessage());
+    }
+    
+    /**
+     * Test 'getOtherListingsWithHostId()' throws an illegal argument exception when the listing id is null.
+     */
+    @Test
+    public void testGetOtherListingsWithListingIdNullInput()
+    {   
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getOtherListingsWithHostId(new AirbnbListing(null,"Spacious Room next to Richmond Par","47094767", "Marcus", "Kingston upon Thames",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35));
         });
 
         assertEquals("The provided listing argument is invalid.", exception.getMessage());
