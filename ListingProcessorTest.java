@@ -841,6 +841,68 @@ public class ListingProcessorTest
     }
     
     /**
+     * Test 'getOtherListingsWithHostId()' returns an empty list.
+     */
+    @Test
+    public void testGetOtherListingsWithHostIdValidInputButNoReturn()
+    {
+        List<AirbnbListing> list1 = new ArrayList<>();
+        List<AirbnbListing> list2;
+        list2 = ListingProcessor.getOtherListingsWithHostId(new AirbnbListing("9020269","Spacious Room next to Richmond Par","47094767", "Marcus", "Kingston upon Thames",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35));
+        assertEquals(list1.size(), list2.size());
+        for (int i = 0; i < list1.size() && i < list2.size(); i++)
+        {
+            assertEquals(list1.get(i), list2.get(i));
+        }
+    }
+    
+    /**
+     * Test 'getOtherListingsWithHostId()' returns an empty list.
+     */
+    @Test
+    public void testGetOtherListingsWithHostIdValidInputWithReturn()
+    {
+        List<AirbnbListing> list1 = new ArrayList<>();
+        list1.add(new AirbnbListing("8922017","Nice square single room and bed","17249646", "Sangho", "Kingston upon Thames",51.40603368,-0.269593138,"Private room",19,1,2,"25/09/2016",0.18,2,364));
+        List<AirbnbListing> list2;
+        list2 = ListingProcessor.getOtherListingsWithHostId(new AirbnbListing("4502201","Nice square single room and bed","17249646", "Sangho", "Kingston upon Thames",51.40610255,-0.271178919,"Private room",19,1,42,"24/01/2017",1.69,2,364));
+        assertEquals(list1.size(), list2.size());
+        for (int i = 0; i < list1.size() && i < list2.size(); i++)
+        {
+            assertEquals(list1.get(i), list2.get(i));
+        }
+    }
+    
+    /**
+     * Test 'getOtherListingsWithHostId()' throws an illegal argument exception when the input is null.
+     */
+    @Test
+    public void testGetOtherListingsWithHostIdNullInput()
+    {   
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getOtherListingsWithHostId(null);
+        });
+
+        assertEquals("The provided listing argument is invalid.", exception.getMessage());
+    }
+    
+    /**
+     * Test 'getOtherListingsWithHostId()' returns an empty list when the host id is null.
+     */
+    @Test
+    public void testGetOtherListingsWithHostIdNullHostIdInput()
+    {   
+        List<AirbnbListing> list1 = new ArrayList<>();
+        List<AirbnbListing> list2;
+        list2 = ListingProcessor.getOtherListingsWithHostId(new AirbnbListing("9020269","Spacious Room next to Richmond Par",null, "Marcus", "Kingston upon Thames",51.41945318,-0.286341833,"Private room",30,1,1,"09/10/2016",0.65,2,35));
+        assertEquals(list1.size(), list2.size());
+        for (int i = 0; i < list1.size() && i < list2.size(); i++)
+        {
+            assertEquals(list1.get(i), list2.get(i));
+        }
+    }
+    
+    /**
      * Test that `getNumberOfReviews()` returns the correct value when given valid arguments.
      */
     @Test

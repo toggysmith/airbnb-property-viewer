@@ -1,5 +1,6 @@
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.Arrays;
@@ -126,16 +127,17 @@ public class ListingProcessor
      */
     public static List<AirbnbListing> getOtherListingsWithHostId(AirbnbListing hostListing)
     {
-        try
+        if (hostListing == null || hostListing.getId() == null)
         {
-            return listings.stream()
-                .filter(listing -> (listing.getHost_id().equals(hostListing.getHost_id())) && !(listing.getId().equals(hostListing.getId())))
-                .collect(Collectors.toList());
+            throw new IllegalArgumentException("The provided listing argument is invalid.");
         }
-        catch (Exception e)
+        if (hostListing.getHost_id() == null)
         {
-            return null;
+            return new ArrayList<AirbnbListing>();
         }
+        return listings.stream()
+            .filter(listing -> (listing != null) && (hostListing.getHost_id().equals(listing.getHost_id())) && !(hostListing.getId().equals(listing.getId())))
+            .collect(Collectors.toList());
     }
     
     /**
