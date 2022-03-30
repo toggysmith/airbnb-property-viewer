@@ -32,7 +32,7 @@
 - [ ] DrawableSearchAreaMapController
 - [x] EmptyListException
 - [ ] Hexagon
-- [ ] InteractiveStatController
+- [x] InteractiveStatController
 - [x] InteractiveStatsTableValues
 - [x] JsToJavaBridge
 - [ ] ListingProcessor
@@ -42,8 +42,8 @@
 - [ ] MainWindow
 - [ ] MapController
 - [x] OpenLayersMap
-- [ ] PieChartController
-- [ ] PieChartView
+- [x] PieChartController
+- [x] PieChartView
 - [x] Position
 - [x] PriceRange
 - [x] PropertyDetailsController
@@ -53,6 +53,6 @@
 - [x] RangeBoxEnum
 - [x] RangeValues
 - [x] StatController
-- [ ] StatisticsListing
+- [x] StatisticsListing
 - [x] StatisticsLoader
 - [ ] WelcomeController
