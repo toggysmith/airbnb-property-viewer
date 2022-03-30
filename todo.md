@@ -40,7 +40,7 @@
 - [x] ListNode
 - [ ] MainController
 - [x] MainView
-- [ ] MainWindow
+- [x] MainWindow
 - [x] MapController
 - [x] OpenLayersMap
 - [x] PieChartController
