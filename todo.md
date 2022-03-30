@@ -29,17 +29,18 @@
 - [x] DestinationDetailsFactory
 - [x] DestinationDetailsStage
 - [x] DistanceDestinationPair
-- [ ] DrawableSearchAreaMapController
+- [x] DrawableSearchAreaMapController
 - [x] EmptyListException
-- [ ] Hexagon
+- [x] Hexagon
 - [x] InteractiveStatController
 - [x] InteractiveStatsTableValues
 - [x] JsToJavaBridge
-- [x] ListingProcessor
+- [ ] ListingProcessor
+- [ ] ListingProcessorTest
 - [x] ListNode
 - [ ] MainController
-- [ ] MainView
-- [ ] MainWindow
+- [x] MainView
+- [x] MainWindow
 - [x] MapController
 - [x] OpenLayersMap
 - [x] PieChartController
@@ -49,10 +50,10 @@
 - [x] PropertyDetailsController
 - [x] PropertyDetailsStageFactory
 - [x] PropertyDetailsStage
-- [ ] QuantityVisualiser
+- [x] QuantityVisualiser
 - [x] RangeBoxEnum
 - [x] RangeValues
 - [x] StatController
 - [x] StatisticsListing
 - [x] StatisticsLoader
-- [ ] WelcomeController
+- [x] WelcomeController

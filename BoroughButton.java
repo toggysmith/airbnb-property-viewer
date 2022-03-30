@@ -17,12 +17,13 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class BoroughButton
 {
-    private final static double r = 60.0;
-    private final static double n = Math.sqrt(r * r * 0.75);
-    private final static double TILE_WIDTH = 2 * n;
-    private final static double TILE_HEIGHT = 2 * r;
+    private final static double RADIUS = 60.0;
+    private final static double N = Math.sqrt(RADIUS * RADIUS * 0.75);
+    private final static double TILE_WIDTH = 2 * N;
+    private final static double TILE_HEIGHT = 2 * RADIUS;
     private final static double SEPARATION = 7.5;
     private final static double STARTING_OFFSET = 15;
+    private final static int STROKE_WIDTH = 2;
     
     private final QuantityVisualiser quantityVisualiser;
     private final List<AirbnbListing> boroughListings;
@@ -33,7 +34,7 @@ public class BoroughButton
     {
         boroughListings = ListingProcessor.filterByBorough(AirbnbDataLoader.getListings(), borough.getName());
         
-        double xCoord = borough.getX() * (TILE_WIDTH + SEPARATION) + ((borough.getY() + 1) % 2) * n;
+        double xCoord = borough.getX() * (TILE_WIDTH + SEPARATION) + ((borough.getY() + 1) % 2) * N;
         double yCoord = borough.getY() * (TILE_HEIGHT * 0.75 + SEPARATION) + TILE_HEIGHT * 0.25;
         
         xCoord += STARTING_OFFSET;
@@ -49,7 +50,7 @@ public class BoroughButton
         vbox.getChildren().addAll(label, quantityVisualiser);
         vbox.setSpacing(12);
         
-        Hexagon hexagon = new Hexagon(xCoord, yCoord);
+        Hexagon hexagon = new Hexagon(xCoord, yCoord, STROKE_WIDTH, RADIUS);
         boroughMap.getChildren().add(hexagon);
         
         boroughMap.setLeftAnchor(vbox, xCoord);
