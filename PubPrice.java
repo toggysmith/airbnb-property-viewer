@@ -17,7 +17,6 @@ public class PubPrice extends PriceType
      */
     public PubPrice()
     {
-        super();
         setUpPubPrices();
     }
     
