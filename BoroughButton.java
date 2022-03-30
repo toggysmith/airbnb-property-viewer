@@ -1,14 +1,12 @@
 import java.util.List;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 
 /**
- * Responsible for creating the borough button by creating its component elements (the hexagon, the label and the
+ * Responsible for creating the borough button by creating its component elements (the hexagon, the borough label and the
  * quantity visualiser) and placing them onto the borough map.
  * 
  * @author Adam Murray (K21003575)
@@ -37,6 +35,8 @@ public class BoroughButton
     
     /**
      * Create the hexagon, label and quantity visualiser that make up the button and place them onto the borough map.
+     * @param borough The borough.
+     * @param boroughMap The AnchorPane that represents the borough map.
      */
     public BoroughButton(Borough borough, AnchorPane boroughMap)
     {
@@ -59,6 +59,7 @@ public class BoroughButton
     
     /**
      * Update the value in the quantity visualiser.
+     * @param noOfPropertiesInBoroughWithMost The number of properties in the borough with the most properties.
      */
     public void update(long noOfPropertiesInBoroughWithMost)
     {

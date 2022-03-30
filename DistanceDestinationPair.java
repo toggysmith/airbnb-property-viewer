@@ -9,34 +9,34 @@
  */ 
 public class DistanceDestinationPair
 {
-      private DestinationListing destination;
-      private int distance;
-      
-      /**
-       * Constructor for DistanceDestinationPair.
-       * @param destination The destination listing that is being measured.
-       * @param distance The distance that the destination is from a property.
-       */
-      public DistanceDestinationPair(DestinationListing destination, int distance)
-      {
-          this.destination = destination;
-          this.distance = distance;
-      }
-      
-      /**
-       * @return The destination.
-       */
-      public DestinationListing getDestination()
-      {
-          return destination;
-      }
-      
-      /**
-       * @return The distance that the destination is from a property.
-       */
-      public int getDistance()
-      {
-          return distance;
-      }
-}
+    private DestinationListing destination;
+    private int distance;
     
+    /**
+     * Constructor for DistanceDestinationPair.
+     * @param destination The destination listing that is being measured.
+     * @param distance The distance that the destination is from a property.
+     */
+    public DistanceDestinationPair(DestinationListing destination, int distance)
+    {
+        this.destination = destination;
+        this.distance = distance;
+    }
+
+    /**
+     * @return The destination.
+     */
+    public DestinationListing getDestination()
+    {
+        return destination;
+    }
+
+    /**
+     * @return The distance that the destination is from a property.
+     */
+    public int getDistance()
+    {
+        return distance;
+    }
+}
+ 

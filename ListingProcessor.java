@@ -146,13 +146,13 @@ public class ListingProcessor
      *@param List<AirbnbListing> listing, the list of Airbnb properties to parse
      *@return List<String>, a string containing all the unique borough names present in the list of AirbnbListing properties
      */
-    public static List<String> getBoroughs(List<AirbnbListing> listing) 
+    public static List<String> getBoroughs(List<AirbnbListing> listings) 
     {
-        return listing.stream()
-                      .map(l -> l.getNeighbourhood())
-                      .filter(borough -> borough != null && validBorough(borough))
-                      .distinct()
-                      .collect(Collectors.toList());
+        return listings.stream()
+                       .map(listing -> listing.getNeighbourhood())
+                       .filter(borough -> borough != null && validBorough(borough))
+                       .distinct()
+                       .collect(Collectors.toList());
     }
     
     /**

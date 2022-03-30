@@ -27,7 +27,7 @@ public class DrawableSearchAreaMapController extends Controller
      * Add the OpenLayers map to the scene and load data about the properties into the JS file.
      */
     @FXML
-    public void initialize()
+    private void initialize()
     {
         borderPane.setCenter(openLayersMap);
         
@@ -92,6 +92,7 @@ public class DrawableSearchAreaMapController extends Controller
     public void refreshButtonOnAction()
     {
         MainController mainController = MainWindow.getMainWindow().getMainController();
+        
         int fromPrice = mainController.getRangeValues().getFromValue();
         int toPrice = mainController.getRangeValues().getToValue();
         
@@ -100,7 +101,7 @@ public class DrawableSearchAreaMapController extends Controller
     }
 
     /**
-     * Gives the Js file all the listings that the propgram has.
+     * Gives the JS file all the listings that the program has.
      */
     private void addPropertiesToJsFile()
     {

@@ -14,10 +14,8 @@ import javafx.scene.control.Alert;
  */
 public class AlertManager
 {
-    /**
-     * The default error message displayed when an error alert occurs with no given error details.
-     */
-    public static final String DEFAULT_ERROR_MESSAGE = "Unfortunately an unknown error has occurred.";
+    // The default error message displayed when an error alert occurs with no given error details.
+    private static final String DEFAULT_ERROR_MESSAGE = "Unfortunately an unknown error has occurred.";
     
     /**
      * Displays an error alert on the screen with a description of the error that occurred. The error alert will not

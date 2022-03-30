@@ -59,7 +59,9 @@ public class CircularLinkedList<E> implements CircularList<E>
         {
             return null;
         }
+        
         currentNode = currentNode.getPrev();
+        
         return currentNode.getElement();
     }
     

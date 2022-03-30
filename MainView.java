@@ -1,16 +1,17 @@
 import javafx.application.Platform;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import java.io.IOException;
+
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 
 /**
- * MainView creates the primary application window by loading it from
- * an FXML file. It also uses the AirbnbDataLoader to load the Airbnb
- * listings from the database.
+ * MainView creates the primary application window by loading it from an FXML file. It also uses the AirbnbDataLoader to load the
+ * Airbnb listings from the database.
  * 
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -20,26 +21,27 @@ import java.util.HashSet;
  */
 public class MainView extends Stage
 {
-    private static Set<Scene> allOpenWindows;
-
     private final static String WINDOW_TITLE = "Airbnb Property Viewer";
 
-    private MainWindow mainWindow;
-    private MainController mainController;
-
+    private static Set<Scene> allOpenWindows;
     private static boolean isInLightMode = false;
     private static Scene scene;
     private static String lightModeStylesheet;
     private static String darkModeStylesheet;
+    
+    private MainWindow mainWindow;
+    private MainController mainController;
 
     /**
      * Create the main application window.
      * @param mainWindow The MainWindow for this application.
+     * @throws IOException The FXML file has not been loaded correctly.
      */
-    public MainView(MainWindow mainWindow) throws Exception
+    public MainView(MainWindow mainWindow) throws IOException
     {
         allOpenWindows = new HashSet<>();
-        // Get the paths to the stylesheets
+        
+        // Get the paths to the stylesheets.
         lightModeStylesheet = getClass().getClassLoader().getResource("light-mode.css").toExternalForm();
         darkModeStylesheet = getClass().getClassLoader().getResource("dark-mode.css").toExternalForm();
 
@@ -48,7 +50,7 @@ public class MainView extends Stage
 
         this.mainWindow = mainWindow;
 
-        scene = new Scene(loader.load(), 870, 870);
+        scene = new Scene(loader.load());
         addToOpenWindows(scene);
         swapColorMode();
 
@@ -60,7 +62,7 @@ public class MainView extends Stage
         setScene(scene);
         setTitle(WINDOW_TITLE);
         sizeToScene();
-        setOnHidden(e -> Platform.exit());
+        setOnCloseRequest(e -> System.exit(0));
         show();
     }
 
@@ -70,6 +72,7 @@ public class MainView extends Stage
     public static void swapColorMode()
     {
         isInLightMode = !isInLightMode;
+        
         for (Scene scene : allOpenWindows)
         {
             setColorMode(scene);
@@ -151,5 +154,4 @@ public class MainView extends Stage
     {
         return mainController;
     }
-
 }

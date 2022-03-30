@@ -1,4 +1,3 @@
-
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.util.Pair;
@@ -10,16 +9,18 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import javafx.scene.control.*;
-import java.util.*;
 import java.util.HashMap;
-import javafx.event.*;
 import java.lang.Math;
 import java.util.stream.Collectors;
 import javafx.fxml.FXMLLoader;
-
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
+import java.util.Deque;
+import java.util.List;
+import java.util.ArrayDeque;
+import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import java.util.Map;
 
 /**
  * StatController extends Controller and provides the GUI and calculation of 
@@ -34,7 +35,6 @@ import javafx.geometry.Insets;
  */
 public class StatController extends Controller
 {
-
     @FXML public GridPane gridPane1;
 
     //These will be the title of the statistics shown
@@ -174,14 +174,14 @@ public class StatController extends Controller
      */
     private void setUpStats()
     {
-        avgProperties = new stat(new BorderPane(),new Label(), new Label(), stat1);
-        totalProperties = new stat(new BorderPane(),new Label(), new Label(), stat2);
-        noNonPrivate = new stat(new BorderPane(),new Label(), new Label(), stat3);
-        mostExpensive = new stat(new BorderPane(),new Label(), new Label(), stat4);
-        highSocial = new stat(new BorderPane(),new Label(), new Label(), stat5 );
-        lowCrime = new stat(new BorderPane(),new Label(), new Label(), stat6);
-        pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7,  DestinationType.PUB);
-        attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, DestinationType.ATTRACTION);
+        avgProperties = new stat(stat1);
+        totalProperties = new stat(stat2);
+        noNonPrivate = new stat(stat3);
+        mostExpensive = new stat(stat4);
+        highSocial = new stat(stat5);
+        lowCrime = new stat(stat6);
+        pubs = new interactiveStat(stat7,  DestinationType.PUB);
+        attractions = new interactiveStat(stat8, DestinationType.ATTRACTION);
     }
 
     /**
@@ -380,8 +380,12 @@ public class StatController extends Controller
          * statistic and the data associated with it and the titleText that references the name
          * of the statistic
          */
-        public stat(BorderPane wrapPane,Label title, Label value, String titleText)
+        public stat(String titleText)
         {
+            BorderPane wrapPane = new BorderPane();
+            Label title = new Label();
+            Label value = new Label();
+            
             //Creating the buttons to be used in the borderpane
             rightButton = new Button();
             leftButton = new Button();
@@ -500,7 +504,7 @@ public class StatController extends Controller
      * @author Tony Smith (K21064940)
      * @version 1.0.0
      */
-    public  class interactiveStat extends stat 
+    public class interactiveStat extends stat 
     {
         //interactive stat controller which handles all the interactive stat main functionality
         private InteractiveStatController interactiveStatController = new InteractiveStatController();
@@ -511,9 +515,10 @@ public class StatController extends Controller
          * Method to construct the interactive stat which is a set of labels and buttons wrapped into a border pane, extending the same structure from the stat object. A DestinationType is also passed to differentiate
          * what kind of DestinationListings this stat will show (PUB or ATTRACTION)
          */
-        public interactiveStat(BorderPane wrapPane, Label title, Label value, String titleText,DestinationType destinationType)
+        public interactiveStat(String titleText, DestinationType destinationType)
         {
-            super(wrapPane,title,value,titleText);
+            super(titleText);
+            
             this.destinationType = destinationType;
             try
             {

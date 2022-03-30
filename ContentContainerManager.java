@@ -32,8 +32,8 @@ public class ContentContainerManager
     }
     
     /**
-     * Initialise the instance variables, load all the content panes,
-     * and set the first pane.
+     * Initialise the instance variables, load all the content panes, and set the first pane.
+     * @param contentContainer The container holding the content pane.
      */
     public ContentContainerManager(Pane contentContainer)
     {

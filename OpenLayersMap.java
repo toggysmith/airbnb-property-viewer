@@ -84,7 +84,6 @@ public class OpenLayersMap extends StackPane
 
     /**
      * Add the necessary scripts to implement a given list of behaviours.
-     * 
      * @param newBehaviours The list of behaviours to implement.
      */
     public void addBehaviour(Behaviour ... newBehaviours)

@@ -23,7 +23,7 @@ public class MapController extends Controller
     
     private List<BoroughButton> buttons;
     
-    /**
+    /*
      * Make sure the scroll pane has the same size as the root and initialize the list of buttons.
      */
     @FXML
@@ -52,6 +52,7 @@ public class MapController extends Controller
     {
         int fromValue = MainWindow.getMainWindow().getMainController().getRangeValues().getFromValue();
         int toValue = MainWindow.getMainWindow().getMainController().getRangeValues().getToValue();
+        
         long noOfPropertiesInBoroughWithMost = ListingProcessor.getNoOfPropertiesInBoroughWithMost(ListingProcessor.filterByPriceRange(AirbnbDataLoader.getListings(), fromValue, toValue));
         
         for (BoroughButton button : buttons)

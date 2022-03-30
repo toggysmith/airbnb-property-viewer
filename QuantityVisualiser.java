@@ -25,22 +25,23 @@ public class QuantityVisualiser extends Group
     /*
      * The contained used to hold the property icons.
      */
-    private HBox iconContainer;
+    private final HBox iconContainer;
     
     /*
-     * The property icon SVG (shared among all quantity visualisers).
+     * The property icon SVG (shared among all quantity visualisers). JavaFX does not provide a way of loading SVG images even
+     * though you can use them.
      */
-    private static String propertyIconSVG = "M23.121,9.069,15.536,1.483a5.008,5.008,0,0,0-7.072,0L.879,9.069A2.978,2.978,0,0,0,0,11.19v9.817a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V11.19A2.978,2.978,0,0,0,23.121,9.069ZM15,22.007H9V18.073a3,3,0,0,1,6,0Zm7-1a1,1,0,0,1-1,1H17V18.073a5,5,0,0,0-10,0v3.934H3a1,1,0,0,1-1-1V11.19a1.008,1.008,0,0,1,.293-.707L9.878,2.9a3.008,3.008,0,0,1,4.244,0l7.585,7.586A1.008,1.008,0,0,1,22,11.19Z";
-
+    private static final String propertyIconSVG = "M23.121,9.069,15.536,1.483a5.008,5.008,0,0,0-7.072,0L.879,9.069A2.978,2.978,0,"
+                                                + "0,0,0,11.19v9.817a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V11.19A2.978,2.978,0,0,0,23.121"
+                                                + ",9.069ZM15,22.007H9V18.073a3,3,0,0,1,6,0Zm7-1a1,1,0,0,1-1,1H17V18.073a5,5,0,0,0-10"
+                                                + ",0v3.934H3a1,1,0,0,1-1-1V11.19a1.008,1.008,0,0,1,.293-.707L9.878,2.9a3.008,3.008,0"
+                                                + ",0,1,4.244,0l7.585,7.586A1.008,1.008,0,0,1,22,11.19Z";
+                                                
     /**
-     * Retrieve the starting current quantity of this
-     * visualiser and the (inclusive) range.
+     * Retrieve the starting current quantity of this visualiser and the (inclusive) range.
      */
     public QuantityVisualiser()
     {
-        super();
-
-        // Initialise the instance variables:
         iconContainer = new HBox();
         getChildren().add(iconContainer);
         this.rangeUpperBound = rangeUpperBound;
@@ -48,7 +49,6 @@ public class QuantityVisualiser extends Group
 
     /**
      * Set the current quantity.
-     *
      * @param newQuantity The new current quantity.
      */
     public void setCurrentQuantity(long newQuantity)
@@ -59,7 +59,6 @@ public class QuantityVisualiser extends Group
     
     /**
      * Set the upper range bound.
-     * 
      * @param rangeUpperBound The upper range bound.
      */
     public void setRangeUpperBound(long rangeUpperBound)
@@ -69,8 +68,7 @@ public class QuantityVisualiser extends Group
     }
 
     /*
-     * Update the house graphic by changing the
-     * number of houses to reflect the quantity of properties.
+     * Update the house graphic by changing the number of houses to reflect the quantity of properties.
      */
     private void updateGraphic()
     {

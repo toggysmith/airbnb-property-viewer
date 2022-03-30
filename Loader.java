@@ -1,4 +1,3 @@
-
 /**
  * Abstract class Loader - to encapsulate common and shared methods to all types of data loaders
  *
@@ -10,9 +9,9 @@
  */
 public abstract class Loader
 {
-        /*
+    /**
      * @param doubleString The string to be converted to Double type.
-     * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
+     * @return The double value of the string, or -1.0 if the string is either empty or just whitespace.
      */
     protected static Double convertDouble(String doubleString) throws Exception
     {
@@ -24,7 +23,7 @@ public abstract class Loader
         return -1.0;
     }
 
-    /*
+    /**
      * @param intString The string to be converted to Integer type.
      * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
      */

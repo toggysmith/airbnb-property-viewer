@@ -24,7 +24,6 @@ public class AirbnbDataLoader extends Loader
     /**
      * Retrieve Airbnb listings. If this method has already been called, the listings will have been
      * saved and those will be returned. Otherwise, load them from memory.
-     * 
      * @return Airbnb listings.
      */
     public static List<AirbnbListing> getListings()

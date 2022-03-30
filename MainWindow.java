@@ -41,19 +41,6 @@ public class MainWindow
     }
     
     /**
-     * This allows MainWindow to remain a singleton.
-     * @return The MainWindow.
-     */
-    public static MainWindow getMainWindow()
-    {
-        if (mainWindow == null)
-        {
-            mainWindow = new MainWindow();
-        }
-        return mainWindow;
-    }
-    
-    /**
      * @return The MainController.
      */
     public MainController getMainController()
@@ -67,6 +54,19 @@ public class MainWindow
     public MainView getMainView()
     {
         return mainView;
+    }
+    
+    /**
+     * This allows MainWindow to remain a singleton.
+     * @return The MainWindow.
+     */
+    public static MainWindow getMainWindow()
+    {
+        if (mainWindow == null)
+        {
+            mainWindow = new MainWindow();
+        }
+        return mainWindow;
     }
     
     /**
