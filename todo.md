@@ -31,7 +31,7 @@
 - [x] DistanceDestinationPair
 - [x] DrawableSearchAreaMapController
 - [x] EmptyListException
-- [ ] Hexagon
+- [x] Hexagon
 - [x] InteractiveStatController
 - [x] InteractiveStatsTableValues
 - [x] JsToJavaBridge
