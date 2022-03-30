@@ -38,7 +38,7 @@ public class RangeValues
         this.fromValue = fromValue;
     }
     
-    /*
+    /**
      * Method to set the toValue String
      * @param String toValue, the value that represents the highest possible price that an AirbnbListing can take in the valid range
      * 
@@ -48,7 +48,7 @@ public class RangeValues
         this.toValue = toValue;
     }
     
-    /*
+    /**
      * Returns the fromValue, facilitates exteranl functionalities by encapsulating conversion logic, the from value string is converted into its corresponding integer and returned.
      * @return int, the from value string converted into an integer
      */
@@ -57,7 +57,7 @@ public class RangeValues
         return convertFromStrToInt(this.fromValue);
     }
     
-    /*
+    /**
      * Returns the toValue, facilitates exteranl functionalities by encapsulating conversion logic, the to value string is converted into its corresponding integer and returned.
      * @return int, the to value string converted into an integer
      */
@@ -66,7 +66,7 @@ public class RangeValues
         return convertToStrToInt(this.toValue);
     }
     
-    /*
+    /**
      * method that handles the conversion logic for the fromValue string into its corresponding integer.
      * In the case the fromValue selected is  "no min" , 0 is returned
      * 
@@ -81,7 +81,7 @@ public class RangeValues
         }
     }
     
-    /*
+    /**
      * method that handles the conversion logic for the toValue string into its corresponding integer
      * In the case the toValue selected is "no max" , Integer.MAXVALUE is returned
      */
@@ -102,7 +102,7 @@ public class RangeValues
         return new PriceRange(fromValue, toValue);
     }
     
-    /*
+    /**
      * method that handles the conversion logic for the fromValue integer returned by the .getFromValue() into its corresponding string. Mainly used in the revert stage when an invalid range is selected and the from combobox needs the
      * corresponding fromValue string to revert the state
      * @return String
@@ -116,7 +116,7 @@ public class RangeValues
         }
     }
     
-    /*
+    /**
      * method that handles the conversion logic for the toValue integer returned by the .getToValue() into its corresponding string. Mainly used in the revert stage when an invalid range is selected and the to combobox needs the
      * corresponding toValue string to revert the state
      * @return String

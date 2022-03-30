@@ -163,11 +163,13 @@ public class ListingProcessor
      */
     public static List<String> getPropertiesNameInBorough(List<AirbnbListing> listings, String boroughName)
     {
+        checkValidBoroughName(boroughName);
         return listings.stream()
                        .filter(listing -> boroughName != null && validBorough(boroughName) && boroughName.equals(listing.getNeighbourhood()))
                        .map(listing -> listing.getName())
                        .distinct()
                        .collect(Collectors.toList());
+        
     }
     
     /**

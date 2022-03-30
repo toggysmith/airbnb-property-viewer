@@ -38,7 +38,7 @@
 - [ ] ListingProcessor
 - [ ] ListingProcessorTest
 - [x] ListNode
-- [ ] MainController
+- [x] MainController
 - [x] MainView
 - [x] MainWindow
 - [x] MapController
@@ -50,7 +50,7 @@
 - [x] PropertyDetailsController
 - [x] PropertyDetailsStageFactory
 - [x] PropertyDetailsStage
-- [ ] QuantityVisualiser
+- [x] QuantityVisualiser
 - [x] RangeBoxEnum
 - [x] RangeValues
 - [x] StatController

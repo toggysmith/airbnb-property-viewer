@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 
 /**
- * The test class ListingProcessorTest.
- *
- * @author Adam Murray (K21003575)
+ * 
+ *@author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
@@ -382,6 +381,9 @@ public class ListingProcessorTest
         assertEquals(matchingListing, listing1);
     }
 
+    /**
+     * test that the getBoroughs() method returns the correct list of strings of borough names from the passed list of AirbnListing objects
+     */
     @Test
     public void testGetBoroughs() 
     {
@@ -397,6 +399,9 @@ public class ListingProcessorTest
         assertNotEquals(boroughs.get(4), "Yorkshire");
     }
 
+    /**
+     * test the getBorough() method if a null list is passed
+     */
     @Test
     public void testGetBoroughsNullListPassed()
     {
@@ -404,13 +409,20 @@ public class ListingProcessorTest
         assertEquals(0, boroughs.size());
     }
 
+    /**
+     * tests the getBorough() method if an AirbnbListing object in the list is passed with a null borough name
+     */
     @Test 
     public void testGetBoroughsNameNull()
     {
         List<String> boroughs = ListingProcessor.getBoroughs(nullBoroughNameListing);
+        //1 because the nullBoroughNameListing has an AirbnbListing object with a valid borough name
         assertEquals(1, boroughs.size());
     }
 
+    /**
+     * tests the getBorough() method when an AirbnbListing object in the list has an invalid borough name
+     */
     @Test
     public void testGetBoroughsInvalidBoroughName()
     {
@@ -419,6 +431,9 @@ public class ListingProcessorTest
         assertEquals(5,boroughs.size());
     }
 
+    /**
+     * Test for getPropertiesNameInBorough() method for valid, invalid and null 
+     */
     @Test
     public void testGetPropertiesNameInBorough()
     {
@@ -431,11 +446,16 @@ public class ListingProcessorTest
         assertEquals("Double bedroom in Southwark",westminster.get(1));
         assertEquals("Spacious Room next to Richmond Par",westminster.get(2));
 
-        List<String> milan = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Milan");
-        assertEquals(0,milan.size());
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    List<String> milan = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Milan");
+        });
+        assertEquals("The provided borough name argument is invalid.",exception.getMessage());
         
-        List<String> empty = ListingProcessor.getPropertiesNameInBorough(customisedListings, null);
-        assertEquals(empty.isEmpty(), true);
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                    List<String> empty = ListingProcessor.getPropertiesNameInBorough(customisedListings, null);
+        });
+        
+        assertEquals("The provided borough name argument is invalid.", exception.getMessage());
     }
 
     /**
@@ -512,6 +532,9 @@ public class ListingProcessorTest
         assertEquals("Invalid Price Passed", exception.getMessage());
     }
     
+    /**
+     * tests the filterDestinations to filter destinations based on the borough name and price string depending on the destination type (PUB or ATTRACTION)
+     */
     @Test
     public void testFilterDestinations()
     {
@@ -545,7 +568,10 @@ public class ListingProcessorTest
         });
         assertEquals("Invalid Price Passed", exception.getMessage());
     }
-
+    
+    /**
+     * test the getPropertyListingByName such that the correct AirbnbListing object is returned based on the list of AirbnbListing, borough name and property name passed
+     */
     @Test
     public void testGetPropertyListingByNames()
     {
@@ -573,6 +599,9 @@ public class ListingProcessorTest
      
     }
     
+    /**
+     * test to get the minimum integer from an array of int
+     */
     @Test
     public void testGetMin()
     {
@@ -594,6 +623,9 @@ public class ListingProcessorTest
      assertEquals("empty array passed", exception1.getMessage());
      }
     
+    /**
+     * test to get the maximum integer from an array of int
+     */
     @Test
     public void testGetMax()
     {
@@ -614,6 +646,9 @@ public class ListingProcessorTest
         
     }
     
+    /**
+     * test to get a specific total based on an array of int , and a from and to value passed to the retrieveSpecifiedAmount() method
+     */
     @Test
     public void testRetrieveSpeciedAmount()
     {
@@ -667,7 +702,7 @@ public class ListingProcessorTest
     {
         nullList = new ArrayList<AirbnbListing>();
         nullBoroughNameListing = new ArrayList<AirbnbListing>();
-
+        //invalid because the borough name is null
         AirbnbListing invalidProperty = new AirbnbListing("447382","Spacious Room next to Richmond Par","47094767", "Marcus", null,51.41944544,-0.286346933,"Private room",30,1,1,"09/10/2016",0.65,2,31);
         AirbnbListing invalidProperty2 = new AirbnbListing("382400","Spacious Room next to Richmond Par","47094767", "Marcus", "Westminster",51.41945318,-0.276345833,"Private room",30,1,1,"09/10/2017",0.90,2,35);
 
