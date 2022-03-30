@@ -533,12 +533,24 @@ public class ListingProcessorTest
      assertEquals("Double bedroom in Southwark",property.getName());
      assertNotEquals("IncorrectName",property.getName());
        
+     
      AirbnbListing propertyWrong = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect name","Westminster");
      assertEquals(propertyWrong,null);
      
-     AirbnbListing propertyNull = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect Name For Property","Westminster");
-     assertEquals(null, propertyNull);
+     Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                AirbnbListing propertyNull = ListingProcessor.getPropertyListingByNames(customisedListings,null,"Westminster");
+        });
+     assertEquals("Invalid listing name provided", exception.getMessage());
+     
        
+     AirbnbListing propertyBorough = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark","Incorrect Borough Name");
+     assertEquals(propertyBorough, null);
+     
+     Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                AirbnbListing boroughNull = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark",null);
+        });
+     assertEquals("Invalid borough name provided", exception1.getMessage());
+     
     }
     
     @Test

@@ -200,6 +200,13 @@ public class ListingProcessor
      */
     public static AirbnbListing getPropertyListingByNames(List<AirbnbListing> listings, String listingName, String boroughName)
     {
+        if(listingName == null){
+            throw new IllegalArgumentException("Invalid listing name provided");
+        }
+        if(boroughName == null){
+            throw new IllegalArgumentException("Invalid borough name provided");
+        }
+        
        AirbnbListing selectedProperty = listings.stream()
                                                 .filter(listing -> listingName.equals(listing.getName()) && boroughName.equals(listing.getNeighbourhood()))
                                                 .findFirst().orElse(null); 
