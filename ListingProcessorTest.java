@@ -516,6 +516,14 @@ public class ListingProcessorTest
         
         List<DestinationListing> pubsTower = ListingProcessor.filterDestinations(pubs, "Tower Hamlets", "££");
         assertEquals(2,pubsTower.size());
+        
+        List<DestinationListing> emptyBorough = ListingProcessor.filterDestinations(pubs, null, "££");
+        assertEquals(emptyBorough.isEmpty(), true);
+        
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                List<DestinationListing> emptyPrice = ListingProcessor.filterDestinations(pubs, "Tower Hamlets", null);
+        });
+        assertEquals("Invalid Price Passed", exception.getMessage());
     }
 
     @Test
