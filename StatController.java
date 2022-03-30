@@ -2,7 +2,7 @@
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
-
+import javafx.util.Pair;
 import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
@@ -42,8 +42,8 @@ public class StatController extends Controller
     private final String stat2 = "Total number of available properties:";
     private final String stat3 = "Number of entire home and apartments:";   
     private final String stat4 = "Borough with Most Expensive Property:";
-    private final String stat5 = "Borough with Highest Social Score";
-    private final String stat6 = "Borough with Lowest Crime Rate";
+    private final String stat5 = "Boroughs with Highest Social Score";
+    private final String stat6 = "Boroughs with Lowest Crime Rate";
     private final String stat7 = "Closest 5 Pubs";
     private final String stat8 = "Closest Attractions";
 
@@ -192,9 +192,10 @@ public class StatController extends Controller
      * (statistic 1)
      */
     public String averagePropertyView() {
+
         int average = ListingProcessor.getNumberOfReviews(airbnbListings,fromValue, toValue);
         long count = ListingProcessor.getNumberOfListings(airbnbListings,fromValue, toValue);
-        //Cast to a double to be able to return a number with two decimal places
+        //Cast to a double to be able to return a number with two decimal places when division is performed
         double l = (double)count;
         //Need a try-catch as initially the program will try to divide zero by zero
         try {
@@ -210,10 +211,8 @@ public class StatController extends Controller
      * (statistic 2)
      */
     public long nonPrivateRoom() {
-        //Method returns a value which  is then casted
         long nonPrivate = ListingProcessor.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
-
-        //int privateCount = (int)nonPrivate;
+        
         return nonPrivate;
     }
     
@@ -222,9 +221,8 @@ public class StatController extends Controller
      * (statistic 3)
      */
     public long totalAvailableProperties() { 
-        //Returns a number  that is then casted to an integer
         long available = ListingProcessor.getTotalAvailableProperties(airbnbListings,fromValue, toValue);
-       // int total = (int)available;
+       
         return available;
     }
 
@@ -235,15 +233,16 @@ public class StatController extends Controller
      * (statistic 4)
      */
     public String expensiveNeighbourhood() {
-        //Variables need to be initialized
+        //Initializing variables
         int max = 0;
-
         String correctNeighbourhood = "";
+        
         //Getting all the properties within the price range
         List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
+        
         //Calculating the total price for each property within the price range. If it is higher than the current highest price, then that becomes the new max
         for(int i = 0; i < filtered.size(); i++) {
-
+            //Calculating the total price for each property in within the price range
             int calcPrice = filtered.get(i).getPrice() * filtered.get(i).getMinimumNights();
             if(calcPrice > max){
                 max = calcPrice;
@@ -263,11 +262,16 @@ public class StatController extends Controller
     public String socialScore() {
         double highestSocial = 0;
         String boroughSocial = "";
+        
+        //Getting all the properties within the price range
         List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
         
         List<String> boroughListing = new ArrayList<>();
         //Getting all boroughs within the price range
         boroughListing = ListingProcessor.getBoroughs(filtered);
+        
+        HashMap<String, Double> linkSocialScore = new HashMap<>();
+        
         //This nested for loop goes through each borough within the price range, calculating the social score for each and then the borough with the highest social score is returned
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
@@ -275,50 +279,101 @@ public class StatController extends Controller
                     double maxSocial = sScore.getAvgTransportAccess() + sScore.getLifeSatisfaction() +
                         sScore.getWorthwileScore() + sScore.getHappinessScore() -
                         sScore.getAnxietyScore();
-                    if(maxSocial > highestSocial) {
-                        highestSocial = maxSocial;
-                        boroughSocial = sScore.getBoroughName() + ": " + df.format(highestSocial);
-                    }
+                        
+                        linkSocialScore.put(sScore.getBoroughName(), maxSocial);
+                    
 
                 }
            
             } 
         }
 
+        boroughSocial = top3Boroughs(linkSocialScore, 0, true);
+        
+        
         return boroughSocial;
     }
 
+    public String top3Boroughs(HashMap<String, Double> linkScores, double startValue, boolean whichStat) {
+        Pair<String, Double> first = new Pair<String, Double>("", startValue);
+        Pair<String, Double> second = new Pair<String, Double>("", startValue);
+        Pair<String, Double> third = new Pair<String, Double>("", startValue);
+       
+        
+        for(Map.Entry<String, Double> socialSet : linkScores.entrySet()) {
+             if(whichStat == true) {
+               if(socialSet.getValue() > first.getValue()) {
+                first = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                       
+                } else if(socialSet.getValue() > second.getValue()) {
+                second = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                    
+                } else if(socialSet.getValue() > third.getValue()) {
+                third = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                
+                }   
+  
+             } else if (whichStat == false) {
+                if(socialSet.getValue() < first.getValue()) {
+                  first = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                       
+                  } else if(socialSet.getValue() < second.getValue()) {
+                  second = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                    
+                  } else if(socialSet.getValue() < third.getValue()) {
+                  third = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                
+                }   
+                
+             }
+             
+            }
+            
+        if(whichStat) {
+               return (first.getKey() + ": " + df.format(first.getValue()) + System.lineSeparator() + second.getKey() + ": " + df.format(second.getValue()) + System.lineSeparator() + third.getKey() + ": " + df.format(third.getValue())); 
+        } else {
+               return first.getKey() + System.lineSeparator() + second.getKey() + System.lineSeparator() + third.getKey();
+        }
+        
+       }
+    
     /**
      * returns the borough with the lowest crime per 1000 people within 
      * the price range
      * (statistic 7)
      */
     public String lowestCrime() {
-        //Looking for the borough with the lowest crime so starting with a high number
-        double lowCrime = 1000;
+        
+        
         String boroughCrime = "";
         List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
         
         List<String> boroughListing = new ArrayList<>();
-
         //Getting all boroughs within the price range
         boroughListing = ListingProcessor.getBoroughs(filtered);
 
+        HashMap<String, Double> linkCrime = new HashMap<>();
+        
         //This nested for loop goes through each borough within the price range, checking if the crime rate is lower than the current lowest, and returning the borough with the lowest crime
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
                 if(boroughListing.get(x).equals(sScore.getBoroughName())) {
-                    double checkCrime = sScore.getCrimeRate() ;
-                    if(checkCrime < lowCrime) {
-                        lowCrime = checkCrime;
-                        boroughCrime = sScore.getBoroughName();
-                    }
+                    
+                    
+                    linkCrime.put(sScore.getBoroughName(), sScore.getCrimeRate());
                 }
             }
 
         }
+        boroughCrime = top3Boroughs(linkCrime, 1000, false);
         return boroughCrime;
     }
+    
+    
+    
+    
+    
+    
     /**
      * Provides the GUI for each statistic by creating a borderpane with labels that show the 
      * title and value of the statistic and buttons that allow the user to switch between each
@@ -338,24 +393,35 @@ public class StatController extends Controller
         private Label value;
         private Button rightButton;
         private Button leftButton;
+        /**
+         * Constructor for the stat class
+         * Paramaters are new borderpanes for each statistic, the labels for the title of the
+         * statistic and the data associated with it and the titleText that references the name
+         * of the statistic
+         */
         public stat(BorderPane wrapPane,Label title, Label value, String titleText)
         {
+            //Creating the buttons to be used in the borderpane
             rightButton = new Button();
             leftButton = new Button();
 
             this.wrapPane = wrapPane;
 
             this.title = title;
+            //Assigning the title of the statistic
             title.setText(titleText);
 
             this.value = value;
 
+            //Setting the positions of the button
             wrapPane.setLeft(leftButton);
             wrapPane.setRight(rightButton);
 
+            //Setting the methods associated with each button
             rightButton.setOnAction(this::clickRight);
             leftButton.setOnAction(this::clickLeft);
 
+            
             wrapPane.setCenter(value);
 
             wrapPane.setTop(title);

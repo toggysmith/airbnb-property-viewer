@@ -922,7 +922,7 @@ public class ListingProcessorTest
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
                     List<AirbnbListing> listings = null;
 
-                    ListingProcessor.getNumberOfReviews(listings, 0, 500);
+                    ListingProcessor.getNumberOfListings(listings, 0, 500);
         });
 
         assertEquals("The provided listings argument is invalid.", exception.getMessage());
@@ -937,7 +937,7 @@ public class ListingProcessorTest
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
                     List<AirbnbListing> listings = new ArrayList<>();
 
-                    ListingProcessor.getNumberOfReviews(listings, 0, 500);
+                    ListingProcessor.getNumberOfListings(listings, 0, 500);
         });
 
         assertEquals("The provided listings argument is invalid.", exception.getMessage());
