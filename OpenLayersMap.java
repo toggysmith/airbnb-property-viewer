@@ -23,40 +23,43 @@ import netscape.javascript.JSObject;
  */
 public class OpenLayersMap extends StackPane
 {
+    /**
+     * Indicates which JS scripts to attach alongside the script which contains the core behaviour
+     * of the map.
+     */
     public enum Behaviour { DRAWING, MARKER, BOUNDARIES };
-    
+
     private WebView webView;
     private WebEngine webEngine;
     private JsToJavaBridge jsToJavaBridge;
-    
+
     /**
-     * 
+     * Setup the WebView with the local website, bind its size to its container's size, and set the 
+     * initial map properties.
      * 
      * @param pathToHtmlFile The path to the HTML file containing the local website.
      * @param initialZoom The zoom level the map should start with.
-     * @param longitude 
-     * @param latitude 
+     * @param initialLongitude The longitude the map should start at.
+     * @param initialLatitude The latitude the map should start at.
      */
-    public OpenLayersMap(String pathToHtmlFile, int initialZoom, double longitude, double latitude)
+    public OpenLayersMap(String pathToHtmlFile, int initialZoom, double initialLongitude, double initialLatitude)
     {
-        webView = new WebView();
-        webEngine = webView.getEngine();
-        webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 Chrome/44.0.2403.155 Safari/537.36");
+        setupWebView(pathToHtmlFile);
+        bindWebViewSizeToContainerSize();
 
-        URL url = getClass().getClassLoader().getResource(pathToHtmlFile);
-        
-        webEngine.load(url.toExternalForm());
-        
-        addScript("core-behaviour.js");
-
-        webView.prefWidthProperty().bind(this.widthProperty());
-        webView.prefHeightProperty().bind(this.heightProperty());
+        executeScript(String.format("setZoom(%d)", initialZoom), true);
+        executeScript(String.format("setLongLat(%f, %f)", initialLongitude, initialLatitude), true);
 
         this.getChildren().add(webView);
-        executeScript(String.format("setZoom(%d)", initialZoom), true);
-        executeScript(String.format("setLongLat(%f, %f)", longitude, latitude), true);
     }
-    
+
+    /**
+     * Run a JavaScript script on the HTML webpage. Depending on whether this is executed before or after the WebView has loaded,
+     * a ChangeListener could be used.
+     * 
+     * @param script The JS script to execute.
+     * @parma executedBeforeLoaded If true, a ChangeListener is used.
+     */
     public void executeScript(String script, boolean executedBeforeLoad)
     {
         if (executedBeforeLoad)
@@ -78,20 +81,28 @@ public class OpenLayersMap extends StackPane
             webEngine.executeScript(script);
         }
     }
-    
-    public void addBehaviour(Behaviour ... newBehaviours) {
-        for (Behaviour newBehaviour : newBehaviours) {
-            switch (newBehaviour) {
+
+    /**
+     * Add the necessary scripts to implement a given list of behaviours.
+     * 
+     * @param newBehaviours The list of behaviours to implement.
+     */
+    public void addBehaviour(Behaviour ... newBehaviours)
+    {
+        for (Behaviour newBehaviour : newBehaviours)
+        {
+            switch (newBehaviour)
+            {
                 // NOTE: These script paths are relative to the HTML file, not this class file.
                 case DRAWING:
-                    addScript("drawing-behaviour.js");
+                    executeScriptFile("drawing-behaviour.js");
                     break;
                 case MARKER:
-                    addScript("marker-behaviour.js");
+                    executeScriptFile("marker-behaviour.js");
                     linkJsToJavaBridge();
                     break;
                 case BOUNDARIES:            
-                    addScript("boundaries-behaviour.js");
+                    executeScriptFile("boundaries-behaviour.js");
                     break;
                 default:
                     // There should be a case for every behaviour.
@@ -99,30 +110,67 @@ public class OpenLayersMap extends StackPane
             }
         }
     }
-    
-    /**
-     * Sets up an object and gives it to javascript so 
-     * javascript can call java methods in that object.
+
+    /*
+     * Setup a bridge object and provide the JavaScript with it so that the JavaScript can call Java methods.
      */
-    public void linkJsToJavaBridge()
+    private void linkJsToJavaBridge()
     {
-        webEngine.getLoadWorker().stateProperty().addListener(
-        new ChangeListener() {
-        @Override
-        public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-            if (newValue != State.SUCCEEDED) { return; }
-            jsToJavaBridge = new JsToJavaBridge();
-            JSObject window = (JSObject) webEngine.executeScript("window");
-            window.setMember("jsToJavaBridge", jsToJavaBridge);
-        }
+        webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue ov, Object oldState, Object newState) {
+                    if (newState != State.SUCCEEDED) return;
+                    
+                    jsToJavaBridge = new JsToJavaBridge();
+                    
+                    JSObject window = (JSObject) webEngine.executeScript("window");
+                    
+                    window.setMember("jsToJavaBridge", jsToJavaBridge);
+                }
+            }
+        );
     }
-    );
+
+    /*
+     * Create the WebView - load the local website from the HTML file and add the JS script file which contains the
+     * core behaviour.
+     */
+    private void setupWebView(String pathToHtmlFile)
+    {
+        webView = new WebView();
+        webEngine = webView.getEngine();
+
+        URL url = getClass().getClassLoader().getResource(pathToHtmlFile);
+
+        webEngine.load(url.toExternalForm());
+
+        executeScriptFile("core-behaviour.js");
     }
-    
-    private void addScript(String name) {
-        try {
+
+    /*
+     * Bind the WebView's size to its container's size so that the two are always identical. I.e. make the WebView
+     * always fill its container.
+     */
+    private void bindWebViewSizeToContainerSize()
+    {
+        webView.prefWidthProperty().bind(this.widthProperty());
+        webView.prefHeightProperty().bind(this.heightProperty());
+    }
+
+    /*
+     * Execute the script in the given file.
+     */
+    private void executeScriptFile(String name)
+    {
+        try
+        {
             String content = new String(Files.readAllBytes(Paths.get("resources/open-layers-map/" + name)));
+
             executeScript(content, true);
-        } catch (Exception e) { }
+        }
+        catch (Exception e)
+        {
+            AlertManager.showTerminatingError("Cannot load script.");
+        }
     }
 }
