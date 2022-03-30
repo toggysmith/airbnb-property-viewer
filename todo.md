@@ -29,7 +29,7 @@
 - [x] DestinationDetailsFactory
 - [x] DestinationDetailsStage
 - [x] DistanceDestinationPair
-- [ ] DrawableSearchAreaMapController
+- [x] DrawableSearchAreaMapController
 - [x] EmptyListException
 - [ ] Hexagon
 - [x] InteractiveStatController
