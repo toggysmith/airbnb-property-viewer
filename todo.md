@@ -11,7 +11,7 @@
 - [x] AlertManager
 - [x] App
 - [x] Borough
-- [ ] BoroughButton
+- [x] BoroughButton
 - [x] BoroughListingsPriceRangeTuple
 - [x] BoroughDetailsController
 - [x] BoroughDetailsFactory
@@ -38,6 +38,7 @@
 - [ ] ListingProcessor
 - [ ] ListingProcessorTest
 - [x] ListNode
+- [ ] loader
 - [x] MainController
 - [x] MainView
 - [x] MainWindow

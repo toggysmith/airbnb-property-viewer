@@ -1,7 +1,6 @@
 
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
@@ -25,6 +24,7 @@ import javafx.geometry.Insets;
 /**
  * StatController extends Controller and provides the GUI and calculation of 
  * the statistics pane
+ * Houses methods that stream the data in the csv file to be used in the statistics
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -78,12 +78,13 @@ public class StatController extends Controller
     private interactiveStat pubs;
     private interactiveStat attractions;
 
-    //The class houses methods that stream the data in the csv file to be used in the statistics
+    
     /**
      * Initializing the view of the pane when it is called
      */
     @FXML
     public void initialize(){
+        //Loads the necessary csv files to be used for the statistics
         airbnbListings = AirbnbDataLoader.getListings();
         statListings = StatisticsLoader.getStatListings();
 
@@ -187,7 +188,7 @@ public class StatController extends Controller
      * @return the average number of reviews per property within the price range
      * (statistic 1)
      */
-    public String averagePropertyView() {
+    private String averagePropertyView() {
 
         int average = ListingProcessor.getNumberOfReviews(airbnbListings,fromValue, toValue);
         long count = ListingProcessor.getNumberOfListings(airbnbListings,fromValue, toValue);
@@ -206,7 +207,7 @@ public class StatController extends Controller
      * @return the number of non-private rooms  within the price range
      * (statistic 2)
      */
-    public long nonPrivateRoom() {
+    private long nonPrivateRoom() {
         long nonPrivate = ListingProcessor.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
         
         return nonPrivate;
@@ -216,7 +217,7 @@ public class StatController extends Controller
      * @return the total available properties within the price range
      * (statistic 3)
      */
-    public long totalAvailableProperties() { 
+    private long totalAvailableProperties() { 
         long available = ListingProcessor.getTotalAvailableProperties(airbnbListings,fromValue, toValue);
        
         return available;
@@ -226,7 +227,7 @@ public class StatController extends Controller
      * @return the most expensive neighbourhood within that price range
      * (statistic 4)
      */
-    public String expensiveNeighbourhood() {
+    private String expensiveNeighbourhood() {
         //Initializing variables
         int max = 0;
         String correctNeighbourhood = "";
@@ -252,7 +253,7 @@ public class StatController extends Controller
      * social score is calculated using a csv file taken from the government website
      * (statistic 8)
      */
-    public String socialScore() {
+    private String socialScore() {
         double highestSocial = 0;
         String boroughSocial = "";
         
@@ -265,7 +266,11 @@ public class StatController extends Controller
         
         HashMap<String, Double> linkSocialScore = new HashMap<>();
         
-        //This nested for loop goes through each borough within the price range, calculating the social score for each and then the borough with the highest social score is returned
+        Pair<String, Double> first = new Pair<String, Double>("", 0.0);
+        Pair<String, Double> second = new Pair<String, Double>("", 0.0);
+        Pair<String, Double> third = new Pair<String, Double>("", 0.0);
+        
+        //This nested for loop goes through each borough within the price range, calculating the social score for each and then adding it to the hashmap
         for(int x = 0; x < boroughListing.size(); x++ ) {
             for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
                 if(boroughListing.get(x).equals(sScore.getBoroughName())) {
@@ -273,68 +278,15 @@ public class StatController extends Controller
                         sScore.getWorthwileScore() + sScore.getHappinessScore() -
                         sScore.getAnxietyScore();
                         
-                        linkSocialScore.put(sScore.getBoroughName(), maxSocial);
-                    
-
+                    linkSocialScore.put(sScore.getBoroughName(), maxSocial);
                 }
            
             } 
         }
 
-        boroughSocial = top3Boroughs(linkSocialScore, 0, true);
-        
-        
-        return boroughSocial;
-    }
-
-    /**
-     * @return the borough with the lowest crime per 1000 people within 
-     * the price range
-     * (statistic 7)
-     */
-    public String lowestCrime() {
-        
-        
-        String boroughCrime = "";
-        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
-        
-        List<String> boroughListing = new ArrayList<>();
-        //Getting all boroughs within the price range
-        boroughListing = ListingProcessor.getBoroughs(filtered);
-
-        HashMap<String, Double> linkCrime = new HashMap<>();
-        
-        //This nested for loop goes through each borough within the price range, checking if the crime rate is lower than the current lowest, and returning the borough with the lowest crime
-        for(int x = 0; x < boroughListing.size(); x++ ) {
-            for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
-                if(boroughListing.get(x).equals(sScore.getBoroughName())) {
-                    
-                    
-                    linkCrime.put(sScore.getBoroughName(), sScore.getCrimeRate());
-                }
-            }
-
-        }
-        boroughCrime = top3Boroughs(linkCrime, 1000, false);
-        return boroughCrime;
-    }
-    
-    /**
-     * @param linkScores That is iterated over to find the highest/lowest values
-     *        startValue To set up the value in the pair
-     *        whichStat as only two methods use this which will determine what part of this method will be executed and returned
-     * 
-     * @return  top three or bottom three boroughs
-     */
-    public String top3Boroughs(HashMap<String, Double> linkScores, double startValue, boolean whichStat) {
-        Pair<String, Double> first = new Pair<String, Double>("", startValue);
-        Pair<String, Double> second = new Pair<String, Double>("", startValue);
-        Pair<String, Double> third = new Pair<String, Double>("", startValue);
-       
-        
-        for(Map.Entry<String, Double> socialSet : linkScores.entrySet()) {
-             if(whichStat == true) {
-               if(socialSet.getValue() > first.getValue()) {
+        //Iterates through each borough within the hashmap and compares them to the values within the pairs, if it is higher then the pair is replaced
+        for(Map.Entry<String, Double> socialSet : linkSocialScore.entrySet()) {
+           if(socialSet.getValue() > first.getValue()) {
                 first = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
                        
                 } else if(socialSet.getValue() > second.getValue()) {
@@ -343,31 +295,65 @@ public class StatController extends Controller
                 } else if(socialSet.getValue() > third.getValue()) {
                 third = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
                 
-                }   
-  
-             } else if (whichStat == false) {
-                if(socialSet.getValue() < first.getValue()) {
-                  first = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
-                       
-                  } else if(socialSet.getValue() < second.getValue()) {
-                  second = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
-                    
-                  } else if(socialSet.getValue() < third.getValue()) {
-                  third = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
-                
-                }   
-                
-             }
-             
+                }
+        }
+       
+        String output = "%s: %s\n%s: %s\n%s: %s";
+        Object[] outputValues = {first.getKey(), df.format(first.getValue()), second.getKey(), df.format(second.getValue()), third.getKey(), df.format(third.getValue())};
+        output = String.format(output, outputValues);
+        return output;
+
+    }
+
+    /**
+     * @return the boroughs with the lowest crime per 1000 people within 
+     * the price range
+     * (statistic 7)
+     */
+    private String lowestCrime() {
+        String boroughCrime = "";
+        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
+        
+        List<String> boroughListing = new ArrayList<>();
+        //Getting all boroughs within the price range
+        boroughListing = ListingProcessor.getBoroughs(filtered);
+        HashMap<String, Double> linkCrime = new HashMap<>();
+        
+        //Creates 3 pairs in order to determine which borough has the lowest crime is descending order
+        Pair<String, Double> first = new Pair<String, Double>("", Double.MAX_VALUE);
+        Pair<String, Double> second = new Pair<String, Double>("", Double.MAX_VALUE);
+        Pair<String, Double> third = new Pair<String, Double>("", Double.MAX_VALUE);        
+        //This nested for loop goes through each borough within the price range, adding the borough with the associated crime rate to the hash map
+        for(int x = 0; x < boroughListing.size(); x++ ) {
+            for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+                if(boroughListing.get(x).equals(sScore.getBoroughName())) {
+                    linkCrime.put(sScore.getBoroughName(), sScore.getCrimeRate());
+                }
             }
-            
-        if(whichStat) {
-               return (first.getKey() + ": " + df.format(first.getValue()) + System.lineSeparator() + second.getKey() + ": " + df.format(second.getValue()) + System.lineSeparator() + third.getKey() + ": " + df.format(third.getValue())); 
-        } else {
-               return first.getKey() + System.lineSeparator() + second.getKey() + System.lineSeparator() + third.getKey();
         }
         
-       }
+        //Iterates through the hashmap, getting the crime rate for each borough, if it is lower than the current values within the pairs, it is then replaced
+        for(Map.Entry<String, Double> socialSet : linkCrime.entrySet()) { 
+            if(socialSet.getValue() < first.getValue()) {
+                first = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                       
+                } else if(socialSet.getValue() < second.getValue()) {
+                second = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                    
+                } else if(socialSet.getValue() < third.getValue()) {
+                third = new Pair<String, Double>(socialSet.getKey(), socialSet.getValue());
+                
+                } 
+        }
+        //return first.getKey() + System.lineSeparator() + second.getKey() + System.lineSeparator() + third.getKey();
+
+        String output = "%s\n%s\n%s";
+        Object[] outputValues = {first.getKey(),  second.getKey(),  third.getKey() };
+        output = String.format(output, outputValues);
+        return output;
+    }
+    
+    
     
     /**
      * Provides the GUI for each statistic by creating a borderpane with labels that show the 
