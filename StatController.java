@@ -196,7 +196,7 @@ public class StatController extends Controller
         
         
         int average = ListingProcessor.getNumberOfReviews(airbnbListings,fromValue, toValue);
-        long count = ListingProcessor.getNumberofListings(airbnbListings,fromValue, toValue);
+        long count = ListingProcessor.getNumberOfListings(airbnbListings,fromValue, toValue);
         //Cast to a double to be able to return a number with two decimal places
         double l = (double)count;
         //Need a try-catch as initially the program will try to divide zero by zero
