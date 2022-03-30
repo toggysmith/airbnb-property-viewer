@@ -38,7 +38,7 @@
 - [x] ListingProcessor
 - [x] ListNode
 - [ ] MainController
-- [ ] MainView
+- [x] MainView
 - [ ] MainWindow
 - [x] MapController
 - [x] OpenLayersMap
