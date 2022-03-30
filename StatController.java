@@ -43,9 +43,9 @@ public class StatController extends Controller
     private final String stat3 = "Number of entire home and apartments:";   
     private final String stat4 = "Borough with Most Expensive Property:";
     private final String stat5 = "Borough with Highest Social Score";
-    private final String stat6 = "Lowest Crime Rate";
+    private final String stat6 = "Borough with Lowest Crime Rate";
     private final String stat7 = "Closest 5 Pubs";
-    private final String stat8 = "Closest 5 Attractions";
+    private final String stat8 = "Closest Attractions";
 
     //Strings that contain the actual statistic to be shown
     String value1, value2, value3, value4, value5, value6, value7, value8;
