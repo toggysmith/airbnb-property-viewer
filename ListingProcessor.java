@@ -200,6 +200,13 @@ public class ListingProcessor
      */
     public static AirbnbListing getPropertyListingByNames(List<AirbnbListing> listings, String listingName, String boroughName)
     {
+        if(listingName == null){
+            throw new IllegalArgumentException("Invalid listing name provided");
+        }
+        if(boroughName == null){
+            throw new IllegalArgumentException("Invalid borough name provided");
+        }
+        
        AirbnbListing selectedProperty = listings.stream()
                                                 .filter(listing -> listingName.equals(listing.getName()) && boroughName.equals(listing.getNeighbourhood()))
                                                 .findFirst().orElse(null); 
@@ -209,6 +216,8 @@ public class ListingProcessor
     //The below streams are used in the pie chart functionalities
     /**
      * The turns all the AirbnbListings to an array of their prices.
+     * @param listings The listings that you want the price for.
+     * @return The prices for the listings as an array of int.
      */
     public static int[] getListingPrices(List<AirbnbListing> listings)
     {
@@ -219,6 +228,8 @@ public class ListingProcessor
     
     /**
      * The turns all the AirbnbListings to an array of their number of reviews.
+     * @param listings The listings that you want the number of reviews for.
+     * @return The number of reviews for the listings as an array of int.
      */
     public static int[] getListingReviews(List<AirbnbListing> listings)
     {
@@ -229,6 +240,8 @@ public class ListingProcessor
     
     /**
      * The turns all the AirbnbListings to an array of their min nights.
+     * @param listings The listings that you want the min nights for.
+     * @return The min nights for the listings as an array of int.
      */
     public static int[] getListingMinNights(List<AirbnbListing> listings)
     {
@@ -244,8 +257,8 @@ public class ListingProcessor
      */
     public static int getMin(int[] values)
     {
-        if(values.length == 0){
-            return 0;
+        if(values.length == 0 || values == null){
+            throw new IllegalArgumentException("empty array passed");
         }else{
         return Arrays.stream(values)
                          .boxed()
@@ -261,8 +274,8 @@ public class ListingProcessor
      */
     public static int getMax(int[] values)
     {
-        if(values.length == 0){
-            return 0;
+        if(values.length == 0 || values == null){
+            throw new IllegalArgumentException("empty array passed");
         }else{
         return Arrays.stream(values)
                      .boxed()
@@ -276,8 +289,8 @@ public class ListingProcessor
      */
     public static long retrieveSpecifiedAmount(int[] values , int from, int to)
     {
-        if(values.length == 0){
-            return 0;
+        if(values.length == 0 || values == null){
+            throw new IllegalArgumentException("empty array passed");
         }else{
         return Arrays.stream(values)
                       .filter(i -> (i >= from) && (i < to))

@@ -430,6 +430,9 @@ public class ListingProcessorTest
 
         List<String> milan = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Milan");
         assertEquals(0,milan.size());
+        
+        List<String> empty = ListingProcessor.getPropertiesNameInBorough(customisedListings, null);
+        assertEquals(empty.isEmpty(), true);
     }
 
     @Test
@@ -513,6 +516,14 @@ public class ListingProcessorTest
         
         List<DestinationListing> pubsTower = ListingProcessor.filterDestinations(pubs, "Tower Hamlets", "££");
         assertEquals(2,pubsTower.size());
+        
+        List<DestinationListing> emptyBorough = ListingProcessor.filterDestinations(pubs, null, "££");
+        assertEquals(emptyBorough.isEmpty(), true);
+        
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                List<DestinationListing> emptyPrice = ListingProcessor.filterDestinations(pubs, "Tower Hamlets", null);
+        });
+        assertEquals("Invalid Price Passed", exception.getMessage());
     }
 
     @Test
@@ -520,14 +531,26 @@ public class ListingProcessorTest
     {
      AirbnbListing property = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark","Westminster");
      assertEquals("Double bedroom in Southwark",property.getName());
-     assertNotEquals("IncorrectName","Double bedroom in Southwark");
+     assertNotEquals("IncorrectName",property.getName());
        
+     
+     AirbnbListing propertyWrong = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect name","Westminster");
+     assertEquals(propertyWrong,null);
+     
+     Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                AirbnbListing propertyNull = ListingProcessor.getPropertyListingByNames(customisedListings,null,"Westminster");
+        });
+     assertEquals("Invalid listing name provided", exception.getMessage());
+     
        
-     AirbnbListing propertyNull = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect Name For Property","Westminster");
-    
-       
-     assertEquals(null, propertyNull);
-       
+     AirbnbListing propertyBorough = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark","Incorrect Borough Name");
+     assertEquals(propertyBorough, null);
+     
+     Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                AirbnbListing boroughNull = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark",null);
+        });
+     assertEquals("Invalid borough name provided", exception1.getMessage());
+     
     }
     
     @Test
@@ -543,9 +566,13 @@ public class ListingProcessorTest
         int negativeMin = ListingProcessor.getMin(array2);
         assertEquals(-1,negativeMin);
         
-        int empty = ListingProcessor.getMin(emptyArray);
-        assertEquals(0,empty);
-    }
+        
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                int empty = ListingProcessor.getMin(emptyArray);
+        });
+        
+     assertEquals("empty array passed", exception1.getMessage());
+     }
     
     @Test
     public void testGetMax()
@@ -560,8 +587,11 @@ public class ListingProcessorTest
         int max = ListingProcessor.getMax(array2);
         assertEquals(0,max);
         
-        int empty = ListingProcessor.getMax(emptyArray);
-        assertEquals(0,empty);
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                int empty = ListingProcessor.getMax(emptyArray);
+        });
+        assertEquals("empty array passed", exception1.getMessage());
+        
     }
     
     @Test
@@ -585,8 +615,10 @@ public class ListingProcessorTest
         int from3 = 10;
         int to3 = 13;
         
-        long total3 = ListingProcessor.retrieveSpecifiedAmount(array3,from3,to3);
-        assertEquals(0,total3);
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                long total3 = ListingProcessor.retrieveSpecifiedAmount(array3,from3,to3);
+        });
+        assertEquals("empty array passed", exception1.getMessage());
     }
     
     private static List<AirbnbListing> createListings()
