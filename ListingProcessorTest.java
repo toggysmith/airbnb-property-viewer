@@ -532,6 +532,9 @@ public class ListingProcessorTest
         assertEquals("Invalid Price Passed", exception.getMessage());
     }
     
+    /**
+     * tests the filterDestinations to filter destinations based on the borough name and price string depending on the destination type (PUB or ATTRACTION)
+     */
     @Test
     public void testFilterDestinations()
     {
@@ -565,7 +568,10 @@ public class ListingProcessorTest
         });
         assertEquals("Invalid Price Passed", exception.getMessage());
     }
-
+    
+    /**
+     * test the getPropertyListingByName such that the correct AirbnbListing object is returned based on the list of AirbnbListing, borough name and property name passed
+     */
     @Test
     public void testGetPropertyListingByNames()
     {
@@ -593,6 +599,9 @@ public class ListingProcessorTest
      
     }
     
+    /**
+     * test to get the minimum integer from an array of int
+     */
     @Test
     public void testGetMin()
     {
@@ -614,6 +623,9 @@ public class ListingProcessorTest
      assertEquals("empty array passed", exception1.getMessage());
      }
     
+    /**
+     * test to get the maximum integer from an array of int
+     */
     @Test
     public void testGetMax()
     {
@@ -634,6 +646,9 @@ public class ListingProcessorTest
         
     }
     
+    /**
+     * test to get a specific total based on an array of int , and a from and to value passed to the retrieveSpecifiedAmount() method
+     */
     @Test
     public void testRetrieveSpeciedAmount()
     {
