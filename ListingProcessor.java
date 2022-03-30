@@ -317,23 +317,19 @@ public class ListingProcessor
     public static Position getAveragePosition(List<AirbnbListing> listings)
     {
         checkValidAirbnbListings(listings);
-        try
-        {
-            return new Position(
-                 listings.stream()
-                .mapToDouble(listing -> listing.getLatitude())
-                .average()
-                .getAsDouble(),
-                
-                listings.stream()
-                .mapToDouble(listing -> listing.getLongitude())
-                .average()
-                .getAsDouble());
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
+        
+        return new Position(
+             listings.stream()
+            .filter(listing -> listing != null)
+            .mapToDouble(listing -> listing.getLatitude())
+            .average()
+            .getAsDouble(),
+            
+            listings.stream()
+            .filter(listing -> listing != null)
+            .mapToDouble(listing -> listing.getLongitude())
+            .average()
+            .getAsDouble());
     }
     
     
