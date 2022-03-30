@@ -20,7 +20,7 @@ import java.net.URL;
  * @author Tony Smith (K21064940)
  * @version 1.0.0
  */
-public class DestinationLoader
+public class DestinationLoader extends Loader
 {
     public static ArrayList<DestinationListing> pubDestinations;
     public static ArrayList<DestinationListing> touristDestinations;
@@ -56,8 +56,8 @@ public class DestinationLoader
                     displayAddress = address1 + ", " +  address2;
                 }
                 
-                double longitude = convertDouble(line[12]);
-                double latitude = convertDouble(line[13]);
+                double longitude = AirbnbDataLoader.convertDouble(line[12]);
+                double latitude = AirbnbDataLoader.convertDouble(line[13]);
                 
                 //issue with csv loader which does not recognise £ symbols, the following conversion is used to re-structure the string to the same format as that from the csv files
                 String ticketPrice = processPoundSymbolConversion(line[15]);
@@ -128,32 +128,4 @@ public class DestinationLoader
         }
         return price;
     }
-    
-    /**
-     * @param doubleString The string to be converted to Double type.
-     * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
-     */
-    private static Double convertDouble(String doubleString) throws Exception
-    {
-        if (doubleString != null && !doubleString.trim().equals(""))
-        {
-            return Double.parseDouble(doubleString);
-        }
-
-        return -1.0;
-    }
-
-    /**
-     * @param intString The string to be converted to Integer type.
-     * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
-     */
-    private static Integer convertInt(String intString)
-    {
-        if (intString != null && !intString.trim().equals(""))
-        {
-            return Integer.parseInt(intString);
-        }
-
-        return -1;
-    }   
 }

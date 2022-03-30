@@ -12,7 +12,7 @@ import java.net.URL;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StatisticsLoader
+public class StatisticsLoader extends Loader
 {
     /**
      * Holds the added statistics listings once they have been loaded from secondary memory.
@@ -72,33 +72,5 @@ public class StatisticsLoader
         if (statListings == null) load();
         
         return statListings;
-    }
-    
-    /*
-     * @param doubleString The string to be converted to Double type.
-     * @return The Double value of the string, or -1.0 if the string is either empty or just whitespace.
-     */
-    private static Double convertDouble(String doubleString) throws Exception
-    {
-        if (doubleString != null && !doubleString.trim().equals(""))
-        {
-            return Double.parseDouble(doubleString);
-        }
-
-        return -1.0;
-    }
-
-    /*
-     * @param intString The string to be converted to Integer type.
-     * @return The Integer value of the string, or -1 if the string is either empty or just whitespace.
-     */
-    private static Integer convertInt(String intString)
-    {
-        if (intString != null && !intString.trim().equals(""))
-        {
-            return Integer.parseInt(intString);
-        }
-
-        return -1;
     }
 }

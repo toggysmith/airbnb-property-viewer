@@ -192,9 +192,6 @@ public class StatController extends Controller
      * (statistic 1)
      */
     public String averagePropertyView() {
-
-        
-        
         int average = ListingProcessor.getNumberOfReviews(airbnbListings,fromValue, toValue);
         long count = ListingProcessor.getNumberOfListings(airbnbListings,fromValue, toValue);
         //Cast to a double to be able to return a number with two decimal places
@@ -479,14 +476,23 @@ public class StatController extends Controller
             return destinationType;
         }
 
+        /*
+         * returns the InteractiveStatController that handles this stat's main functionality and user interaction
+         * @return InteractiveStatController
+         */
         private InteractiveStatController getInteractiveController()
         {
             return interactiveStatController;
         }
 
+        /**
+         * Method called everytime the combo boxes in the main pane are updated to update the data that is held in the interactive statistics' combo boxes
+         */
         public void updateComboValues()
         {
+            //list of AirbnbListings that are in the selected main pane price range
             List<AirbnbListing> filteredListings = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
+            //list of destinations that are of this interactive statistics DestinationType (PUB or ATTRACTION)
             List<DestinationListing> destinations = DestinationType.getDestinations(this.getDesType());
 
             this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
