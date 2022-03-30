@@ -42,7 +42,7 @@ public class MainController extends Controller
         comboBoxRangeValues = new RangeValues(RangeBoxEnum.NOMIN.toString(), RangeBoxEnum.NOMAX.toString());
         mapController = (MapController) contentContainerManager.getController(MapController.class);
         statController = (StatController) contentContainerManager.getController(StatController.class);
-        mapController.createMap();
+        mapController.createButtons();
     }
     
     /*
@@ -120,7 +120,7 @@ public class MainController extends Controller
                 toRangeBox.setValue(comboBoxRangeValues.convertToIntToStr(comboBoxRangeValues.getToValue()));
             }
             //everytime the comboboxes are changed so are the values storing the combo box values in the mapController and statController
-            mapController.updateMap();
+            mapController.updateButtons();
             statController.updateValues();
         }
     }

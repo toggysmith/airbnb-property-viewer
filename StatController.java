@@ -188,7 +188,7 @@ public class StatController extends Controller
     
 
     /**
-     * Returns the average number of reviews per property within the price range
+     * @return the average number of reviews per property within the price range
      * (statistic 1)
      */
     public String averagePropertyView() {
@@ -207,7 +207,7 @@ public class StatController extends Controller
     }
 
     /**
-     * returns the number of non-private rooms  within the price range
+     * @return the number of non-private rooms  within the price range
      * (statistic 2)
      */
     public long nonPrivateRoom() {
@@ -217,7 +217,7 @@ public class StatController extends Controller
     }
     
     /**
-     * returns the total available properties within the price range
+     * @return the total available properties within the price range
      * (statistic 3)
      */
     public long totalAvailableProperties() { 
@@ -229,7 +229,7 @@ public class StatController extends Controller
     
 
     /**
-     * returns the most expensive neighbourhood within that price range
+     * @return the most expensive neighbourhood within that price range
      * (statistic 4)
      */
     public String expensiveNeighbourhood() {
@@ -255,7 +255,7 @@ public class StatController extends Controller
     }
 
     /**
-     * returns the highest social score with the borough name
+     * @return the highest social score with the borough name
      * social score is calculated using a csv file taken from the government website
      * (statistic 8)
      */
@@ -294,6 +294,45 @@ public class StatController extends Controller
         return boroughSocial;
     }
 
+    /**
+     * @return the borough with the lowest crime per 1000 people within 
+     * the price range
+     * (statistic 7)
+     */
+    public String lowestCrime() {
+        
+        
+        String boroughCrime = "";
+        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
+        
+        List<String> boroughListing = new ArrayList<>();
+        //Getting all boroughs within the price range
+        boroughListing = ListingProcessor.getBoroughs(filtered);
+
+        HashMap<String, Double> linkCrime = new HashMap<>();
+        
+        //This nested for loop goes through each borough within the price range, checking if the crime rate is lower than the current lowest, and returning the borough with the lowest crime
+        for(int x = 0; x < boroughListing.size(); x++ ) {
+            for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
+                if(boroughListing.get(x).equals(sScore.getBoroughName())) {
+                    
+                    
+                    linkCrime.put(sScore.getBoroughName(), sScore.getCrimeRate());
+                }
+            }
+
+        }
+        boroughCrime = top3Boroughs(linkCrime, 1000, false);
+        return boroughCrime;
+    }
+    
+    /**
+     * @param linkScores That is iterated over to find the highest/lowest values
+     *        startValue To set up the value in the pair
+     *        whichStat as only two methods use this which will determine what part of this method will be executed and returned
+     * 
+     * @return  top three or bottom three boroughs
+     */
     public String top3Boroughs(HashMap<String, Double> linkScores, double startValue, boolean whichStat) {
         Pair<String, Double> first = new Pair<String, Double>("", startValue);
         Pair<String, Double> second = new Pair<String, Double>("", startValue);
@@ -336,39 +375,6 @@ public class StatController extends Controller
         }
         
        }
-    
-    /**
-     * returns the borough with the lowest crime per 1000 people within 
-     * the price range
-     * (statistic 7)
-     */
-    public String lowestCrime() {
-        
-        
-        String boroughCrime = "";
-        List<AirbnbListing> filtered = ListingProcessor.filterByPriceRange(airbnbListings, fromValue, toValue);
-        
-        List<String> boroughListing = new ArrayList<>();
-        //Getting all boroughs within the price range
-        boroughListing = ListingProcessor.getBoroughs(filtered);
-
-        HashMap<String, Double> linkCrime = new HashMap<>();
-        
-        //This nested for loop goes through each borough within the price range, checking if the crime rate is lower than the current lowest, and returning the borough with the lowest crime
-        for(int x = 0; x < boroughListing.size(); x++ ) {
-            for(StatisticsListing sScore : StatisticsLoader.getStatListings()) {
-                if(boroughListing.get(x).equals(sScore.getBoroughName())) {
-                    
-                    
-                    linkCrime.put(sScore.getBoroughName(), sScore.getCrimeRate());
-                }
-            }
-
-        }
-        boroughCrime = top3Boroughs(linkCrime, 1000, false);
-        return boroughCrime;
-    }
-    
     
     
     
@@ -422,13 +428,14 @@ public class StatController extends Controller
             leftButton.setOnAction(this::clickLeft);
 
             
+            //Setting up where the components are in the borderpane and their allignment
             wrapPane.setCenter(value);
-
             wrapPane.setTop(title);
             wrapPane.setAlignment(title,Pos.CENTER);
             wrapPane.setAlignment(rightButton, Pos.CENTER);
             wrapPane.setAlignment(leftButton, Pos.CENTER);
 
+            //Fixing the size of the buttons and labels
             wrapPane.setMargin(rightButton, new Insets(0,15,0,0));
             wrapPane.setMargin(leftButton, new Insets(0,0,0,15));
             wrapPane.setMargin(title, new Insets(50,50,50,50));
@@ -442,6 +449,10 @@ public class StatController extends Controller
             this.setCenter(wrapPane);
         }
 
+        /**
+         * @param the value of the statistic to be displayed
+         * changes the value of the statistics
+         */
         public void updateValue(String text)
         {
             value.setText(text);

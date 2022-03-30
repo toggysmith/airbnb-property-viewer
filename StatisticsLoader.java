@@ -7,19 +7,22 @@ import java.net.URI;
 import java.io.File;
 import java.net.URL;
 /**
- * Write a description of class StatisticLoader here.
+ * Loads the london-borough-profiles csv file which is to be read and used in the additional statistics
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class StatisticsLoader extends Loader
 {
-    /**
-     * Holds the added statistics listings once they have been loaded from secondary memory.
-     */
+    
+    // Holds the added statistics listings once they have been loaded from secondary memory.
+     
     private static ArrayList<StatisticsListing> statListings;
     
-    /*
+    /**
      * Loads and saves stat listings from a CSV file. Each row in the CSV file corresponds to data
      * about a borough.
      */
