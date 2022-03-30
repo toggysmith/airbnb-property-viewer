@@ -531,12 +531,12 @@ public class ListingProcessorTest
     {
      AirbnbListing property = ListingProcessor.getPropertyListingByNames(customisedListings,"Double bedroom in Southwark","Westminster");
      assertEquals("Double bedroom in Southwark",property.getName());
-     assertNotEquals("IncorrectName","Double bedroom in Southwark");
+     assertNotEquals("IncorrectName",property.getName());
        
-       
+     AirbnbListing propertyWrong = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect name","Westminster");
+     assertEquals(propertyWrong,null);
+     
      AirbnbListing propertyNull = ListingProcessor.getPropertyListingByNames(customisedListings,"Incorrect Name For Property","Westminster");
-    
-       
      assertEquals(null, propertyNull);
        
     }
