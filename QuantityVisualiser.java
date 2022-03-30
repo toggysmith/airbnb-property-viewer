@@ -1,10 +1,6 @@
-// @TODO: Refactor class
-
-import javafx.scene.shape.Circle;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.SVGPath;
-import java.io.FileInputStream;
 
 /**
  * This class should create a graphical representation
@@ -12,6 +8,12 @@ import java.io.FileInputStream;
  *
  * It does this by using size and color as visual
  * indicators.
+ * 
+ * @author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public class QuantityVisualiser extends Group
 {
@@ -67,8 +69,8 @@ public class QuantityVisualiser extends Group
     }
 
     /*
-     * Update the circle graphic by changing its
-     * size and color to reflect the quantity.
+     * Update the house graphic by changing the
+     * number of houses to reflect the quantity of properties.
      */
     private void updateGraphic()
     {
