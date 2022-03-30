@@ -79,7 +79,6 @@ public class StatController extends Controller
     private interactiveStat attractions;
 
     //The class houses methods that stream the data in the csv file to be used in the statistics
-    //private ListingProcessor sortList;
     /**
      * Initializing the view of the pane when it is called
      */
@@ -162,7 +161,6 @@ public class StatController extends Controller
      */
     private void setupQueue()
     {
-
         dq = new ArrayDeque<stat>();
         dq.addLast(highSocial);
         dq.addLast(lowCrime);
@@ -184,8 +182,6 @@ public class StatController extends Controller
         pubs = new interactiveStat(new BorderPane(),new Label(), new Label(), stat7,  DestinationType.PUB);
         attractions = new interactiveStat(new BorderPane(),new Label(), new Label(), stat8, DestinationType.ATTRACTION);
     }
-
-    
 
     /**
      * @return the average number of reviews per property within the price range
@@ -226,8 +222,6 @@ public class StatController extends Controller
         return available;
     }
 
-    
-
     /**
      * @return the most expensive neighbourhood within that price range
      * (statistic 4)
@@ -250,7 +244,6 @@ public class StatController extends Controller
             }
 
         }
-
         return correctNeighbourhood;
     }
 
@@ -376,10 +369,6 @@ public class StatController extends Controller
         
        }
     
-    
-    
-    
-    
     /**
      * Provides the GUI for each statistic by creating a borderpane with labels that show the 
      * title and value of the statistic and buttons that allow the user to switch between each
@@ -488,15 +477,26 @@ public class StatController extends Controller
             gridPane1.add(first,column,row);
         }
 
+        /**
+         * returns the string represeting the text of title
+         * @return String, the stat's title
+         */
         public String getTitle()
         {
             return title.getText();
         }
 
+        /**
+         * returns the text of the value label
+         * @return String, the text of the value label
+         */
         public String getValue() {
             return value.getText();
         }
-
+        
+        /**
+         * returns the BorderPane that wraps all the components of the statistic object
+         */
         public BorderPane getWrapPane()
         {
             return wrapPane;
@@ -574,7 +574,6 @@ public class StatController extends Controller
 
             this.getInteractiveController().updateBoxes(filteredListings,destinations,destinationType);
         }
-
     }
 }
 
