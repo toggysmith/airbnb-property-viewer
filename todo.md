@@ -41,7 +41,7 @@
 - [ ] MainView
 - [ ] MainWindow
 - [ ] MapController
-- [ ] OpenLayersMap
+- [x] OpenLayersMap
 - [ ] PieChartController
 - [ ] PieChartView
 - [x] Position
