@@ -123,7 +123,8 @@ public class ListingProcessor
     /**
      * This gets a list of all the AirbnbListing's by the host that also owns the paramater hostListing, not including the hostListing.
      * @param hostListing The listing by the host you want to find other listings for.
-     * @return The other AirbnbListing's by the host given.
+     * @return The other AirbnbListing's by the host given. IllegalArgumentException is thrown if the hostListing or the hostListing id is null.
+     * Returns an empty list if the hostListing host id is null.
      */
     public static List<AirbnbListing> getOtherListingsWithHostId(AirbnbListing hostListing)
     {
