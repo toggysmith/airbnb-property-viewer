@@ -435,6 +435,11 @@ public class ListingProcessorTest
         assertEquals(empty.isEmpty(), true);
     }
 
+    /**
+     * Tests 'getAveragePosition()' returns the a Position
+     * with the average longitude and latitude when 
+     * a valid input is given.
+     */
     @Test
     public void testGetAveragePositionValidInput()
     {
@@ -444,18 +449,30 @@ public class ListingProcessorTest
         assertEquals(position1.getLongitude(), position2.getLongitude());
     }
 
+    /**
+     * Tests 'getAveragePosition()' throws an IllegalArgumentException when given a null input.
+     */
     @Test
     public void testGetAveragePositionNullInput()
     {
-        Position position1 = ListingProcessor.getAveragePosition(null);
-        assertNull(position1);
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getAveragePosition(null);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
     }
 
+    /**
+     * Tests 'getAveragePosition()' throws an IllegalArgumentException when given an empty input.
+     */
     @Test
     public void testGetAveragePositionEmptyListInput()
     {
-        Position position1 = ListingProcessor.getAveragePosition(new ArrayList<AirbnbListing>());
-        assertNull(position1);
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getAveragePosition(new ArrayList<AirbnbListing>());
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
     }
     
     /**
@@ -723,18 +740,16 @@ public class ListingProcessorTest
     }
 
     /**
-     * Test 'getListingPrices()' returns an empty array when given a null input.
+     * Test 'getListingPrices()' throws an IllegalArgumentException when given a null input.
      */
     @Test
     public void testGetListingPricesNullInput()
     {
-        int[] empty = {};
-        int[] test = ListingProcessor.getListingPrices(null);
-        assertEquals(empty.length, test.length);
-        for (int i = 0; i < empty.length && i < test.length; i++)
-        {
-            assertEquals(empty[i], test[i]);
-        }
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getListingPrices(null);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
     }
 
     /**
@@ -769,18 +784,16 @@ public class ListingProcessorTest
     }
 
     /**
-     * Test 'getListingReviews()' returns an empty array when given a null input.
+     * Test 'getListingReviews()' throws an IllegalArgumentException when given a null input.
      */
     @Test
     public void testGetListingReviewsNullInput()
     {
-        int[] empty = {};
-        int[] test = ListingProcessor.getListingReviews(null);
-        assertEquals(empty.length, test.length);
-        for (int i = 0; i < empty.length && i < test.length; i++)
-        {
-            assertEquals(empty[i], test[i]);
-        }
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getListingReviews(null);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
     }
 
     /**
@@ -815,18 +828,16 @@ public class ListingProcessorTest
     }
 
     /**
-     * Test 'getListingMinNights()' returns an empty array when given a null input.
+     * Test 'getListingMinNights()' throws an IllegalArgumentException when given a null input.
      */
     @Test
     public void testGetListingMinNightsNullInput()
     {
-        int[] empty = {};
-        int[] test = ListingProcessor.getListingMinNights(null);
-        assertEquals(empty.length, test.length);
-        for (int i = 0; i < empty.length && i < test.length; i++)
-        {
-            assertEquals(empty[i], test[i]);
-        }
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    ListingProcessor.getListingMinNights(null);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
     }
     
     /**

@@ -52,7 +52,7 @@
 - [ ] QuantityVisualiser
 - [x] RangeBoxEnum
 - [x] RangeValues
-- [ ] StatController
+- [x] StatController
 - [ ] StatisticsListing
-- [ ] StatisticsLoader
+- [x] StatisticsLoader
 - [ ] WelcomeController
