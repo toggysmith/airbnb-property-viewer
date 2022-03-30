@@ -831,7 +831,7 @@ public class ListingProcessorTest
         listings.add(new AirbnbListing("7833588", "Bright DOUBLE ROOM, central LONDON", "34472628", "Tommaso", "Hammersmith and Fulham", 51.52066587, -0.056124665, "Private room", 231, 1, 7, "07/12/2015", 0.37, 1, 0));
         listings.add(new AirbnbListing("9020269", "Spacious Room next to Richmond Par", "47094767", "Marcus", "Kingston upon Thames", 51.41945318, -0.286341833, "Private room", 30, 1, 1, "09/10/2016", 0.65, 2, 35));
         
-        long totalListings = ListingProcessor.getNumberofListings(listings, 0, 500);
+        long totalListings = ListingProcessor.getNumberOfListings(listings, 0, 500);
         
         
         assertEquals(totalListings, listings.size());
@@ -855,7 +855,7 @@ public class ListingProcessorTest
     }
 
     /**
-     * Test that `getNumberofListings()` throws an IllegalArgumentException with the right message when given an empty listings argument.
+     * Test that `getNumberOfListings()` throws an IllegalArgumentException with the right message when given an empty listings argument.
      */
     @Test
     public void testGetNumberOfListingsWithEmptyListings()

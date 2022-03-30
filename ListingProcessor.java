@@ -326,7 +326,7 @@ public class ListingProcessor
     /**
      * Get the total number of listings for all properties within the price range
      */
-    public static long getNumberofListings(List<AirbnbListing> listings, int fromPrice, int toPrice) {
+    public static long getNumberOfListings(List<AirbnbListing> listings, int fromPrice, int toPrice) {
         checkValidAirbnbListings(listings);
         
         listings = filterByPriceRange(listings, fromPrice, toPrice);
