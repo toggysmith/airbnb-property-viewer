@@ -35,7 +35,8 @@
 - [x] InteractiveStatController
 - [x] InteractiveStatsTableValues
 - [x] JsToJavaBridge
-- [x] ListingProcessor
+- [ ] ListingProcessor
+- [ ] ListingProcessorTest
 - [x] ListNode
 - [ ] MainController
 - [x] MainView
