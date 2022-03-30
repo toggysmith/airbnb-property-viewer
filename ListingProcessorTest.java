@@ -37,26 +37,6 @@ public class ListingProcessorTest
         setUpCustomisedListing();
         setUpDestinations();
     }
-
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
-    @BeforeEach
-    public void setUp()
-    {
-    }
-
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
-    @AfterEach
-    public void tearDown()
-    {
-    }
     
     /**
      * Test that `filterByBorough()` returns the correct list when given valid arguments.
