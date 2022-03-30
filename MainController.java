@@ -1,4 +1,3 @@
-// @TODO: Refactor class
 
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
@@ -33,7 +32,7 @@ public class MainController extends Controller
     private StatController statController;
     
     /**
-     * 
+     * Main method that sets up the panes and their corresponding controllers for the entire application
      */
     public void setUpPanes() throws IOException
     {
@@ -137,7 +136,7 @@ public class MainController extends Controller
         invalidRange.showAndWait();
     } 
     
-    /*
+    /**
      * returns the object storing the combo box range values
      * @return RangeValues, containing the from value and to value
      */
@@ -146,7 +145,7 @@ public class MainController extends Controller
         return comboBoxRangeValues;
     }
     
-    /*
+    /**
      * returns the combo box object storing the "from values"
      * @return ComboBox<String>, returns a combo box storing strings
      */
@@ -155,7 +154,7 @@ public class MainController extends Controller
         return fromRangeBox;
     }
     
-    /*
+    /**
      * returns the combo box object storing the "to values"
      * @return ComboBox<String>, returns a combo box storing strings
      */
