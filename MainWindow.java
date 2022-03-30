@@ -1,9 +1,8 @@
 import java.util.List;
-import javafx.collections.ObservableList;
-
 
 /**
- * Responsible for holding the position of a listing.
+ * Responsible for creating MainView and giving other classes access
+ * to values such as the range values.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)

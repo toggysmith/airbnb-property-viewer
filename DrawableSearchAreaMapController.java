@@ -1,14 +1,7 @@
 import javafx.fxml.FXML;
-import javafx.scene.web.WebView;
-import javafx.scene.web.WebEngine;
-import java.net.URL;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.application.Platform;
 
 /**
  * Responsible for setting up the map that lets the user draw a search area for properties. This map is primarily implemented

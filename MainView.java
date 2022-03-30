@@ -1,5 +1,3 @@
-// @TODO: Refactor class
-
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +16,7 @@ import java.util.HashSet;
  * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
- * @version 1.0
+ * @version 1.0.0
  */
 public class MainView extends Stage
 {
@@ -36,6 +34,7 @@ public class MainView extends Stage
 
     /**
      * Create the main application window.
+     * @param mainWindow The MainWindow for this application.
      */
     public MainView(MainWindow mainWindow) throws Exception
     {

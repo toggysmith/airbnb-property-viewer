@@ -130,14 +130,10 @@ public class InteractiveStatController extends Controller
          if(desType.equals(DestinationType.PUB)){
             price.setPromptText("Pub Price Range");
             PubPrice pubPricings = new PubPrice();
-            
-            //ArrayList<String> categories = new ArrayList<>(Arrays.asList("£", "££", "£££"));
             price.getItems().addAll(pubPricings.getPrices());
         }else if(desType.equals(DestinationType.ATTRACTION)){
             price.setPromptText("Ticket Price");
             AttractionPrice attractionPrices = new AttractionPrice();
-            
-            //ArrayList<String> tickets = new ArrayList<>(Arrays.asList("free", "£2.50 - £5.00","£5.00 - £7.00", "£7.00 - £9.00"));
             price.getItems().addAll(attractionPrices.getPrices());
         }
     }
