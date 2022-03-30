@@ -216,6 +216,8 @@ public class ListingProcessor
     //The below streams are used in the pie chart functionalities
     /**
      * The turns all the AirbnbListings to an array of their prices.
+     * @param listings The listings that you want the price for.
+     * @return The prices for the listings as an array of int.
      */
     public static int[] getListingPrices(List<AirbnbListing> listings)
     {
@@ -226,6 +228,8 @@ public class ListingProcessor
     
     /**
      * The turns all the AirbnbListings to an array of their number of reviews.
+     * @param listings The listings that you want the number of reviews for.
+     * @return The number of reviews for the listings as an array of int.
      */
     public static int[] getListingReviews(List<AirbnbListing> listings)
     {
@@ -236,6 +240,8 @@ public class ListingProcessor
     
     /**
      * The turns all the AirbnbListings to an array of their min nights.
+     * @param listings The listings that you want the min nights for.
+     * @return The min nights for the listings as an array of int.
      */
     public static int[] getListingMinNights(List<AirbnbListing> listings)
     {
