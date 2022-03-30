@@ -55,4 +55,4 @@
 - [x] StatController
 - [x] StatisticsListing
 - [x] StatisticsLoader
-- [ ] WelcomeController
+- [x] WelcomeController
