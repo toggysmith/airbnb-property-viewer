@@ -691,6 +691,10 @@ public class ListingProcessorTest
         customDestinations.add(destination3);
     }
 
+    /**
+     * Test 'getListingPrices()' returns an array of the pices 
+     * when given a valid input.
+     */
     @Test
     public void testGetListingPricesValidInput()
     {
@@ -703,6 +707,9 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingPrices()' returns an empty array when given an empty input.
+     */
     @Test
     public void testGetListingPricesEmptyInput()
     {
@@ -715,11 +722,14 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingPrices()' returns an empty array when given a null input.
+     */
     @Test
     public void testGetListingPricesNullInput()
     {
         int[] empty = {};
-        int[] test = ListingProcessor.getListingPrices(nullList);
+        int[] test = ListingProcessor.getListingPrices(null);
         assertEquals(empty.length, test.length);
         for (int i = 0; i < empty.length && i < test.length; i++)
         {
@@ -727,6 +737,10 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingReviews()' returns an array of the number of reviews 
+     * when given a valid input.
+     */
     @Test
     public void testGetListingReviewsValidInput()
     {
@@ -739,6 +753,9 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingReviews()' returns an empty array when given an empty input.
+     */
     @Test
     public void testGetListingReviewsEmptyInput()
     {
@@ -751,11 +768,14 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingReviews()' returns an empty array when given a null input.
+     */
     @Test
     public void testGetListingReviewsNullInput()
     {
         int[] empty = {};
-        int[] test = ListingProcessor.getListingReviews(nullList);
+        int[] test = ListingProcessor.getListingReviews(null);
         assertEquals(empty.length, test.length);
         for (int i = 0; i < empty.length && i < test.length; i++)
         {
@@ -763,8 +783,12 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingMinNights()' returns an array of the min nights 
+     * when given a valid input.
+     */
     @Test
-    public void testGgetListingMinNightsValidInput()
+    public void testGetListingMinNightsValidInput()
     {
         int[] array1 = {2, 2, 1, 1, 1, 1, 1};
         int[] test = ListingProcessor.getListingMinNights(customisedListings);
@@ -775,6 +799,9 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingMinNights()' returns an empty array when given an empty input.
+     */
     @Test
     public void testGetListingMinNightsEmptyInput()
     {
@@ -787,11 +814,14 @@ public class ListingProcessorTest
         }
     }
 
+    /**
+     * Test 'getListingMinNights()' returns an empty array when given a null input.
+     */
     @Test
     public void testGetListingMinNightsNullInput()
     {
         int[] empty = {};
-        int[] test = ListingProcessor.getListingMinNights(nullList);
+        int[] test = ListingProcessor.getListingMinNights(null);
         assertEquals(empty.length, test.length);
         for (int i = 0; i < empty.length && i < test.length; i++)
         {

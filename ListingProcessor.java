@@ -221,6 +221,10 @@ public class ListingProcessor
      */
     public static int[] getListingPrices(List<AirbnbListing> listings)
     {
+        if (listings == null)
+        {
+            throw new IllegalArgumentException("The provided listings argument is invalid.");
+        }
         return listings.stream()
                 .mapToInt(listing -> listing.getPrice())
                 .toArray();
@@ -233,6 +237,10 @@ public class ListingProcessor
      */
     public static int[] getListingReviews(List<AirbnbListing> listings)
     {
+        if (listings == null)
+        {
+            throw new IllegalArgumentException("The provided listings argument is invalid.");
+        }
         return listings.stream()
                 .mapToInt(listing -> listing.getNumberOfReviews())
                 .toArray();
@@ -245,6 +253,10 @@ public class ListingProcessor
      */
     public static int[] getListingMinNights(List<AirbnbListing> listings)
     {
+        if (listings == null)
+        {
+            throw new IllegalArgumentException("The provided listings argument is invalid.");
+        }
         return listings.stream()
                        .mapToInt(listing -> listing.getMinimumNights())
                        .toArray();
@@ -304,6 +316,7 @@ public class ListingProcessor
      */
     public static Position getAveragePosition(List<AirbnbListing> listings)
     {
+        checkValidAirbnbListings(listings);
         try
         {
             return new Position(
