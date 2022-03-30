@@ -787,7 +787,7 @@ public class ListingProcessorTest
     }
     
     /**
-     * Test that `getListingWithId()` throws an IllegalArgumentException with the right message when given a null listings argument.
+     * Test that `getNumberOfReviews()` throws an IllegalArgumentException with the right message when given a null listings argument.
      */
     @Test
     public void testGetNumberOfReviewsWithNullListings()
@@ -802,7 +802,7 @@ public class ListingProcessorTest
     }
 
     /**
-     * Test that `getListingWithId()` throws an IllegalArgumentException with the right message when given an empty listings argument.
+     * Test that `getNumberOfReviews()` throws an IllegalArgumentException with the right message when given an empty listings argument.
      */
     @Test
     public void testGetNumberOfReviewsWithEmptyListings()
@@ -817,7 +817,7 @@ public class ListingProcessorTest
     }
     
     /**
-     * Test that `getNumberOfReviews()` returns the correct list when given valid arguments.
+     * Test that `getNumberofListings()` returns the correct list when given valid arguments.
      */
     @Test
     public void testGetNumberOfListingsWithValidArguements()
@@ -840,7 +840,7 @@ public class ListingProcessorTest
     
     
     /**
-     * Test that `getListingWithId()` throws an IllegalArgumentException with the right message when given a null listings argument.
+     * Test that `getNumberofListings()` throws an IllegalArgumentException with the right message when given a null listings argument.
      */
     @Test
     public void testGetNumberOfListingsWithNullListings()
@@ -855,7 +855,7 @@ public class ListingProcessorTest
     }
 
     /**
-     * Test that `getListingWithId()` throws an IllegalArgumentException with the right message when given an empty listings argument.
+     * Test that `getNumberofListings()` throws an IllegalArgumentException with the right message when given an empty listings argument.
      */
     @Test
     public void testGetNumberOfListingsWithEmptyListings()
@@ -864,6 +864,59 @@ public class ListingProcessorTest
                     List<AirbnbListing> listings = new ArrayList<>();
 
                     ListingProcessor.getNumberOfReviews(listings, 0, 500);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
+    }
+    
+    /**
+     * Test that `getTotalAvailableProperties()` returns the correct list when given valid arguments.
+     */
+    @Test
+    public void testGetTotalAvailabilityWithValidArguements()
+    {
+        List<AirbnbListing> listings = new ArrayList<>();
+        
+        listings.add(new AirbnbListing("14403483", "Large room, sleeps 3, Brixton", "88550548", "Allison", "Lambeth", 51.47125306, -0.11250696, "Private room", 37, 2, 28, "03/03/2017", 4.12, 1, 254));
+        listings.add(new AirbnbListing("9957622", "Double bed in Notting Hill", "51168635", "Serge", "Westminster", 51.51782111, -0.192291889, "Private room", 35, 2, 18, "30/12/2016", 1.67, 1, 0));
+        listings.add(new AirbnbListing("7483279", "Double beedroom in Southwark", "78372", "Adam", "Hammersmith and Fulham", 51.46977981, -0.189799402, "Entire home/apt", 160, 1, 0, "12/8/2015", 1.00, 1, 0));
+        listings.add(new AirbnbListing("2584302", "Epic room in LONDON!", "23426", "Jeff", "Hammersmith and Fulham", 51.21937781, -0.133779402, "Private room", 200, 1, 0, "12/8/2015", 1.00, 1, 0));
+        listings.add(new AirbnbListing("7833588", "Bright DOUBLE ROOM, central LONDON", "34472628", "Tommaso", "Hammersmith and Fulham", 51.52066587, -0.056124665, "Private room", 231, 1, 7, "07/12/2015", 0.37, 1, 0));
+        listings.add(new AirbnbListing("9020269", "Spacious Room next to Richmond Par", "47094767", "Marcus", "Kingston upon Thames", 51.41945318, -0.286341833, "Private room", 30, 1, 1, "09/10/2016", 0.65, 2, 35));
+        
+        long totalAvailability = ListingProcessor.getTotalAvailableProperties(listings, 0, 500);
+        
+        
+        assertEquals(totalAvailability, 2);
+    }
+    
+    
+    
+    /**
+     * Test that `getTotalAvailableProperties()` throws an IllegalArgumentException with the right message when given a null listings argument.
+     */
+    @Test
+    public void testGetTotalAvailabilityWithNullListings()
+    {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    List<AirbnbListing> listings = null;
+
+                    ListingProcessor.getTotalAvailableProperties(listings, 0, 500);
+        });
+
+        assertEquals("The provided listings argument is invalid.", exception.getMessage());
+    }
+
+    /**
+     * Test that `getTotalAvailableProperties()` throws an IllegalArgumentException with the right message when given an empty listings argument.
+     */
+    @Test
+    public void testGeTotalAvailabilityWithEmptyListings()
+    {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+                    List<AirbnbListing> listings = new ArrayList<>();
+
+                    ListingProcessor.getTotalAvailableProperties(listings, 0, 500);
         });
 
         assertEquals("The provided listings argument is invalid.", exception.getMessage());

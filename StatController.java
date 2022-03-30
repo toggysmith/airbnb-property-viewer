@@ -212,23 +212,23 @@ public class StatController extends Controller
      * returns the number of non-private rooms  within the price range
      * (statistic 2)
      */
-    public int nonPrivateRoom() {
+    public long nonPrivateRoom() {
         //Method returns a value which  is then casted
         long nonPrivate = ListingProcessor.getNonPrivate(airbnbListings, roomNeeded, fromValue, toValue);
 
-        int privateCount = (int)nonPrivate;
-        return privateCount;
+        //int privateCount = (int)nonPrivate;
+        return nonPrivate;
     }
     
     /**
      * returns the total available properties within the price range
      * (statistic 3)
      */
-    public int totalAvailableProperties() { 
+    public long totalAvailableProperties() { 
         //Returns a number  that is then casted to an integer
-        long available = ListingProcessor.getTotalAvailability(airbnbListings,fromValue, toValue);
-        int total = (int)available;
-        return total;
+        long available = ListingProcessor.getTotalAvailableProperties(airbnbListings,fromValue, toValue);
+       // int total = (int)available;
+        return available;
     }
 
     

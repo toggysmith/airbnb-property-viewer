@@ -334,7 +334,7 @@ public class ListingProcessor
     /**
      * Get the total number of availability for all properties within the price range
      */
-    public static long getTotalAvailability(List<AirbnbListing> listings, int fromPrice, int toPrice) {
+    public static long getTotalAvailableProperties(List<AirbnbListing> listings, int fromPrice, int toPrice) {
         listings = filterByPriceRange(listings, fromPrice, toPrice);
         return listings.stream()
             .filter(listing -> listing.getAvailability365() > 0) 
