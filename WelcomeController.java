@@ -1,11 +1,10 @@
-import javafx.fxml.FXML;
 import java.awt.Desktop;
 import java.net.URL;
-import java.net.MalformedURLException;
-import java.io.IOException;
+
+import javafx.fxml.FXML;
 
 /**
- * 
+ * Responsible for handling the "Visit our GitHub" and "Swap color mode" button clicks.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)

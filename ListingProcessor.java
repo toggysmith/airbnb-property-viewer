@@ -123,7 +123,8 @@ public class ListingProcessor
     /**
      * This gets a list of all the AirbnbListing's by the host that also owns the paramater hostListing, not including the hostListing.
      * @param hostListing The listing by the host you want to find other listings for.
-     * @return The other AirbnbListing's by the host given.
+     * @return The other AirbnbListing's by the host given. IllegalArgumentException is thrown if the hostListing or the hostListing id is null.
+     * Returns an empty list if the hostListing host id is null.
      */
     public static List<AirbnbListing> getOtherListingsWithHostId(AirbnbListing hostListing)
     {
@@ -219,7 +220,7 @@ public class ListingProcessor
     /**
      * The turns all the AirbnbListings to an array of their prices.
      * @param listings The listings that you want the price for.
-     * @return The prices for the listings as an array of int.
+     * @return The prices for the listings as an array of int. Throws an IllegalArgumentException if listings is null.
      */
     public static int[] getListingPrices(List<AirbnbListing> listings)
     {
@@ -235,7 +236,7 @@ public class ListingProcessor
     /**
      * The turns all the AirbnbListings to an array of their number of reviews.
      * @param listings The listings that you want the number of reviews for.
-     * @return The number of reviews for the listings as an array of int.
+     * @return The number of reviews for the listings as an array of int. Throws an IllegalArgumentException if listings is null.
      */
     public static int[] getListingReviews(List<AirbnbListing> listings)
     {
@@ -251,7 +252,7 @@ public class ListingProcessor
     /**
      * The turns all the AirbnbListings to an array of their min nights.
      * @param listings The listings that you want the min nights for.
-     * @return The min nights for the listings as an array of int.
+     * @return The min nights for the listings as an array of int. Throws an IllegalArgumentException if listings is null.
      */
     public static int[] getListingMinNights(List<AirbnbListing> listings)
     {
@@ -314,7 +315,7 @@ public class ListingProcessor
     
     /**
      * @param listings The listings to be sorted through.
-     * @return A Position object containing the average latitude and longitude of the listings.
+     * @return A Position object containing the average latitude and longitude of the listings. Throws an IllegalArgumentException if listings is null or empty.
      */
     public static Position getAveragePosition(List<AirbnbListing> listings)
     {
