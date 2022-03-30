@@ -58,6 +58,7 @@ public class PieChartView extends Stage
             pieValues.put(symbol + " " + min + " =< x < " + symbol + " " + toValue,totalValue);
         }  
 
+        //passes in the data to the controller to set up pie chart appearance
         controller.setup(pieValues);
     }
 }
