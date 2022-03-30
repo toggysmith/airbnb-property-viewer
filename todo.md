@@ -38,7 +38,7 @@
 - [ ] ListingProcessor
 - [ ] ListingProcessorTest
 - [x] ListNode
-- [ ] MainController
+- [x] MainController
 - [x] MainView
 - [x] MainWindow
 - [x] MapController
