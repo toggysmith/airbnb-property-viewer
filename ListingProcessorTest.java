@@ -429,6 +429,9 @@ public class ListingProcessorTest
 
         List<String> milan = ListingProcessor.getPropertiesNameInBorough(customisedListings, "Milan");
         assertEquals(0,milan.size());
+        
+        List<String> empty = ListingProcessor.getPropertiesNameInBorough(customisedListings, null);
+        assertEquals(empty.isEmpty(), true);
     }
 
     @Test
