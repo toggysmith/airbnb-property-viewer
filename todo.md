@@ -40,7 +40,7 @@
 - [ ] MainController
 - [ ] MainView
 - [ ] MainWindow
-- [ ] MapController
+- [x] MapController
 - [x] OpenLayersMap
 - [x] PieChartController
 - [x] PieChartView
