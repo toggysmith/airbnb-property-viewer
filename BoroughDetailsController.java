@@ -191,6 +191,9 @@ public class BoroughDetailsController extends Controller
         toPrice.setText(String.format(toPrice.getText(), priceRange.getToValueStr()));
     }
     
+    /*
+     * makes the pie chart object and sets the children of pieChart to the anchorPane returned
+     */
     private void makePieChart()
     {
         try
@@ -205,6 +208,10 @@ public class BoroughDetailsController extends Controller
         }
     }
     
+    /*
+     * Method that gathers all of the data from the relevant table column depending on which option is chosen from the combo box
+     * @return selectedAttribute, the data from which column of the table the user wishes to display as a piechart
+     */
     private void setUpPieChart(String selectedAttribute)
     {
         int[] attributeValues = new int[boroughTable.getItems().size()];   
@@ -225,6 +232,9 @@ public class BoroughDetailsController extends Controller
         }
     }
     
+    /*
+     * sets up the possible data options the pie chart can be made from
+     */
     private void setUpComboBox()
     {
         List<String> comboBoxStrings = new ArrayList<String>();
@@ -232,10 +242,13 @@ public class BoroughDetailsController extends Controller
         comboBoxStrings.add("Number of reviews");
         comboBoxStrings.add("Min number of nights");
         attributeBox.getItems().addAll(comboBoxStrings);
-        
+    
         makePieChart();
     }
     
+    /*
+     * method called everytime the value of the combo box is changed
+     */
     @FXML
     public void selectedBox()
     {
