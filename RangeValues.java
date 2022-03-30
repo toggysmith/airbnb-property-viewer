@@ -103,30 +103,18 @@ public class RangeValues
     }
     
     /**
-     * method that handles the conversion logic for the fromValue integer returned by the .getFromValue() into its corresponding string. Mainly used in the revert stage when an invalid range is selected and the from combobox needs the
-     * corresponding fromValue string to revert the state
-     * @return String
+     * @return The from-value as a string.
      */
-    public String convertFromIntToStr(int fromValue)
+    public String getFromValueStr()
     {
-        if(fromValue == 0){
-            return RangeBoxEnum.NOMIN.toString();
-        }else{
-            return Integer.toString(fromValue);
-        }
+        return fromValue;
     }
     
     /**
-     * method that handles the conversion logic for the toValue integer returned by the .getToValue() into its corresponding string. Mainly used in the revert stage when an invalid range is selected and the to combobox needs the
-     * corresponding toValue string to revert the state
-     * @return String
+     * @return The to-value as a string.
      */
-    public String convertToIntToStr(int toValue)
+    public String getToValueStr()
     {
-        if(toValue == Integer.MAX_VALUE){
-            return RangeBoxEnum.NOMAX.toString();
-        }else{
-            return Integer.toString(toValue);
-        }
+        return toValue;
     }
 }

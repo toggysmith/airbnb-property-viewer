@@ -20,8 +20,6 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        MainWindow mainWindow = MainWindow.getMainWindow();
-        
-        mainWindow.getMainView().setMaximized(true);
+        MainWindow.getMainWindow().getMainView().setMaximized(true);
     }
 }

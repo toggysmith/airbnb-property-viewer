@@ -20,11 +20,12 @@ public class MainWindow
     private RangeValues rangeValues;
     
     /*
-     * Constructor for objects of class MainWindow
+     * Creates the MainView and initialises instance fields.
      */
     private MainWindow()
     {
         airbnbListings = AirbnbDataLoader.getListings();
+        
         try
         {
             mainView = new MainView(this);
@@ -34,23 +35,9 @@ public class MainWindow
         catch (Exception e)
         {
             e.printStackTrace();
+            
+            AlertManager.showTerminatingError("Cannot start program.");
         }
-    }
-    
-    /**
-     * @return The mainController.
-     */
-    public MainController getMainController()
-    {
-        return mainController;
-    }
-    
-    /**
-     * @return The mainView.
-     */
-    public MainView getMainView()
-    {
-        return mainView;
     }
     
     /**
@@ -67,7 +54,23 @@ public class MainWindow
     }
     
     /**
-     * @return The rangeValues.
+     * @return The MainController.
+     */
+    public MainController getMainController()
+    {
+        return mainController;
+    }
+    
+    /**
+     * @return The MainView.
+     */
+    public MainView getMainView()
+    {
+        return mainView;
+    }
+    
+    /**
+     * @return The RangeValues.
      */
     public RangeValues getRangeValues()
     {

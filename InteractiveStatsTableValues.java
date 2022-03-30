@@ -1,7 +1,5 @@
-
 /**
- * InteractiveStatsTableValues holds the values in each row
- * for the table in the statistics interactive pane.
+ * InteractiveStatsTableValues holds the values in each row for the table in the statistics interactive pane.
  * 
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
@@ -12,16 +10,17 @@
 public class InteractiveStatsTableValues
 {
     private DistanceDestinationPair distanceDestinationPair;
-    
     private String name;
     private String address;
     private String distance;
+    
     /**
-     * Constructor for objects of class InteractiveStatsTableValues
+     * Constructor for objects of class InteractiveStatsTableValues.
      */
     public InteractiveStatsTableValues(DistanceDestinationPair distanceDestinationPair)
     {
         this.distanceDestinationPair = distanceDestinationPair;
+        
         name = distanceDestinationPair.getDestination().getDestinationName();
         address = distanceDestinationPair.getDestination().getAddress();
         distance = String.format("%s km", distanceDestinationPair.getDistance());

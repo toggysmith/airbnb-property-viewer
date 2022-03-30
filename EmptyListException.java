@@ -10,14 +10,14 @@
  */
 public class EmptyListException extends Exception
 {
-    private String error;
+    private String errorMessage;
     
     /**
-     * Constructor for EmptyListException.
+     * Set the default error message.
      */
-    public EmptyListException(String error)
+    public EmptyListException(String errorMessage)
     {
-        this.error = error;
+        this.errorMessage = errorMessage;
     }
     
     /**
@@ -26,6 +26,6 @@ public class EmptyListException extends Exception
     @Override
     public String toString()
     {
-        return error;
+        return errorMessage;
     }
 }

@@ -1,151 +1,166 @@
-import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Comparator;
-import java.util.Collections;
+import java.util.List;
+
 /**
- * DestinationDistances class controls the main mathematical functionality of the calculation for the five closest locations (pubs or tourist attraction relevant to a propety selected by
- * the user)
+ * DestinationDistances class controls the main mathematical functionality of the calculation for the five closest locations (pubs or
+ * tourist attractions relevant to a property selected by the user).
  * 
- * This class creates an array list of DistanceDestinationPair , adding all the destinations from the passed DestinationListing List and their corresponding calculated distances
- * from the selectedProperty by the user as a reference point
+ * This class creates an array list of DistanceDestinationPair, adding all the destinations from the passed DestinationListing list
+ * and their corresponding calculated distances from the selected property by the user as a reference point.
  * 
- * This class is then sorted an only the first five elements are returned which represent the five closest destinations to the selected property
+ * This class is then sorted and only the first five elements are returned which represent the five closest destinations to the
+ * selected property.
  *
  * @author Adam Murray (K21003575)
  * @author Augusto Favero (K21059800)
  * @author Mathew Tran (K21074020)
  * @author Tony Smith (K21064940)
  * @version 1.0.0
- * 
  */
 public class DestinationDistances
 {
     private final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
     
-    private ArrayList<DistanceDestinationPair> destinations;
-    //every time one of the two interactivity stats is displayed
+    private ArrayList<DistanceDestinationPair> destinations; // Every time one of the two interactivity stats is displayed.
     
     /**
-     * DestinationDistances constructor creates a new array list for all the destination and distance pairs for all relevant destinations
-     * @param List<DestinationListing> filteredDestinations, the list of filtered destinations that fit the user selected preferences
-     * @param AirbnbListing selectedProperty, the property selected by the user
+     * Creates a new array list for all the destination and distance pairs for all relevant destinations.
+     * @param filteredDestinations The list of filtered destinations that fit the user selected preferences.
+     * @param selectedProperty The property selected by the user.
      */
     public DestinationDistances(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
     {
         destinations = new ArrayList<>();
         addDestinations(filteredDestinations,selectedProperty);
     }
-    
-    /*
-     * The filtered destinations are iterated over and their relative distance is calculated using the selected property as a reference point
-     * @param List<DestinationListing> filteredDestinations, the list of filtered destinations that fit the user selected preferences
-     * @param AirbnbListing selectedProperty, the property selected by the user
-     */
-    private void addDestinations(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
-    {
-        for(DestinationListing destination: filteredDestinations){
-             int calculatedDistance = calculateDistance(selectedProperty.getLongitude(), destination.getLongitude(), selectedProperty.getLatitude(), destination.getLatitude());
-             destinations.add(new DistanceDestinationPair(destination, calculatedDistance)); 
-        }
-    }
    
     /**
-     *Converts the destinations ArrayList<DestinationPair> to an array which is sorted using a merge sort and the first five elements in the list are retrieved. If there are less then five locations, all of them are displayed,
-     *otherwise the first five are chosen which represent the five closest destinations
-     *@return ArrayList<DistanceDestinationPair>, containing the up to five closest destinations relative to the selected property
+     * Converts the destinations ArrayList<DestinationPair> to an array which is sorted using a merge sort and the first five
+     * elements in the list are retrieved. If there are less then five locations, all of them are displayed, otherwise the first
+     * five are chosen which represent the five closest destinations.
+     * @return Containing the up to five closest destinations relative to the selected property.
      */
     public ArrayList<DistanceDestinationPair> getFiveSmallest()
-    {        
+    {
+        // If there's nothing in the destination list, return nothing.
         ArrayList<DistanceDestinationPair> smallestFive = new ArrayList<DistanceDestinationPair>();
-        if(destinations.size() == 0){
+        
+        if (destinations.size() == 0)
+        {
             return smallestFive;
         }
         
-        DistanceDestinationPair[] pairs = new DistanceDestinationPair[destinations.size()];
+        // Convert the ArrayList into an array.
+        DistanceDestinationPair[] pairs = destinations.toArray(new DistanceDestinationPair[destinations.size()]);
         
-        for(int i = 0; i <= pairs.length - 1; i++){
-              pairs[i] = destinations.get(i);
-        }
+        // Find the first five elements in the pairs array.
+        mergeSort(pairs, pairs.length);
         
-        mergeSort(pairs,pairs.length);
-        //less then five destinations were returned
-        if(pairs.length <= 5){
-            for(int i = 0; i <= pairs.length - 1; i++){
-                smallestFive.add(pairs[i]);
-            }
-        }else{
-        //more then five destinations were returned, only first 5 are chosen (five closest)
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5 && i < pairs.length; i++)
+        {
             smallestFive.add(pairs[i]);
         }
-        }
+        
         return smallestFive;
     }
     
-    //reference : https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude (1st answer)
     /*
-     * given the property and destination longitude and latitude calculateDistancew() calculates the distance between them
-     * @param, property longitude and latitude and venue/destination longitude and latitude
-     * @return int, returns the distance between the two locations in KM as an int 
+     * The filtered destinations are iterated over and their relative distance is calculated using the selected property as a
+     * reference point.
+     * @param filteredDestinations The list of filtered destinations that fit the user selected preferences.
+     * @param selectedProperty The property selected by the user.
+     */
+    private void addDestinations(List<DestinationListing> filteredDestinations, AirbnbListing selectedProperty)
+    {
+        for (DestinationListing destination: filteredDestinations)
+        {
+            int calculatedDistance = calculateDistance(selectedProperty.getLongitude(), destination.getLongitude(),
+                                                       selectedProperty.getLatitude(), destination.getLatitude());
+            
+            destinations.add(new DistanceDestinationPair(destination, calculatedDistance)); 
+        }
+    }
+    
+    // Reference : https://stackoverflow.com/a/16794680
+    /*
+     * Given the property and destination longitude and latitude calculateDistance() calculates the distance between them.
+     * @param propertyLong The longitude of the property.
+     * @param venueLong The longitude of the venue.
+     * @param propertyLat The latitude of the property.
+     * @param venueLat The latitude of the venue.
+     * @return The distance between the two locations in KM as an int.
      */
     private int calculateDistance(double propertyLong, double venueLong, double propertyLat, double venueLat)
     {
-        
         double latDistance = Math.toRadians(propertyLat - venueLat);
-        double lngDistance = Math.toRadians(propertyLong - venueLong);
-
+        double longDistance = Math.toRadians(propertyLong - venueLong);
+        
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-          + Math.cos(Math.toRadians(propertyLat)) * Math.cos(Math.toRadians(venueLat))
-          * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+                   + Math.cos(Math.toRadians(propertyLat)) * Math.cos(Math.toRadians(venueLat))
+                   * Math.sin(longDistance / 2) * Math.sin(longDistance / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
     }
     
-    //reference: https://www.baeldung.com/java-merge-sort
+    // Reference: https://www.baeldung.com/java-merge-sort
     /**
-     *Merge sort algorithm that sorts the inputed array in ascending order, sorting the DistanceDestinationPair object from shortest distance to longest distance 
+     * Merge sort algorithm that sorts the inputted array in ascending order, sorting the DistanceDestinationPair object from
+     * shortest distance to longest distance.
      */
-    public void mergeSort(DistanceDestinationPair[] a, int n)
+    private void mergeSort(DistanceDestinationPair[] a, int n)
     {
-        if (n < 2) {
+        if (n < 2)
+        {
             return;
         }
+        
         int mid = n / 2;
+        
         DistanceDestinationPair[] l = new DistanceDestinationPair[mid];
         DistanceDestinationPair[] r = new DistanceDestinationPair[n - mid];
 
-        for (int i = 0; i < mid; i++) {
+        for (int i = 0; i < mid; i++)
+        {
             l[i] = a[i];
         }
-        for (int i = mid; i < n; i++) {
+        
+        for (int i = mid; i < n; i++)
+        {
             r[i - mid] = a[i];
         }
+        
         mergeSort(l, mid);
         mergeSort(r, n - mid);
 
         merge(a, l, r, mid, n - mid);
     }
-
+    
+    /*
+     * Reference: https://www.baeldung.com/java-merge-sort
+     */
     private void merge(DistanceDestinationPair[] a, DistanceDestinationPair[] l, DistanceDestinationPair[] r, int left, int right)
     {
- 
         int i = 0, j = 0, k = 0;
-        while (i < left && j < right) {
-            if (l[i].getDistance() <= r[j].getDistance()) {
+        
+        while (i < left && j < right)
+        {
+            if (l[i].getDistance() <= r[j].getDistance())
+            {
                 a[k++] = l[i++];
-            }
-            else{
+            } else {
                 a[k++] = r[j++];
             }
         }
-        while (i < left) {
+        
+        while (i < left)
+        {
             a[k++] = l[i++];
         }
-        while (j < right) {
+        
+        while (j < right)
+        {
             a[k++] = r[j++];
         }
     }
