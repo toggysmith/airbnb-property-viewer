@@ -38,6 +38,7 @@
 - [ ] ListingProcessor
 - [ ] ListingProcessorTest
 - [x] ListNode
+- [ ] loader
 - [x] MainController
 - [x] MainView
 - [x] MainWindow
