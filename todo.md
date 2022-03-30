@@ -11,7 +11,7 @@
 - [x] AlertManager
 - [x] App
 - [x] Borough
-- [ ] BoroughButton
+- [x] BoroughButton
 - [x] BoroughListingsPriceRangeTuple
 - [x] BoroughDetailsController
 - [x] BoroughDetailsFactory
