@@ -13,7 +13,7 @@
 - [x] Borough
 - [ ] BoroughButton
 - [x] BoroughListingsPriceRangeTuple
-- [ ] BoroughDetailsController
+- [x] BoroughDetailsController
 - [x] BoroughDetailsFactory
 - [x] BoroughDetailsStage
 - [x] CircularLinkedList
@@ -35,12 +35,12 @@
 - [x] InteractiveStatController
 - [x] InteractiveStatsTableValues
 - [x] JsToJavaBridge
-- [ ] ListingProcessor
+- [x] ListingProcessor
 - [x] ListNode
 - [ ] MainController
 - [ ] MainView
 - [ ] MainWindow
-- [ ] MapController
+- [x] MapController
 - [x] OpenLayersMap
 - [x] PieChartController
 - [x] PieChartView
