@@ -1,9 +1,12 @@
 
 /**
- * Abstract class Loader - write a description of the class here
+ * Abstract class Loader - to encapsulate common and shared methods to all types of data loaders
  *
- * @author (your name here)
- * @version (version number or date here)
+ * author Adam Murray (K21003575)
+ * @author Augusto Favero (K21059800)
+ * @author Mathew Tran (K21074020)
+ * @author Tony Smith (K21064940)
+ * @version 1.0.0
  */
 public abstract class Loader
 {

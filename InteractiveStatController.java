@@ -188,6 +188,10 @@ public class InteractiveStatController extends Controller
         comboBoxContainer.getChildren().add(2, price);
     }
 
+    /*
+     * method called when the boroughs comboboxes' values are changed, the relevant data is added to the property combo box which holds all the properties that exist under the borough name selected and in the price range
+     * selected in the main pane
+     */
     @FXML
     private void processBoroughsBox()
     {
@@ -202,10 +206,15 @@ public class InteractiveStatController extends Controller
         price.setDisable(true);
         setUpPriceBox(desType);
         locationsResult.getItems().clear();
+    
         checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue());
        }
     }
     
+    /*
+     * method called when the properites comboboxes' values are changed, the relevant data is added to the price combo box which holds valid prices that can be selected depedending on the type of destinations the interactive statistic
+     * represents
+     */
     @FXML 
     private void processPropertiesBox()
     {
@@ -215,12 +224,21 @@ public class InteractiveStatController extends Controller
         }
     }
     
+    /*
+     * method called when the price combo box values are changed/ selected. displaying the destinations that fit the user requested preferences
+     */
     @FXML 
     private void processPriceBox()
     {
         checkBoxes(boroughs.getValue(), propertyName.getValue(), price.getValue()); 
     }
     
+    /*
+     * main method that retrieves the closest destinations based on the selected values from the three combo boxes
+     * @param String boroughSelected, the borough selected in the first combo box
+     * @param String propertySelected, the property selected by the user in the second combo box
+     * @param String priceSelected, the price selected by the user in the third combo box
+     */
     private void checkBoxes(String boroughSelected, String propertySelected,String priceSelected)
     {
         if(boroughSelected != null && propertySelected != null && priceSelected != null){
@@ -228,8 +246,9 @@ public class InteractiveStatController extends Controller
                        
            AirbnbListing selectedProperty = ListingProcessor.getPropertyListingByNames(filteredListing, propertySelected, boroughSelected);
         
-           
+           //calculator to calculate all the distances for all destinations that have been filtered in relation to the selectedProperty
            desCalculator = new DestinationDistances(filteredDestinations, selectedProperty);
+           //method to retrieve all the five closest destinations from all the destinations that fit the user preferences
            fiveClosestDestinations = new ArrayList<DistanceDestinationPair>();
            fiveClosestDestinations = desCalculator.getFiveSmallest();
            displayResult();
