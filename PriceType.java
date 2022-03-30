@@ -14,7 +14,7 @@ import java.lang.IllegalArgumentException;
  * @version 1.0.0
 
  */
-public class PriceType
+public abstract class PriceType
 {
     //list storing the possible price values, this is initaliased by the concrete classes of PriceType
     protected List<String> destinationPrices;
