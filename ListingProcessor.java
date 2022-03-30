@@ -257,8 +257,8 @@ public class ListingProcessor
      */
     public static int getMin(int[] values)
     {
-        if(values.length == 0){
-            return 0;
+        if(values.length == 0 || values == null){
+            throw new IllegalArgumentException("empty array passed");
         }else{
         return Arrays.stream(values)
                          .boxed()
@@ -274,8 +274,8 @@ public class ListingProcessor
      */
     public static int getMax(int[] values)
     {
-        if(values.length == 0){
-            return 0;
+        if(values.length == 0 || values == null){
+            throw new IllegalArgumentException("empty array passed");
         }else{
         return Arrays.stream(values)
                      .boxed()
@@ -289,8 +289,8 @@ public class ListingProcessor
      */
     public static long retrieveSpecifiedAmount(int[] values , int from, int to)
     {
-        if(values.length == 0){
-            return 0;
+        if(values.length == 0 || values == null){
+            throw new IllegalArgumentException("empty array passed");
         }else{
         return Arrays.stream(values)
                       .filter(i -> (i >= from) && (i < to))

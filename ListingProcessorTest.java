@@ -566,9 +566,13 @@ public class ListingProcessorTest
         int negativeMin = ListingProcessor.getMin(array2);
         assertEquals(-1,negativeMin);
         
-        int empty = ListingProcessor.getMin(emptyArray);
-        assertEquals(0,empty);
-    }
+        
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                int empty = ListingProcessor.getMin(emptyArray);
+        });
+        
+     assertEquals("empty array passed", exception1.getMessage());
+     }
     
     @Test
     public void testGetMax()
@@ -583,8 +587,11 @@ public class ListingProcessorTest
         int max = ListingProcessor.getMax(array2);
         assertEquals(0,max);
         
-        int empty = ListingProcessor.getMax(emptyArray);
-        assertEquals(0,empty);
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                int empty = ListingProcessor.getMax(emptyArray);
+        });
+        assertEquals("empty array passed", exception1.getMessage());
+        
     }
     
     @Test
@@ -608,8 +615,10 @@ public class ListingProcessorTest
         int from3 = 10;
         int to3 = 13;
         
-        long total3 = ListingProcessor.retrieveSpecifiedAmount(array3,from3,to3);
-        assertEquals(0,total3);
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> {
+                long total3 = ListingProcessor.retrieveSpecifiedAmount(array3,from3,to3);
+        });
+        assertEquals("empty array passed", exception1.getMessage());
     }
     
     private static List<AirbnbListing> createListings()
