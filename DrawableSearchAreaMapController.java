@@ -23,8 +23,6 @@ public class DrawableSearchAreaMapController extends Controller
     private enum MapMode { DRAWING_MODE, MARKER_MODE; }
     private MapMode mapMode = MapMode.DRAWING_MODE;
 
-
-
     /**
      * Add the OpenLayers map to the scene and load data about the properties into the JS file.
      */
