@@ -40,7 +40,7 @@ Within BlueJ, there should be a `Tools` tab which will open to reveal a `Testing
 
 # Walkthrough
 
-https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/29480134-3fb0-443a-b9b0-b1dce09f95b0
+https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/19e75b6f-c4ff-4c87-afe5-efeb65c0ad99
 
 # Screenshots
 
