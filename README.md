@@ -46,41 +46,41 @@ https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/19e75b6f-c4
 
 <details>
   <summary>The main screen in light mode.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/69b83ada-7f20-4c20-8642-46acaa2a3c0a" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/a8c6032e-b87b-4345-ac2a-e7b3f90c4fb4" />
 </details>
 
 <details>
   <summary>The main screen in dark mode.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/88dfffb6-997c-4b42-b6a0-bc8b601341ed" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/d982bf9c-4267-4062-9ae2-4f7003cddf08" />
 </details>
 
 <details>
   <summary>An abstract map of the boroughs.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/685d1f8e-d109-42bf-a7f0-bd97ef54e4e6" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/22d4a87b-85f9-4290-8c1c-569aa42017b7" />
   <p>More of the house icons indicates that a borough has more properties relative to the rest.</p>
 </details>
 
 <details>
   <summary>A screen for showing different statistics.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/19d349e6-55ee-4354-8f8c-abae0e10d797" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/a72ffbc2-12ee-4c77-90d0-7fa735e1b870" />
 </details>
 
 <details>
   <summary>A screen showing a real-world map of the boroughs.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/fecd199f-d089-4d2b-b82b-f181212b6c4e" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/91e4c3e6-3bdf-455f-8542-8f3779c7228b" />
 </details>
 
 <details>
   <summary>A demonstration of the draw-an-area functionality on the real-world map screen.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/ca73c91a-7977-4e4d-ac0d-31a88e87de15" />
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/542f0493-c87c-4b25-9d1c-a059ce6fdffb" />
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/14f2414b-e5d3-4275-9ac4-7b50ada17098" />
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/57b5dd3c-a03e-432f-ab31-71f8ddaabb12" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/6ce2dcf0-6109-4a4d-8e5d-62e8ea120ef8" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/5266c951-b252-4f9e-b99b-adfd9abb567b" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/2a1ee515-c04c-4dfa-8894-0e891b9d0847" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/c5a0d058-ef31-4e16-bc2e-ca0aeeed41c7" />
 </details>
 
 <details>
   <summary>An example of the details that might be shown about a property.</summary>
-  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/4c6790f5-0d7f-40de-b9c6-898feb96ce7b" />
+  <img src="https://github.com/toggysmith/airbnb-property-viewer/assets/61121030/14f8c622-1e63-482a-a97d-9188b19b5175" />
 </details>
 
 # Contributors
